@@ -21,7 +21,10 @@
     <opaqueInsets>
         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
     </opaqueInsets>
-    <TextField GridPane.columnIndex="1" />
+    <TextField GridPane.columnIndex="1">
+      <GridPane.margin>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </GridPane.margin></TextField>
     <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Nick Name" textAlignment="CENTER">
         <opaqueInsets>
           <Insets />
@@ -43,9 +46,24 @@
       <GridPane.margin>
          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
       </GridPane.margin></Button>
-    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-    <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-    <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-    <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-    <CheckBox mnemonicParsing="false" text="CheckBox" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <GridPane.margin>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </GridPane.margin></TextField>
+    <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <GridPane.margin>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </GridPane.margin></TextField>
+    <TextField GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <GridPane.margin>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </GridPane.margin></TextField>
+    <TextField GridPane.columnIndex="1" GridPane.rowIndex="5">
+      <GridPane.margin>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </GridPane.margin></TextField>
+    <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <GridPane.margin>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </GridPane.margin></CheckBox>
 </GridPane>
