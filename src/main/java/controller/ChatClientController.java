@@ -12,6 +12,7 @@ import static client.CommonSettings.PRODUCT_NAME;
 
 public class ChatClientController {
 
+
     public void menuHandler(ActionEvent e) {
         Alert alert = new Alert(Alert.AlertType.NONE);
         var name = ((MenuItem) e.getTarget()).getText();

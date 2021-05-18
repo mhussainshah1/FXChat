@@ -8,13 +8,13 @@ It is a multithreaded client/server ChatServer based on console which uses Java 
 **Instructions:**
 *****************
 
-**client.Client**
+**client.client.ClientObject**
 
-To start the client.Client in console mode use one of the following command
- 1. java client.Client
- 2. java client.Client username
- 3. java client.Client username portNumber
- 4. java client.Client username portNumber serverAddress
+To start the client.client.ClientObject in console mode use one of the following command
+ 1. java client.client.ClientObject
+ 2. java client.client.ClientObject username
+ 3. java client.client.ClientObject username portNumber
+ 4. java client.client.ClientObject username portNumber serverAddress
 
 at the console prompt
 If the portNumber is not specified 1500 is used
