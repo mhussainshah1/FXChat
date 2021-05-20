@@ -32,8 +32,8 @@ public class Main extends Application {
         var loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
         Parent root = loader.load();
 
-        LoginController historyController = loader.getController();
-        historyController.initialize();
+//        LoginController loginController = loader.getController();
+      //  loginController.initialize();
 
         Stage loginStage = new Stage();
         loginStage.getIcons().add(new Image("images/icon.gif"));

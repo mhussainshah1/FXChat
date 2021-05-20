@@ -37,7 +37,8 @@ public class LoginController {
     private Properties properties;
     private ClientObject client;
 
-
+    //Calls automatically
+    @FXML
     public void initialize() {
         client = new ClientObject();
         properties = new Properties();
