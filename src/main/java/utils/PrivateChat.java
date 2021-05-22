@@ -113,6 +113,7 @@ public class PrivateChat extends Application {
             buttonList.add(icon);
         }
         tp = new TilePane(5, 5);
+        tp.setPrefColumns(3);
         tp.setVisible(visible);
         tp.getChildren().addAll(buttonList);
 

@@ -49,7 +49,7 @@
               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
           </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" onAction="#actionHandler" prefHeight="25.0" prefWidth="62.0" text="Quit" GridPane.columnIndex="1" GridPane.rowIndex="6">
+      <Button cancelButton="true" mnemonicParsing="false" onAction="#actionHandler" prefHeight="25.0" prefWidth="62.0" text="Quit" GridPane.columnIndex="1" GridPane.rowIndex="6">
           <GridPane.margin>
               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
           </GridPane.margin>

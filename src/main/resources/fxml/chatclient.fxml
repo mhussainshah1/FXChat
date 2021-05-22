@@ -14,6 +14,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.TextFlow?>
 
@@ -25,79 +26,59 @@
          </left>
          <right>
             <HBox BorderPane.alignment="CENTER">
-               <children>
-                  <Button mnemonicParsing="false" styleClass="chat-button" stylesheets="@../stylesheets/chatclient.css" text="Send Message!" />
-                  <Button mnemonicParsing="false" onAction="#btnHandler" styleClass="chat-button" stylesheets="@../stylesheets/chatclient.css" text="Exit Chat" />
-               </children>
+               <Button fx:id="btnSend" disable="true" mnemonicParsing="false" onAction="#btnHandler" styleClass="chat-button" stylesheets="@../stylesheets/chatclient.css" text="Send Message!" />
+               <Button mnemonicParsing="false" onAction="#btnHandler" styleClass="chat-button" stylesheets="@../stylesheets/chatclient.css" text="Exit Chat" />
             </HBox>
          </right>
          <center>
-            <TextField disable="true" prefHeight="26.0" prefWidth="483.0" BorderPane.alignment="CENTER" />
+            <TextField fx:id="txtMessage" prefHeight="26.0" prefWidth="483.0" promptText="Broadcast Message" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </bottom>
    <right>
       <BorderPane BorderPane.alignment="CENTER">
          <center>
-            <TabPane prefHeight="456.0" prefWidth="200.0" style="-fx-border-color: orange; -fx-border-width: 5;" tabClosingPolicy="UNAVAILABLE">
-              <tabs>
-                <Tab style="-fx-font-weight: bold; -fx-font-color: white;" text="Users">
-                     <content>
-                        <BorderPane>
-                           <bottom>
-                              <VBox BorderPane.alignment="CENTER">
-                                 <children>
-                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="chat-button" stylesheets="@../stylesheets/chatclient.css" text="Send Direct Message" />
-                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="chat-button" stylesheets="@../stylesheets/chatclient.css" text="Ignore User" />
-                                 </children>
-                              </VBox>
-                           </bottom>
-                           <center>
-                              <ScrollPane BorderPane.alignment="CENTER">
-                                 <content>
-                                    <ListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-                                 </content>
-                              </ScrollPane>
-                           </center>
-                        </BorderPane>
-                     </content>
-                  </Tab>
-                <Tab style="-fx-font-weight: bold;" text="Rooms">
-                     <content>
-                        <BorderPane>
-                           <bottom>
-                              <VBox BorderPane.alignment="CENTER">
-                                 <children>
-                                    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="chat-label" stylesheets="@../stylesheets/chatclient.css" text="ROOM COUNT" />
-                                    <TextField alignment="CENTER" editable="false" />
-                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="chat-button" stylesheets="@../stylesheets/chatclient.css" text="Change Room" />
-                                 </children>
-                              </VBox>
-                           </bottom>
-                           <center>
-                              <ScrollPane BorderPane.alignment="CENTER">
-                                 <content>
-                                    <ListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-                                 </content>
-                              </ScrollPane>
-                           </center>
-                        </BorderPane>
-                     </content>
-                  </Tab>
-                  <Tab style="-fx-font-weight: bold;" text="Images">
-                     <content>
-                        <VBox prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <ScrollPane>
-                                 <content>
-                                    <ImageView fitHeight="399.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true" />
-                                 </content>
-                              </ScrollPane>
-                           </children>
+            <TabPane fx:id="rightPane" disable="true" prefHeight="456.0" prefWidth="200.0" style="-fx-border-color: orange; -fx-border-width: 5;" tabClosingPolicy="UNAVAILABLE">
+               <Tab style="-fx-font-weight: bold; -fx-font-color: white;" text="Users">
+                  <BorderPane>
+                     <bottom>
+                        <VBox BorderPane.alignment="CENTER">
+                           <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="chat-button" stylesheets="@../stylesheets/chatclient.css" text="Send Direct Message" />
+                           <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="chat-button" stylesheets="@../stylesheets/chatclient.css" text="Ignore User" />
                         </VBox>
-                     </content>
-                  </Tab>
-              </tabs>
+                     </bottom>
+                     <center>
+                        <ScrollPane BorderPane.alignment="CENTER">
+                           <ListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                        </ScrollPane>
+                     </center>
+                  </BorderPane>
+               </Tab>
+               <Tab style="-fx-font-weight: bold;" text="Rooms">
+                  <BorderPane>
+                     <bottom>
+                        <VBox BorderPane.alignment="CENTER">
+                           <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="chat-label" stylesheets="@../stylesheets/chatclient.css" text="ROOM COUNT" />
+                           <TextField alignment="CENTER" editable="false" />
+                           <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="chat-button" stylesheets="@../stylesheets/chatclient.css" text="Change Room" />
+                        </VBox>
+                     </bottom>
+                     <center>
+                        <ScrollPane BorderPane.alignment="CENTER">
+                           <ListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                        </ScrollPane>
+                     </center>
+                  </BorderPane>
+               </Tab>
+               <Tab style="-fx-font-weight: bold;" text="Images">
+                  <BorderPane>
+                     <center>
+                        <ScrollPane prefHeight="418.0" prefWidth="190.0" BorderPane.alignment="CENTER">
+                           <TilePane fx:id="tilePane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" />
+                        </ScrollPane>
+                     </center>
+                  </BorderPane>
+               </Tab>
             </TabPane>
          </center>
       </BorderPane>
@@ -106,20 +87,14 @@
       <BorderPane prefHeight="107.0" prefWidth="778.0" BorderPane.alignment="CENTER">
          <top>
             <MenuBar BorderPane.alignment="CENTER">
-              <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                        <MenuItem mnemonicParsing="false" text="Login" />
-                        <MenuItem mnemonicParsing="false" text="Logout" />
-                    <MenuItem mnemonicParsing="false" onAction="#menuHandler" text="Exit" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#menuHandler" text="About" />
-                  </items>
-                </Menu>
-              </menus>
+               <Menu mnemonicParsing="false" text="File">
+                  <MenuItem fx:id="loginMenuItem" mnemonicParsing="false" onAction="#menuHandler" text="Login" />
+                  <MenuItem fx:id="logoutMenuItem" disable="true" mnemonicParsing="false" onAction="#menuHandler" text="Logout" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuHandler" text="Exit" />
+               </Menu>
+               <Menu mnemonicParsing="false" text="Help">
+                  <MenuItem mnemonicParsing="false" onAction="#menuHandler" text="About" />
+               </Menu>
             </MenuBar>
          </top>
          <bottom>
@@ -131,9 +106,7 @@
                   <Label contentDisplay="GRAPHIC_ONLY" prefHeight="57.0" prefWidth="391.0" text="Default Banner" BorderPane.alignment="CENTER">
                      <graphic>
                         <ImageView fitHeight="49.0" fitWidth="346.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/defaultbanner.gif" />
-                           </image>
+                           <Image url="@../images/defaultbanner.gif" />
                         </ImageView>
                      </graphic>
                   </Label>
@@ -142,9 +115,7 @@
                   <Label contentDisplay="GRAPHIC_ONLY" text="logo" BorderPane.alignment="CENTER">
                      <graphic>
                         <ImageView fitHeight="56.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/logo.gif" />
-                           </image>
+                           <Image url="@../images/logo.gif" />
                         </ImageView>
                      </graphic>
                   </Label>
@@ -154,6 +125,6 @@
       </BorderPane>
    </top>
    <center>
-      <TextFlow maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+      <TextFlow fx:id="messageBoard" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

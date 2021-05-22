@@ -194,17 +194,20 @@ public class Client {
 	 */
 	private void disconnect() {
 		try {
-			if (sInput != null) sInput.close();
+			if (sInput != null)
+				sInput.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		try {
-			if (sOutput != null) sOutput.close();
+			if (sOutput != null)
+				sOutput.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		try {
-			if (socket != null) socket.close();
+			if (socket != null)
+				socket.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

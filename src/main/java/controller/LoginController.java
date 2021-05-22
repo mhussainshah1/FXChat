@@ -35,12 +35,10 @@ public class LoginController {
 
     private boolean connect;
     private Properties properties;
-    private ClientObject client;
 
     //Calls automatically
     @FXML
     public void initialize() {
-        client = new ClientObject();
         properties = new Properties();
         try {
             properties.load(this.getClass().getClassLoader().getResourceAsStream("data.properties"));
@@ -63,12 +61,12 @@ public class LoginController {
         proxyCheckBox.setSelected(Boolean.parseBoolean(properties.getProperty("ProxyState")));
         txtProxyHost.setText(properties.getProperty("ProxyHost"));
         txtProxyPort.setText(properties.getProperty("ProxyPort"));
-        loginToChat();
     }
 
     //Handler
     public void actionHandler(ActionEvent e) {
-        var name = ((Button) e.getTarget()).getText();
+        Button button = (Button) e.getTarget();
+        var name = button.getText();
 
         if (name.equals("Connect")) {
             connect =true;
@@ -84,33 +82,19 @@ public class LoginController {
                 properties.setProperty("ProxyHost", txtProxyHost.getText());
                 properties.setProperty("ProxyPort", txtProxyPort.getText());
                 properties.store(fileOutputStream, PRODUCT_NAME);
-            } catch (java.io.IOException exc) {
+                button.getScene().getWindow().hide();
+            } catch (IOException exc) {
                 exc.printStackTrace();
             }
         }
+
         if (name.equals("Quit")) {
             connect =false;
+            button.getScene().getWindow().hide();
         }
     }
 
     public boolean isConnect() {
         return connect;
-    }
-
-    private void loginToChat() {
-
-        if (connect) {
-            client.setUserName(txtUserName.getText());
-            client.setServerName(txtServerName.getText());
-            client.setServerPort(Integer.parseInt(txtServerPort.getText()));
-            if (proxyCheckBox.isSelected()) {
-                client.setProxy(true);
-                client.setProxyHost(txtProxyHost.getText());
-                client.setServerPort(Integer.parseInt(txtProxyPort.getText()));
-            } else {
-                client.setProxy(false);
-            }
-        }
-        System.out.println(client);
     }
 }
