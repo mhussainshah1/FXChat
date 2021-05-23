@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-// the main.java.server that can be run as a console
+// the server that can be run as a console
 public class Server {
 	// a unique ID for each connection
 	private static int uniqueId;
@@ -23,7 +23,7 @@ public class Server {
 	private final SimpleDateFormat sdf;
 	// the port number to listen for connection
 	private final int port;
-	// to check if main.java.server is running
+	// to check if server is running
 	private boolean keepGoing;
 	// notification
 	private final String notif = " *** ";
@@ -41,12 +41,12 @@ public class Server {
 
 
 	 /*  To run as a console application
-	 * > java main.java.server.Server
-	 * > java main.java.server.Server portNumber
+	 * > java server.Server
+	 * > java server.Server portNumber
 	 * If the port number is not specified 1500 is used
 	 */
 	public static void main(String[] args) {
-		// start main.java.server on port 1500 unless a PortNumber is specified
+		// start server on port 1500 unless a PortNumber is specified
 		int portNumber = 1500;
 		switch (args.length) {
 			case 1:
@@ -54,35 +54,35 @@ public class Server {
 					portNumber = Integer.parseInt(args[0]);
 				} catch (Exception e) {
 					System.out.println("Invalid port number.");
-					System.out.println("Usage is: > java main.java.server.Server [portNumber]");
+					System.out.println("Usage is: > java server.Server [portNumber]");
 					return;
 				}
 			case 0:
 				break;
 			default:
-				System.out.println("Usage is: > java main.java.server.Server [portNumber]");
+				System.out.println("Usage is: > java server.Server [portNumber]");
 				return;
 
 		}
-		// create a main.java.server object and start it
+		// create a server object and start it
 		Server server = new Server(portNumber);
 		server.start();
 	}
 
 	public void start() {
 		keepGoing = true;
-		//create socket main.java.server and wait for connection requests
+		//create socket server and wait for connection requests
 		try {
-			// the socket used by the main.java.server
+			// the socket used by the server
 			ServerSocket serverSocket = new ServerSocket(port);
 
-			// infinite loop to wait for connections ( till main.java.server is active )
+			// infinite loop to wait for connections ( till server is active )
 			while (keepGoing) {
-				display("main.java.server.Server waiting for Clients on port " + port + ".");
+				display("server.Server waiting for Clients on port " + port + ".");
 
 				// accept connection if requested from client
 				Socket socket = serverSocket.accept();
-				// break if main.java.server stoped
+				// break if server stoped
 				if (!keepGoing)
 					break;
 				// if client is connected, create its thread
@@ -92,7 +92,7 @@ public class Server {
 
 				t.start();
 			}
-			// try to stop the main.java.server
+			// try to stop the server
 			try {
 				serverSocket.close();
 				for (ClientThread tc : al) {
@@ -106,7 +106,7 @@ public class Server {
 					}
 				}
 			} catch (Exception e) {
-				display("Exception closing the main.java.server and clients: " + e);
+				display("Exception closing the server and clients: " + e);
 			}
 		} catch (IOException e) {
 			String msg = sdf.format(new Date()) + " Exception on new ServerSocket: " + e + "\n";
@@ -114,7 +114,7 @@ public class Server {
 		}
 	}
 
-	// to stop the main.java.server
+	// to stop the server
 	protected void stop() {
 		keepGoing = false;
 		try {
