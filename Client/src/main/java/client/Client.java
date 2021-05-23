@@ -1,15 +1,10 @@
 package client;
-
-
-
 import common.ChatMessage;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Scanner;
-
 
 //The client.Client that can be run as a console
 public class Client {
@@ -45,7 +40,7 @@ public class Client {
 	 */
 	public static void main(String[] args) {
 		// default values if not entered
-		int portNumber = 1500;
+		int portNumber = 1436;
 		String serverAddress = "localhost";
 		String userName = "Anonymous";
 		Scanner scan = new Scanner(System.in);

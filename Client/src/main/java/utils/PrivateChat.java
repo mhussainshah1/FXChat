@@ -8,7 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -35,7 +38,7 @@ public class PrivateChat extends Application {
         var textFlow = new TextFlow();
         textFlow.setPadding(new Insets(10));
         textFlow.setLineSpacing(10);
-        textFlow.setPrefSize(310,190);
+        textFlow.setPrefSize(310, 190);
         textFlow.setStyle("-fx-background-color: white;");
         var scrollPane = new ScrollPane(textFlow);
 //        scrollPane.setPrefViewportWidth(310);
@@ -54,14 +57,16 @@ public class PrivateChat extends Application {
                         text = new Text("\n" + name + ": " + textField.getText());
                     }
                     if (textField.getText().contains("~~")) {
+                        text = new Text("\n" + name);
+                        textFlow.getChildren().add(text);
                         var tokenizer = new StringTokenizer(textField.getText(), " ");
                         while (tokenizer.hasMoreTokens()) {
                             String token = tokenizer.nextToken();
                             //If its a Proper Image
                             int i = Integer.parseInt(token.substring(2));
                             var imageView = new ImageView(new Image("icons/photo" + i + ".gif"));
-                            text.setText(text.getText().replace("~~" + i, ""));
-                            textFlow.getChildren().addAll(text, imageView);
+//                            text.setText(text.getText().replace("~~" + i, ""));
+                            textFlow.getChildren().addAll(/*text,*/ imageView);
                         }
                     } else {
                         textFlow.getChildren().add(text);
@@ -104,11 +109,13 @@ public class PrivateChat extends Application {
         flowPane2.setAlignment(Pos.CENTER);
         flowPane2.getChildren().addAll(btnClear, btnIgnoreUser, btnClose, btnEmotion);
 
-        List<Button> buttonList = new ArrayList<>();
+        List<Label> buttonList = new ArrayList<>();
         for (int i = 0; i < 21; i++) {
-            var icon = new Button(Integer.toString(i), new ImageView("icons/photo" + i + ".gif"));
+            var icon = new Label(Integer.toString(i), new ImageView("icons/photo" + i + ".gif"));
             icon.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-            icon.setOnAction(event -> textField.appendText("~~" + icon.getText() + " "));
+            icon.setOnMouseClicked(event -> textField.appendText("~~" + icon.getText() + " "));
+            icon.setOnMouseEntered(event -> icon.setStyle("-fx-border-color: black"));
+            icon.setOnMouseExited(event -> icon.setStyle("-fx-border-color: white"));
             icon.setCursor(Cursor.OPEN_HAND);
             buttonList.add(icon);
         }

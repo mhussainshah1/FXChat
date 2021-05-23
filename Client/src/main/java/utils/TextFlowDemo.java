@@ -21,11 +21,9 @@ public class TextFlowDemo extends Application {
     }
 
     public void start(Stage primaryStage) {
-
         TextFlow textFlow = new TextFlow();
         textFlow.setPadding(new Insets(10));
         textFlow.setLineSpacing(10);
-
 
         VBox container = new VBox();
         TextField textField = new TextField();

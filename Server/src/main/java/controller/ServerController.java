@@ -4,69 +4,108 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+import server.Server;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.StringTokenizer;
 
 import static client.CommonSettings.PRODUCT_NAME;
 
 public class ServerController {
-    @FXML
-    TextField txtMessage;
+
     @FXML
     Button btnStop;
     @FXML
     Button btnStart;
     @FXML
-    TextField txtServerName;
-    @FXML
     TextField txtServerPort;
     @FXML
     TextField txtMaximumGuest;
     @FXML
+    TextFlow messageBoard;
+    @FXML
+    TextField txtMessage;
+    @FXML
     Button btnSendMessage;
+    //Handlers
+    Server server;
     private Properties properties;
+    private int portNumber;
+    private int maximumGuestNumber;
+    private String roomList = "";
 
     public void initialize() {
         properties = getProperties();
 //        properties.forEach((x, y) -> System.out.println(x + " = " + y));
 
-        if (properties.getProperty("ServerName") != null)
-            txtServerName.setText(properties.getProperty("ServerName"));
-        else
-            txtServerName.setText("localhost");
-
         if (properties.getProperty("PortNumber") != null)
-            txtServerPort.setText(properties.getProperty("PortNumber"));
+            portNumber = Integer.parseInt(properties.getProperty("PortNumber"));
         else
-            txtServerPort.setText("1436");
+            portNumber = 1436;
+        txtServerPort.setText(String.valueOf(portNumber));
 
         if (properties.getProperty("") != null)
-            txtMaximumGuest.setText(properties.getProperty("MaximumGuest"));
+            maximumGuestNumber = Integer.parseInt(properties.getProperty("MaximumGuest"));
         else
-            txtMaximumGuest.setText("50");
+            maximumGuestNumber = 50;
+        txtMaximumGuest.setText(String.valueOf(maximumGuestNumber));
+
+        if (properties.getProperty("roomlist") != null)
+            roomList = properties.getProperty("roomlist");
+        else
+            roomList = "General;Teen;Music;Party;";
     }
 
-    //Handlers
     public void btnHandler(ActionEvent e) {
         Button button = (Button) e.getTarget();
         var name = button.getText();
 
         if (name.equals("Start Server")) {
             try (var fileOutputStream = new FileOutputStream("server.properties")) {
-                properties.setProperty("ServerName", txtServerName.getText());
                 properties.setProperty("PortNumber", txtServerPort.getText());
                 properties.setProperty("MaximumGuest", txtMaximumGuest.getText());
                 properties.store(fileOutputStream, PRODUCT_NAME);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+            server = new Server(portNumber, this);
             enableLogin();
         }
 
         if (name.equals("Stop Server")) {
+            server.stop();
             disableLogout();
+        }
+
+        if (name.equals("Send Message!")) {
+            String text;
+            if (messageBoard.getChildren().size() == 0) {
+                text = "Server : " + txtMessage.getText();
+            } else { // Add new line if not the first child
+                text = "Server : " + txtMessage.getText();
+            }
+            if (txtMessage.getText().contains("~~")) {
+                var tokenizer = new StringTokenizer(txtMessage.getText(), " ");
+                messageBoard.getChildren().add(new Text("Server : "));
+                while (tokenizer.hasMoreTokens()) {
+                    String token = tokenizer.nextToken();
+                    //If its a Proper Image
+                    int i = Integer.parseInt(token.substring(2));
+                    var imageView = new ImageView(new Image("icons/photo" + i + ".gif"));
+                    messageBoard.getChildren().addAll(imageView);
+                }
+                server.displayWithoutStamp("");
+            } else {
+                server.broadcast(text);
+            }
+            txtMessage.clear();
+            txtMessage.requestFocus();
         }
     }
 
@@ -77,10 +116,10 @@ public class ServerController {
 
     private void disableLogout() {
         control(false);
+        messageBoard.getChildren().clear();
     }
 
     void control(boolean status) {
-        txtServerName.setDisable(status);
         txtServerPort.setDisable(status);
         txtMaximumGuest.setDisable(status);
         btnStart.setDisable(status);
@@ -99,5 +138,17 @@ public class ServerController {
             e.printStackTrace();
         }
         return properties;
+    }
+
+    public TextFlow getMessageBoard() {
+        return messageBoard;
+    }
+
+    public void txtHandler(ActionEvent e) {
+        TextField textField = (TextField) e.getSource();
+        String ID = textField.getId();
+        if (ID.equals("txtMessage")) {
+            btnSendMessage.fire();
+        }
     }
 }

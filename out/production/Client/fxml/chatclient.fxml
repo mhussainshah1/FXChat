@@ -73,7 +73,7 @@
                <Tab style="-fx-font-weight: bold;" text="Images">
                   <BorderPane>
                      <center>
-                        <ScrollPane prefHeight="418.0" prefWidth="190.0" BorderPane.alignment="CENTER">
+                        <ScrollPane hbarPolicy="ALWAYS" prefHeight="418.0" prefWidth="190.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
                            <TilePane fx:id="tilePane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" />
                         </ScrollPane>
                      </center>

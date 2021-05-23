@@ -61,17 +61,27 @@ public class ChatClientController {
         clientData = new ClientObject();
         messageObject = new MessageObject();
 
-        List<Button> buttonList = new ArrayList<>();
+/*        List<Button> buttonList = new ArrayList<>();
         for (int i = 0; i < 21; i++) {
             var icon = new Button(Integer.toString(i), new ImageView("icons/photo" + i + ".gif"));
             icon.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
             icon.setOnAction(event -> txtMessage.appendText("~~" + icon.getText() + " "));
             icon.setCursor(Cursor.OPEN_HAND);
             buttonList.add(icon);
+        }*/
+        List<Label> buttonList = new ArrayList<>();
+        for (int i = 0; i < 21; i++) {
+            var icon = new Label(Integer.toString(i), new ImageView("icons/photo" + i + ".gif"));
+            icon.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            icon.setOnMouseClicked(event -> txtMessage.appendText("~~" + icon.getText() + " "));
+            icon.setOnMouseEntered(event -> icon.setStyle("-fx-border-color: black"));
+            icon.setOnMouseExited(event -> icon.setStyle("-fx-border-color: white"));
+            icon.setCursor(Cursor.OPEN_HAND);
+            buttonList.add(icon);
         }
-        tilePane.setPrefColumns(3);
-        tilePane.setHgap(15);
-        tilePane.setVgap(15);
+        tilePane.setPrefColumns(4);
+        tilePane.setHgap(10);
+        tilePane.setVgap(10);
         tilePane.setPadding(new Insets(10));
         tilePane.getChildren().addAll(buttonList);
     }
@@ -96,7 +106,7 @@ public class ChatClientController {
             alert.setTitle("About Us");
             alert.setHeaderText(PRODUCT_NAME);
             alert.setContentText("\nDeveloped By...\n" + COMPANY_NAME);
-            alert.setGraphic(new ImageView("main/resources/icons/photo13.gif"));
+            alert.setGraphic(new ImageView("/icons/photo13.gif"));
             alert.setAlertType(Alert.AlertType.INFORMATION);
             alert.show();
         }
