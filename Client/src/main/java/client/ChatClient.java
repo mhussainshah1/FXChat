@@ -1,71 +1,64 @@
 package client;
+
 import common.ChatMessage;
+import controller.ChatClientController;
+import javafx.application.Platform;
+import server.MessageObject;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import static client.MessageObject.MESSAGE_TYPE_ADMIN;
 
 //The client.Client that can be run as a console
 public class ChatClient {
 
-    private final int port;                    //port
+    // to display time
+    private SimpleDateFormat sdf;
+    private ChatClientController chatClientController;
+    private MessageObject messageObject;
+
     // notification
     private String notif = " *** ";
-    private String server;
-    private String userName;
     private String message;
 
     // for I/O
-    private ObjectInputStream sInput;        // to read from the socket
-    private ObjectOutputStream sOutput;        // to write on the socket
-    private Socket socket;                    // socket object
+    private ObjectInputStream sInput;           // to read from the socket
+    private ObjectOutputStream sOutput;         // to write on the socket
+    private Socket socket;                      // socket object
+
+    private String server;
+    private String userName;
+    private int port;                           //port
 
     /**
      * Constructor to set below things main.java.server: the main.java.server address  port: the port number username: the username
      */
-    public ChatClient(String server, int port, String userName) {
+    public ChatClient(String server, int port, String userName, ChatClientController chatClientController) {
         this.server = server;
         this.port = port;
         this.userName = userName;
-        // try to connect to the main.java.server and return if not connected
-        if (!start())
-            return;
+        this.chatClientController = chatClientController;
 
-        // infinite loop to get the input from the user
-        while (true) {
-            String msg = getMessage();
+        // to display hh:mm:ss
+        sdf = new SimpleDateFormat("HH:mm:ss");
 
-            // logout if message is LOGOUT
-            if (msg.equalsIgnoreCase("LOGOUT")) {
-                sendMessage(new ChatMessage(ChatMessage.LOGOUT, ""));
-                break;
-            }
-            // message to check who are present in chatroom
-            else if (msg.equalsIgnoreCase("WHOISIN")) {
-                sendMessage(new ChatMessage(ChatMessage.LIST, ""));
-            }
-            // regular text message
-            else {
-                sendMessage(new ChatMessage(ChatMessage.MESSAGE, msg));
-            }
-        }
+        display("server name = " + server +
+                ",port number = " + port +
+                ",user name = " + userName);
 
-        // client completed its job. disconnect client.
-        disconnect();
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public static void main(String[] args) {
-        ChatClient client = new ChatClient("localhost", 1500,  "Amir");
-        client.setMessage("Test");
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     /*
@@ -112,16 +105,23 @@ public class ChatClient {
     /*
      * To send a message to the console
      */
-    private void display(String msg) {
-        System.out.println(msg);
+    public void display(String msg) {
+        String time = sdf.format(new Date()) + " " + msg + "\n";
+        System.out.print(time);
+
+        Platform.runLater(() -> {
+            messageObject = new MessageObject();
+            chatClientController.getMessageBoard().getChildren().add(messageObject.getText(time, MESSAGE_TYPE_ADMIN));
+        });
     }
 
     /*
      * To send a message to the main.java.server
      */
-    void sendMessage(ChatMessage msg) {
+    public void sendMessage(ChatMessage msg) {
         try {
             sOutput.writeObject(msg);
+            display(msg.getMessage());
         } catch (IOException e) {
             display("Exception writing to main.java.server: " + e);
         }
@@ -131,7 +131,7 @@ public class ChatClient {
      * When something goes wrong
      * Close the Input/Output streams and disconnect
      */
-    private void disconnect() {
+    public void disconnect() {
         try {
             if (sInput != null)
                 sInput.close();
@@ -162,12 +162,13 @@ public class ChatClient {
                     // read the message form the input datastream
                     String msg = (String) sInput.readObject();
                     // print the message
-                    System.out.println(msg);
-                    System.out.print("> ");
+                    display(msg);
+                    display("> ");
                 } catch (IOException e) {
                     display(notif + "Server has closed the connection: " + e + notif);
                     break;
                 } catch (ClassNotFoundException e2) {
+                    display(e2.getMessage());
                     e2.printStackTrace();
                 }
             }

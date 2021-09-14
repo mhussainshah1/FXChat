@@ -2,6 +2,8 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -32,6 +34,12 @@ public class LoginController {
     @FXML
     CheckBox proxyCheckBox;
 
+    public void setChatClientController(ChatClientController chatClientController) {
+        this.chatClientController = chatClientController;
+    }
+
+    ChatClientController chatClientController;
+
     private boolean connect;
     private Properties properties;
 
@@ -44,7 +52,7 @@ public class LoginController {
         } catch (IOException | NullPointerException exc) {
             exc.printStackTrace();
         }
-        properties.forEach((x,y) -> System.out.println(x + " = " + y));
+        properties.forEach((x, y) -> System.out.println(x + " = " + y));
         txtUserName.setText(properties.getProperty("UserName"));
 
         if (properties.getProperty("ServerName") != null)
@@ -68,7 +76,7 @@ public class LoginController {
         var name = button.getText();
 
         if (name.equals("Connect")) {
-            connect =true;
+            connect = true;
             try (var fileOutputStream = new FileOutputStream("data.properties")) {
                 if (proxyCheckBox.isSelected())
                     properties.setProperty("ProxyState", "true");
@@ -82,13 +90,16 @@ public class LoginController {
                 properties.setProperty("ProxyPort", txtProxyPort.getText());
                 properties.store(fileOutputStream, PRODUCT_NAME);
                 button.getScene().getWindow().hide();
+
+                chatClientController.loginToChat();
+
             } catch (IOException exc) {
                 exc.printStackTrace();
             }
         }
 
         if (name.equals("Quit")) {
-            connect =false;
+            connect = false;
             button.getScene().getWindow().hide();
         }
     }

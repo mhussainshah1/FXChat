@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImnagePanel extends Application {
+public class ImagePanel extends Application {
     public static void main(String[] args) {
         launch(args);
     }

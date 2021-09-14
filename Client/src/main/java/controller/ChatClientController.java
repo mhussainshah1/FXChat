@@ -23,13 +23,15 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+import java.util.Scanner;
 
 import static client.CommonSettings.COMPANY_NAME;
 import static client.CommonSettings.PRODUCT_NAME;
 import static client.MessageObject.MESSAGE_TYPE_ADMIN;
 import static client.MessageObject.MESSAGE_TYPE_DEFAULT;
 
-public class ChatClientController {
+public class ChatClientController implements Runnable {
 
     public static final int QUIT_TYPE_DEFAULT = 0,
             QUIT_TYPE_KICK = 1,
@@ -53,6 +55,8 @@ public class ChatClientController {
     String userRoom = "General";
     int totalUserCount;
     ChatClient client;
+    Thread thread;
+
     private LoginController loginController;
     private ClientObject clientData;
     private MessageObject messageObject;
@@ -112,6 +116,8 @@ public class ChatClientController {
         }
     }
 
+    //methods
+
     private void sendMessage() {
         ChatMessage message = new ChatMessage(ChatMessage.MESSAGE, userName + ": " + txtMessage.getText());
 //        sendMessageToServer("MESS " + userRoom + "~" + userName + ": " + txtMessage.getText());
@@ -119,8 +125,6 @@ public class ChatClientController {
         txtMessage.clear();
         txtMessage.requestFocus();
     }
-
-    //methods
 
     public void btnHandler(ActionEvent e) {
         var name = ((Button) e.getTarget()).getText();
@@ -140,6 +144,7 @@ public class ChatClientController {
         var loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
         Parent root = loader.load();
         loginController = loader.getController();
+        loginController.setChatClientController(this);
         Stage loginStage = new Stage();
         loginStage.getIcons().add(new Image("/images/icon.gif"));
         loginStage.setTitle(PRODUCT_NAME + " - Login");
@@ -148,10 +153,10 @@ public class ChatClientController {
         loginStage.initModality(Modality.APPLICATION_MODAL);
         loginStage.setScene(new Scene(root, 250, 400));
         loginStage.show();
-        loginToChat();
+        //loginToChat();
     }
 
-    private void loginToChat() {
+    void loginToChat() {
         if (loginController.isConnect()) {
             clientData.setUserName(loginController.txtUserName.getText());
             clientData.setServerName(loginController.txtServerName.getText());
@@ -168,13 +173,75 @@ public class ChatClientController {
         System.out.println(clientData);
     }
 
-    private void connectToServer() {
+    public void connectToServer() {
         messageBoard.getChildren().clear();
-        messageBoard.getChildren().add(messageObject.getText("Connecting To Server... Please Wait...", MESSAGE_TYPE_ADMIN));
+        messageBoard.getChildren().add(messageObject.getText("Connecting To Server... Please Wait...\n", MESSAGE_TYPE_ADMIN));
+        Properties properties = new Properties();
         try {
-            client = new ChatClient(clientData.getServerName(), clientData.getServerPort(), clientData.getUserName());
+            properties.load(this.getClass().getClassLoader().getResourceAsStream("data.properties"));
+        } catch (IOException | NullPointerException exc) {
+            exc.printStackTrace();
+        }
+
+//        clientData.setServerName(properties.getProperty("ServerName"));
+//        clientData.setServerPort(Integer.parseInt(properties.getProperty("ServerPort")));
+//        clientData.setUserName(properties.getProperty("UserName"));
+
+        thread = new Thread(this);
+        thread.start();
+    }
+
+    @Override
+    public void run() {
+        // default values if not entered
+
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("Enter the username: ");
+        userName = scan.nextLine();
+
+        try {
+            // create the client.Client object
+            client = new ChatClient(clientData.getServerName(), clientData.getServerPort(), clientData.getUserName(), this);
+            // try to connect to the main.java.server and return if not connected
+            if (!client.start())
+                return;
+
+            client.display("""
+				Hello.! Welcome to the chatroom.Instructions:
+				1. Simply type the message to send broadcast to all active clients
+				2. Type '@username<space>yourmessage' without quotes to send message to desired client
+				3. Type 'WHOISIN' without quotes to see list of active clients
+				4. Type 'LOGOUT' without quotes to logoff from main.java.server
+				"""
+            );
+
+            // infinite loop to get the input from the user
+            while (true) {
+                client.display("> ");
+                // read message from user
+                String msg = scan.nextLine();
+                // logout if message is LOGOUT
+                if (msg.equalsIgnoreCase("LOGOUT")) {
+                    client.sendMessage(new ChatMessage(ChatMessage.LOGOUT, ""));
+                    break;
+                }
+                // message to check who are present in chatroom
+                else if (msg.equalsIgnoreCase("WHOISIN")) {
+                    client.sendMessage(new ChatMessage(ChatMessage.LIST, ""));
+                }
+                // regular text message
+                else {
+                    client.sendMessage(new ChatMessage(ChatMessage.MESSAGE, msg));
+                }
+            }
+            // close resource
+            scan.close();
+            // client completed its job. disconnect client.
+            client.disconnect();
             loginEnable();
         } catch (Exception e) {
+            e.printStackTrace();
             quitConnection(QUIT_TYPE_NULL);
         }
     }
@@ -197,7 +264,6 @@ public class ChatClientController {
     }
 
     private void disconnectChat() {
-        System.out.println("here");
         quitConnection(QUIT_TYPE_DEFAULT);
     }
 
@@ -215,5 +281,13 @@ public class ChatClientController {
         userName = "";
         userRoom = "";
         totalUserCount = 0;
+    }
+
+    public TextFlow getMessageBoard() {
+        return messageBoard;
+    }
+
+    public void setMessageBoard(TextFlow messageBoard) {
+        this.messageBoard = messageBoard;
     }
 }

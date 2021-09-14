@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import static client.CommonSettings.PRODUCT_NAME;
 
-public class Main extends Application {
+public class ClientMain extends Application {
 
     public static void main(String[] args) {
         launch(args);

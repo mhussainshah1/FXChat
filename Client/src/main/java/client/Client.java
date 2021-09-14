@@ -79,12 +79,14 @@ public class Client {
 		if (!client.start())
 			return;
 
-		System.out.println("\nHello.! Welcome to the chatroom.");
-		System.out.println("Instructions:");
-		System.out.println("1. Simply type the message to send broadcast to all active clients");
-		System.out.println("2. Type '@username<space>yourmessage' without quotes to send message to desired client");
-		System.out.println("3. Type 'WHOISIN' without quotes to see list of active clients");
-		System.out.println("4. Type 'LOGOUT' without quotes to logoff from main.java.server");
+		System.out.println("""
+				Hello.! Welcome to the chatroom.Instructions:
+				1. Simply type the message to send broadcast to all active clients
+				2. Type '@username<space>yourmessage' without quotes to send message to desired client
+				3. Type 'WHOISIN' without quotes to see list of active clients
+				4. Type 'LOGOUT' without quotes to logoff from main.java.server
+				"""
+		);
 
 		// infinite loop to get the input from the user
 		while (true) {
