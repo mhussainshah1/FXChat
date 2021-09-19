@@ -34,12 +34,7 @@ public class LoginController {
     @FXML
     CheckBox proxyCheckBox;
 
-    public void setChatClientController(ChatClientController chatClientController) {
-        this.chatClientController = chatClientController;
-    }
-
     ChatClientController chatClientController;
-
     private boolean connect;
     private Properties properties;
 
@@ -106,5 +101,9 @@ public class LoginController {
 
     public boolean isConnect() {
         return connect;
+    }
+
+    public void setChatClientController(ChatClientController chatClientController) {
+        this.chatClientController = chatClientController;
     }
 }

@@ -12,7 +12,7 @@ import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static client.MessageObject.MESSAGE_TYPE_ADMIN;
+import static client.MessageObject.*;
 
 //The client.Client that can be run as a console
 public class ChatClient {
@@ -47,9 +47,9 @@ public class ChatClient {
         // to display hh:mm:ss
         sdf = new SimpleDateFormat("HH:mm:ss");
 
-        display("server name = " + server +
-                ",port number = " + port +
-                ",user name = " + userName);
+        display("Server name = " + server +
+                ", Port number = " + port +
+                ", User name = " + userName, MESSAGE_TYPE_JOIN);
 
     }
 
@@ -71,19 +71,19 @@ public class ChatClient {
         }
         // exception handler if it failed
         catch (Exception ec) {
-            display("Error connecting to main.java.server:" + ec);
+            display("Error connecting to main.java.server:" + ec, MESSAGE_TYPE_LEAVE);
             return false;
         }
 
         String msg = "Connection accepted " + socket.getInetAddress() + ":" + socket.getPort();
-        display(msg);
+        display(msg, MESSAGE_TYPE_JOIN);
 
         /* Creating both Data Stream */
         try {
             sInput = new ObjectInputStream(socket.getInputStream());
             sOutput = new ObjectOutputStream(socket.getOutputStream());
         } catch (IOException eIO) {
-            display("Exception creating new Input/output Streams: " + eIO);
+            display("Exception creating new Input/output Streams: " + eIO, MESSAGE_TYPE_LEAVE);
             return false;
         }
 
@@ -94,7 +94,7 @@ public class ChatClient {
         try {
             sOutput.writeObject(userName);
         } catch (IOException eIO) {
-            display("Exception doing login : " + eIO);
+            display("Exception doing login : " + eIO, MESSAGE_TYPE_LEAVE);
             disconnect();
             return false;
         }
@@ -105,13 +105,13 @@ public class ChatClient {
     /*
      * To send a message to the console
      */
-    public void display(String msg) {
+    public void display(String msg, int type) {
         String time = sdf.format(new Date()) + " " + msg + "\n";
         System.out.print(time);
 
         Platform.runLater(() -> {
             messageObject = new MessageObject();
-            chatClientController.getMessageBoard().getChildren().add(messageObject.getText(time, MESSAGE_TYPE_ADMIN));
+            chatClientController.getMessageBoard().getChildren().add(messageObject.getText(time, type));
         });
     }
 
@@ -121,9 +121,9 @@ public class ChatClient {
     public void sendMessage(ChatMessage msg) {
         try {
             sOutput.writeObject(msg);
-            display(msg.getMessage());
+            display(msg.getMessage(), MESSAGE_TYPE_DEFAULT);
         } catch (IOException e) {
-            display("Exception writing to main.java.server: " + e);
+            display("Exception writing to main.java.server: " + e, MESSAGE_TYPE_LEAVE);
         }
     }
 
@@ -152,6 +152,10 @@ public class ChatClient {
         }
     }
 
+    public ObjectInputStream getsInput() {
+        return sInput;
+    }
+
     /*
      * a class that waits for the message from the main.java.server
      */
@@ -160,15 +164,16 @@ public class ChatClient {
             while (true) {
                 try {
                     // read the message form the input datastream
-                    String msg = (String) sInput.readObject();
+                    String msg = ((ChatMessage)  sInput.readObject()).getMessage();
+
                     // print the message
-                    display(msg);
-                    display("> ");
+                    display(msg, MESSAGE_TYPE_DEFAULT);
+                    display("> ", MESSAGE_TYPE_DEFAULT);
                 } catch (IOException e) {
-                    display(notif + "Server has closed the connection: " + e + notif);
+                    display(notif + "Server has closed the connection: " + e + notif, MESSAGE_TYPE_LEAVE);
                     break;
                 } catch (ClassNotFoundException e2) {
-                    display(e2.getMessage());
+                    display(e2.getMessage(), MESSAGE_TYPE_LEAVE);
                     e2.printStackTrace();
                 }
             }

@@ -28,8 +28,7 @@ import java.util.Scanner;
 
 import static client.CommonSettings.COMPANY_NAME;
 import static client.CommonSettings.PRODUCT_NAME;
-import static client.MessageObject.MESSAGE_TYPE_ADMIN;
-import static client.MessageObject.MESSAGE_TYPE_DEFAULT;
+import static client.MessageObject.*;
 
 public class ChatClientController implements Runnable {
 
@@ -120,6 +119,7 @@ public class ChatClientController implements Runnable {
 
     private void sendMessage() {
         ChatMessage message = new ChatMessage(ChatMessage.MESSAGE, userName + ": " + txtMessage.getText());
+        sendMessageToServer(message);
 //        sendMessageToServer("MESS " + userRoom + "~" + userName + ": " + txtMessage.getText());
         messageObject.getText(userName + ": " + txtMessage.getText(), MESSAGE_TYPE_DEFAULT);
         txtMessage.clear();
@@ -183,10 +183,6 @@ public class ChatClientController implements Runnable {
             exc.printStackTrace();
         }
 
-//        clientData.setServerName(properties.getProperty("ServerName"));
-//        clientData.setServerPort(Integer.parseInt(properties.getProperty("ServerPort")));
-//        clientData.setUserName(properties.getProperty("UserName"));
-
         thread = new Thread(this);
         thread.start();
     }
@@ -195,11 +191,6 @@ public class ChatClientController implements Runnable {
     public void run() {
         // default values if not entered
 
-        Scanner scan = new Scanner(System.in);
-
-        System.out.println("Enter the username: ");
-        userName = scan.nextLine();
-
         try {
             // create the client.Client object
             client = new ChatClient(clientData.getServerName(), clientData.getServerPort(), clientData.getUserName(), this);
@@ -207,20 +198,23 @@ public class ChatClientController implements Runnable {
             if (!client.start())
                 return;
 
+            loginEnable();
+
             client.display("""
 				Hello.! Welcome to the chatroom.Instructions:
 				1. Simply type the message to send broadcast to all active clients
 				2. Type '@username<space>yourmessage' without quotes to send message to desired client
 				3. Type 'WHOISIN' without quotes to see list of active clients
 				4. Type 'LOGOUT' without quotes to logoff from main.java.server
-				"""
+				""", MESSAGE_TYPE_JOIN
             );
 
             // infinite loop to get the input from the user
             while (true) {
-                client.display("> ");
+                client.display("> " ,MESSAGE_TYPE_DEFAULT);
                 // read message from user
-                String msg = scan.nextLine();
+                String msg = ((ChatMessage) client.getsInput().readObject()).getMessage();
+
                 // logout if message is LOGOUT
                 if (msg.equalsIgnoreCase("LOGOUT")) {
                     client.sendMessage(new ChatMessage(ChatMessage.LOGOUT, ""));
@@ -235,19 +229,19 @@ public class ChatClientController implements Runnable {
                     client.sendMessage(new ChatMessage(ChatMessage.MESSAGE, msg));
                 }
             }
-            // close resource
-            scan.close();
+
             // client completed its job. disconnect client.
             client.disconnect();
-            loginEnable();
+
         } catch (Exception e) {
             e.printStackTrace();
             quitConnection(QUIT_TYPE_NULL);
         }
     }
 
-    private void sendMessageToServer(String Message) {
+    private void sendMessageToServer(ChatMessage message ) {
         try {
+            client.sendMessage(new ChatMessage(ChatMessage.MESSAGE,message + "\r\n"));
 //            dataoutputstream.writeBytes(Message + "\r\n");
         } catch (Exception e) {
             e.printStackTrace();
