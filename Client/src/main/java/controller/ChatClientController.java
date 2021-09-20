@@ -20,10 +20,11 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.Scanner;
 
 import static client.CommonSettings.COMPANY_NAME;
@@ -50,7 +51,7 @@ public class ChatClientController implements Runnable {
     @FXML
     MenuItem logoutMenuItem;
 
-    String userName = "Amir";
+    String userName = "Anonymous";
     String userRoom = "General";
     int totalUserCount;
     ChatClient client;
@@ -59,6 +60,7 @@ public class ChatClientController implements Runnable {
     private LoginController loginController;
     private ClientObject clientData;
     private MessageObject messageObject;
+    boolean keepGoing = true;
 
     public void initialize() {
         clientData = new ClientObject();
@@ -115,17 +117,6 @@ public class ChatClientController implements Runnable {
         }
     }
 
-    //methods
-
-    private void sendMessage() {
-        ChatMessage message = new ChatMessage(ChatMessage.MESSAGE, userName + ": " + txtMessage.getText());
-        sendMessageToServer(message);
-//        sendMessageToServer("MESS " + userRoom + "~" + userName + ": " + txtMessage.getText());
-        messageObject.getText(userName + ": " + txtMessage.getText(), MESSAGE_TYPE_DEFAULT);
-        txtMessage.clear();
-        txtMessage.requestFocus();
-    }
-
     public void btnHandler(ActionEvent e) {
         var name = ((Button) e.getTarget()).getText();
 
@@ -137,6 +128,14 @@ public class ChatClientController implements Runnable {
         if (name.equals("Exit Chat")) {
             disconnectChat();
             Platform.exit();
+        }
+    }
+
+    public void txtHandler(ActionEvent e) {
+        TextField textField = (TextField) e.getSource();
+        String ID = textField.getId();
+        if (ID.equals("txtMessage")) {
+            btnSend.fire();
         }
     }
 
@@ -176,12 +175,6 @@ public class ChatClientController implements Runnable {
     public void connectToServer() {
         messageBoard.getChildren().clear();
         messageBoard.getChildren().add(messageObject.getText("Connecting To Server... Please Wait...\n", MESSAGE_TYPE_ADMIN));
-        Properties properties = new Properties();
-        try {
-            properties.load(this.getClass().getClassLoader().getResourceAsStream("data.properties"));
-        } catch (IOException | NullPointerException exc) {
-            exc.printStackTrace();
-        }
 
         thread = new Thread(this);
         thread.start();
@@ -200,20 +193,31 @@ public class ChatClientController implements Runnable {
 
             loginEnable();
 
-            client.display("""
-				Hello.! Welcome to the chatroom.Instructions:
-				1. Simply type the message to send broadcast to all active clients
-				2. Type '@username<space>yourmessage' without quotes to send message to desired client
-				3. Type 'WHOISIN' without quotes to see list of active clients
-				4. Type 'LOGOUT' without quotes to logoff from main.java.server
-				""", MESSAGE_TYPE_JOIN
+            client.displayWithoutStamp("""
+                    Hello.! Welcome to the chatroom.Instructions:
+                    1. Simply type the message to send broadcast to all active clients
+                    2. Type '@username<space>yourmessage' without quotes to send message to desired client
+                    3. Type 'WHOISIN' without quotes to see list of active clients
+                    4. Type 'LOGOUT' without quotes to logoff from main.java.server
+                    """, MESSAGE_TYPE_JOIN
             );
 
             // infinite loop to get the input from the user
-            while (true) {
-                client.display("> " ,MESSAGE_TYPE_DEFAULT);
+            String msg = "";
+
+            Scanner scan = new Scanner(System.in);
+
+            while (keepGoing) {
+                if (thread == null) {
+                    keepGoing = false;
+                    break;
+                }
+                //client.displayWithoutStamp("> ", MESSAGE_TYPE_DEFAULT);
+                System.out.print("> ");
+
                 // read message from user
-                String msg = ((ChatMessage) client.getsInput().readObject()).getMessage();
+//                msg = (String) client.getsInput().readObject();
+                msg = scan.nextLine();
 
                 // logout if message is LOGOUT
                 if (msg.equalsIgnoreCase("LOGOUT")) {
@@ -230,8 +234,12 @@ public class ChatClientController implements Runnable {
                 }
             }
 
+            //close resource
+            scan.close();
+
             // client completed its job. disconnect client.
             client.disconnect();
+            logoutDisable();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -239,10 +247,19 @@ public class ChatClientController implements Runnable {
         }
     }
 
-    private void sendMessageToServer(ChatMessage message ) {
+    //methods
+    private void sendMessage() {
+        ChatMessage message = new ChatMessage(ChatMessage.MESSAGE, txtMessage.getText());
+        sendMessageToServer(message);
+        messageObject.getText(txtMessage.getText(), MESSAGE_TYPE_DEFAULT);
+        txtMessage.clear();
+        txtMessage.requestFocus();
+    }
+
+    private void sendMessageToServer(ChatMessage message) {
         try {
-            client.sendMessage(new ChatMessage(ChatMessage.MESSAGE,message + "\r\n"));
-//            dataoutputstream.writeBytes(Message + "\r\n");
+            client.sendMessage(message);
+//            dataoutputstream.writeBytes(message + "\r\n");
         } catch (Exception e) {
             e.printStackTrace();
             quitConnection(QUIT_TYPE_DEFAULT);
@@ -258,10 +275,18 @@ public class ChatClientController implements Runnable {
     }
 
     private void disconnectChat() {
-        quitConnection(QUIT_TYPE_DEFAULT);
+        if(client.getSocket() != null){
+            messageObject.getText("CONNECTION TO THE SERVER CLOSED", MESSAGE_TYPE_ADMIN);
+            quitConnection(QUIT_TYPE_DEFAULT);
+        }
     }
 
     private void quitConnection(int quitType) {
+        if (thread != null) {
+            keepGoing = false;
+            thread.interrupt();
+            thread = null;
+        }
         logoutDisable();
     }
 

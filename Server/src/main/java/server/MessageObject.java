@@ -2,8 +2,6 @@ package server;
 
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 
@@ -15,17 +13,17 @@ public class MessageObject {
     public static final int MESSAGE_TYPE_ADMIN = 3;
 
     private Text text;
-    private int MessageType;
+    private int messageType;
 
     public MessageObject() {
         this.text = new Text();
-        this.MessageType = MESSAGE_TYPE_DEFAULT;
+        this.messageType = MESSAGE_TYPE_DEFAULT;
     }
 
-    public Text getText(String Message, int MessageType) {
+    public Text getText(String Message, int messageType) {
         text.setText(Message);
         text.setFont(Font.font("Arial", 14));
-        switch (MessageType) {
+        switch (messageType) {
             case MESSAGE_TYPE_DEFAULT -> {
                 text.setFill(Color.BLACK);
             }

@@ -10,44 +10,44 @@ import java.io.Serializable;
 
 public class ChatMessage implements Serializable {
 
-	// The different types of message sent by the client.Client
-	// LIST to receive the list of the users connected
-	// MESSAGE an ordinary text message
-	// LOGOUT to disconnect from the main.java.server.Server
-	public static final int LIST = 0,
-			MESSAGE = 1,
-			LOGOUT = 2,
-			ROOM = 3,
-			ADD = 4,
-			EXIST = 5,
-			REMOVE = 6,
-			KICKED_OUT = 7,
-			KICKED_USER_INFO = 8,
-			CHANGE_ROOM = 9,
-			JOIN_ROOM = 10,
-			LEAVE_ROOM = 11,
-			ROOM_COUNT = 12,
-			PRIVATE_MESSAGE = 13;
+    // The different types of message sent by the client.Client
+    // LIST to receive the list of the users connected
+    // MESSAGE an ordinary text message
+    // LOGOUT to disconnect from the main.java.server.Server
+    public static final int LIST = 0,
+            MESSAGE = 1,
+            LOGOUT = 2,
+            ROOM = 3,
+            ADD = 4,
+            EXIST = 5,
+            REMOVE = 6,
+            KICKED_OUT = 7,
+            KICKED_USER_INFO = 8,
+            CHANGE_ROOM = 9,
+            JOIN_ROOM = 10,
+            LEAVE_ROOM = 11,
+            ROOM_COUNT = 12,
+            PRIVATE_MESSAGE = 13;
 
-	private final int type;
-	private final String message;
+    private final int type;
+    private final String message;
 
-	// constructor
-	public ChatMessage(int type, String message) {
-		this.type = type;
-		this.message = message;
-	}
+    // constructor
+    public ChatMessage(int type, String message) {
+        this.type = type;
+        this.message = message;
+    }
 
-	public int getType() {
-		return type;
-	}
+    public int getType() {
+        return type;
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	@Override
-	public String toString() {
-		return message;
-	}
+    @Override
+    public String toString() {
+        return message;
+    }
 }

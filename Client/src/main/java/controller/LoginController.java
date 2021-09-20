@@ -41,6 +41,7 @@ public class LoginController {
     //Calls automatically
     @FXML
     public void initialize() {
+
         properties = new Properties();
         try {
             properties.load(this.getClass().getClassLoader().getResourceAsStream("data.properties"));

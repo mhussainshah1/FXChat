@@ -136,6 +136,7 @@ public class Client {
 		// exception handler if it failed
 		catch (Exception ec) {
 			display("Error connectiong to main.java.server:" + ec);
+			ec.printStackTrace();
 			return false;
 		}
 
@@ -148,6 +149,7 @@ public class Client {
 			sOutput = new ObjectOutputStream(socket.getOutputStream());
 		} catch (IOException eIO) {
 			display("Exception creating new Input/output Streams: " + eIO);
+			eIO.printStackTrace();
 			return false;
 		}
 
@@ -159,6 +161,7 @@ public class Client {
 			sOutput.writeObject(username);
 		} catch (IOException eIO) {
 			display("Exception doing login : " + eIO);
+			eIO.printStackTrace();
 			disconnect();
 			return false;
 		}
@@ -181,6 +184,7 @@ public class Client {
 			sOutput.writeObject(msg);
 		} catch (IOException e) {
 			display("Exception writing to main.java.server: " + e);
+			e.printStackTrace();
 		}
 	}
 
@@ -223,6 +227,7 @@ public class Client {
 					System.out.print("> ");
 				} catch (IOException e) {
 					display(notif + "main.java.server.Server has closed the connection: " + e + notif);
+					e.printStackTrace();
 					break;
 				} catch (ClassNotFoundException e2) {
 					e2.printStackTrace();

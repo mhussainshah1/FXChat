@@ -27,9 +27,11 @@ class ClientThread extends Thread {
     // Constructor
     ClientThread(Server server, Socket socket) {
         this.server = server;
+
         // a unique id
         id = ++Server.uniqueId;
         this.socket = socket;
+
         //Creating both Data Stream
         server.displayWithoutStamp("Thread trying to create Object Input/Output Streams");
         try {
@@ -134,6 +136,7 @@ class ClientThread extends Thread {
         catch (IOException e) {
             server.display(server.notif + "Error sending message to " + username + server.notif);
             server.display(e.toString());
+            e.printStackTrace();
         }
         return true;
     }

@@ -29,6 +29,7 @@ public class ChatClient {
     // for I/O
     private ObjectInputStream sInput;           // to read from the socket
     private ObjectOutputStream sOutput;         // to write on the socket
+
     private Socket socket;                      // socket object
 
     private String server;
@@ -46,11 +47,6 @@ public class ChatClient {
 
         // to display hh:mm:ss
         sdf = new SimpleDateFormat("HH:mm:ss");
-
-        display("Server name = " + server +
-                ", Port number = " + port +
-                ", User name = " + userName, MESSAGE_TYPE_JOIN);
-
     }
 
     public String getMessage() {
@@ -61,6 +57,17 @@ public class ChatClient {
         this.message = message;
     }
 
+    public ObjectInputStream getsInput() {
+        return sInput;
+    }
+
+    public ObjectOutputStream getsOutput() {
+        return sOutput;
+    }
+
+    public Socket getSocket() {
+        return socket;
+    }
     /*
      * To start the chat
      */
@@ -72,6 +79,7 @@ public class ChatClient {
         // exception handler if it failed
         catch (Exception ec) {
             display("Error connecting to main.java.server:" + ec, MESSAGE_TYPE_LEAVE);
+            ec.printStackTrace();
             return false;
         }
 
@@ -84,6 +92,7 @@ public class ChatClient {
             sOutput = new ObjectOutputStream(socket.getOutputStream());
         } catch (IOException eIO) {
             display("Exception creating new Input/output Streams: " + eIO, MESSAGE_TYPE_LEAVE);
+            eIO.printStackTrace();
             return false;
         }
 
@@ -95,6 +104,7 @@ public class ChatClient {
             sOutput.writeObject(userName);
         } catch (IOException eIO) {
             display("Exception doing login : " + eIO, MESSAGE_TYPE_LEAVE);
+            eIO.printStackTrace();
             disconnect();
             return false;
         }
@@ -105,6 +115,7 @@ public class ChatClient {
     /*
      * To send a message to the console
      */
+
     public void display(String msg, int type) {
         String time = sdf.format(new Date()) + " " + msg + "\n";
         System.out.print(time);
@@ -115,15 +126,24 @@ public class ChatClient {
         });
     }
 
+    public void displayWithoutStamp(String message, int type) {
+        System.out.println(message);
+
+        Platform.runLater(() -> {
+            messageObject = new MessageObject();
+            chatClientController.getMessageBoard().getChildren().add(messageObject.getText(message + "\n > ", type));
+        });
+    }
+
     /*
      * To send a message to the main.java.server
      */
     public void sendMessage(ChatMessage msg) {
         try {
             sOutput.writeObject(msg);
-            display(msg.getMessage(), MESSAGE_TYPE_DEFAULT);
         } catch (IOException e) {
             display("Exception writing to main.java.server: " + e, MESSAGE_TYPE_LEAVE);
+            e.printStackTrace();
         }
     }
 
@@ -152,10 +172,6 @@ public class ChatClient {
         }
     }
 
-    public ObjectInputStream getsInput() {
-        return sInput;
-    }
-
     /*
      * a class that waits for the message from the main.java.server
      */
@@ -164,13 +180,14 @@ public class ChatClient {
             while (true) {
                 try {
                     // read the message form the input datastream
-                    String msg = ((ChatMessage)  sInput.readObject()).getMessage();
+                    String msg = ((String) sInput.readObject());
 
                     // print the message
-                    display(msg, MESSAGE_TYPE_DEFAULT);
-                    display("> ", MESSAGE_TYPE_DEFAULT);
+                    displayWithoutStamp(msg, MESSAGE_TYPE_DEFAULT);
+                    System.out.print("> ");
                 } catch (IOException e) {
                     display(notif + "Server has closed the connection: " + e + notif, MESSAGE_TYPE_LEAVE);
+                    e.printStackTrace();
                     break;
                 } catch (ClassNotFoundException e2) {
                     display(e2.getMessage(), MESSAGE_TYPE_LEAVE);
