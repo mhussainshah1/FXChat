@@ -116,7 +116,6 @@ public class Client {
 	/**
 	 *  Constructor to set below things main.java.server: the main.java.server address  port: the port number username: the username
 	 */
-
 	public String getUsername() {
 		return username;
 	}

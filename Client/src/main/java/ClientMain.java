@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import static client.CommonSettings.PRODUCT_NAME;
+import static common.CommonSettings.PRODUCT_NAME;
 
 public class ClientMain extends Application {
 

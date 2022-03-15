@@ -1,4 +1,4 @@
-package client;
+package common;
 
 public interface CommonSettings {
     String PRODUCT_NAME = "Amir Chat v1.0";

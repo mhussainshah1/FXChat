@@ -1,6 +1,7 @@
-package client;
+package common;
 
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 
@@ -19,8 +20,10 @@ public class MessageObject {
         this.MessageType = MESSAGE_TYPE_DEFAULT;
     }
 
+    //Format Message
     public Text getText(String Message, int MessageType) {
         text.setText(Message);
+        text.setFont(Font.font("Arial", 14));
         switch (MessageType) {
             case MESSAGE_TYPE_DEFAULT -> {
                 text.setFill(Color.BLACK);

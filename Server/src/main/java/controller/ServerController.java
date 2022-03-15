@@ -1,21 +1,27 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import common.MessageObject;
 import server.Server;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.StringTokenizer;
 
-import static client.CommonSettings.PRODUCT_NAME;
+import static common.CommonSettings.PRODUCT_NAME;
+import static common.MessageObject.MESSAGE_TYPE_ADMIN;
 
 public class ServerController {
 
@@ -34,11 +40,12 @@ public class ServerController {
     @FXML
     Button btnSendMessage;
     //Handlers
-    Server server;
+    private Server server;
     private Properties properties;
     private int portNumber;
     private int maximumGuestNumber;
     private String roomList = "";
+    private MessageObject messageObject;
 
     public void initialize() {
         properties = getProperties();
@@ -84,32 +91,46 @@ public class ServerController {
         }
 
         if (name.equals("Send Message!")) {
-            String text;
-            if (messageBoard.getChildren().size() == 0) {
-                text = "Server : " + txtMessage.getText();
-            } else { // Add new line if not the first child
-                text = "Server : " + txtMessage.getText();
-            }
-            if (txtMessage.getText().contains("~~")) {
-                var tokenizer = new StringTokenizer(txtMessage.getText(), " ");
-                messageBoard.getChildren().add(new Text("Server : "));
-                while (tokenizer.hasMoreTokens()) {
-                    String token = tokenizer.nextToken();
-                    //If its a Proper Image
-                    int i = Integer.parseInt(token.substring(2));
-                    var imageView = new ImageView(new Image("icons/photo" + i + ".gif"));
-                    messageBoard.getChildren().addAll(imageView);
-                }
-                server.displayWithoutStamp("");
-            } else {
-                server.broadcast(text);
-            }
+            String message = "Server : " + txtMessage.getText();
+            server.broadcast(message);
             txtMessage.clear();
             txtMessage.requestFocus();
         }
     }
 
     //Methods
+    // Display an event to the console
+    public void display(String message) {
+        System.out.println(message);
+        List<Node> list = new ArrayList<>();
+
+        if (message.contains("~~")) {
+            var tokenizer = new StringTokenizer(message, " ");
+            while (tokenizer.hasMoreTokens()) {
+                String token = tokenizer.nextToken();
+                //If it's a Proper Image
+                if (token.contains("~~")) {
+                    int i = Integer.parseInt(token.substring(2));
+                    if (i >= 0 && i < 21) {
+                        var imageView = new ImageView(new Image("icons/photo" + i + ".gif"));
+                        list.add(imageView);
+                    }
+                } else {
+                    messageObject = new MessageObject();
+                    list.add(messageObject.getText(token + " ", MESSAGE_TYPE_ADMIN));
+                }
+            }
+        } else {
+            messageObject = new MessageObject();
+            list.add(messageObject.getText(message , MESSAGE_TYPE_ADMIN));
+        }
+
+        Platform.runLater(() -> {
+            messageBoard.getChildren().addAll(list);
+            messageBoard.getChildren().add(new Text("\n"));
+        });
+    }
+
     private void enableLogin() {
         control(true);
     }

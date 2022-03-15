@@ -1,4 +1,4 @@
-package server;
+package common;
 
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;

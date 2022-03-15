@@ -62,7 +62,7 @@ public class PrivateChat extends Application {
                         var tokenizer = new StringTokenizer(textField.getText(), " ");
                         while (tokenizer.hasMoreTokens()) {
                             String token = tokenizer.nextToken();
-                            //If its a Proper Image
+                            //If it's a Proper Image
                             int i = Integer.parseInt(token.substring(2));
                             var imageView = new ImageView(new Image("icons/photo" + i + ".gif"));
 //                            text.setText(text.getText().replace("~~" + i, ""));

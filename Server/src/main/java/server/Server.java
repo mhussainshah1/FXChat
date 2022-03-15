@@ -1,7 +1,7 @@
 package server;
 
+import common.MessageObject;
 import controller.ServerController;
-import javafx.application.Platform;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -10,8 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static client.MessageObject.MESSAGE_TYPE_ADMIN;
 
 // the server that can be run as a console
 public class Server implements Runnable {
@@ -52,7 +50,7 @@ public class Server implements Runnable {
             // the socket used by the server
             ServerSocket serverSocket = new ServerSocket(port);
             while (keepGoing) { // infinite loop to wait for connections ( till server is active )
-                display("Server waiting for Clients on port " + port + ".");
+                serverController.display("Server waiting for Clients on port " + port + ".");
                 Socket socket = serverSocket.accept(); // accept connection if requested from client
                 if (!keepGoing)
                     break; // break if server stopped
@@ -94,25 +92,6 @@ public class Server implements Runnable {
         }
     }
 
-    // Display an event to the console
-    public void display(String msg) {
-        String time = sdf.format(new Date()) + " " + msg + "\n";
-        System.out.print(time);
-
-        Platform.runLater(() -> {
-            messageObject = new MessageObject();
-            serverController.getMessageBoard().getChildren().add(messageObject.getText(time, MESSAGE_TYPE_ADMIN));
-        });
-    }
-
-    public void displayWithoutStamp(String message) {
-        System.out.print(message + "\n");
-        Platform.runLater(() -> {
-            messageObject = new MessageObject();
-            serverController.getMessageBoard().getChildren().add(messageObject.getText(message + "\n", MESSAGE_TYPE_ADMIN));
-        });
-    }
-
     // to broadcast a message to all Clients
     public synchronized boolean broadcast(String message) {
         // add timestamp to the message
@@ -147,12 +126,11 @@ public class Server implements Runnable {
             }
             // mentioned user not found, return false
             return found;
-        }
-        // if message is a broadcast message
-        else {
-            String messageLf = time + " " + message + "\n";
+            // if message is a broadcast message
+        } else {
+            String messageLf = time + " " + message;
             // display message
-            displayWithoutStamp(messageLf);
+            display(messageLf);
 //            System.out.print(messageLf);
 
             // we loop in reverse order in case we would have to remove a client.Client
@@ -167,6 +145,10 @@ public class Server implements Runnable {
             }
         }
         return true;
+    }
+
+    public void display(String message) {
+        serverController.display(message);
     }
 
     // if client sent LOGOUT message to exit

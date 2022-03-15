@@ -46,6 +46,7 @@ public class ClientList extends Application {
                 selItems += "\n      " + selected.get(i).getText();
             }
             response.setText("All transport selected: " + selItems);
+            var privateChat = new PrivateChat();
         });
 
         //Parent

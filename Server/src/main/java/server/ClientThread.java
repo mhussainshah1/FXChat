@@ -33,7 +33,7 @@ class ClientThread extends Thread {
         this.socket = socket;
 
         //Creating both Data Stream
-        server.displayWithoutStamp("Thread trying to create Object Input/Output Streams");
+        server.display("Thread trying to create Object Input/Output Streams");
         try {
             sOutput = new ObjectOutputStream(socket.getOutputStream());
             sInput = new ObjectInputStream(socket.getInputStream());
