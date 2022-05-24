@@ -7,7 +7,7 @@
 <?import javafx.scene.text.TextFlow?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0"
             prefWidth="778.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.controller.ChatClientController">
+            fx:controller="com.controller.ClientController">
     <!--   child controllers-->
     <fx:include fx:id="login" source="login.fxml"/>
 

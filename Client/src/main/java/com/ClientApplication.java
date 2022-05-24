@@ -1,7 +1,7 @@
 package com;
 
 import com.common.CommonSettings;
-import com.controller.ChatClientController;
+import com.controller.ClientController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,14 +24,14 @@ public class ClientApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         var loader = new FXMLLoader(getClass().getResource("/com/controller/chatclient.fxml"));
         Parent root = loader.load();
-        ChatClientController chatClientController = loader.getController();
+        ClientController clientController = loader.getController();
         primaryStage.getIcons().add(new Image(getClass().getResource( "/images/icon.gif").toString()));
         primaryStage.setScene(new Scene(root, 778, 575));
         primaryStage.setTitle(CommonSettings.PRODUCT_NAME);
         primaryStage.show();
 
         createLoginStage();
-        chatClientController.openLoginWindow();
+        clientController.openLoginWindow();
     }
 
     public void createLoginStage() throws IOException {

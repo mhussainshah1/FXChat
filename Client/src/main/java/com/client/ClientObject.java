@@ -9,7 +9,6 @@ public class ClientObject implements Serializable {
     private String proxyHost;
     private int proxyPort;
     private boolean proxy;
-
     public ClientObject(){
     }
 

@@ -1,7 +1,6 @@
 package com.server;
 
 import com.common.ChatMessage;
-import com.common.MessageObject;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -40,15 +39,13 @@ public class Server extends ServerNetWorkConnection implements Serializable {
         connectionThread.start();
     }
 
-    // to stop the server
-    public void stop() throws IOException {
-        keepGoing = false;
-        new Socket("localhost", port);
+    public void closeConnection() throws IOException {// to stop the server
+        connectionThread.closeConnection();
     }
 
     // Display an event to the console
     private void display(String msg) {
-        String time = sdf.format(new Date()) + " " + msg;
+        String time = sdf.format(new Date()) + " " + msg + "\n";
         onReceiveCallback.accept(time);
     }
 
@@ -92,7 +89,6 @@ public class Server extends ServerNetWorkConnection implements Serializable {
             String messageLf = time + " " + message + "\n";
             // display message
             onReceiveCallback.accept(messageLf);
-//            System.out.print(messageLf);
 
             // we loop in reverse order in case we would have to remove a client.Client
             // because it has disconnected
@@ -113,8 +109,7 @@ public class Server extends ServerNetWorkConnection implements Serializable {
         String disconnectedClient = "";
         // scan the array list until we found the Id
         for (ClientThread clientThread : clientThreads) {
-            // if found remove it
-            if (clientThread.id == id) {
+            if (clientThread.id == id) {// if found remove it
                 disconnectedClient = clientThread.getUserName();
                 clientThreads.remove(clientThread);
                 break;
@@ -131,7 +126,7 @@ public class Server extends ServerNetWorkConnection implements Serializable {
 
     @Override
     protected String getIP() {
-        return null;
+        return "localhost";
     }
 
     @Override
@@ -140,6 +135,7 @@ public class Server extends ServerNetWorkConnection implements Serializable {
     }
 
     private class ConnectionThread extends Thread {
+        ServerSocket serverSocket;
         public Socket socket;
 
         @Override
@@ -147,7 +143,7 @@ public class Server extends ServerNetWorkConnection implements Serializable {
             keepGoing = true;
             //create socket server and wait for connection requests
             try (ServerSocket serverSocket = new ServerSocket(port);) {// the socket used by the server
-
+                this.serverSocket = serverSocket;
                 while (keepGoing) { // infinite loop to wait for connections ( till server is active )
                     display("Server waiting for Clients on port " + port + ".");
                     this.socket = serverSocket.accept(); // accept connection if requested from client
@@ -158,20 +154,17 @@ public class Server extends ServerNetWorkConnection implements Serializable {
                     clientThreads.add(t);//add this client to arraylist
                     t.start();
                 }
+                closeConnection();
             } catch (IOException e) {
-                display(sdf.format(new Date()) + " Exception on new ServerSocket: " + e + "\n");
+                display(sdf.format(new Date()) + " Exception on new ServerSocket: " + e);
             }
-            // try to stop the server
-
-            for (ClientThread tc : clientThreads) {
-                try {// close all data streams and socket
-                    tc.close();
-                } catch (IOException ioE) {
-                    display(ioE.getMessage());
-                    ioE.printStackTrace();
-                }
+        }
+        public void closeConnection() throws IOException {// try to stop the server
+            keepGoing = false;
+            serverSocket.close();
+            for (ClientThread tc : clientThreads) {// close all data streams and socket
+                tc.close();
             }
-
         }
     }
 
@@ -180,7 +173,6 @@ public class Server extends ServerNetWorkConnection implements Serializable {
         private int id; // my unique id (easier for disconnection)
         private String date;// timestamp
         private Socket socket; // the socket to get messages from client
-
         private String userName;// the Username of the Client
         private ChatMessage chatMessage;// message object to receive message and its type
         ObjectInputStream in;
@@ -202,7 +194,7 @@ public class Server extends ServerNetWorkConnection implements Serializable {
         @Override
         public void run() {
             //Creating both Data Stream
-            onReceiveCallback.accept("Thread trying to create Object Input/Output Streams");
+            onReceiveCallback.accept("Thread trying to create Object Input/Output Streams\n");
             try (var out = new ObjectOutputStream(socket.getOutputStream());
                  var in = new ObjectInputStream(socket.getInputStream());) {
 
@@ -285,5 +277,4 @@ public class Server extends ServerNetWorkConnection implements Serializable {
             return true;
         }
     }
-
 }

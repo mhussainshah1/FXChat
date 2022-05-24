@@ -30,7 +30,7 @@ public class LoginController {
     private TextField txtProxyPort;
     @FXML
     private CheckBox proxyCheckBox;
-    private ChatClientController chatClientController;
+    private ClientController clientController;
     private boolean connect;
     private Properties properties;
 
@@ -85,7 +85,7 @@ public class LoginController {
 
                 button.getScene().getWindow().hide();
 
-                chatClientController.loginToChat();
+                clientController.loginToChat();
 
             } catch (IOException exc) {
                 exc.printStackTrace();
@@ -102,8 +102,8 @@ public class LoginController {
         return connect;
     }
 
-    public void setChatClientController(ChatClientController chatClientController) {
-        this.chatClientController = chatClientController;
+    public void setChatClientController(ClientController clientController) {
+        this.clientController = clientController;
     }
 
     public String getUserName() {

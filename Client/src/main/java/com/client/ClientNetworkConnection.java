@@ -1,11 +1,16 @@
 package com.client;
 
+import com.common.ChatMessage;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
 import java.util.function.Consumer;
+
+import static com.controller.ClientController.QUIT_TYPE_DEFAULT;
+import static com.controller.ClientController.QUIT_TYPE_KICK;
 
 public abstract class ClientNetworkConnection {
     private final String notif = " *** ";// notification
@@ -25,8 +30,12 @@ public abstract class ClientNetworkConnection {
         connectionThread.out.writeObject(data);
     }
 
-    public void closeConnection() throws Exception {
-        connectionThread.socket.close();
+    public void closeConnection(int quitType) throws Exception {
+        connectionThread.quitConnection(quitType);
+    }
+
+    public void disconnectChat() {
+        connectionThread.quitConnection(QUIT_TYPE_DEFAULT);
     }
 
     protected abstract String getIP();
@@ -55,17 +64,33 @@ public abstract class ClientNetworkConnection {
                 this.in = in;
 
                 socket.setTcpNoDelay(true);//disable buffering - send message quicker without waiting for buffer to get full
-                onReceiveCallback.accept("Connection accepted " + socket.getInetAddress() + ":" + socket.getPort());
+                onReceiveCallback.accept("Connection accepted " + socket.getInetAddress() + ":" + socket.getPort() + "\n");
                 out.writeObject(getUserName());//send username to the server
 
                 while (true) {
                     // read the message form the input datastream
                     Serializable data = (Serializable) in.readObject();
-                    onReceiveCallback.accept(data + "\n");
+                    onReceiveCallback.accept(data);
                 }
             } catch (Exception e) {
-                //onReceiveCallback.accept("Connection closed");
                 onReceiveCallback.accept(notif + "Server has closed the connection: " + e + notif);
+            }
+        }
+
+        public void quitConnection(int quitType) {
+            if (socket != null) {
+                onReceiveCallback.accept("CONNECTION TO THE SERVER CLOSED\n");
+                try {
+                    if (quitType == QUIT_TYPE_DEFAULT)
+                        send(new ChatMessage(ChatMessage.REMOVE, ""));
+                    if (quitType == QUIT_TYPE_KICK)
+                        send(new ChatMessage(ChatMessage.KICKED_OUT, ""));
+                    socket.close();
+//                socket = null;
+//                tappanel.UserCanvas.ClearAll();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

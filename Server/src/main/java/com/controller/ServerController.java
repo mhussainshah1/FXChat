@@ -8,17 +8,12 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.StringTokenizer;
 
 import static com.common.CommonSettings.PRODUCT_NAME;
 import static com.common.MessageObject.MESSAGE_TYPE_ADMIN;
@@ -50,13 +45,15 @@ public class ServerController {
 
     //Methods
     public void initialize() {
+        this.messageObject = new MessageObject();
         properties = getProperties();
-//        properties.forEach((x, y) -> System.out.println(x + " = " + y));
+        properties.forEach((x, y) -> System.out.println(x + " = " + y));
 
         if (properties.getProperty("PortNumber") != null)
             portNumber = Integer.parseInt(properties.getProperty("PortNumber"));
         else
             portNumber = 1436;
+
         txtServerPort.setText(String.valueOf(portNumber));
 
         if (properties.getProperty("") != null)
@@ -88,25 +85,24 @@ public class ServerController {
             enableLogin();
         }
 
-        if (name.equals("Stop Server")) {
-            server.stop();
-            disableLogout();
+        if (name.equals("Send Message!")) {
+            sendMessage("Server : " + txtMessage.getText());
         }
 
-        if (name.equals("Send Message!")) {
-            String message = "Server : " + txtMessage.getText();
-            server.broadcast(message);
-            txtMessage.clear();
-            txtMessage.requestFocus();
+        if (name.equals("Stop Server")) {
+            server.closeConnection();
+            disableLogout();
         }
     }
 
     public void txtHandler(ActionEvent e) {
-        TextField textField = (TextField) e.getSource();
-        String ID = textField.getId();
-        if (ID.equals("txtMessage")) {
-            btnSendMessage.fire();
-        }
+        sendMessage("Server : " + txtMessage.getText());
+    }
+
+    private void sendMessage(String message) {
+        server.broadcast(message);
+        txtMessage.clear();
+        txtMessage.requestFocus();
     }
 
     private void enableLogin() {
@@ -115,10 +111,10 @@ public class ServerController {
 
     private void disableLogout() {
         control(false);
-        messageBoard.getChildren().clear();
     }
 
     void control(boolean status) {
+        messageBoard.getChildren().clear();
         txtServerPort.setDisable(status);
         txtMaximumGuest.setDisable(status);
         btnStart.setDisable(status);
@@ -142,43 +138,15 @@ public class ServerController {
     private Server createServer() {
         return new Server(portNumber, data -> {
             Platform.runLater(() -> { //UI or background thread - manipulate UI object , It gives control back to UI thread
-                //messageBoard.getChildren().add(new Text(data.toString() + "\n"));
-                display(data.toString());
+                display(data.toString(),MESSAGE_TYPE_ADMIN);
             });
-
-           /* Platform.runLater(() -> {
-                messageObject = new MessageObject();
-                messageBoard.getChildren().add(messageObject.getText(data.toString(), MESSAGE_TYPE_ADMIN));
-            });*/
         });
     }
 
     // Display an event to the console
-    public void display(String message) {
+    public void display(String message, int type) {
         System.out.println(message);
-        List<Node> list = new ArrayList<>();
-
-        if (message.contains("~~")) {
-            var tokenizer = new StringTokenizer(message, " ");
-            while (tokenizer.hasMoreTokens()) {
-                String token = tokenizer.nextToken().trim();
-                //If it's a Proper Image
-                if (token.contains("~~")) {
-                    int i = Integer.parseInt(token.substring(2));
-                    if (i >= 0 && i < 21) {
-                        var imageView = new ImageView(new Image(getClass().getResource("/icons/photo" + i + ".gif").toString()));
-                        list.add(imageView);
-                    }
-                } else {
-                    messageObject = new MessageObject();
-                    list.add(messageObject.getText(token + " ", MESSAGE_TYPE_ADMIN));
-                }
-            }
-        } else {
-            messageObject = new MessageObject();
-            list.add(messageObject.getText(message, MESSAGE_TYPE_ADMIN));
-        }
-        messageBoard.getChildren().addAll(list);
-        messageBoard.getChildren().add(new Text("\n"));
+        List<Node> nodes = messageObject.parseMessage(message, type);
+        messageBoard.getChildren().addAll(nodes);
     }
 }
