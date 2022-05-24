@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a211d92d-531c-4502-87dc-f0396759b514" name="Default Changelist" comment="server">
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/FXChat.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FXChat.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/Client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Client.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/ClientMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/client/ChatClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/client/ChatClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/controller/ChatClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/controller/ChatClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/utils/ImnagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/utils/ImagePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.properties" beforeDir="false" afterPath="$PROJECT_DIR$/data.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/client/ChatClient$ListenFromServer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/client/ChatClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/client/Client$ListenFromServer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/client/Client.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/client/ClientObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/client/CommonSettings.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/client/MessageObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/common/ChatMessage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/controller/AboutController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/controller/ChatClientController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/controller/LoginController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/controller/PrivateChatController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/data.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/docs/ChatClient-Emoicons.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/docs/ChatClient-Room.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/docs/ChatClient-User.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/docs/Jeeva Chat.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/docs/LoginDialog.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/docs/Private Chat.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/fxml/about.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/fxml/chatclient.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/fxml/login.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/fxml/privatechat.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/fxml/server.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo0.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo1.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo10.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo11.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo12.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo13.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo14.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo15.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo16.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo17.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo18.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo19.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo2.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo20.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo3.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo4.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo5.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo6.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo7.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo8.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/icons/photo9.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/images/defaultbanner.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/images/icon.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/images/logo.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/stylesheets/chatclient.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/utils/ClientList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/utils/DialogDemo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/utils/ImnagePanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/utils/MessageBox.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/utils/PrivateChat.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/utils/TextFlowDemo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/controller/ServerController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/fxml/server.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/images/icon.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/server.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/server/ClientThread.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/server/MessageObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/server/Server.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/stylesheets/chatserver.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Server/src/main/java/server/ClientThread.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Client/src/main/java/client/ChatClient.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectId" id="1sujWSKcXWpoRlYpB0gycnGiWiq" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../JeevaChat" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveInnerDialog.RECENTS_KEY">
+      <recent name="server" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="server" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Client">
+    <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="client.Client" />
+      <module name="Client" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClientMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ClientMain" />
+      <module name="Client" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\Java\javafx-sdk-16\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerMain" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Server" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\Java\javafx-sdk-16\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.ServerMain" />
+      <item itemvalue="Application.ClientMain" />
+      <item itemvalue="Application.Client" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Client" />
+        <item itemvalue="Application.ServerMain" />
+        <item itemvalue="Application.ClientMain" />
+        <item itemvalue="Application.ClientMain" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a211d92d-531c-4502-87dc-f0396759b514" name="Default Changelist" comment="" />
+      <created>1621729401011</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1621729401011</updated>
+      <workItem from="1621729402659" duration="396000" />
+      <workItem from="1621729835626" duration="7016000" />
+      <workItem from="1621742692267" duration="15292000" />
+      <workItem from="1621758627134" duration="3031000" />
+      <workItem from="1621787033864" duration="275000" />
+      <workItem from="1621837573973" duration="563000" />
+      <workItem from="1621943585394" duration="33000" />
+      <workItem from="1629497379971" duration="650000" />
+      <workItem from="1629498140866" duration="2812000" />
+      <workItem from="1631134268207" duration="2081000" />
+      <workItem from="1631230534349" duration="320000" />
+      <workItem from="1631230898539" duration="5955000" />
+      <workItem from="1631242926512" duration="4581000" />
+      <workItem from="1631285885818" duration="1135000" />
+      <workItem from="1631508150608" duration="1623000" />
+    </task>
+    <task id="LOCAL-00001" summary="server">
+      <created>1621735285460</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1621735285460</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="server" />
+    <option name="LAST_COMMIT_MESSAGE" value="server" />
+  </component>
+</project>

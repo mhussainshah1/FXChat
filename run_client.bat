@@ -1,1 +1,1 @@
-java -cp out/production/Client client.Client
+java -cp out/production/Client com.client.Client

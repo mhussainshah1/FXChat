@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.TextFlow?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0"
+            prefWidth="778.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.controller.ClientController">
+    <!--   child controllers-->
+    <fx:include fx:id="login" source="login.fxml"/>
+
+    <bottom>
+        <BorderPane BorderPane.alignment="CENTER">
+            <left>
+                <Label prefHeight="19.0" prefWidth="118.0" styleClass="chat-label"
+                       stylesheets="@../../stylesheets/chatclient.css" text="General Message!"
+                       BorderPane.alignment="CENTER"/>
+            </left>
+            <right>
+                <HBox BorderPane.alignment="CENTER">
+                    <Button fx:id="btnSend" disable="true" mnemonicParsing="false" onAction="#btnHandler"
+                            styleClass="chat-button" stylesheets="@../../stylesheets/chatclient.css"
+                            text="Send Message!"/>
+                    <Button mnemonicParsing="false" onAction="#btnHandler" styleClass="chat-button"
+                            stylesheets="@../../stylesheets/chatclient.css" text="Exit Chat"/>
+                </HBox>
+            </right>
+            <center>
+                <TextField fx:id="txtMessage" onAction="#txtHandler" prefHeight="26.0" prefWidth="483.0"
+                           promptText="Broadcast Message" BorderPane.alignment="CENTER"/>
+            </center>
+        </BorderPane>
+    </bottom>
+    <right>
+        <BorderPane BorderPane.alignment="CENTER">
+            <center>
+                <TabPane fx:id="rightPane" disable="true" prefHeight="456.0" prefWidth="200.0"
+                         style="-fx-border-color: orange; -fx-border-width: 5;" tabClosingPolicy="UNAVAILABLE">
+                    <Tab style="-fx-font-weight: bold; -fx-font-color: white;" text="Users">
+                        <BorderPane>
+                            <bottom>
+                                <VBox BorderPane.alignment="CENTER">
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                                            styleClass="chat-button" stylesheets="@../../stylesheets/chatclient.css"
+                                            text="Send Direct Message"/>
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                                            styleClass="chat-button" stylesheets="@../../stylesheets/chatclient.css"
+                                            text="Ignore User"/>
+                                </VBox>
+                            </bottom>
+                            <center>
+                                <ScrollPane BorderPane.alignment="CENTER">
+                                    <ListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"/>
+                                </ScrollPane>
+                            </center>
+                        </BorderPane>
+                    </Tab>
+                    <Tab style="-fx-font-weight: bold;" text="Rooms">
+                        <BorderPane>
+                            <bottom>
+                                <VBox BorderPane.alignment="CENTER">
+                                    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="chat-label"
+                                           stylesheets="@../../stylesheets/chatclient.css" text="ROOM COUNT"/>
+                                    <TextField alignment="CENTER" editable="false"/>
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                                            styleClass="chat-button" stylesheets="@../../stylesheets/chatclient.css"
+                                            text="Change Room"/>
+                                </VBox>
+                            </bottom>
+                            <center>
+                                <ScrollPane BorderPane.alignment="CENTER">
+                                    <ListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"/>
+                                </ScrollPane>
+                            </center>
+                        </BorderPane>
+                    </Tab>
+                    <Tab style="-fx-font-weight: bold;" text="Images">
+                        <BorderPane>
+                            <center>
+                                <ScrollPane hbarPolicy="ALWAYS" prefHeight="418.0" prefWidth="190.0" vbarPolicy="ALWAYS"
+                                            BorderPane.alignment="CENTER">
+                                    <TilePane fx:id="tilePane" maxHeight="1.7976931348623157E308"
+                                              maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+                                              minWidth="-Infinity"/>
+                                </ScrollPane>
+                            </center>
+                        </BorderPane>
+                    </Tab>
+                </TabPane>
+            </center>
+        </BorderPane>
+    </right>
+    <top>
+        <BorderPane prefHeight="107.0" prefWidth="778.0" BorderPane.alignment="CENTER">
+            <top>
+                <MenuBar BorderPane.alignment="CENTER">
+                    <Menu mnemonicParsing="false" text="File">
+                        <MenuItem fx:id="loginMenuItem" mnemonicParsing="false" onAction="#menuHandler" text="Login"/>
+                        <MenuItem fx:id="logoutMenuItem" disable="true" mnemonicParsing="false" onAction="#menuHandler"
+                                  text="Logout"/>
+                        <MenuItem mnemonicParsing="false" onAction="#menuHandler" text="Exit"/>
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="Help">
+                        <MenuItem mnemonicParsing="false" onAction="#menuHandler" text="About"/>
+                    </Menu>
+                </MenuBar>
+            </top>
+            <bottom>
+                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Information Label"
+                       BorderPane.alignment="CENTER"/>
+            </bottom>
+            <center>
+                <BorderPane style="-fx-background-color: yellow;" BorderPane.alignment="CENTER">
+                    <left>
+                        <Label contentDisplay="GRAPHIC_ONLY" prefHeight="57.0" prefWidth="391.0" text="Default Banner"
+                               BorderPane.alignment="CENTER">
+                            <graphic>
+                                <ImageView fitHeight="49.0" fitWidth="346.0" pickOnBounds="true" preserveRatio="true">
+                                    <Image url="@../../images/defaultbanner.gif"/>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                    </left>
+                    <right>
+                        <Label contentDisplay="GRAPHIC_ONLY" text="logo" BorderPane.alignment="CENTER">
+                            <graphic>
+                                <ImageView fitHeight="56.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true">
+                                    <Image url="@../../images/logo.gif"/>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                    </right>
+                </BorderPane>
+            </center>
+        </BorderPane>
+    </top>
+    <center>
+        <ScrollPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;"
+                    BorderPane.alignment="CENTER">
+            <TextFlow fx:id="messageBoard" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                      prefHeight="433.0" prefWidth="574.0" style="-fx-background-color: white;"/>
+        </ScrollPane>
+    </center>
+</BorderPane>
