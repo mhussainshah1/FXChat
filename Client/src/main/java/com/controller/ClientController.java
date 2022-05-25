@@ -90,7 +90,7 @@ public class ClientController {
 
         if (name.equals("Logout")) {
             client.disconnectChat();
-            logoutDisable();
+            disableLogout();
         }
 
         if (name.equals("Exit")) {
@@ -145,7 +145,7 @@ public class ClientController {
         ClientApplication.getLoginStage().show();
     }
 
-    void loginToChat() throws IOException {
+    public void loginToChat() throws IOException {
         if (loginController.isConnect()) {
             clientData.setUserName(loginController.getUserName());
             clientData.setServerName(loginController.getServerName());
@@ -161,7 +161,7 @@ public class ClientController {
         connectToServer();
     }
 
-    public void connectToServer() {
+    private void connectToServer() {
         client = createClient();
         try {
             client.startConnection();
@@ -176,14 +176,14 @@ public class ClientController {
                         4. Type 'LOGOUT' without quotes to logoff from main.java.server                        
                         """, MESSAGE_TYPE_JOIN
         );
-        loginEnable();
+        enableLogin();
     }
 
     /*
      * To send a message to the text flow
      */
 
-    public void display(String message, int type) {
+    private void display(String message, int type) {
         System.out.println(message);
         List<Node> nodes = messageObject.parseMessage(message, type);
         messageBoard.getChildren().addAll(nodes);
@@ -209,33 +209,33 @@ public class ClientController {
         txtMessage.requestFocus();
     }
 
-    private void loginEnable() {
-        txtMessage.setEditable(true);
-        btnSend.setDisable(false);
-        rightPane.setDisable(false);
-        logoutMenuItem.setDisable(false);
-        loginMenuItem.setDisable(true);
-    }
-
     private void quitConnection(int quitType) {
         try {
             client.closeConnection(quitType);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        logoutDisable();
+        disableLogout();
     }
 
-    private void logoutDisable() {
-        txtMessage.setEditable(false);
-        btnSend.setDisable(true);
-        rightPane.setDisable(true);
-        logoutMenuItem.setDisable(true);
-        loginMenuItem.setDisable(false);
+    private void enableLogin() {
+        control(true);
+    }
 
+    private void disableLogout() {
+        messageBoard.getChildren().clear();
+        control(false);
         userName = "";
         userRoom = "";
         totalUserCount = 0;
+    }
+
+    private void control(boolean status) {
+        txtMessage.setEditable(status);
+        btnSend.setDisable(!status);
+        rightPane.setDisable(!status);
+        logoutMenuItem.setDisable(!status);
+        loginMenuItem.setDisable(status);
     }
 
     private Client createClient() {

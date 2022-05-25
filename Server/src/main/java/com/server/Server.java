@@ -40,6 +40,7 @@ public class Server extends ServerNetWorkConnection implements Serializable {
     }
 
     public void closeConnection() throws IOException {// to stop the server
+        keepGoing =false;
         connectionThread.closeConnection();
     }
 
@@ -154,13 +155,17 @@ public class Server extends ServerNetWorkConnection implements Serializable {
                     clientThreads.add(t);//add this client to arraylist
                     t.start();
                 }
-                closeConnection();
             } catch (IOException e) {
                 display(sdf.format(new Date()) + " Exception on new ServerSocket: " + e);
             }
+            try {
+                closeConnection();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
+
         public void closeConnection() throws IOException {// try to stop the server
-            keepGoing = false;
             serverSocket.close();
             for (ClientThread tc : clientThreads) {// close all data streams and socket
                 tc.close();
@@ -201,21 +206,14 @@ public class Server extends ServerNetWorkConnection implements Serializable {
                 this.out = out;
                 this.in = in;
 
-                // read the username
-                userName = (String) in.readObject();
+                userName = (String) in.readObject();// read the username
                 broadcast(notif + userName + " has joined the chat room." + notif);
                 // to loop until LOGOUT
                 boolean keepGoing = true;
                 while (keepGoing) {
-                    // read a String (which is an object)
-                    try {
-                        chatMessage = (ChatMessage) in.readObject();
-                    } catch (IOException e) {
-                        display(userName + " Exception reading Streams: " + e);
-                        break;
-                    } catch (ClassNotFoundException e2) {
-                        break;
-                    }
+
+                    chatMessage = (ChatMessage) in.readObject();// read a String (which is an object)
+
                     // get the message from the common.ChatMessage object received
                     String message = chatMessage.getMessage();
 

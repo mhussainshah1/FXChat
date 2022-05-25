@@ -140,7 +140,7 @@ public class Server {
 
         // if private message, send message to mentioned username only
         if (isPrivate) {
-            String tocheck = w[1].substring(1, w[1].length());
+            String tocheck = w[1].substring(1);
 
             message = w[0] + w[2];
             String messageLf = time + " " + message + "\n";
