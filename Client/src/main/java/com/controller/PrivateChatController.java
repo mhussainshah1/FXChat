@@ -24,7 +24,8 @@ import static com.common.ChatMessage.MESSAGE_TYPE_DEFAULT;
 
 
 public class PrivateChatController {
-    @FXML private Label lblTitle;
+    @FXML
+    private Label lblTitle;
     @FXML
     private VBox root;
     private TilePane tilePane;
@@ -69,7 +70,7 @@ public class PrivateChatController {
 
     private void sendMessage(String message) {
         try {
-            client.send(new ChatMessage(ChatMessage.MESSAGE,"@"+toSend +" "+message));//@username<space>yourmessage
+            client.send(new ChatMessage(ChatMessage.MESSAGE, "@" + toSend + " " + message));//@username<space>yourmessage
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -85,18 +86,13 @@ public class PrivateChatController {
         if (name.equals("Send")) {
             display(textField.getText(), MESSAGE_TYPE_DEFAULT);
             sendMessage(textField.getText());
-        }
-        if (name.equals("Clear")) {
+        } else if (name.equals("Clear")) {
             textFlow.getChildren().clear();
-        }
+        } else if (name.equals("Ignore User")) {
 
-        if (name.equals("Ignore User")) {
-
-        }
-        if (name.equals("Close")) {
+        } else if (name.equals("Close")) {
             stage.hide();
-        }
-        if (name.equals("Emotions")) {
+        } else if (name.equals("Emotions")) {
             if (visible) {
                 visible = false;
                 root.getChildren().remove(tilePane);
@@ -110,16 +106,15 @@ public class PrivateChatController {
         }
     }
 
-    private void display(String message, int type) {
+    private void display(String message, int messageType) {
         System.out.println(message);
-        List<Node> nodes = messageObject.parseMessage(message, type);
+        List<Node> nodes = messageObject.parseMessage(message, messageType);
         textFlow.getChildren().addAll(nodes);
     }
 
     public void txtHandler(ActionEvent actionEvent) {
         btnSend.fire();
     }
-
 
     public void setClient(Client client) {
         lblTitle.setText("Conversation with: " + client.getUserName());
@@ -129,5 +124,4 @@ public class PrivateChatController {
     public void setToSend(String toSend) {
         this.toSend = toSend;
     }
-
 }

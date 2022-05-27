@@ -35,11 +35,10 @@ public class ClientApplication extends Application {
         primaryStage.setTitle(CommonSettings.PRODUCT_NAME);
         primaryStage.show();
 
-        showLoginStage();
         clientController.openLoginWindow();
     }
 
-    public void showLoginStage() throws IOException {
+    public static void showLoginStage() throws IOException {
         var loader = new FXMLLoader(ClientApplication.class.getResource("/com/controller/login.fxml"));
         Parent root = loader.load();
 

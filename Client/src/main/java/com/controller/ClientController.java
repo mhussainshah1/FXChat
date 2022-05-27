@@ -2,7 +2,6 @@ package com.controller;
 
 import com.ClientApplication;
 import com.client.Client;
-import com.client.ClientObject;
 import com.common.ChatMessage;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -48,20 +47,16 @@ public class ClientController {
     private MenuItem loginMenuItem;
     @FXML
     private MenuItem logoutMenuItem;
-
     private String userName = "Anonymous";
     private String userRoom = "General";
     private int totalUserCount;
     private Client client;
-
-    private ClientObject clientData;
-
     private LoginController loginController;
     private ChatMessage messageObject;
 
     @FXML
     private void initialize() {
-        clientData = new ClientObject();
+        client = new Client();
         messageObject = new ChatMessage();
 
         List<Label> buttonList = new ArrayList<>();
@@ -80,7 +75,7 @@ public class ClientController {
 
     //Handlers
     @FXML
-    private void menuHandler(ActionEvent e) {
+    private void menuHandler(ActionEvent e) throws IOException {
         Alert alert = new Alert(Alert.AlertType.NONE);
         var name = ((MenuItem) e.getTarget()).getText();
 
@@ -127,22 +122,23 @@ public class ClientController {
         sendMessage(txtMessage.getText());
     }
 
-    public void openLoginWindow() {
+    public void openLoginWindow() throws IOException {
+        ClientApplication.showLoginStage();
         messageBoard.getChildren().clear();
         display("Connecting To Server... Please Wait...\n", MESSAGE_TYPE_ADMIN);
     }
 
     public void loginToChat() throws IOException {
         if (loginController.isConnect()) {
-            clientData.setUserName(loginController.getUserName());
-            clientData.setServerName(loginController.getServerName());
-            clientData.setServerPort(loginController.getServerPort());
+            client.setUserName(loginController.getUserName());
+            client.setServerName(loginController.getServerName());
+            client.setServerPort(loginController.getServerPort());
             if (loginController.isProxyCheckBox()) {
-                clientData.setProxy(true);
-                clientData.setProxyHost(loginController.getProxyHost());
-                clientData.setServerPort(loginController.getProxyPort());
+                client.setProxy(true);
+                client.setProxyHost(loginController.getProxyHost());
+                client.setServerPort(loginController.getProxyPort());
             } else {
-                clientData.setProxy(false);
+                client.setProxy(false);
             }
         }
         connectToServer();
@@ -156,11 +152,12 @@ public class ClientController {
             throw new RuntimeException(e);
         }
         display("""
-                Hello.! Welcome to the chatroom.Instructions:
+                Hello.! Welcome to the chatroom.
+                Instructions:
                 1. Simply type the message to send broadcast to all active clients
                 2. Type '@username<space>yourmessage' without quotes to send message to desired client
                 3. Type 'LIST' without quotes to see list of active clients
-                4. Type 'LOGOUT' without quotes to logoff from main.java.server                        
+                4. Type 'LOGOUT' without quotes to logoff from main.java.server                       
                 """, MESSAGE_TYPE_JOIN
         );
         enableLogin();
@@ -173,7 +170,7 @@ public class ClientController {
         icon.setOnMouseClicked(e -> {
             if (e.getClickCount() == 2) {
                 try {
-                    ClientApplication.setUserName(clientData.getUserName());
+                    ClientApplication.setUserName(client.getUserName());
                     ClientApplication.showPrivateChatStage();
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -242,7 +239,7 @@ public class ClientController {
     }
 
     private Client createClient() {
-        return new Client(clientData.getServerName(), clientData.getServerPort(), clientData.getUserName(), data ->
+        return new Client(client.getServerName(), client.getServerPort(), client.getUserName(), data ->
                 Platform.runLater(() -> { //UI or background thread - manipulate UI object , It gives control back to UI thread
                     display(data.toString(), MESSAGE_TYPE_DEFAULT);
                 }));
