@@ -16,16 +16,12 @@ public class LoginController {
 
     @FXML
     private TextField txtUserName;
-
     @FXML
     private TextField txtServerName;
-
     @FXML
     private TextField txtServerPort;
-
     @FXML
     private TextField txtProxyHost;
-
     @FXML
     private TextField txtProxyPort;
     @FXML
@@ -36,7 +32,7 @@ public class LoginController {
 
     //Calls automatically
     @FXML
-    public void initialize() {
+    private void initialize() {
 
         properties = new Properties();
         try {
@@ -64,7 +60,7 @@ public class LoginController {
 
     //Handler
     @FXML
-    public void actionHandler(ActionEvent e) {
+    private void actionHandler(ActionEvent e) {
         Button button = (Button) e.getTarget();
         var name = button.getText();
 

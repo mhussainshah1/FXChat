@@ -1,4 +1,4 @@
-module com.client {
+module client {
     requires javafx.controls;
     requires javafx.fxml;
 
@@ -11,6 +11,4 @@ module com.client {
     opens com.controller to javafx.fxml;
     exports com.controller;
 
-    opens com.utils to javafx.fxml;
-    exports com.utils;
 }

@@ -1,6 +1,6 @@
 package com.controller;
 
-import com.common.MessageObject;
+import com.common.ChatMessage;
 import com.server.Server;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -15,8 +15,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
+import static com.common.ChatMessage.MESSAGE_TYPE_ADMIN;
 import static com.common.CommonSettings.PRODUCT_NAME;
-import static com.common.MessageObject.MESSAGE_TYPE_ADMIN;
 
 public class ServerController {
 
@@ -41,11 +41,11 @@ public class ServerController {
     private int portNumber = 1436;
     private int maximumGuestNumber;
     private String roomList = "";
-    private MessageObject messageObject;
+    private ChatMessage messageObject;
 
     //Methods
     public void initialize() {
-        this.messageObject = new MessageObject();
+        this.messageObject = new ChatMessage();
         properties = getProperties();
         properties.forEach((x, y) -> System.out.println(x + " = " + y));
 

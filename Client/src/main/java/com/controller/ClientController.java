@@ -4,18 +4,15 @@ import com.ClientApplication;
 import com.client.Client;
 import com.client.ClientObject;
 import com.common.ChatMessage;
-import com.common.MessageObject;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.text.TextFlow;
 
@@ -23,16 +20,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.common.ChatMessage.*;
 import static com.common.CommonSettings.COMPANY_NAME;
 import static com.common.CommonSettings.PRODUCT_NAME;
-import static com.common.MessageObject.*;
+
 
 public class ClientController {
 
     public static final int QUIT_TYPE_DEFAULT = 0,
             QUIT_TYPE_KICK = 1,
             QUIT_TYPE_NULL = 2;
-
+    @FXML
+    private GridPane login;
+    @FXML
+    private ListView<Label> userView;
     @FXML
     private TilePane tilePane;
     @FXML
@@ -52,16 +53,16 @@ public class ClientController {
     private String userRoom = "General";
     private int totalUserCount;
     private Client client;
-    // private Thread thread;
+
+    private ClientObject clientData;
+
+    private LoginController loginController;
+    private ChatMessage messageObject;
 
     @FXML
-    private LoginController loginController;
-    private ClientObject clientData;
-    private MessageObject messageObject;
-
-    public void initialize() {
+    private void initialize() {
         clientData = new ClientObject();
-        messageObject = new MessageObject();
+        messageObject = new ChatMessage();
 
         List<Label> buttonList = new ArrayList<>();
         for (int i = 0; i < 21; i++) {
@@ -73,15 +74,13 @@ public class ClientController {
             icon.setCursor(Cursor.OPEN_HAND);
             buttonList.add(icon);
         }
-        tilePane.setPrefColumns(4);
-        tilePane.setHgap(10);
-        tilePane.setVgap(10);
         tilePane.setPadding(new Insets(10));
         tilePane.getChildren().addAll(buttonList);
     }
 
     //Handlers
-    public void menuHandler(ActionEvent e) throws IOException {
+    @FXML
+    private void menuHandler(ActionEvent e) {
         Alert alert = new Alert(Alert.AlertType.NONE);
         var name = ((MenuItem) e.getTarget()).getText();
 
@@ -108,7 +107,8 @@ public class ClientController {
         }
     }
 
-    public void btnHandler(ActionEvent e) {
+    @FXML
+    private void btnHandler(ActionEvent e) {
         Button button = (Button) e.getTarget();
         var name = button.getText();
 
@@ -121,28 +121,15 @@ public class ClientController {
         }
     }
 
-    public void txtHandler(ActionEvent e) {
-//        TextField textField = (TextField) e.getSource();
-//        String ID = textField.getId();
-//        if (ID.equals("txtMessage")) {
-//            btnSend.fire();
-//        }
-
+    @FXML
+    private void txtHandler(ActionEvent e) {
         display("> ", MESSAGE_TYPE_DEFAULT);
         sendMessage(txtMessage.getText());
     }
 
-    public void openLoginWindow() throws IOException {
-        var loader = new FXMLLoader(getClass().getResource("/com/controller/login.fxml"));
-        Parent root = loader.load();
-        ClientApplication.getLoginStage().setScene(new Scene(root, 250, 400));
-
+    public void openLoginWindow() {
         messageBoard.getChildren().clear();
         display("Connecting To Server... Please Wait...\n", MESSAGE_TYPE_ADMIN);
-
-        loginController = loader.getController();
-        loginController.setChatClientController(this);
-        ClientApplication.getLoginStage().show();
     }
 
     public void loginToChat() throws IOException {
@@ -169,14 +156,30 @@ public class ClientController {
             throw new RuntimeException(e);
         }
         display("""
-                        Hello.! Welcome to the chatroom.Instructions:
-                        1. Simply type the message to send broadcast to all active clients
-                        2. Type '@username<space>yourmessage' without quotes to send message to desired client
-                        3. Type 'LIST' without quotes to see list of active clients
-                        4. Type 'LOGOUT' without quotes to logoff from main.java.server                        
-                        """, MESSAGE_TYPE_JOIN
+                Hello.! Welcome to the chatroom.Instructions:
+                1. Simply type the message to send broadcast to all active clients
+                2. Type '@username<space>yourmessage' without quotes to send message to desired client
+                3. Type 'LIST' without quotes to see list of active clients
+                4. Type 'LOGOUT' without quotes to logoff from main.java.server                        
+                """, MESSAGE_TYPE_JOIN
         );
         enableLogin();
+
+        int i = 11;
+        var icon = new Label(client.getUserName(), new ImageView(getClass().getResource("/icons/photo" + i + ".gif").toString()));
+        icon.setCursor(Cursor.OPEN_HAND);
+        userView.getItems().add(icon);
+
+        icon.setOnMouseClicked(e -> {
+            if (e.getClickCount() == 2) {
+                try {
+                    ClientApplication.setUserName(clientData.getUserName());
+                    ClientApplication.showPrivateChatStage();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
     /*
@@ -243,5 +246,13 @@ public class ClientController {
                 Platform.runLater(() -> { //UI or background thread - manipulate UI object , It gives control back to UI thread
                     display(data.toString(), MESSAGE_TYPE_DEFAULT);
                 }));
+    }
+
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
+    }
+
+    public Client getClient() {
+        return client;
     }
 }

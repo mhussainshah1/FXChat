@@ -74,6 +74,7 @@ public abstract class ClientNetworkConnection {
                 }
             } catch (Exception e) {
                 onReceiveCallback.accept(notif + "Server has closed the connection: " + e + notif);
+                e.printStackTrace();
             }
         }
 

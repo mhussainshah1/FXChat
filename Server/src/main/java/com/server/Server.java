@@ -16,7 +16,6 @@ import java.util.function.Consumer;
 
 // the server that can be run as a console
 public class Server extends ServerNetWorkConnection implements Serializable {
-
     public static int uniqueId;// a unique ID for each connection
     public final List<ClientThread> clientThreads;// an ArrayList to keep the list of the client.Client
     public final SimpleDateFormat sdf; // to display time
@@ -42,12 +41,6 @@ public class Server extends ServerNetWorkConnection implements Serializable {
     public void closeConnection() throws IOException {// to stop the server
         keepGoing =false;
         connectionThread.closeConnection();
-    }
-
-    // Display an event to the console
-    private void display(String msg) {
-        String time = sdf.format(new Date()) + " " + msg + "\n";
-        onReceiveCallback.accept(time);
     }
 
     // to broadcast a message to all Clients
@@ -104,7 +97,17 @@ public class Server extends ServerNetWorkConnection implements Serializable {
         }
         return true;
     }
+    private void display(String msg) {
+        String time = sdf.format(new Date()) + " " + msg + "\n";
+        onReceiveCallback.accept(time);
+    }
 
+    // Display an event to the console
+    public void send(Serializable data) throws IOException {
+        for (ClientThread cl : clientThreads) {
+            cl.out.writeObject(data);
+        }
+    }
     // if client sent LOGOUT message to exit
     synchronized void remove(int id) {
         String disconnectedClient = "";
@@ -117,12 +120,6 @@ public class Server extends ServerNetWorkConnection implements Serializable {
             }
         }
         broadcast(notif + disconnectedClient + " has left the chat room." + notif);
-    }
-
-    public void send(Serializable data) throws IOException {
-        for (ClientThread cl : clientThreads) {
-            cl.out.writeObject(data);
-        }
     }
 
     @Override
@@ -211,19 +208,16 @@ public class Server extends ServerNetWorkConnection implements Serializable {
                 // to loop until LOGOUT
                 boolean keepGoing = true;
                 while (keepGoing) {
-
-                    chatMessage = (ChatMessage) in.readObject();// read a String (which is an object)
-
+                        chatMessage = (ChatMessage) in.readObject();
                     // get the message from the common.ChatMessage object received
                     String message = chatMessage.getMessage();
 
                     // different actions based on type message
-                    switch (chatMessage.getType()) {
+                    switch (chatMessage.getMessageType()) {
                         case ChatMessage.MESSAGE:
                             boolean confirmation = broadcast(userName + ": " + message);
                             if (!confirmation) {
-                                String msg = notif + "Sorry. No such user exists." + notif;
-                                writeMsg(msg);
+                                writeMsg(notif + "Sorry. No such user exists." + notif+"\n");
                             }
                             break;
                         case ChatMessage.LOGOUT:
@@ -241,11 +235,17 @@ public class Server extends ServerNetWorkConnection implements Serializable {
                     }
                 }
                 // if out of the loop then disconnected and remove from client list
-                remove(id);
-                close();
+
             } catch (IOException e) {
                 display("Exception creating new Input/output Streams: " + e);
+                e.printStackTrace();
             } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            remove(id);
+            try {
+                close();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
