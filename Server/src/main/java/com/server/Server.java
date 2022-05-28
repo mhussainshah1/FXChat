@@ -1,5 +1,6 @@
 package com.server;
 
+import com.common.Data;
 import com.common.Message;
 
 import java.io.IOException;
@@ -12,6 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 // the server that can be run as a console
@@ -24,14 +27,20 @@ public class Server extends ServerNetWorkConnection implements Serializable {
     private final ConnectionThread connectionThread = new ConnectionThread();
     private final Consumer<Serializable> onReceiveCallback;
     private boolean keepGoing;// to check if server is running
-    //constructor that receive the port to listen to for connection as parameter
+    private static ExecutorService pool;
 
+    //constructor that receive the port to listen to for connection as parameter
     public Server(int port, Consumer<Serializable> onReceiveCallback) {
         super(onReceiveCallback);
         this.onReceiveCallback = onReceiveCallback;
         this.port = port;// the port
         sdf = new SimpleDateFormat("HH:mm:ss");// to display hh:mm:ss
         clientThreads = new ArrayList<>();// an ArrayList to keep the list of the Client
+        try(Data data = new Data("server.properties");) {
+            pool = Executors.newFixedThreadPool(data.getMaximumGuestNumber());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void startConnection() throws IOException {
@@ -152,7 +161,8 @@ public class Server extends ServerNetWorkConnection implements Serializable {
 
                     ClientThread t = new ClientThread(socket);// if client is connected, create its thread
                     clientThreads.add(t);//add this client to arraylist
-                    t.start();
+                    pool.execute(t);
+                    //t.start();
                 }
             } catch (IOException e) {
                 display(sdf.format(new Date()) + " Exception on new ServerSocket: " + e);
@@ -166,9 +176,10 @@ public class Server extends ServerNetWorkConnection implements Serializable {
 
         public void closeConnection() throws IOException {// try to stop the server
             serverSocket.close();
-            for (ClientThread tc : clientThreads) {// close all data streams and socket
-                tc.close();
-            }
+            pool.shutdown();
+//            for (ClientThread tc : clientThreads) {// close all data streams and socket
+//                tc.close();
+//            }
         }
     }
 

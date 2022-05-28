@@ -90,8 +90,10 @@ public class ClientController {
         var name = button.getText();
 
         if (name.equals("Send Message!")) {
-            if (!txtMessage.getText().isEmpty())
+            if (!txtMessage.getText().isEmpty()) {
+                display("> ", MESSAGE_TYPE_DEFAULT);
                 sendMessage(txtMessage.getText());
+            }
         }
         if (name.equals("Exit Chat")) {
             client.disconnectChat();
@@ -101,8 +103,7 @@ public class ClientController {
 
     @FXML
     private void txtHandler(ActionEvent e) {
-        display("> ", MESSAGE_TYPE_DEFAULT);
-        sendMessage(txtMessage.getText());
+       btnSend.fire();
     }
 
     @FXML

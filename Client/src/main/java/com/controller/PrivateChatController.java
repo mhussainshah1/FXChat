@@ -75,8 +75,10 @@ public class PrivateChatController {
         Stage stage = (Stage) button.getScene().getWindow();
 
         if (name.equals("Send")) {
-            display("You : " + textField.getText() + "\n", MESSAGE_TYPE_DEFAULT);
-            sendMessage(textField.getText());
+            if(!textField.getText().isBlank()) {
+                display("You : " + textField.getText() + "\n", MESSAGE_TYPE_DEFAULT);
+                sendMessage(textField.getText());
+            }
 
         } else if (name.equals("Clear")) {
             textFlow.getChildren().clear();

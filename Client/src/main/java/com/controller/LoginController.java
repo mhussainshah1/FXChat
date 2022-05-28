@@ -1,16 +1,14 @@
 package com.controller;
 
+import com.common.Data;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-
-import static com.common.CommonSettings.PRODUCT_NAME;
 
 public class LoginController {
     @FXML
@@ -31,63 +29,40 @@ public class LoginController {
 
     //Calls automatically
     @FXML
-    private void initialize() {
+    private void initialize() throws IOException {
 
-        properties = new Properties();
-        try {
-            properties.load(this.getClass().getClassLoader().getResourceAsStream("data.properties"));
-        } catch (IOException | NullPointerException exc) {
-            exc.printStackTrace();
+        try (Data data = new Data("data.properties")) {
+            txtUserName.setText(data.getUserName());
+            txtServerName.setText(data.getServerName());
+            txtServerPort.setText(String.valueOf(data.getServerPort()));
+            proxyCheckBox.setSelected(data.isProxyState());
+            txtProxyHost.setText(data.getProxyHost());
+            txtProxyPort.setText(String.valueOf(data.getProxyPort()));
         }
-        properties.forEach((x, y) -> System.out.println(x + " = " + y));
-        txtUserName.setText(properties.getProperty("UserName"));
-
-        if (properties.getProperty("ServerName") != null)
-            txtServerName.setText(properties.getProperty("ServerName"));
-        else
-            txtServerName.setText("bah.com");
-
-        if (properties.getProperty("ServerPort") != null)
-            txtServerPort.setText(properties.getProperty("ServerPort"));
-        else
-            txtServerPort.setText("1436");
-
-        proxyCheckBox.setSelected(Boolean.parseBoolean(properties.getProperty("ProxyState")));
-        txtProxyHost.setText(properties.getProperty("ProxyHost"));
-        txtProxyPort.setText(properties.getProperty("ProxyPort"));
     }
 
     //Handler
     @FXML
-    private void actionHandler(ActionEvent e) {
+    private void actionHandler(ActionEvent e) throws IOException {
         Button button = (Button) e.getTarget();
         var name = button.getText();
 
         if (name.equals("Connect")) {
             connect = true;
-            try (var fileOutputStream = new FileOutputStream("data.properties")) {
-                if (proxyCheckBox.isSelected())
-                    properties.setProperty("ProxyState", "true");
-                else
-                    properties.setProperty("ProxyState", "false");
-
-                properties.setProperty("UserName", txtUserName.getText());
-                properties.setProperty("ServerName", txtServerName.getText());
-                properties.setProperty("ServerPort", txtServerPort.getText());
-                properties.setProperty("ProxyHost", txtProxyHost.getText());
-                properties.setProperty("ProxyPort", txtProxyPort.getText());
-                properties.store(fileOutputStream, PRODUCT_NAME);
-
-                button.getScene().getWindow().hide();
-
-                clientController.loginToChat();
-
-            } catch (IOException exc) {
-                exc.printStackTrace();
+            try (var data = new Data("data.properties")) {
+                data.setProxyState(proxyCheckBox.isSelected());
+                data.setUserName(txtUserName.getText());
+                data.setServerName(txtServerName.getText());
+                System.out.println(txtServerPort.getText());
+                data.setServerPort(Integer.parseInt(txtServerPort.getText()));
+                data.setProxyHost(txtProxyHost.getText());
+                data.setProxyPort(Integer.parseInt(txtProxyPort.getText()));
             }
+            button.getScene().getWindow().hide();
+            clientController.loginToChat();
         }
 
-        if (name.equals("Quit")) {
+        else if (name.equals("Quit")) {
             connect = false;
             button.getScene().getWindow().hide();
         }

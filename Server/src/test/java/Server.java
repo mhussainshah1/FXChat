@@ -10,11 +10,8 @@ public class Server {
     private static String[] names = {"Amir", "Ali", "Asim", "Fatima", "Marrieum"};
     private static String[] adjs = {"the gentle", "the un-gentle", "the overwrought", "the urban"};
     private static final int PORT = 9090;
-
     private static List<ClientHandler> clients = new ArrayList<>();
-
     private static ExecutorService pool = Executors.newFixedThreadPool(4);
-
     public static void main(String[] args) throws IOException {
         ServerSocket listner = new ServerSocket(PORT);
 
