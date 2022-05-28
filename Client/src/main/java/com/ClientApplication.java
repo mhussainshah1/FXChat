@@ -2,6 +2,8 @@ package com;
 
 import com.common.CommonSettings;
 import com.controller.ClientController;
+import com.controller.LoginController;
+import com.controller.PrivateChatController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,7 +16,8 @@ import java.io.IOException;
 
 public class ClientApplication extends Application {
 
-    private static Stage loginStage = null;
+    private static String  userName;
+    private static ClientController clientController;
 
     public static void main(String[] args) {
         launch(args);
@@ -24,26 +27,51 @@ public class ClientApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         var loader = new FXMLLoader(getClass().getResource("/com/controller/chatclient.fxml"));
         Parent root = loader.load();
-        ClientController clientController = loader.getController();
+
+        clientController = loader.getController();
+
         primaryStage.getIcons().add(new Image(getClass().getResource( "/images/icon.gif").toString()));
         primaryStage.setScene(new Scene(root, 778, 575));
         primaryStage.setTitle(CommonSettings.PRODUCT_NAME);
         primaryStage.show();
 
-        createLoginStage();
         clientController.openLoginWindow();
     }
 
-    public void createLoginStage() throws IOException {
-        loginStage = new Stage();
-        loginStage.getIcons().add(new Image(getClass().getResource( "/images/icon.gif").toString()));
+    public static void showLoginStage() throws IOException {
+        var loader = new FXMLLoader(ClientApplication.class.getResource("/com/controller/login.fxml"));
+        Parent root = loader.load();
+
+        LoginController loginController = loader.getController();
+        loginController.setChatClientController(clientController);
+        clientController.setLoginController(loginController);
+
+        Stage loginStage = new Stage();
+        loginStage.getIcons().add(new Image(ClientApplication.class.getResource( "/images/icon.gif").toString()));
         loginStage.setTitle(CommonSettings.PRODUCT_NAME + " - Login");
         loginStage.setAlwaysOnTop(true);
         loginStage.setResizable(false);
         loginStage.initModality(Modality.APPLICATION_MODAL);
+        loginStage.setScene(new Scene(root, 250, 400));
+        loginStage.show();
     }
 
-    public static Stage getLoginStage() {
-        return loginStage;
+    public static void showPrivateChatStage(String toSend) throws IOException {
+        var loader = new FXMLLoader(ClientApplication.class.getResource("/com/controller/privatechat.fxml"));
+        Parent root = loader.load();
+
+        PrivateChatController privateChatController = loader.getController();
+        privateChatController.setClient(clientController.getClient());
+        privateChatController.setToSend(toSend);
+
+        Stage privateChatStage = new Stage();
+        privateChatStage.getIcons().add(new Image(ClientApplication.class.getResource( "/images/icon.gif").toString()));
+        privateChatStage.setScene(new Scene(root, 310, 270));
+        privateChatStage.setTitle("Private Chat with - " + userName);
+        privateChatStage.show();
+    }
+
+    public static void setUserName(String userName) {
+        ClientApplication.userName = userName;
     }
 }

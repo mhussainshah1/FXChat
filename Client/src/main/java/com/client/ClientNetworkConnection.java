@@ -1,6 +1,6 @@
 package com.client;
 
-import com.common.ChatMessage;
+import com.common.Message;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -14,9 +14,11 @@ import static com.controller.ClientController.QUIT_TYPE_KICK;
 
 public abstract class ClientNetworkConnection {
     private final String notif = " *** ";// notification
-
     private final ListenFromServer connectionThread = new ListenFromServer();
     private final Consumer<Serializable> onReceiveCallback;
+    public ClientNetworkConnection() {
+        this.onReceiveCallback = System.out::println;
+    }
 
     public ClientNetworkConnection(Consumer<Serializable> onReceiveCallback) {
         this.onReceiveCallback = onReceiveCallback;
@@ -38,9 +40,9 @@ public abstract class ClientNetworkConnection {
         connectionThread.quitConnection(QUIT_TYPE_DEFAULT);
     }
 
-    protected abstract String getIP();
+    protected abstract String getServerName();
 
-    protected abstract int getPort();
+    protected abstract int getServerPort();
 
     protected abstract String getUserName();
 
@@ -55,7 +57,7 @@ public abstract class ClientNetworkConnection {
 
         @Override
         public void run() {
-            try (var socket = new Socket(getIP(), getPort());
+            try (var socket = new Socket(getServerName(), getServerPort());
                  var in = new ObjectInputStream(socket.getInputStream());
                  var out = new ObjectOutputStream(socket.getOutputStream())) {
 
@@ -74,6 +76,7 @@ public abstract class ClientNetworkConnection {
                 }
             } catch (Exception e) {
                 onReceiveCallback.accept(notif + "Server has closed the connection: " + e + notif);
+                e.printStackTrace();
             }
         }
 
@@ -82,9 +85,9 @@ public abstract class ClientNetworkConnection {
                 onReceiveCallback.accept("CONNECTION TO THE SERVER CLOSED\n");
                 try {
                     if (quitType == QUIT_TYPE_DEFAULT)
-                        send(new ChatMessage(ChatMessage.REMOVE, ""));
+                        send(new Message(Message.REMOVE, ""));
                     if (quitType == QUIT_TYPE_KICK)
-                        send(new ChatMessage(ChatMessage.KICKED_OUT, ""));
+                        send(new Message(Message.KICKED_OUT, ""));
                     socket.close();
 //                socket = null;
 //                tappanel.UserCanvas.ClearAll();

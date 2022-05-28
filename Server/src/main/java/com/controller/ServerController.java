@@ -1,6 +1,7 @@
 package com.controller;
 
-import com.common.MessageObject;
+import com.common.Message;
+import com.common.Data;
 import com.server.Server;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -10,13 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.TextFlow;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
-import java.util.Properties;
 
-import static com.common.CommonSettings.PRODUCT_NAME;
-import static com.common.MessageObject.MESSAGE_TYPE_ADMIN;
+import static com.common.Message.MESSAGE_TYPE_ADMIN;
 
 public class ServerController {
 
@@ -36,36 +34,19 @@ public class ServerController {
     private Button btnSendMessage;
     //Handlers
     private Server server = createServer();
-    ;
-    private Properties properties;
-    private int portNumber = 1436;
+    private int serverPort = 1436;
     private int maximumGuestNumber;
-    private String roomList = "";
-    private MessageObject messageObject;
+    private Message message;
 
     //Methods
-    public void initialize() {
-        this.messageObject = new MessageObject();
-        properties = getProperties();
-        properties.forEach((x, y) -> System.out.println(x + " = " + y));
-
-        if (properties.getProperty("PortNumber") != null)
-            portNumber = Integer.parseInt(properties.getProperty("PortNumber"));
-        else
-            portNumber = 1436;
-
-        txtServerPort.setText(String.valueOf(portNumber));
-
-        if (properties.getProperty("") != null)
-            maximumGuestNumber = Integer.parseInt(properties.getProperty("MaximumGuest"));
-        else
-            maximumGuestNumber = 50;
+    public void initialize() throws IOException {
+        this.message = new Message();
+        try(Data data = new Data("server.properties");){
+            this.serverPort = data.getServerPort();
+            this.maximumGuestNumber = data.getMaximumGuestNumber();
+        }
+        txtServerPort.setText(String.valueOf(serverPort));
         txtMaximumGuest.setText(String.valueOf(maximumGuestNumber));
-
-        if (properties.getProperty("roomlist") != null)
-            roomList = properties.getProperty("roomlist");
-        else
-            roomList = "General;Teen;Music;Party;";
     }
 
     public void btnHandler(ActionEvent e) throws IOException {
@@ -73,29 +54,27 @@ public class ServerController {
         var name = button.getText();
 
         if (name.equals("Start Server")) {
-            try (var fileOutputStream = new FileOutputStream("server.properties")) {
-                properties.setProperty("PortNumber", txtServerPort.getText());
-                properties.setProperty("MaximumGuest", txtMaximumGuest.getText());
-                properties.store(fileOutputStream, PRODUCT_NAME);
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            try(Data data = new Data("server.properties")){
+                data.setServerPort(Integer.parseInt(txtServerPort.getText()));
+                data.setMaximumGuestNumber(Integer.parseInt(txtMaximumGuest.getText()));
             }
             server = createServer();
             server.startConnection();
             enableLogin();
         }
 
-        if (name.equals("Send Message!")) {
-            sendMessage("Server : " + txtMessage.getText());
+        else if (name.equals("Send Message!")) {
+            btnSendMessage.fire();
         }
 
-        if (name.equals("Stop Server")) {
+        else if (name.equals("Stop Server")) {
             server.closeConnection();
             disableLogout();
         }
     }
 
     public void txtHandler(ActionEvent e) {
+        if(!txtMessage.getText().isEmpty())
         sendMessage("Server : " + txtMessage.getText());
     }
 
@@ -123,20 +102,10 @@ public class ServerController {
         btnSendMessage.setDisable(!status);
     }
 
-    //Loading Properties File
-    private Properties getProperties() {
-        //Getting the Property Value From Property File
-        properties = new Properties();
-        try (var inputstream = getClass().getClassLoader().getResourceAsStream("server.properties")) {
-            properties.load(inputstream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return properties;
-    }
+
 
     private Server createServer() {
-        return new Server(portNumber, data -> {
+        return new Server(serverPort, data -> {
             Platform.runLater(() -> { //UI or background thread - manipulate UI object , It gives control back to UI thread
                 display(data.toString(),MESSAGE_TYPE_ADMIN);
             });
@@ -146,7 +115,7 @@ public class ServerController {
     // Display an event to the console
     public void display(String message, int type) {
         System.out.println(message);
-        List<Node> nodes = messageObject.parseMessage(message, type);
+        List<Node> nodes = this.message.parseMessage(message, type);
         messageBoard.getChildren().addAll(nodes);
     }
 }

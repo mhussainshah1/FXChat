@@ -8,13 +8,13 @@ It is a multithreaded com.client/main.java.server ChatServer based on console wh
 **Instructions:**
 *****************
 
-**com.client.com.client.ClientObject**
+**com.client.com.client.Client**
 
-To start the com.client.ClientObject in console mode use one of the following command
- 1. java com.client.ClientObject
- 2. java com.client.ClientObject username
- 3. java com.client.ClientObject username portNumber
- 4. java com.client.ClientObject username portNumber serverAddress
+To start the com.client.Client in console mode use one of the following command
+ 1. java com.client.Client
+ 2. java com.client.Client username
+ 3. java com.client.Client username portNumber
+ 4. java com.client.Client username portNumber serverAddress
 
 at the console prompt
 If the portNumber is not specified 1500 is used
