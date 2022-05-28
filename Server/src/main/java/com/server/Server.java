@@ -1,6 +1,6 @@
 package com.server;
 
-import com.common.ChatMessage;
+import com.common.Message;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -39,7 +39,7 @@ public class Server extends ServerNetWorkConnection implements Serializable {
     }
 
     public void closeConnection() throws IOException {// to stop the server
-        keepGoing =false;
+        keepGoing = false;
         connectionThread.closeConnection();
     }
 
@@ -55,16 +55,16 @@ public class Server extends ServerNetWorkConnection implements Serializable {
 
         // if private message, send message to mentioned username only
         if (isPrivate) {
-            String tocheck = w[1].substring(1);
+            String toCheck = w[1].substring(1);
 
             message = w[0] + w[2];
-            String messageLf = time + " " + message + "\n";
+            String messageLf = time + "  " + message + "\n";
             boolean found = false;
             // we loop in reverse order to find the mentioned username
             for (int y = clientThreads.size(); --y >= 0; ) {
                 ClientThread ct1 = clientThreads.get(y);
                 String check = ct1.getUserName();
-                if (check.equals(tocheck)) {
+                if (check.equals(toCheck)) {
                     // try to write to the client.Client if it fails remove it from the list
                     if (!ct1.writeMsg(messageLf)) {
                         clientThreads.remove(y);
@@ -97,6 +97,7 @@ public class Server extends ServerNetWorkConnection implements Serializable {
         }
         return true;
     }
+
     private void display(String msg) {
         String time = sdf.format(new Date()) + " " + msg + "\n";
         onReceiveCallback.accept(time);
@@ -108,6 +109,7 @@ public class Server extends ServerNetWorkConnection implements Serializable {
             cl.out.writeObject(data);
         }
     }
+
     // if client sent LOGOUT message to exit
     synchronized void remove(int id) {
         String disconnectedClient = "";
@@ -176,7 +178,7 @@ public class Server extends ServerNetWorkConnection implements Serializable {
         private String date;// timestamp
         private Socket socket; // the socket to get messages from client
         private String userName;// the Username of the Client
-        private ChatMessage chatMessage;// message object to receive message and its type
+        private Message message;// message object to receive message and its type
         ObjectInputStream in;
         ObjectOutputStream out;
 
@@ -208,23 +210,23 @@ public class Server extends ServerNetWorkConnection implements Serializable {
                 // to loop until LOGOUT
                 boolean keepGoing = true;
                 while (keepGoing) {
-                        chatMessage = (ChatMessage) in.readObject();
+                    message = (Message) in.readObject();
                     // get the message from the common.ChatMessage object received
-                    String message = chatMessage.getMessage();
+                    String message = this.message.getMessage();
 
                     // different actions based on type message
-                    switch (chatMessage.getMessageType()) {
-                        case ChatMessage.MESSAGE:
+                    switch (this.message.getMessageType()) {
+                        case Message.MESSAGE:
                             boolean confirmation = broadcast(userName + ": " + message);
                             if (!confirmation) {
-                                writeMsg(notif + "Sorry. No such user exists." + notif+"\n");
+                                writeMsg(notif + "Sorry. No such user exists." + notif + "\n");
                             }
                             break;
-                        case ChatMessage.LOGOUT:
+                        case Message.LOGOUT:
                             display(userName + " disconnected with a LOGOUT message.");
                             keepGoing = false;
                             break;
-                        case ChatMessage.LIST:
+                        case Message.LIST:
                             writeMsg("List of the users connected at " + sdf.format(new Date()) + "\n");
                             // send list of active clients
                             for (int i = 0; i < clientThreads.size(); ++i) {

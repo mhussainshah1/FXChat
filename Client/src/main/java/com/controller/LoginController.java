@@ -13,7 +13,6 @@ import java.util.Properties;
 import static com.common.CommonSettings.PRODUCT_NAME;
 
 public class LoginController {
-
     @FXML
     private TextField txtUserName;
     @FXML

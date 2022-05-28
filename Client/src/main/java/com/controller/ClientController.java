@@ -2,24 +2,23 @@ package com.controller;
 
 import com.ClientApplication;
 import com.client.Client;
-import com.common.ChatMessage;
+import com.common.Message;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.text.TextFlow;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.common.ChatMessage.*;
+import static com.common.Message.*;
 import static com.common.CommonSettings.COMPANY_NAME;
 import static com.common.CommonSettings.PRODUCT_NAME;
 
@@ -52,28 +51,16 @@ public class ClientController {
     private int totalUserCount;
     private Client client;
     private LoginController loginController;
-    private ChatMessage messageObject;
+    private Message messageObject;
 
     @FXML
     private void initialize() {
         client = new Client();
-        messageObject = new ChatMessage();
-
-        List<Label> buttonList = new ArrayList<>();
-        for (int i = 0; i < 21; i++) {
-            var icon = new Label(Integer.toString(i), new ImageView(getClass().getResource("/icons/photo" + i + ".gif").toString()));
-            icon.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-            icon.setOnMouseClicked(event -> txtMessage.appendText("~~" + icon.getText() + " "));
-            icon.setOnMouseEntered(event -> icon.setStyle("-fx-border-color: black"));
-            icon.setOnMouseExited(event -> icon.setStyle("-fx-border-color: white"));
-            icon.setCursor(Cursor.OPEN_HAND);
-            buttonList.add(icon);
-        }
-        tilePane.setPadding(new Insets(10));
-        tilePane.getChildren().addAll(buttonList);
+        messageObject = new Message();
     }
 
-    //Handlers
+    //Event Handlers
+
     @FXML
     private void menuHandler(ActionEvent e) throws IOException {
         Alert alert = new Alert(Alert.AlertType.NONE);
@@ -81,18 +68,13 @@ public class ClientController {
 
         if (name.equals("Login"))
             openLoginWindow();
-
-        if (name.equals("Logout")) {
+        else if (name.equals("Logout")) {
             client.disconnectChat();
             disableLogout();
-        }
-
-        if (name.equals("Exit")) {
+        } else if (name.equals("Exit")) {
             client.disconnectChat();
             Platform.exit();
-        }
-
-        if (name.equals("About")) {
+        } else if (name.equals("About")) {
             alert.setTitle("About Us");
             alert.setHeaderText(PRODUCT_NAME);
             alert.setContentText("\nDeveloped By...\n" + COMPANY_NAME);
@@ -108,7 +90,8 @@ public class ClientController {
         var name = button.getText();
 
         if (name.equals("Send Message!")) {
-            sendMessage(txtMessage.getText());
+            if (!txtMessage.getText().isEmpty())
+                sendMessage(txtMessage.getText());
         }
         if (name.equals("Exit Chat")) {
             client.disconnectChat();
@@ -122,6 +105,41 @@ public class ClientController {
         sendMessage(txtMessage.getText());
     }
 
+    @FXML
+    private void iconHandler(MouseEvent mouseEvent) {
+        Label icon = (Label) mouseEvent.getSource();
+
+        if (mouseEvent.getEventType() == MouseEvent.MOUSE_ENTERED) {
+            icon.setStyle("-fx-border-color: black");
+
+        } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_CLICKED) {
+            txtMessage.appendText("~~" + icon.getText() + " ");
+
+        } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_EXITED) {
+            icon.setStyle("-fx-border-color: white");
+        }
+    }
+
+       /* @FXML private void userViewHandler() {
+        ObservableList<Label> userTypes = FXCollections.observableArrayList(userView.getItems());
+        userView.setItems(userTypes);
+        var userSelModel = userView.getSelectionModel();
+        userSelModel.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            String selItems = "";
+            ObservableList<Label> selected = userView.getSelectionModel().getSelectedItems();
+            ClientApplication.setUserName(client.getUserName());
+            for (Label label : selected) {
+                System.out.println(label.getText());
+                try {
+                    ClientApplication.showPrivateChatStage(label.getText());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }*/
+
+    //Instance Method
     public void openLoginWindow() throws IOException {
         ClientApplication.showLoginStage();
         messageBoard.getChildren().clear();
@@ -168,16 +186,18 @@ public class ClientController {
         userView.getItems().add(icon);
 
         icon.setOnMouseClicked(e -> {
+            Label toSend = (Label) e.getSource();
             if (e.getClickCount() == 2) {
                 try {
                     ClientApplication.setUserName(client.getUserName());
-                    ClientApplication.showPrivateChatStage();
+                    ClientApplication.showPrivateChatStage(toSend.getText());
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
             }
         });
     }
+
 
     /*
      * To send a message to the text flow
@@ -192,13 +212,13 @@ public class ClientController {
     private void sendMessage(String message) {
         try {
             if (message.equalsIgnoreCase("LOGOUT")) { // logout if message is LOGOUT
-                client.send(new ChatMessage(ChatMessage.LOGOUT, ""));
+                client.send(new Message(Message.LOGOUT, ""));
 
             } else if (message.equalsIgnoreCase("LIST")) { // message to check who are present in chatroom
-                client.send(new ChatMessage(ChatMessage.LIST, ""));
+                client.send(new Message(Message.LIST, ""));
 
             } else { // regular text message
-                client.send(new ChatMessage(ChatMessage.MESSAGE, message));
+                client.send(new Message(Message.MESSAGE, message));
             }
         } catch (Exception ex) {
             display("Failed to send\n", MESSAGE_TYPE_LEAVE);
@@ -245,6 +265,7 @@ public class ClientController {
                 }));
     }
 
+    //Bean Methods
     public void setLoginController(LoginController loginController) {
         this.loginController = loginController;
     }

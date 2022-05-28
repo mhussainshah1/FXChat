@@ -34,8 +34,9 @@ public class ClientList extends Application {
             icon.setCursor(Cursor.OPEN_HAND);
             labelList.add(icon);
         }
+        var lvTransport = new ListView<Label>();
         ObservableList<Label> transportTypes = FXCollections.observableArrayList(labelList);
-        var lvTransport = new ListView<>(transportTypes);
+        lvTransport.setItems(transportTypes);
         lvTransport.setPrefSize(400, 400);
         lvTransport.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         var lvSelModel = lvTransport.getSelectionModel();

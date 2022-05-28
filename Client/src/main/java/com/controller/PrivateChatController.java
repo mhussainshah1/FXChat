@@ -1,9 +1,10 @@
 package com.controller;
 
 import com.client.Client;
-import com.common.ChatMessage;
+import com.common.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -20,7 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.common.ChatMessage.MESSAGE_TYPE_DEFAULT;
+import static com.common.Message.MESSAGE_TYPE_DEFAULT;
 
 
 public class PrivateChatController {
@@ -45,12 +46,11 @@ public class PrivateChatController {
     private TextFlow textFlow;
     private boolean visible = false;
     private Client client;
-    private ChatMessage messageObject;
+    private Message message;
     private String toSend = "Server";
 
-
     public void initialize() {
-        messageObject = new ChatMessage();
+        message = new Message();
 
         List<Label> buttonList = new ArrayList<>();
         for (int i = 0; i < 21; i++) {
@@ -59,6 +59,7 @@ public class PrivateChatController {
             icon.setOnMouseClicked(event -> textField.appendText("~~" + icon.getText() + " "));
             icon.setOnMouseEntered(event -> icon.setStyle("-fx-border-color: black"));
             icon.setOnMouseExited(event -> icon.setStyle("-fx-border-color: white"));
+            icon.setPadding(new Insets(10));
             icon.setCursor(Cursor.OPEN_HAND);
             buttonList.add(icon);
         }
@@ -68,30 +69,23 @@ public class PrivateChatController {
         tilePane.getChildren().addAll(buttonList);
     }
 
-    private void sendMessage(String message) {
-        try {
-            client.send(new ChatMessage(ChatMessage.MESSAGE, "@" + toSend + " " + message));//@username<space>yourmessage
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        textField.clear();
-        textField.requestFocus();
-    }
-
-    public void btnHandler(ActionEvent actionEvent) {
+    @FXML private void btnHandler(ActionEvent actionEvent) {
         Button button = (Button) actionEvent.getTarget();
         var name = button.getText();
         Stage stage = (Stage) button.getScene().getWindow();
 
         if (name.equals("Send")) {
-            display(textField.getText(), MESSAGE_TYPE_DEFAULT);
+            display("You : " + textField.getText() + "\n", MESSAGE_TYPE_DEFAULT);
             sendMessage(textField.getText());
+
         } else if (name.equals("Clear")) {
             textFlow.getChildren().clear();
+
         } else if (name.equals("Ignore User")) {
 
         } else if (name.equals("Close")) {
             stage.hide();
+
         } else if (name.equals("Emotions")) {
             if (visible) {
                 visible = false;
@@ -106,22 +100,34 @@ public class PrivateChatController {
         }
     }
 
-    private void display(String message, int messageType) {
-        System.out.println(message);
-        List<Node> nodes = messageObject.parseMessage(message, messageType);
-        textFlow.getChildren().addAll(nodes);
-    }
-
-    public void txtHandler(ActionEvent actionEvent) {
+    @FXML private void txtHandler(ActionEvent actionEvent) {
         btnSend.fire();
     }
 
-    public void setClient(Client client) {
-        lblTitle.setText("Conversation with: " + client.getUserName());
-        this.client = client;
+    //Instance Methods
+
+    private void sendMessage(String messageText) {
+        try {
+            client.send(new Message(Message.MESSAGE, "@" + toSend + " " + messageText));//@username<space>yourmessage
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        textField.clear();
+        textField.requestFocus();
+    }
+    private void display(String messageText, int messageType) {
+        System.out.println(messageText);
+        List<Node> nodes = message.parseMessage(messageText, messageType);
+        textFlow.getChildren().addAll(nodes);
     }
 
     public void setToSend(String toSend) {
         this.toSend = toSend;
+    }
+
+    //Bean Methods
+    public void setClient(Client client) {
+        lblTitle.setText("Conversation with: " + client.getUserName());
+        this.client = client;
     }
 }

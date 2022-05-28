@@ -1,6 +1,6 @@
 package com.client;
 
-import com.common.ChatMessage;
+import com.common.Message;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -85,9 +85,9 @@ public abstract class ClientNetworkConnection {
                 onReceiveCallback.accept("CONNECTION TO THE SERVER CLOSED\n");
                 try {
                     if (quitType == QUIT_TYPE_DEFAULT)
-                        send(new ChatMessage(ChatMessage.REMOVE, ""));
+                        send(new Message(Message.REMOVE, ""));
                     if (quitType == QUIT_TYPE_KICK)
-                        send(new ChatMessage(ChatMessage.KICKED_OUT, ""));
+                        send(new Message(Message.KICKED_OUT, ""));
                     socket.close();
 //                socket = null;
 //                tappanel.UserCanvas.ClearAll();

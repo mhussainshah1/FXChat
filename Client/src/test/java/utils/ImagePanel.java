@@ -1,6 +1,7 @@
 package utils;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,7 +28,11 @@ public class ImagePanel extends Application {
             var icon = new Button(Integer.toString(i),new ImageView(getClass().getResource(  "/icons/photo" + i + ".gif").toString()));
             icon.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
             icon.setOnAction(event -> System.out.println(icon.getText()));
+            icon.setOnMouseEntered(event -> icon.setStyle("-fx-border-color: black"));
+            icon.setOnMouseExited(event -> icon.setStyle("-fx-border-color: white"));
             icon.setCursor(Cursor.OPEN_HAND);
+            icon.setPadding(new Insets(10));
+
             buttonList.add(icon);
         }
 

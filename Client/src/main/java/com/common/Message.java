@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
  * need to count bytes or to wait for a line feed at the end of the frame
  */
 
-public class ChatMessage implements Serializable {
+public class Message implements Serializable {
     // The different types of message sent by the Client
     public static final int LIST = 0,// LIST to receive the list of the users connected
             MESSAGE = 1, // MESSAGE an ordinary text message
@@ -36,7 +36,6 @@ public class ChatMessage implements Serializable {
             LEAVE_ROOM = 11,
             ROOM_COUNT = 12,
             PRIVATE_MESSAGE = 13;
-
     public static final int MESSAGE_TYPE_DEFAULT = 0;
     public static final int MESSAGE_TYPE_JOIN = 1;
     public static final int MESSAGE_TYPE_LEAVE = 2;
@@ -45,13 +44,13 @@ public class ChatMessage implements Serializable {
     private final int messageType;
     private final String message;
 
-    public ChatMessage(){
+    public Message(){
         this.messageType = MESSAGE_TYPE_DEFAULT;
         message = "ChatMessage: - default constructor";
         list = new ArrayList<>();
     }
     // constructor
-    public ChatMessage(int messageType, String message) {
+    public Message(int messageType, String message) {
         this.messageType = messageType;
         this.message = message;
         list = new ArrayList<>();

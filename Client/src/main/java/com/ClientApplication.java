@@ -56,12 +56,13 @@ public class ClientApplication extends Application {
         loginStage.show();
     }
 
-    public static void showPrivateChatStage() throws IOException {
+    public static void showPrivateChatStage(String toSend) throws IOException {
         var loader = new FXMLLoader(ClientApplication.class.getResource("/com/controller/privatechat.fxml"));
         Parent root = loader.load();
 
         PrivateChatController privateChatController = loader.getController();
         privateChatController.setClient(clientController.getClient());
+        privateChatController.setToSend(toSend);
 
         Stage privateChatStage = new Stage();
         privateChatStage.getIcons().add(new Image(ClientApplication.class.getResource( "/images/icon.gif").toString()));
@@ -73,6 +74,4 @@ public class ClientApplication extends Application {
     public static void setUserName(String userName) {
         ClientApplication.userName = userName;
     }
-
-
 }
