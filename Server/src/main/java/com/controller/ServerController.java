@@ -102,8 +102,6 @@ public class ServerController {
         btnSendMessage.setDisable(!status);
     }
 
-
-
     private Server createServer() {
         return new Server(serverPort, data -> {
             Platform.runLater(() -> { //UI or background thread - manipulate UI object , It gives control back to UI thread

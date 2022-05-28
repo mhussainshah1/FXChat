@@ -8,16 +8,16 @@ import java.util.Properties;
 import static com.common.CommonSettings.PRODUCT_NAME;
 
 public class Data implements AutoCloseable {
-    private final InputStream inputStream;
-    private final FileOutputStream fileOutputStream;
+    private InputStream inputStream;
+    private FileOutputStream fileOutputStream;
+    private String userName;
+    private String serverName;
+    private int serverPort;
+    private int maximumGuestNumber;
+    private String roomList;
     private boolean proxyState;
     private int proxyPort;
     private String proxyHost;
-    private String userName;
-    private int serverPort;
-    private String serverName;
-    private int maximumGuestNumber;
-    private String roomList;
     private Properties properties;
 
     public Data(String fileName) throws IOException {
@@ -48,7 +48,6 @@ public class Data implements AutoCloseable {
             roomList = properties.getProperty("roomList");
         else roomList = "General;Teen;Music;Party;";
 
-
         if (properties.getProperty("ProxyHost") != null)
             proxyHost = properties.getProperty("ProxyHost");
         else proxyHost = "";
@@ -60,6 +59,15 @@ public class Data implements AutoCloseable {
         if (properties.getProperty("ProxyPort") != null)
             proxyPort = Integer.parseInt(properties.getProperty("ProxyPort"));
         else proxyPort = 0;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        properties.setProperty("UserName", userName);
+        this.userName = userName;
     }
 
     public int getServerPort() {
@@ -89,8 +97,8 @@ public class Data implements AutoCloseable {
             roomList = properties.getProperty("roomList") + ";" + roomList;
         this.roomList = roomList;
     }
-
     //Loading Properties File
+
     private Properties getProperties() throws IOException {
         //Getting the Property Value From Property File
         if (inputStream != null) properties.load(inputStream);
@@ -105,16 +113,16 @@ public class Data implements AutoCloseable {
         return proxyState;
     }
 
+    public void setProxyState(boolean proxyState) {
+        this.proxyState = proxyState;
+    }
+
     public int getProxyPort() {
         return proxyPort;
     }
 
     public String getProxyHost() {
         return proxyHost;
-    }
-
-    public void setProxyState(boolean proxyState) {
-        this.proxyState = proxyState;
     }
 
     public void setProxyPort(int proxyPort) {
@@ -127,22 +135,13 @@ public class Data implements AutoCloseable {
         this.proxyHost = proxyHost;
     }
 
-    public void setUserName(String userName) {
-        properties.setProperty("UserName", userName);
-        this.userName = userName;
+    public String getServerName() {
+        return serverName;
     }
 
     public void setServerName(String serverName) {
         properties.setProperty("ServerName", serverName);
         this.serverName = serverName;
-    }
-
-    public String getServerName() {
-        return serverName;
-    }
-
-    public String getUserName() {
-        return userName;
     }
 
     private void store() throws IOException {
