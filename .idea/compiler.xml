@@ -8,7 +8,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Server" />
         <module name="Client" />
-        <module name="FXChat" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

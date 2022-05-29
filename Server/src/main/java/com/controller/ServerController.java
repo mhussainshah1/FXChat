@@ -64,7 +64,9 @@ public class ServerController {
         }
 
         else if (name.equals("Send Message!")) {
-            btnSendMessage.fire();
+            if(!txtMessage.getText().isEmpty())
+                sendMessage("Server : " + txtMessage.getText());
+
         }
 
         else if (name.equals("Stop Server")) {
@@ -74,8 +76,7 @@ public class ServerController {
     }
 
     public void txtHandler(ActionEvent e) {
-        if(!txtMessage.getText().isEmpty())
-        sendMessage("Server : " + txtMessage.getText());
+        btnSendMessage.fire();
     }
 
     private void sendMessage(String message) {

@@ -108,7 +108,7 @@ public class ClientController {
 
     @FXML
     private void iconHandler(MouseEvent mouseEvent) {
-        Label icon = (Label) mouseEvent.getSource();
+        Label icon = (Label) mouseEvent.getTarget();
 
         if (mouseEvent.getEventType() == MouseEvent.MOUSE_ENTERED) {
             icon.setStyle("-fx-border-color: black");

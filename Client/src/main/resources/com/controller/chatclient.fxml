@@ -135,11 +135,10 @@
                                  </Label>
                                  <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" prefWidth="34.0" text="4">
                                     <graphic>
-                                       <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                          <image>
-                                             <Image url="@../../icons/photo4.gif" />
-                                          </image>
-                                       </ImageView>
+                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true"
+                                                   preserveRatio="true">
+                                            <Image url="@../../icons/photo4.gif"/>
+                                        </ImageView>
                                     </graphic>
                                     <cursor>
                                        <Cursor fx:constant="OPEN_HAND" />

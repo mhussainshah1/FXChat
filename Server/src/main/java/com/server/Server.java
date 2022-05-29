@@ -20,6 +20,7 @@ import java.util.function.Consumer;
 // the server that can be run as a console
 public class Server extends ServerNetWorkConnection implements Serializable {
     public static int uniqueId;// a unique ID for each connection
+    private static ExecutorService pool;
     public final List<ClientThread> clientThreads;// an ArrayList to keep the list of the client.Client
     public final SimpleDateFormat sdf; // to display time
     public final String notif = " *** ";// notification
@@ -27,7 +28,6 @@ public class Server extends ServerNetWorkConnection implements Serializable {
     private final ConnectionThread connectionThread = new ConnectionThread();
     private final Consumer<Serializable> onReceiveCallback;
     private boolean keepGoing;// to check if server is running
-    private static ExecutorService pool;
 
     //constructor that receive the port to listen to for connection as parameter
     public Server(int port, Consumer<Serializable> onReceiveCallback) {
@@ -36,9 +36,9 @@ public class Server extends ServerNetWorkConnection implements Serializable {
         this.port = port;// the port
         sdf = new SimpleDateFormat("HH:mm:ss");// to display hh:mm:ss
         clientThreads = new ArrayList<>();// an ArrayList to keep the list of the Client
-        try(Data data = new Data("server.properties");) {
+        try (Data data = new Data("server.properties");) {
             pool = Executors.newFixedThreadPool(data.getMaximumGuestNumber());
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -66,8 +66,9 @@ public class Server extends ServerNetWorkConnection implements Serializable {
         if (isPrivate) {
             String toCheck = w[1].substring(1);
 
-            message = w[0] + w[2];
+            message = w[0] + " " + w[2];
             String messageLf = time + "  " + message + "\n";
+
             boolean found = false;
             // we loop in reverse order to find the mentioned username
             for (int y = clientThreads.size(); --y >= 0; ) {
@@ -144,8 +145,8 @@ public class Server extends ServerNetWorkConnection implements Serializable {
     }
 
     private class ConnectionThread extends Thread {
-        ServerSocket serverSocket;
         public Socket socket;
+        ServerSocket serverSocket;
 
         @Override
         public synchronized void run() {
@@ -185,13 +186,13 @@ public class Server extends ServerNetWorkConnection implements Serializable {
 
     // One instance of this thread will run for each client
     private class ClientThread extends Thread {
+        ObjectInputStream in;
+        ObjectOutputStream out;
         private int id; // my unique id (easier for disconnection)
         private String date;// timestamp
         private Socket socket; // the socket to get messages from client
         private String userName;// the Username of the Client
         private Message message;// message object to receive message and its type
-        ObjectInputStream in;
-        ObjectOutputStream out;
 
         // Constructor
         ClientThread(Socket socket) {

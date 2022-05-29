@@ -1,30 +1,317 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.TextFlow?>
-<VBox fx:id="root" prefHeight="270.0" prefWidth="310.0" xmlns="http://javafx.com/javafx/18"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controller.PrivateChatController">
-    <Label fx:id="lblTitle"/>
+
+<VBox fx:id="root" prefHeight="415.0" prefWidth="310.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controller.PrivateChatController">
+    <Label fx:id="lblTitle" />
     <ScrollPane prefHeight="200.0" prefWidth="200.0">
-        <TextFlow fx:id="textFlow" lineSpacing="10.0" prefHeight="172.0" prefWidth="306.0"
-                  style="-fx-background-color: white;">
+        <TextFlow fx:id="textFlow" lineSpacing="10.0" prefHeight="195.0" prefWidth="294.0" style="-fx-background-color: white;">
             <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </padding>
         </TextFlow>
     </ScrollPane>
     <HBox prefHeight="41.0" prefWidth="310.0">
-        <TextField fx:id="textField" onAction="#txtHandler" prefHeight="26.0" prefWidth="262.0"/>
-        <Button fx:id="btnSend" mnemonicParsing="false" onAction="#btnHandler" text="Send"/>
+        <TextField fx:id="textField" onAction="#txtHandler" prefHeight="26.0" prefWidth="262.0" />
+        <Button fx:id="btnSend" mnemonicParsing="false" onAction="#btnHandler" text="Send" />
     </HBox>
     <FlowPane alignment="CENTER" hgap="10.0" prefHeight="34.0" prefWidth="310.0" vgap="10.0">
-        <Button fx:id="btnClear" mnemonicParsing="false" onAction="#btnHandler" text="Clear"/>
-        <Button fx:id="btnIgnoreUser" mnemonicParsing="false" onAction="#btnHandler" text="Ignore User"/>
-        <Button fx:id="btnClose" mnemonicParsing="false" onAction="#btnHandler" text="Close"/>
-        <Button fx:id="btnEmotions" mnemonicParsing="false" onAction="#btnHandler" text="Emotions"/>
+        <Button fx:id="btnClear" mnemonicParsing="false" onAction="#btnHandler" text="Clear" />
+        <Button fx:id="btnIgnoreUser" mnemonicParsing="false" onAction="#btnHandler" text="Ignore User" />
+        <Button fx:id="btnClose" mnemonicParsing="false" onAction="#btnHandler" text="Close" />
+        <Button fx:id="btnEmotions" mnemonicParsing="false" onAction="#btnHandler" text="Emotions" />
     </FlowPane>
+    <TilePane fx:id="tilePane" hgap="10.0" prefColumns="3" prefHeight="123.0" prefWidth="310.0" vgap="10.0">
+        <cursor>
+            <Cursor fx:constant="HAND" />
+        </cursor>
+        <opaqueInsets>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        </opaqueInsets>
+        <Label alignment="CENTER" contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" prefWidth="30.0" text="0">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo0.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" prefWidth="35.0" text="1">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo1.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" prefWidth="35.0" text="2">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo2.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" prefWidth="34.0" text="3">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo3.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" prefWidth="34.0" text="4">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo4.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" prefWidth="34.0" text="5">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo5.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" prefWidth="30.0" text="6">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo6.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" prefHeight="30.0" prefWidth="34.0" text="7">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo7.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" prefWidth="30.0" text="8">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo8.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" prefWidth="34.0" text="9">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo9.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" prefWidth="34.0" text="10">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo10.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" prefWidth="34.0" text="11">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo11.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" prefWidth="34.0" text="12">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo12.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" prefWidth="34.0" text="13">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo13.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" prefWidth="34.0" text="14">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo14.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" text="15">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo15.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" text="16">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo16.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" text="17">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo17.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" text="18">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo18.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" text="19">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo19.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+        <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler" onMouseEntered="#iconHandler" onMouseExited="#iconHandler" text="20">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../icons/photo20.gif" />
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+            <opaqueInsets>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </opaqueInsets>
+        </Label>
+    </TilePane>
 </VBox>

@@ -37,7 +37,6 @@ public class Message implements Serializable {
             LEAVE_ROOM = 11,
             ROOM_COUNT = 12,
             PRIVATE_MESSAGE = 13;
-
     public static final int MESSAGE_TYPE_DEFAULT = 0;
     public static final int MESSAGE_TYPE_JOIN = 1;
     public static final int MESSAGE_TYPE_LEAVE = 2;

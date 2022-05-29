@@ -4,31 +4,27 @@ import com.client.Client;
 import com.common.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.common.Message.MESSAGE_TYPE_DEFAULT;
-
 
 public class PrivateChatController {
     @FXML
     private Label lblTitle;
     @FXML
     private VBox root;
+    @FXML
     private TilePane tilePane;
     @FXML
     private TextField textField;
@@ -52,7 +48,7 @@ public class PrivateChatController {
     public void initialize() {
         message = new Message();
 
-        List<Label> buttonList = new ArrayList<>();
+       /* List<Label> buttonList = new ArrayList<>();
         for (int i = 0; i < 21; i++) {
             var icon = new Label(Integer.toString(i), new ImageView(getClass().getResource("/icons/photo" + i + ".gif").toString()));
             icon.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
@@ -63,10 +59,12 @@ public class PrivateChatController {
             icon.setCursor(Cursor.OPEN_HAND);
             buttonList.add(icon);
         }
-        tilePane = new TilePane(5, 5);
+        tilePane = new TilePane(10, 10);
         tilePane.setPrefColumns(3);
         tilePane.setVisible(visible);
-        tilePane.getChildren().addAll(buttonList);
+        tilePane.getChildren().addAll(buttonList);*/
+        //tilePane.setVisible(visible);
+        root.getChildren().remove(tilePane);
     }
 
     @FXML private void btnHandler(ActionEvent actionEvent) {
@@ -92,13 +90,13 @@ public class PrivateChatController {
             if (visible) {
                 visible = false;
                 root.getChildren().remove(tilePane);
-                stage.setHeight(300);
+                stage.setHeight(320);
             } else {
                 visible = true;
                 root.getChildren().add(tilePane);
-                stage.setHeight(460);
+                stage.setHeight(415);
             }
-            tilePane.setVisible(visible);
+            //tilePane.setVisible(visible);
         }
     }
 
@@ -131,5 +129,19 @@ public class PrivateChatController {
     public void setClient(Client client) {
         lblTitle.setText("Conversation with: " + client.getUserName());
         this.client = client;
+    }
+
+    public void iconHandler(MouseEvent mouseEvent) {
+        Label icon = (Label) mouseEvent.getTarget();
+
+        if (mouseEvent.getEventType() == MouseEvent.MOUSE_ENTERED) {
+            icon.setStyle("-fx-border-color: black");
+
+        } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_CLICKED) {
+            textField.appendText("~~" + icon.getText() + " ");
+
+        } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_EXITED) {
+            icon.setStyle("-fx-border-color: white");
+        }
     }
 }
