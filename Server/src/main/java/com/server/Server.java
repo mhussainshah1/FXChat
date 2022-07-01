@@ -21,9 +21,9 @@ import java.util.function.Consumer;
 public class Server extends ServerNetWorkConnection implements Serializable {
     public static int uniqueId;// a unique ID for each connection
     private static ExecutorService pool;
-    public final List<ClientThread> clientThreads;// an ArrayList to keep the list of the client.Client
-    public final SimpleDateFormat sdf; // to display time
-    public final String notif = " *** ";// notification
+    private final List<ClientThread> clientThreads;// an ArrayList to keep the list of the client.Client
+    private final SimpleDateFormat sdf; // to display time
+    private final String notif = " *** ";// notification
     private final int port;// the port number to listen for connection
     private final ConnectionThread connectionThread = new ConnectionThread();
     private final Consumer<Serializable> onReceiveCallback;
@@ -75,7 +75,7 @@ public class Server extends ServerNetWorkConnection implements Serializable {
                 ClientThread ct1 = clientThreads.get(y);
                 String check = ct1.getUserName();
                 if (check.equals(toCheck)) {
-                    // try to write to the client.Client if it fails remove it from the list
+                    // try to write to the Client if it fails remove it from the list
                     if (!ct1.writeMsg(messageLf)) {
                         clientThreads.remove(y);
                         display("Disconnected Client " + ct1.userName + " removed from list.");

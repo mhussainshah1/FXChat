@@ -45,9 +45,9 @@ public class PrivateChatController {
     private Message message;
     private String toSend = "Server";
 
-    public void initialize() {
+    @FXML
+    private void initialize() {
         message = new Message();
-
        /* List<Label> buttonList = new ArrayList<>();
         for (int i = 0; i < 21; i++) {
             var icon = new Label(Integer.toString(i), new ImageView(getClass().getResource("/icons/photo" + i + ".gif").toString()));
@@ -67,13 +67,15 @@ public class PrivateChatController {
         root.getChildren().remove(tilePane);
     }
 
-    @FXML private void btnHandler(ActionEvent actionEvent) {
+    //Instance Methods
+    @FXML
+    private void btnHandler(ActionEvent actionEvent) {
         Button button = (Button) actionEvent.getTarget();
         var name = button.getText();
         Stage stage = (Stage) button.getScene().getWindow();
 
         if (name.equals("Send")) {
-            if(!textField.getText().isBlank()) {
+            if (!textField.getText().isBlank()) {
                 display("You : " + textField.getText() + "\n", MESSAGE_TYPE_DEFAULT);
                 sendMessage(textField.getText());
             }
@@ -100,38 +102,14 @@ public class PrivateChatController {
         }
     }
 
-    @FXML private void txtHandler(ActionEvent actionEvent) {
+    @FXML
+    private void txtHandler(ActionEvent actionEvent) {
         btnSend.fire();
+
     }
 
-    //Instance Methods
-
-    private void sendMessage(String messageText) {
-        try {
-            client.send(new Message(Message.MESSAGE, "@" + toSend + " " + messageText));//@username<space>yourmessage
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        textField.clear();
-        textField.requestFocus();
-    }
-    private void display(String messageText, int messageType) {
-        System.out.println(messageText);
-        List<Node> nodes = message.parseMessage(messageText, messageType);
-        textFlow.getChildren().addAll(nodes);
-    }
-
-    public void setToSend(String toSend) {
-        this.toSend = toSend;
-    }
-
-    //Bean Methods
-    public void setClient(Client client) {
-        lblTitle.setText("Conversation with: " + client.getUserName());
-        this.client = client;
-    }
-
-    public void iconHandler(MouseEvent mouseEvent) {
+    @FXML
+    private void iconHandler(MouseEvent mouseEvent) {
         Label icon = (Label) mouseEvent.getTarget();
 
         if (mouseEvent.getEventType() == MouseEvent.MOUSE_ENTERED) {
@@ -143,5 +121,31 @@ public class PrivateChatController {
         } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_EXITED) {
             icon.setStyle("-fx-border-color: white");
         }
+    }
+
+    private void sendMessage(String messageText) {
+        try {
+            client.send(new Message(Message.MESSAGE, "@" + toSend + " " + messageText));//@username<space>yourmessage
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        textField.clear();
+        textField.requestFocus();
+    }
+
+    private void display(String messageText, int messageType) {
+        System.out.println(messageText);
+        List<Node> nodes = message.parseMessage(messageText, messageType);
+        textFlow.getChildren().addAll(nodes);
+    }
+
+    public void setToSend(String toSend) {
+        this.toSend = toSend;
+    }
+    //Bean Methods
+
+    public void setClient(Client client) {
+        lblTitle.setText("Conversation with: " + client.getUserName());
+        this.client = client;
     }
 }

@@ -44,15 +44,15 @@ public class Message implements Serializable {
     private final int messageType;
     private final String message;
 
-    public Message(){
-        this.messageType = MESSAGE_TYPE_DEFAULT;
-        message = "ChatMessage: - default constructor";
-        list = new ArrayList<>();
-    }
     // constructor
     public Message(int messageType, String message) {
         this.messageType = messageType;
         this.message = message;
+        list = new ArrayList<>();
+    }
+    public Message(){
+        this.messageType = MESSAGE_TYPE_DEFAULT;
+        message = "ChatMessage: - default constructor";
         list = new ArrayList<>();
     }
     public int getMessageType() {
