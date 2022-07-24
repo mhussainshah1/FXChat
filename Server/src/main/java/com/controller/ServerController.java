@@ -1,7 +1,7 @@
 package com.controller;
 
-import com.common.Message;
 import com.common.Data;
+import com.common.Message;
 import com.server.Server;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -32,16 +32,16 @@ public class ServerController {
     private TextField txtMessage;
     @FXML
     private Button btnSendMessage;
-    //Handlers
-    private Server server = createServer();
     private int serverPort = 1436;
     private int maximumGuestNumber;
     private Message message;
+    //Handlers
+    private Server server = createServer();
 
     //Methods
     public void initialize() throws IOException {
         this.message = new Message();
-        try(Data data = new Data("server.properties");){
+        try (Data data = new Data("server.properties");) {
             this.serverPort = data.getServerPort();
             this.maximumGuestNumber = data.getMaximumGuestNumber();
         }
@@ -54,28 +54,24 @@ public class ServerController {
         var name = button.getText();
 
         if (name.equals("Start Server")) {
-            try(Data data = new Data("server.properties")){
+            try (Data data = new Data("server.properties")) {
                 data.setServerPort(Integer.parseInt(txtServerPort.getText()));
                 data.setMaximumGuestNumber(Integer.parseInt(txtMaximumGuest.getText()));
             }
             server = createServer();
             server.startConnection();
             enableLogin();
-        }
-
-        else if (name.equals("Send Message!")) {
-            btnSendMessage.fire();
-        }
-
-        else if (name.equals("Stop Server")) {
+        } else if (name.equals("Send Message!")) {
+            if (!txtMessage.getText().isEmpty())
+                sendMessage("Server : " + txtMessage.getText());
+        } else if (name.equals("Stop Server")) {
             server.closeConnection();
             disableLogout();
         }
     }
 
     public void txtHandler(ActionEvent e) {
-        if(!txtMessage.getText().isEmpty())
-        sendMessage("Server : " + txtMessage.getText());
+        btnSendMessage.fire();
     }
 
     private void sendMessage(String message) {
@@ -103,11 +99,10 @@ public class ServerController {
     }
 
 
-
     private Server createServer() {
         return new Server(serverPort, data -> {
             Platform.runLater(() -> { //UI or background thread - manipulate UI object , It gives control back to UI thread
-                display(data.toString(),MESSAGE_TYPE_ADMIN);
+                display(data.toString(), MESSAGE_TYPE_ADMIN);
             });
         });
     }
