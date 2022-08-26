@@ -223,28 +223,28 @@ public class Server extends ServerNetWorkConnection implements Serializable {
                 while (keepGoing) {
                     message = (Message) in.readObject();
                     // get the message from the common.ChatMessage object received
-                    String message = this.message.getMessage();
+                    String message = this.message.toString();
 
                     // different actions based on type message
                     switch (this.message.getMessageType()) {
-                        case Message.MESSAGE:
+                        case Message.MESSAGE -> {
                             boolean confirmation = broadcast(userName + ": " + message);
                             if (!confirmation) {
                                 writeMsg(notif + "Sorry. No such user exists." + notif + "\n");
                             }
-                            break;
-                        case Message.LOGOUT:
+                        }
+                        case Message.LOGOUT -> {
                             display(userName + " disconnected with a LOGOUT message.");
                             keepGoing = false;
-                            break;
-                        case Message.LIST:
+                        }
+                        case Message.LIST -> {
                             writeMsg("List of the users connected at " + sdf.format(new Date()) + "\n");
                             // send list of active clients
                             for (int i = 0; i < clientThreads.size(); ++i) {
                                 ClientThread ct = clientThreads.get(i);
                                 writeMsg((i + 1) + ") " + ct.userName + " since " + ct.date);
                             }
-                            break;
+                        }
                     }
                 }
                 // if out of the loop then disconnected and remove from client list

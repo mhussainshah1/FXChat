@@ -8,6 +8,9 @@ module client {
     opens com.client to javafx.fxml;
     exports com.client;
 
+    opens com.common to javafx.fxml;
+    exports com.common;
+
     opens com.controller to javafx.fxml;
     exports com.controller;
 

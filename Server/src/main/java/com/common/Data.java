@@ -26,15 +26,15 @@ public class Data implements AutoCloseable {
         this.properties = new Properties();
 
         properties = getProperties();
-        properties.forEach((x, y) -> System.out.println(x + " = " + y));
-
-        if (properties.getProperty("PortNumber") != null)
-            serverPort = Integer.parseInt(properties.getProperty("PortNumber"));
-        else serverPort = 1436;
+//        properties.forEach((x, y) -> System.out.println(x + " = " + y));
 
         if (properties.getProperty("ServerName") != null)
             serverName = properties.getProperty("ServerName");
         else serverName = "localhost";
+
+        if (properties.getProperty("PortNumber") != null) {
+            serverPort = Integer.parseInt(properties.getProperty("PortNumber"));
+        } else serverPort = 1436;
 
         if (properties.getProperty("UserName") != null)
             userName = properties.getProperty("UserName");
@@ -46,8 +46,7 @@ public class Data implements AutoCloseable {
 
         if (properties.getProperty("roomList") != null)
             roomList = properties.getProperty("roomList");
-        else roomList = "General;Teen;Music;Party;";
-
+        else roomList = "General Teen Music Party";
 
         if (properties.getProperty("ProxyHost") != null)
             proxyHost = properties.getProperty("ProxyHost");
@@ -93,7 +92,8 @@ public class Data implements AutoCloseable {
     //Loading Properties File
     private Properties getProperties() throws IOException {
         //Getting the Property Value From Property File
-        if (inputStream != null) properties.load(inputStream);
+        if (inputStream != null)
+            properties.load(inputStream);
         return properties;
     }
 
@@ -105,16 +105,12 @@ public class Data implements AutoCloseable {
         return proxyState;
     }
 
-    public int getProxyPort() {
-        return proxyPort;
-    }
-
-    public String getProxyHost() {
-        return proxyHost;
-    }
-
     public void setProxyState(boolean proxyState) {
         this.proxyState = proxyState;
+    }
+
+    public int getProxyPort() {
+        return proxyPort;
     }
 
     public void setProxyPort(int proxyPort) {
@@ -122,14 +118,17 @@ public class Data implements AutoCloseable {
         this.proxyPort = proxyPort;
     }
 
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
     public void setProxyHost(String proxyHost) {
         properties.setProperty("ProxyHost", proxyHost);
         this.proxyHost = proxyHost;
     }
 
-    public void setUserName(String userName) {
-        properties.setProperty("UserName", userName);
-        this.userName = userName;
+    public String getServerName() {
+        return serverName;
     }
 
     public void setServerName(String serverName) {
@@ -137,22 +136,27 @@ public class Data implements AutoCloseable {
         this.serverName = serverName;
     }
 
-    public String getServerName() {
-        return serverName;
-    }
-
     public String getUserName() {
         return userName;
     }
 
+    public void setUserName(String userName) {
+        properties.setProperty("UserName", userName);
+        this.userName = userName;
+    }
+
     private void store() throws IOException {
-        if (fileOutputStream != null) properties.store(fileOutputStream, PRODUCT_NAME);
+        if (fileOutputStream != null)
+            properties.store(fileOutputStream, PRODUCT_NAME);
     }
 
     @Override
     public void close() throws IOException {
         store();
-        if (inputStream != null) inputStream.close();
-        if (fileOutputStream != null) fileOutputStream.close();
+        if (inputStream != null)
+            inputStream.close();
+
+        if (fileOutputStream != null)
+            fileOutputStream.close();
     }
 }

@@ -1,16 +1,19 @@
 package com.controller;
 
 import com.common.Data;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import java.util.Properties;
 
 public class LoginController {
+    @FXML
+    private ChoiceBox<String> choiceRoom;
     @FXML
     private TextField txtUserName;
     @FXML
@@ -25,7 +28,7 @@ public class LoginController {
     private CheckBox proxyCheckBox;
     private ClientController clientController;
     private boolean connect;
-    private Properties properties;
+    private String roomName = "General";
 
     //Calls automatically
     @FXML
@@ -33,6 +36,12 @@ public class LoginController {
 
         try (Data data = new Data("data.properties")) {
             txtUserName.setText(data.getUserName());
+            choiceRoom.setItems(FXCollections.observableArrayList("General", "Teen", "Music", "Party"));
+            choiceRoom.setOnAction(event -> {
+                roomName = choiceRoom.getValue();
+                choiceRoom.setValue(roomName);
+            });
+
             txtServerName.setText(data.getServerName());
             txtServerPort.setText(String.valueOf(data.getServerPort()));
             proxyCheckBox.setSelected(data.isProxyState());
@@ -50,11 +59,11 @@ public class LoginController {
         if (name.equals("Connect")) {
             connect = true;
             try (var data = new Data("data.properties")) {
-                data.setProxyState(proxyCheckBox.isSelected());
                 data.setUserName(txtUserName.getText());
+                data.setRoomName(roomName);
                 data.setServerName(txtServerName.getText());
-                System.out.println(txtServerPort.getText());
                 data.setServerPort(Integer.parseInt(txtServerPort.getText()));
+                data.setProxyState(proxyCheckBox.isSelected());
                 data.setProxyHost(txtProxyHost.getText());
                 data.setProxyPort(Integer.parseInt(txtProxyPort.getText()));
             }
@@ -78,6 +87,10 @@ public class LoginController {
 
     public String getUserName() {
         return txtUserName.getText();
+    }
+
+    public String getUserRoom(){
+        return choiceRoom.getValue();
     }
 
     public String getServerName() {

@@ -1,6 +1,7 @@
 package com.common;
 
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -13,6 +14,9 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.common.CommonSettings.*;
+
 /**
  * This class defines the different type of messages that will be exchanged between the
  * Clients and the main.java.server.Server.
@@ -36,34 +40,24 @@ public class Message implements Serializable {
             LEAVE_ROOM = 11,
             ROOM_COUNT = 12,
             PRIVATE_MESSAGE = 13;
-    public static final int MESSAGE_TYPE_DEFAULT = 0;
-    public static final int MESSAGE_TYPE_JOIN = 1;
-    public static final int MESSAGE_TYPE_LEAVE = 2;
-    public static final int MESSAGE_TYPE_ADMIN = 3;
     private List<Node> list;
     private final int messageType;
-    private final String message;
+    private boolean ignored;
+    private Label label;
 
-    public Message(){
-        this.messageType = MESSAGE_TYPE_DEFAULT;
-        message = "ChatMessage: - default constructor";
-        list = new ArrayList<>();
-    }
     // constructor
-    public Message(int messageType, String message) {
+    public Message(Label label){
+        this(MESSAGE_TYPE_DEFAULT,label);
+    }
+    public Message(int messageType, Label label) {
         this.messageType = messageType;
-        this.message = message;
+        this.label = label;
         list = new ArrayList<>();
     }
-    public int getMessageType() {
-        return messageType;
-    }
-    public String getMessage() {
-        return message;
-    }
+
     @Override
     public String toString() {
-        return message;
+        return label.getText();
     }
     public Text formatMessage(Text text, int messageType) {
         text.setFont(Font.font("Arial", 14));
@@ -105,10 +99,23 @@ public class Message implements Serializable {
                     list.add(formatMessage(new Text(token), messageType));
                 }
             }
-            list.add(new Text(System.lineSeparator())); //new line separator
         } else {
             list.add(formatMessage(new Text(message), messageType));
         }
+        list.add(new Text(System.lineSeparator())); //new line separator
         return list;
     }
+
+    public boolean isIgnored() {
+        return ignored;
+    }
+
+    public void setIgnored(boolean ignored) {
+        this.ignored = ignored;
+    }
+
+    public Label getLabel() {
+        return label;
+    }
+
 }

@@ -1,6 +1,7 @@
 package utils;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -38,7 +39,7 @@ public class PrivateChat extends Application {
         var textFlow = new TextFlow();
         textFlow.setPadding(new Insets(10));
         textFlow.setLineSpacing(10);
-        textFlow.setPrefSize(310, 190);
+        textFlow.setPrefSize(400, 270);
         textFlow.setStyle("-fx-background-color: white;");
         var scrollPane = new ScrollPane(textFlow);
 //        scrollPane.setPrefViewportWidth(310);
@@ -64,7 +65,7 @@ public class PrivateChat extends Application {
                             String token = tokenizer.nextToken();
                             //If it's a Proper Image
                             int i = Integer.parseInt(token.substring(2));
-                            var imageView = new ImageView(new Image(getClass().getResource(  "/icons/photo" + i + ".gif").toString()));
+                            var imageView = new ImageView(new Image(getClass().getResource("/icons/photo" + i + ".gif").toString()));
 //                            text.setText(text.getText().replace("~~" + i, ""));
                             textFlow.getChildren().addAll(/*text,*/ imageView);
                         }
@@ -89,18 +90,18 @@ public class PrivateChat extends Application {
         var btnIgnoreUser = new Button("Ignore User");
 
         var btnClose = new Button("Close");
-        btnClose.setOnAction(e -> System.exit(0));
+        btnClose.setOnAction(e -> Platform.exit());
 
         var btnEmotion = new Button("Emotions");
         btnEmotion.setOnAction(e -> {
             if (visible) {
                 visible = false;
                 rootNode.getChildren().remove(tilePane);
-                primaryStage.setHeight(300);
+                primaryStage.setHeight(390);
             } else {
                 visible = true;
                 rootNode.getChildren().add(tilePane);
-                primaryStage.setHeight(460);
+                primaryStage.setHeight(415 + 50);
             }
             tilePane.setVisible(visible);
         });
@@ -111,7 +112,7 @@ public class PrivateChat extends Application {
 
         List<Label> buttonList = new ArrayList<>();
         for (int i = 0; i < 21; i++) {
-            var icon = new Label(Integer.toString(i), new ImageView(getClass().getResource( "/icons/photo" + i + ".gif").toString()));
+            var icon = new Label(Integer.toString(i), new ImageView(getClass().getResource("/icons/photo" + i + ".gif").toString()));
             icon.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
             icon.setOnMouseClicked(event -> textField.appendText("~~" + icon.getText() + " "));
             icon.setOnMouseEntered(event -> icon.setStyle("-fx-border-color: black"));
@@ -125,7 +126,7 @@ public class PrivateChat extends Application {
         tilePane.getChildren().addAll(buttonList);
 
         rootNode.getChildren().addAll(lblTile, scrollPane, flowPane1, flowPane2);
-        var scene = new Scene(rootNode, 310, 270);
+        var scene = new Scene(rootNode, 415, 350);
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("Private Chat with " + name);

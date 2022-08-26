@@ -1,6 +1,7 @@
 package com.client;
 
 import com.common.Message;
+import javafx.scene.control.Label;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -9,8 +10,8 @@ import java.io.Serializable;
 import java.net.Socket;
 import java.util.function.Consumer;
 
-import static com.controller.ClientController.QUIT_TYPE_DEFAULT;
-import static com.controller.ClientController.QUIT_TYPE_KICK;
+import static com.common.CommonSettings.QUIT_TYPE_DEFAULT;
+import static com.common.CommonSettings.QUIT_TYPE_KICK;
 
 public abstract class ClientNetworkConnection {
     private final String notif = " *** ";// notification
@@ -85,12 +86,12 @@ public abstract class ClientNetworkConnection {
                 onReceiveCallback.accept("CONNECTION TO THE SERVER CLOSED\n");
                 try {
                     if (quitType == QUIT_TYPE_DEFAULT)
-                        send(new Message(Message.REMOVE, ""));
+                        send(new Message(Message.REMOVE, new Label()));
                     if (quitType == QUIT_TYPE_KICK)
-                        send(new Message(Message.KICKED_OUT, ""));
+                        send(new Message(Message.KICKED_OUT, new Label()));
                     socket.close();
-//                socket = null;
-//                tappanel.UserCanvas.ClearAll();
+                socket = null;
+//                userView.getItems().clear();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -14,28 +14,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static com.common.CommonSettings.PRIVATE_WINDOW_HEIGHT;
+import static com.common.CommonSettings.PRIVATE_WINDOW_WIDTH;
+
 public class ClientApplication extends Application {
 
-    private static String  userName;
+    private static String userName;
     private static ClientController clientController;
 
     public static void main(String[] args) {
         launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        var loader = new FXMLLoader(getClass().getResource("/com/controller/chatclient.fxml"));
-        Parent root = loader.load();
-
-        clientController = loader.getController();
-
-        primaryStage.getIcons().add(new Image(getClass().getResource( "/images/icon.gif").toString()));
-        primaryStage.setScene(new Scene(root, 778, 575));
-        primaryStage.setTitle(CommonSettings.PRODUCT_NAME);
-        primaryStage.show();
-
-        clientController.openLoginWindow();
     }
 
     public static void showLoginStage() throws IOException {
@@ -47,7 +35,7 @@ public class ClientApplication extends Application {
         clientController.setLoginController(loginController);
 
         Stage loginStage = new Stage();
-        loginStage.getIcons().add(new Image(ClientApplication.class.getResource( "/images/icon.gif").toString()));
+        loginStage.getIcons().add(new Image(ClientApplication.class.getResource("/images/icon.gif").toString()));
         loginStage.setTitle(CommonSettings.PRODUCT_NAME + " - Login");
         loginStage.setAlwaysOnTop(true);
         loginStage.setResizable(false);
@@ -56,22 +44,43 @@ public class ClientApplication extends Application {
         loginStage.show();
     }
 
-    public static void showPrivateChatStage(String toSend) throws IOException {
+    public static PrivateChatController showPrivateChatStage(String selectedUser) throws IOException {
         var loader = new FXMLLoader(ClientApplication.class.getResource("/com/controller/privatechat.fxml"));
         Parent root = loader.load();
 
         PrivateChatController privateChatController = loader.getController();
-        privateChatController.setClient(clientController.getClient());
-        privateChatController.setToSend(toSend);
+        privateChatController.setClientController(clientController);
+        privateChatController.setUserName(selectedUser);
 
         Stage privateChatStage = new Stage();
-        privateChatStage.getIcons().add(new Image(ClientApplication.class.getResource( "/images/icon.gif").toString()));
-        privateChatStage.setScene(new Scene(root, 310, 270));
-        privateChatStage.setTitle("Private Chat with - " + userName);
-        privateChatStage.show();
+        privateChatStage.getIcons().add(new Image(ClientApplication.class.getResource("/images/icon.gif").toString()));
+        privateChatStage.setScene(new Scene(root));
+        privateChatStage.setHeight(PRIVATE_WINDOW_HEIGHT);
+        privateChatStage.setWidth(PRIVATE_WINDOW_WIDTH);
+        privateChatStage.setTitle("Private Chat with - " + selectedUser);
+        privateChatStage.setResizable(false);
+//        privateChatStage.setOnHidden(e->privateChatController.exitPrivateWindow());
+        return privateChatController;
     }
 
-    public static void setUserName(String userName) {
-        ClientApplication.userName = userName;
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        var loader = new FXMLLoader(getClass().getResource("/com/controller/chatclient.fxml"));
+        Parent root = loader.load();
+
+        clientController = loader.getController();
+
+        primaryStage.getIcons().add(new Image(getClass().getResource("/images/icon.gif").toString()));
+        primaryStage.setScene(new Scene(root, 778, 575));
+        primaryStage.setTitle(CommonSettings.PRODUCT_NAME);
+        primaryStage.setResizable(false);
+        primaryStage.show();
+
+        clientController.openLoginWindow();
+    }
+
+    @Override
+    public void stop() {
+        clientController.shutdown();
     }
 }
