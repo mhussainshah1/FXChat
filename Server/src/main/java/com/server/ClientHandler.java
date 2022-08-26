@@ -238,7 +238,7 @@ public class ClientHandler extends Thread implements CommonSettings {
                 return;
             }
         }
-        onReceiveCallback.accept(userName + " has been logged out from chat!", MESSAGE_TYPE_LEAVE);
+//        onReceiveCallback.accept(userName + " has been logged out from chat!", MESSAGE_TYPE_LEAVE);
     }
 
     //Function To Change the Room

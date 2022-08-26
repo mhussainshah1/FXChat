@@ -439,10 +439,14 @@ public class ClientController {
 
     //Set or Remove Ignore List from Array
     protected void ignoreUser(boolean isIgnore, String ignoreUserName) {
+        PrivateChatController privateWindow = getPrivateWindowByUserName(ignoreUserName);
+        if (privateWindow != null) {
+            privateWindow.handleBtnIgnoreUser(btnIgnoreUser.getText());
+        }
+
         Message message = getMessageByText(ignoreUserName);
         if (message != null) {
             message.setIgnored(isIgnore);
-
             if (isIgnore) {
                 btnIgnoreUser.setText("Allow User");
                 display(ignoreUserName + " has been ignored!", MESSAGE_TYPE_LEAVE);

@@ -10,7 +10,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.TilePane;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
@@ -65,15 +64,7 @@ public class PrivateChatController {
             textFlow.getChildren().clear();
 
         } else if (actionEvent.getSource().equals(btnIgnoreUser)) {
-            if (name.equals("Ignore User")) {
-                clientController.ignoreUser(true, userName);
-                btnIgnoreUser.setText("Allow User");
-                display(userName + " has been ignored!", MESSAGE_TYPE_ADMIN);
-            } else {
-                clientController.ignoreUser(false, userName);
-                btnIgnoreUser.setText("Ignore User");
-                display(userName + " has been removed from ignored list!", MESSAGE_TYPE_ADMIN);
-            }
+            clientController.ignoreUser(name.equals("Ignore User"), userName);
 
         } else if (name.equals("Close")) {
             exitPrivateWindow();
@@ -87,6 +78,16 @@ public class PrivateChatController {
                 stage.setHeight(PRIVATE_WINDOW_HEIGHT + EMOTION_CANVAS_HEIGHT);
             }
             scrollPane.setVisible(visible);
+        }
+    }
+
+    public void handleBtnIgnoreUser(String name) {
+        if (name.equals("Ignore User")) {
+            btnIgnoreUser.setText("Allow User");
+            display(userName + " has been ignored!", MESSAGE_TYPE_LEAVE);
+        } else {
+            btnIgnoreUser.setText("Ignore User");
+            display(userName + " has been removed from ignored list!", MESSAGE_TYPE_JOIN);
         }
     }
 

@@ -45,6 +45,8 @@ public class Message implements Serializable {
     private boolean ignored;
     private Label label;
 
+    private String btnIgnoreUserText;
+
     // constructor
     public Message(Label label){
         this(MESSAGE_TYPE_DEFAULT,label);
@@ -117,5 +119,4 @@ public class Message implements Serializable {
     public Label getLabel() {
         return label;
     }
-
 }
