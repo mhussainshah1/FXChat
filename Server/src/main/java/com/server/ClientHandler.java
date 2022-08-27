@@ -422,7 +422,6 @@ public class ClientHandler extends Thread implements CommonSettings {
             clientHandler.sendMessageToClient(clientHandler.getSocket(), messageToSend);
 //            }
         }
-        onReceiveCallback.accept("Server: " + message, MESSAGE_TYPE_ADMIN);
     }
 
     public Socket getSocket() {

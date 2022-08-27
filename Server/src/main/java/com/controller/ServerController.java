@@ -10,9 +10,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import static com.common.CommonSettings.MESSAGE_TYPE_ADMIN;
@@ -100,16 +104,19 @@ public class ServerController {
     }
 
     private ChatServer createServer() throws IOException {
-        return new ChatServer(serverPort, maximumGuestNumber, ( data , messageType) -> {
-            Platform.runLater(() -> { //UI or background thread - manipulate UI object , It gives control back to UI thread
-                display(data.toString(), messageType);
-            });
-        });
+        return new ChatServer(
+                Integer.parseInt(txtServerPort.getText()),
+                Integer.parseInt(txtMaximumGuest.getText()),
+                (data, messageType) -> {
+                    Platform.runLater(() -> { //UI or background thread - manipulate UI object , It gives control back to UI thread
+                        display(data.toString(), messageType);
+                    });
+                });
     }
 
     // Display an event to the console
     public void display(String text, int type) {
-        List<Node> nodes = this.message.parseMessage(text, type);
+        List<Node> nodes = message.parseMessage(text, type);
         messageBoard.getChildren().addAll(nodes);
     }
 }

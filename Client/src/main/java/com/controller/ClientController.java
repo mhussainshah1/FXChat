@@ -304,7 +304,9 @@ public class ClientController {
         String message = tokens[2];
 
         // Check whether ignored user
-        if (!(isIgnoredUser(userName)))
+        if (userName.equalsIgnoreCase("Server") ){
+            display(userName + ": " + message, MESSAGE_TYPE_ADMIN);
+        } else if(!(isIgnoredUser(userName)))
             display(userName + ": " + message, MESSAGE_TYPE_DEFAULT);
     }
 

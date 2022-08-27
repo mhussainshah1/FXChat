@@ -9,6 +9,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -75,6 +77,10 @@ public class Message implements Serializable {
     }
     public List<Node> parseMessage(String message, int messageType) {
         list = new ArrayList<>();
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("hh:mm:ss'> ' ");
+        String time = f.format(LocalDateTime.now());
+        list.add(formatMessage(new Text(time), messageType));
+
         if (message.contains("~~")) {
             var tokenizer = new StringTokenizer(message, " ");
             while (tokenizer.hasMoreTokens()) {

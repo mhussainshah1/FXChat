@@ -9,6 +9,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -40,17 +42,18 @@ public class Message implements Serializable {
             LEAVE_ROOM = 11,
             ROOM_COUNT = 12,
             PRIVATE_MESSAGE = 13;
-    private List<Node> list;
     private final int messageType;
+    private List<Node> list;
     private boolean ignored;
     private Label label;
 
     private String btnIgnoreUserText;
 
     // constructor
-    public Message(Label label){
-        this(MESSAGE_TYPE_DEFAULT,label);
+    public Message(Label label) {
+        this(MESSAGE_TYPE_DEFAULT, label);
     }
+
     public Message(int messageType, Label label) {
         this.messageType = messageType;
         this.label = label;
@@ -61,6 +64,7 @@ public class Message implements Serializable {
     public String toString() {
         return label.getText();
     }
+
     public Text formatMessage(Text text, int messageType) {
         text.setFont(Font.font("Arial", 14));
         switch (messageType) {
@@ -82,6 +86,10 @@ public class Message implements Serializable {
 
     public List<Node> parseMessage(String message, int messageType) {
         list = new ArrayList<>();
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("hh:mm:ss'> ' ");
+        String time = f.format(LocalDateTime.now());
+        list.add(formatMessage(new Text(time), messageType));
+
         if (message.contains("~~")) {
             var tokenizer = new StringTokenizer(message, " ");
             while (tokenizer.hasMoreTokens()) {

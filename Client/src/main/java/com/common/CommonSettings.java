@@ -4,6 +4,7 @@ public interface CommonSettings {
     int MESSAGE_TYPE_JOIN = 1;
     int MESSAGE_TYPE_LEAVE = 2;
     int MESSAGE_TYPE_ADMIN = 3;
+
     int QUIT_TYPE_DEFAULT = 0;
     int QUIT_TYPE_KICK = 1;
     int QUIT_TYPE_NULL = 2;

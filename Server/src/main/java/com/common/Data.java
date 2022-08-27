@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import static com.common.CommonSettings.COMPANY_NAME;
 import static com.common.CommonSettings.PRODUCT_NAME;
 
 public class Data implements AutoCloseable {
@@ -147,7 +148,7 @@ public class Data implements AutoCloseable {
 
     private void store() throws IOException {
         if (fileOutputStream != null)
-            properties.store(fileOutputStream, PRODUCT_NAME);
+            properties.store(fileOutputStream, PRODUCT_NAME + " " + COMPANY_NAME);
     }
 
     @Override
