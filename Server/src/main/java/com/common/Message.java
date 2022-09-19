@@ -42,18 +42,21 @@ public class Message implements Serializable {
             LEAVE_ROOM = 11,
             ROOM_COUNT = 12,
             PRIVATE_MESSAGE = 13;
-    private List<Node> list;
-    private final int messageType;
-    private boolean ignored;
+    private int messageType;
     private Label label;
+    private DateTimeFormatter dateTimeFormatter;
+    private List<Node> list;
+    private boolean ignored;
 
     // constructor
     public Message(Label label){
-        this(MESSAGE_TYPE_DEFAULT,label);
+        this(label, MESSAGE_TYPE_DEFAULT);
     }
-    public Message(int messageType, Label label) {
-        this.messageType = messageType;
+
+    public Message(Label label, int messageType) {
         this.label = label;
+        this.messageType = messageType;
+        this.dateTimeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss'> ' ");
         list = new ArrayList<>();
     }
 
@@ -77,8 +80,7 @@ public class Message implements Serializable {
     }
     public List<Node> parseMessage(String message, int messageType) {
         list = new ArrayList<>();
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("hh:mm:ss'> ' ");
-        String time = f.format(LocalDateTime.now());
+        String time = dateTimeFormatter.format(LocalDateTime.now());
         list.add(formatMessage(new Text(time), messageType));
 
         if (message.contains("~~")) {

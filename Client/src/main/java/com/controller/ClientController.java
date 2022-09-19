@@ -72,7 +72,7 @@ public class ClientController {
         messages = new ArrayList<>();
         selectedUser = "";
         messageObject = new Message(new Label());
-        privateWindows = new ArrayList<>(MAX_PRIVATE_WINDOW);
+        privateWindows = new ArrayList<>();
         messageBoard.heightProperty().addListener((observable, oldValue, newValue) -> sp_main.setVvalue((Double) newValue));
     }
 
@@ -304,9 +304,9 @@ public class ClientController {
         String message = tokens[2];
 
         // Check whether ignored user
-        if (userName.equalsIgnoreCase("Server") ){
+        if (userName.equalsIgnoreCase("Server")) {
             display(userName + ": " + message, MESSAGE_TYPE_ADMIN);
-        } else if(!(isIgnoredUser(userName)))
+        } else if (!(isIgnoredUser(userName)))
             display(userName + ": " + message, MESSAGE_TYPE_DEFAULT);
     }
 
@@ -371,15 +371,14 @@ public class ClientController {
         //Check whether ignored user
         if (!(isIgnoredUser(userName))) {
             boolean privateFlag = false;
-            for (PrivateChatController privateWindow : privateWindows) {
-                if (privateWindow.getUserName().equals(userName)) {
-                    if (message != null)
-                        privateWindow.display(userName + ": " + message, MESSAGE_TYPE_DEFAULT);
-                    privateWindow.getStage().show();
-                    privateWindow.getStage().requestFocus();
-                    privateFlag = true;
-                    break;
-                }
+
+            PrivateChatController privateWindow = getPrivateWindowByUserName(userName);
+            if (privateWindow != null) {
+                if (message != null)
+                    privateWindow.display(userName + ": " + message, MESSAGE_TYPE_DEFAULT);
+                privateWindow.getStage().show();
+                privateWindow.getStage().requestFocus();
+                privateFlag = true;
             }
 
             if (!(privateFlag)) {
@@ -387,7 +386,7 @@ public class ClientController {
                     display("You are exceeding private window limit! So you may lose some message from your friends!", MESSAGE_TYPE_ADMIN);
                 } else {
                     try {
-                        var privateWindow = ClientApplication.showPrivateChatStage(userName);
+                        privateWindow = ClientApplication.showPrivateChatStage(userName);
                         if (message != null)
                             privateWindow.display(userName + ": " + message, MESSAGE_TYPE_DEFAULT);
                         privateWindow.getStage().show();
@@ -401,21 +400,13 @@ public class ClientController {
         }
     }
 
-    public PrivateChatController getPrivateWindowByUserName(String userName) {
-        for (PrivateChatController privateChatController : privateWindows) {
-            if (privateChatController.getUserName().equalsIgnoreCase(userName)) {
-                return privateChatController;
-            }
-        }
-        return null;
-    }
-
     public void addListItem(ListView<Label> listView, Label label) {
         messages.add(new Message(label));
         listView.getItems().add(label);
     }
 
     // Function To Remove the Given Item From the List Array
+
     private void removeListItem(ListView<Label> items, String text) {
         for (Label label : items.getItems()) {
             if (label.getText().equalsIgnoreCase(text)) {
@@ -425,8 +416,8 @@ public class ClientController {
             }
         }
     }
-
     //List ViewCanvas Methods in Jeeva Project
+
     protected void ignoreUser(boolean isIgnore) {
         if (selectedUser.equals("")) {
             display("Invalid User Selection!", MESSAGE_TYPE_ADMIN);
@@ -438,8 +429,8 @@ public class ClientController {
         }
         ignoreUser(isIgnore, selectedUser);
     }
-
     //Set or Remove Ignore List from Array
+
     protected void ignoreUser(boolean isIgnore, String ignoreUserName) {
         PrivateChatController privateWindow = getPrivateWindowByUserName(ignoreUserName);
         if (privateWindow != null) {
@@ -458,8 +449,8 @@ public class ClientController {
             }
         }
     }
-
     //Function To Get the Index of Give Message from List Array
+
     public Message getMessageByText(String text) {
         for (Message message : messages) {
             Label label = message.getLabel();
@@ -476,24 +467,30 @@ public class ClientController {
     }
 
     //Enable the Private Chat when the End User logged out
-    private void enablePrivateWindow(String toUserName) {
+
+    public PrivateChatController getPrivateWindowByUserName(String userName) {
         for (PrivateChatController privateWindow : privateWindows) {
-            if (privateWindow.getUserName().equals(toUserName)) {
-                privateWindow.display(toUserName + " is Currently Online!", MESSAGE_TYPE_ADMIN);
-                privateWindow.enableAll();
-                return;
+            if (privateWindow.getUserName().equalsIgnoreCase(userName)) {
+                return privateWindow;
             }
+        }
+        return null;
+    }
+
+    private void enablePrivateWindow(String toUserName) {
+        PrivateChatController privateWindow = getPrivateWindowByUserName(toUserName);
+        if (privateWindow != null) {
+            privateWindow.display(toUserName + " is Currently Online!", MESSAGE_TYPE_ADMIN);
+            privateWindow.enableAll();
         }
     }
 
     //Disable the Private Chat when the End User logged out
     private void removeUserFromPrivateChat(String toUserName) {
-        for (PrivateChatController privateWindow : privateWindows) {
-            if (privateWindow.getUserName().equals(toUserName)) {
-                privateWindow.display(toUserName + " is Currently Offline!", MESSAGE_TYPE_ADMIN);
-                privateWindow.disableAll();
-                return;
-            }
+        PrivateChatController privateWindow = getPrivateWindowByUserName(toUserName);
+        if (privateWindow != null) {
+            privateWindow.display(toUserName + " is Currently Offline!", MESSAGE_TYPE_ADMIN);
+            privateWindow.disableAll();
         }
     }
 
@@ -504,13 +501,11 @@ public class ClientController {
 
     // Function To Remove Private Window
     protected void removePrivateWindow(String toUserName) {
-        for (PrivateChatController privateWindow : privateWindows) {
-            if (privateWindow.getUserName().equals(toUserName)) {
-                privateWindows.remove(privateWindow);
-                break;
-            }
+        PrivateChatController privateWindow = getPrivateWindowByUserName(toUserName);
+        if (privateWindow != null) {
+            privateWindows.remove(privateWindow);
+            privateWindows.trimToSize();
         }
-        privateWindows.trimToSize();
     }
 
     // Function to Change Room
@@ -533,7 +528,9 @@ public class ClientController {
     }
 
     private void quitConnection(int quitType) {
-        chatClient.closeConnection(quitType);
+        if (chatClient != null)
+            chatClient.closeConnection(quitType);
+
         disableLogout();
         display("ADMIN: CONNECTION TO THE SERVER CLOSED.", MESSAGE_TYPE_ADMIN);
     }

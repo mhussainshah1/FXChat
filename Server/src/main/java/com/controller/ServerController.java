@@ -29,6 +29,8 @@ public class ServerController {
     @FXML
     private Button btnStart;
     @FXML
+    private TextField txtServerName;
+    @FXML
     private TextField txtServerPort;
     @FXML
     private TextField txtMaximumGuest;
@@ -38,6 +40,7 @@ public class ServerController {
     private TextField txtMessage;
     @FXML
     private Button btnSendMessage;
+    private String serverName = "localhost";
     private int serverPort = 1436;
     private int maximumGuestNumber = 50;
     private Message message;
@@ -46,6 +49,7 @@ public class ServerController {
     //Methods
     public void initialize() throws IOException {
         this.message = new Message(new Label());
+        txtServerName.setText(String.valueOf(serverName));
         txtServerPort.setText(String.valueOf(serverPort));
         txtMaximumGuest.setText(String.valueOf(maximumGuestNumber));
         messageBoard.heightProperty().addListener((observable, oldValue, newValue) -> sp_main.setVvalue((Double) newValue));
@@ -95,6 +99,7 @@ public class ServerController {
 
     void control(boolean status) {
         messageBoard.getChildren().clear();
+        txtServerName.setDisable(status);
         txtServerPort.setDisable(status);
         txtMaximumGuest.setDisable(status);
         btnStart.setDisable(status);
@@ -105,6 +110,7 @@ public class ServerController {
 
     private ChatServer createServer() throws IOException {
         return new ChatServer(
+                txtServerPort.getText(),
                 Integer.parseInt(txtServerPort.getText()),
                 Integer.parseInt(txtMaximumGuest.getText()),
                 (data, messageType) -> {

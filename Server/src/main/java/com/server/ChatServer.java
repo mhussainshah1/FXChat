@@ -13,18 +13,17 @@ import java.util.function.BiConsumer;
 import static com.common.CommonSettings.MESSAGE_TYPE_ADMIN;
 
 public class ChatServer {
-    private int port;
     private BiConsumer<Serializable, Integer> onReceiveCallback;
     private Thread thread;
     private ServerSocket serverSocket;
     private Socket socket;
     private ClientHandler clientHandler;
     private String roomList;
-
     private ExecutorService pool;
 
-    public ChatServer(int port, int maximumGuestNumber, BiConsumer<Serializable, Integer> onReceiveCallback) throws IOException {
+    public ChatServer(String serverName, int port, int maximumGuestNumber, BiConsumer<Serializable, Integer> onReceiveCallback) throws IOException {
         try (Data data = new Data("server.properties")) {
+            data.setServerName(serverName);
             data.setServerPort(port);
             data.setMaximumGuestNumber(maximumGuestNumber);
             roomList = data.getRoomList();
@@ -32,7 +31,6 @@ public class ChatServer {
         }
         this.serverSocket = new ServerSocket(port);
         this.onReceiveCallback = onReceiveCallback;
-        this.port = port;// the port
     }
 
     public void startConnection() {
@@ -42,7 +40,7 @@ public class ChatServer {
 
     private void readConnectionLoop() {
         //Accepting all the client connections and create a separate thread
-        while (thread != null) {
+        while (!serverSocket.isClosed()) {
             try {
                 //Accepting the Server Connections
                 socket = serverSocket.accept();
@@ -58,14 +56,9 @@ public class ChatServer {
     }
 
     public void closeConnection() {
-        if (thread != null) {
-            thread.interrupt();
-            thread = null;
-        }
         try {
             if (serverSocket != null) {
                 serverSocket.close();
-                serverSocket = null;
             }
             pool.shutdown();
         } catch (IOException e) {

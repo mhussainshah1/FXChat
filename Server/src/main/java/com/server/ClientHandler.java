@@ -103,11 +103,11 @@ public class ClientHandler extends Thread implements CommonSettings {
                 }
                 //REIP amir~ali
                 else if (command.equalsIgnoreCase("REIP")) {
-                    getRemoteUserAddress(socket, RFC.substring(5, RFC.indexOf("~")), RFC.substring(RFC.indexOf("~") + 1));
+                    getRemoteUserAddress(socket, tokens);
                 }
                 //AEIP amir~ali
                 else if (command.equalsIgnoreCase("AEIP")) {
-                    sendRemoteUserAddress(socket, RFC.substring(5, RFC.indexOf("~")), RFC.substring(RFC.indexOf("~") + 1));
+                    sendRemoteUserAddress(socket, tokens);
                 }
                 //QUVC amir~ali
                 else if (command.equalsIgnoreCase("QUVC")) {
@@ -378,16 +378,22 @@ public class ClientHandler extends Thread implements CommonSettings {
     }
 
     //Function to Get Remote User Address
-    protected void getRemoteUserAddress(Socket ClientSocket, String toUserName, String fromUserNmae) {
+    protected void getRemoteUserAddress(Socket ClientSocket, String[] tokens) {
+        String fromUserName = tokens[1];
+        String toUserName = tokens[2];
+
         clientHandler = getClientHandlerByUserName(toUserName);
         if (clientHandler != null) {
-            sendMessageToClient(clientHandler.getSocket(), "REIP " + fromUserNmae + " " + ClientSocket.getInetAddress().getHostAddress());
+            sendMessageToClient(clientHandler.getSocket(), "REIP " + fromUserName + " " + ClientSocket.getInetAddress().getHostAddress());
         }
     }
 
     //Function to Get Remote User Address
-    protected void sendRemoteUserAddress(Socket ClientSocket, String toUserName, String fromUserNmae) {
-        clientHandler = getClientHandlerByUserName(fromUserNmae);
+    protected void sendRemoteUserAddress(Socket ClientSocket, String[] tokens) {
+        String fromUserName = tokens[1];
+        String toUserName = tokens[2];
+
+        clientHandler = getClientHandlerByUserName(fromUserName);
         if (clientHandler != null) {
             sendMessageToClient(clientHandler.getSocket(), "AEIP " + toUserName + " " + ClientSocket.getInetAddress().getHostAddress());
         }
