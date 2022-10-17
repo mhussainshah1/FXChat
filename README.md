@@ -27,13 +27,18 @@ This Java Chat Application developed by my own interest, and now i am interested
 
 * server.properties - used to store to port no, and room lists.
 * run ServerApplication and click start server button.
+* Server<br>
 <img src="server.png">
 
 ### Client
 
 * data.properties - used to store the client information like username, server name and proxy name if you are behind firewall.
 * run ClientApplication , and enter the username and give the machine name of chatserver (if the server runs on same machine just give localhost as a servername) and click Connect Button.
+
+* Login Dialog <br>
 <img src="login.png">
+
+* Client with private window chat dialog<br>
 <img src="client.png">
 
 ### Conclusion
