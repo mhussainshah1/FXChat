@@ -44,6 +44,7 @@ public class ChatServer {
             try {
                 //Accepting the Server Connections
                 socket = serverSocket.accept();
+                socket.setTcpNoDelay(true);
                 // Create a Separate Thread for that each client
                 clientHandler = new ClientHandler(this, socket, onReceiveCallback);
                 pool.execute(clientHandler);

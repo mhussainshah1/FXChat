@@ -111,11 +111,7 @@ public class ClientController {
             shutdown();
         } else if (name.equals("Change Room")) {
             //Change Room Coding
-            try {
-                changeRoom();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            changeRoom();
         } else if (e.getSource().equals(btnIgnoreUser)) {
             ignoreUser(name.equals("Ignore User"));
         } else if (name.equals("Send Direct Message")) {
@@ -191,7 +187,7 @@ public class ClientController {
         display("Connecting To Server... Please Wait...\n", MESSAGE_TYPE_ADMIN);
     }
 
-    public void loginToChat() throws IOException {
+    public void loginToChat() {
         if (loginController.isConnect()) {
             userName = loginController.getUserName();
             userRoom = loginController.getUserRoom();
@@ -205,7 +201,12 @@ public class ClientController {
                 proxy = false;
             }
         }
-        connectToServer();
+        try {
+            connectToServer();
+        } catch (IOException e) {
+            e.printStackTrace();
+            display(e.toString(),MESSAGE_TYPE_ADMIN);
+        }
     }
 
     private void connectToServer() throws IOException {
@@ -223,7 +224,7 @@ public class ClientController {
     }
 
     // To send a message to the text flow
-    private void display(String message, int type) {
+    private void display(String message, Integer type) {
         List<Node> nodes = messageObject.parseMessage(message, type);
         messageBoard.getChildren().addAll(nodes);
     }
@@ -532,7 +533,7 @@ public class ClientController {
             chatClient.closeConnection(quitType);
 
         disableLogout();
-        display("ADMIN: CONNECTION TO THE SERVER CLOSED.", MESSAGE_TYPE_ADMIN);
+        display("ADMIN: CONNECTION TO THE SERVER IS CLOSED.", MESSAGE_TYPE_ADMIN);
     }
 
     private void enableLogin() {
@@ -556,14 +557,13 @@ public class ClientController {
     }
 
     private ChatClient createClient() {
-        return new ChatClient(this, userName, userRoom, serverName, serverPort, proxyHost, proxyPort, data ->
+        return new ChatClient(this, userName, userRoom, serverName, serverPort, proxyHost, proxyPort, (data , type) ->
                 Platform.runLater(() -> { //UI or background thread - manipulate UI object , It gives control back to UI thread
-                    display(data.toString(), MESSAGE_TYPE_DEFAULT);
+                    display(data.toString(), type);
                 }));
     }
 
     //Bean Methods
-
     public void setLoginController(LoginController loginController) {
         this.loginController = loginController;
     }
