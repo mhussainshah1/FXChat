@@ -1,37 +1,44 @@
-**********
-**About:**
-**********
+### Chat
 
-It is a multithreaded com.client/main.java.server ChatServer based on console which uses Java Socket programming. A main.java.server listens for connection requests from clients across the network or even from the same machine. Clients know how to connect to the main.java.server via an IP address and port number. After connecting to the main.java.server, the com.client gets to choose his/her username on the chat room. The com.client sends a message, the message is sent to the main.java.server using ObjectOutputStream in java. After receiving the message from the com.client, the main.java.server broadcasts the message if it is not a private message. And if it is a private message which is detect using ‘@’ followed by a valid username, then send the message only to that user. Java object serialization to transfer the messages.
+### ADVANCED JAVA CHAT APPLICATION
+## Developed By
+## Muhammad Shah
 
-*****************
-**Instructions:**
-*****************
+This Java Chat Application developed by my own interest, and now i am interested to share my source code with other peoples to get learn from it. I request everyone, if suppose you are using this for any college project, just dont submit as it is. Try to understand the coding and use this application for a reference and develop with your own knowledge. In Anytime, If you need any help contact me through mail.
 
-**com.client.com.client.Client**
+### Requirements
+	* Java Run Time Environment 8 or Higer
 
-To start the com.client.Client in console mode use one of the following command
- 1. java com.client.Client
- 2. java com.client.Client username
- 3. java com.client.Client username portNumber
- 4. java com.client.Client username portNumber serverAddress
+### RFC Used In Chat
+|RFC |			Description				|
+|----|:--------------------------------------------------------:|
+|HELO| - Initialize Connection To Server 			|
+|QUIT| - Remove Users From Chat					|
+|KICK| - Kickoff From Chat					|
+|CHRO| - Change Room						|
+|MESS| - Send General Message 					|
+|PRIV| - Send Private Message					|
+|ROCO| - Get Users Count in Specfied Room			|
+|CALL| - Request for Voice Chat (Not Included with this one)	|
 
-at the console prompt
-If the portNumber is not specified 1500 is used
-If the serverAddress is not specified "localHost" is used
-If the username is not specified "Anonymous" is used
+### How To Run Application
 
-**main.java.server.Server**
+### Server
 
-To run as a console application
- 1. java main.java.server.Server
- 2. java main.java.server.Server portNumber
-If the port number is not specified 1500 is used
+* server.properties - used to store to port no, and room lists.
+* run ServerApplication and click start server button.
+<img src="server.png">
 
-**Chat**
+### Client
 
-While in com.client console:
-1. Simply type the message to send broadcast to all active clients
-2. Type '@username<space>yourmessage' without quotes to send message to desired com.client
-3. Type 'WHOISIN' without quotes to see list of active clients
-4. Type 'LOGOUT' without quotes to logoff from main.java.server
+* data.properties - used to store the client information like username, server name and proxy name if you are behind firewall.
+* run ClientApplication , and enter the username and give the machine name of chatserver (if the server runs on same machine just give localhost as a servername) and click Connect Button.
+
+<img src="login.png">
+
+<img src="client.png">
+
+### Conclusion
+So, i hope this will satisfy your requirements in some way. plz email me at mhussainshah79@gmail.com and give me your feedback about it. 
+	
+

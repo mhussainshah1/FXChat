@@ -7,14 +7,14 @@ import javafx.application.Platform;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-import static com.common.CommonSettings.QUIT_TYPE_DEFAULT;
-import static com.common.CommonSettings.QUIT_TYPE_KICK;
+import static com.common.CommonSettings.*;
 
 public class ChatClient {
     private final ClientController clientController;
-    private final Consumer<Serializable> onReceiveCallback;
+    private final BiConsumer<Serializable , Integer> onReceiveCallback;
     private String userName;
     private String userRoom;
     private String serverName;
@@ -27,7 +27,7 @@ public class ChatClient {
     private BufferedReader bufferedIn;
     private OutputStream outputStream;
 
-    public ChatClient(ClientController frame, String userName, String userRoom, String serverName, int serverPort, String proxyHost, int proxyPort, Consumer<Serializable> onReceiveCallback) {
+    public ChatClient(ClientController frame, String userName, String userRoom, String serverName, int serverPort, String proxyHost, int proxyPort, BiConsumer<Serializable , Integer> onReceiveCallback) {
         this.clientController = frame;
         this.userName = userName;
         this.userRoom = userRoom;
@@ -49,6 +49,7 @@ public class ChatClient {
             //Not Proxy
             socket = new Socket(serverName, serverPort);
         }
+        socket.setTcpNoDelay(true);
         outputStream = socket.getOutputStream();
         sendMessageToServer("HELO " + userName + " " + userRoom);
         bufferedIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -140,10 +141,11 @@ public class ChatClient {
                     }
                 });
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             //display(e.getMessage(), CommonSettings.MESSAGE_TYPE_ADMIN);
             /*quitConnection*/
             closeConnection(QUIT_TYPE_DEFAULT);
+            onReceiveCallback.accept(e , MESSAGE_TYPE_ADMIN);
             e.printStackTrace();
         }
     }
