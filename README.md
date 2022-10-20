@@ -42,6 +42,6 @@ This Java Chat Application developed by my own interest, and now i am interested
 <img src="client.png">
 
 ### Conclusion
-So, i hope this will satisfy your requirements in some way. plz email me at mhussainshah79@gmail.com and give me your feedback about it. 
+I hope this will satisfy your requirements in some way. please email to give your feedback at at mhussainshah79@gmail.com. 
 	
 
