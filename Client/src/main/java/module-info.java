@@ -5,7 +5,7 @@ module client {
     opens com to javafx.fxml;
     exports com;
 
-    opens com.client to javafx.fxml;
+    opens com.client to javafx.fxml, test;
     exports com.client;
 
     opens com.common to javafx.fxml;

@@ -15,15 +15,15 @@ public class Server {
     // a unique ID for each connection
     private static int uniqueId;
     // an ArrayList to keep the list of the Client
-    private List<ClientThread> al;
+    private final List<ClientThread> al;
     // to display time
-    private SimpleDateFormat sdf;
+    private final SimpleDateFormat sdf;
     // the port number to listen for connection
-    private int port;
+    private final int port;
     // to check if server is running
     private boolean keepGoing;
     // notification
-    private String notif = " *** ";
+    private final String notif = " *** ";
 
     //constructor that receive the port to listen to for connection as parameter
 
@@ -133,9 +133,7 @@ public class Server {
         // to check if message is private i.e. client to client message
         String[] w = message.split(" ", 3);
 
-        boolean isPrivate = false;
-        if (w[1].charAt(0) == '@')
-            isPrivate = true;
+        boolean isPrivate = w[1].charAt(0) == '@';
 
 
         // if private message, send message to mentioned username only
@@ -161,9 +159,7 @@ public class Server {
                 }
             }
             // mentioned user not found, return false
-            if (found != true) {
-                return false;
-            }
+            return found;
         }
         // if message is a broadcast message
         else {
@@ -234,7 +230,7 @@ public class Server {
                 return;
             } catch (ClassNotFoundException e) {
             }
-            date = new Date().toString() + "\n";
+            date = new Date() + "\n";
         }
 
         public String getUsername() {
@@ -267,7 +263,7 @@ public class Server {
 
                     case ChatMessage.MESSAGE:
                         boolean confirmation = broadcast(username + ": " + message);
-                        if (confirmation == false) {
+                        if (!confirmation) {
                             String msg = notif + "Sorry. No such user exists." + notif;
                             writeMsg(msg);
                         }
@@ -301,7 +297,6 @@ public class Server {
                 if (sInput != null) sInput.close();
             } catch (Exception e) {
             }
-            ;
             try {
                 if (socket != null) socket.close();
             } catch (Exception e) {

@@ -12,6 +12,11 @@ import javafx.stage.Stage;
 
 public class MessageBox extends Application {
 
+    public static void main(String[] args) {
+        // launch the application
+        launch(args);
+    }
+
     // launch the application
     public void start(Stage s) {
         // set title for the stage
@@ -84,10 +89,5 @@ public class MessageBox extends Application {
         s.setScene(sc);
 
         s.show();
-    }
-
-    public static void main(String[] args) {
-        // launch the application
-        launch(args);
     }
 }

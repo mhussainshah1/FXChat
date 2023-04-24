@@ -7,21 +7,25 @@ import java.util.Properties;
  * SocksSocketImpl: A Socket implementation class support SOCKS4A & SOCKS5
  *
  * @version 1.1a,
- * @author Jeeva S (vavjeeva@yahoo.com)
+ * @author
  */
 
 /**
- *  SocksSocketImpl: A Socket Implementation class support SOCKS4A & SOCKS5
+ * SocksSocketImpl: A Socket Implementation class support SOCKS4A & SOCKS5
  *
- *  <A HREF="http://www.socks.nec.com/socksprot.html">SOCKS References:</A><BR>
- *	 <DD>[1] <A HREF="http://www.socks.nec.com/protocol/socks4.protocol">SOCKS 4 Protocol</A><BR>
- *	 <DD>[2] <A HREF="http://www.socks.nec.com/protocol/socks4a.protocol">SOCKS 4A: A Simple Extension to SOCKS 4 Protocol</A><BR>
- *	 <DD>[3] <A HREF="//http://www.socks.nec.com/rfc/rfc1928.txt">RFC1928 SOCKS Protocol Version 5</A><BR>
- *	 <DD>[4] <A HREF="//http://www.socks.nec.com/rfc/rfc1929.txt">RFC1929 Username/Password Authentication for SOCKS V5</A></DL></DD>
- *	 <DD>[5] <A HREF="//http://www.socks.nec.com/draft/draft-ietf-aft-socks-pro-v5-04.txt">SOCKS Protocol Version 5 (22 Feb 1999)</A></DL></DD>
+ * <A HREF="http://www.socks.nec.com/socksprot.html">SOCKS References:</A><BR>
+ * <DD>[1] <A HREF="http://www.socks.nec.com/protocol/socks4.protocol">SOCKS 4 Protocol</A><BR>
+ * <DD>[2] <A HREF="http://www.socks.nec.com/protocol/socks4a.protocol">SOCKS 4A: A Simple Extension to SOCKS 4 Protocol</A><BR>
+ * <DD>[3] <A HREF="//http://www.socks.nec.com/rfc/rfc1928.txt">RFC1928 SOCKS Protocol Version 5</A><BR>
+ * <DD>[4] <A HREF="//http://www.socks.nec.com/rfc/rfc1929.txt">RFC1929 Username/Password Authentication for SOCKS V5</A></DL></DD>
+ * <DD>[5] <A HREF="//http://www.socks.nec.com/draft/draft-ietf-aft-socks-pro-v5-04.txt">SOCKS Protocol Version 5 (22 Feb 1999)</A></DL></DD>
  */
 
 class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
+    /**
+     * Set command for the specific SOCKS proxy serer.
+     */
+    private final int command = COMMAND_CONNECT;
     /*
      *  a boolean indicating whether this is a stream socket or a datagram socket.
      *  If the stream argument is true, this creates a stream socket. If the stream argument is
@@ -37,7 +41,6 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
      * the direct DatagramSocket communication between local host and remote host.
      */
     private DatagramSocket clientDatagramSocket = null;
-
     /*
      * The IP address of the SOCKS proxy server.
      */
@@ -82,10 +85,6 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
     private int remoteBoundAddressType;
     private byte[] remoteBoundAddress = null;
     private byte[] remoteBoundPort = null;
-    /**
-     * Set command for the specific SOCKS proxy serer.
-     */
-    private final int command = COMMAND_CONNECT;
     /*
      * instance variable for SO_TIMEOUT
      */
@@ -225,7 +224,7 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
      * Returns the value of this socket's <code>proxy address</code> field.
      *
      * @return the value of this socket's <code>proxy address</code> field.
-     * @see     SocketImpl#address
+     * @see SocketImpl#address
      */
     protected InetAddress getProxyAddress() {
         return proxyAddress;
@@ -244,7 +243,7 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
      * Returns the value of this socket's <code>proxy address</code> field.
      *
      * @return the value of this socket's <code>proxy address</code> field.
-     * @see     SocketImpl#address
+     * @see SocketImpl#address
      */
     protected InetAddress getLocalAddress() {
         return localAddress;
@@ -254,7 +253,7 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
      * Returns the value of this socket's <code>localport</code> field.
      *
      * @return the value of this socket's <code>localport</code> field.
-     * @see     SocketImpl#localport
+     * @see SocketImpl#localport
      */
     protected int getLocalPort() {
         return localport;
@@ -264,7 +263,7 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
      * Returns the value of this socket's <code>address</code> field.
      *
      * @return the value of this socket's <code>address</code> field.
-     * @see     SocketImpl#address
+     * @see SocketImpl#address
      */
     protected InetAddress getInetAddress() {
         return address;
@@ -274,7 +273,7 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
      * Returns the value of this socket's <code>port</code> field.
      *
      * @return the value of this socket's <code>port</code> field.
-     * @see     SocketImpl#port
+     * @see SocketImpl#port
      */
     protected int getPort() {
         return port;
@@ -303,10 +302,10 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
      * Creates a socket with a boolean that specifies whether this
      * is a stream socket (true) or an unconnected UDP socket (false).
      *
-     * @param    stream   if <code>true</code>, create a stream socket;
-     *					  otherwise, create a datagram socket.
-     * @exception IOException  if an I/O error occurs while creating the
-     *			   socket.
+     * @param stream if <code>true</code>, create a stream socket;
+     *               otherwise, create a datagram socket.
+     * @throws IOException if an I/O error occurs while creating the
+     *                     socket.
      */
     protected void create(boolean stream) throws IOException {
         //Nothing since it's always a socket connection between local host and proxy server.
@@ -315,9 +314,9 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
     /**
      * Binds this socket to the specified port number flag the specified host.
      *
-     * @param    address   the IP address of the specified host.
-     * @param    port   the port number.
-     * @exception IOException  if an I/O error occurs when binding this socket.
+     * @param address the IP address of the specified host.
+     * @param port    the port number.
+     * @throws IOException if an I/O error occurs when binding this socket.
      */
     protected void bind(InetAddress address, int port) throws IOException {
         this.localAddress = address;
@@ -327,10 +326,10 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
     /**
      * Connects this stream socket to the specified port flag the named host.
      *
-     * @param    host   the name of the remote host.
-     * @param    port   the port number.
-     * @exception IOException  if an I/O error occurs when connecting to the
-     *			   remote host.
+     * @param host the name of the remote host.
+     * @param port the port number.
+     * @throws IOException if an I/O error occurs when connecting to the
+     *                     remote host.
      */
     protected void connect(String host, int port) throws IOException {
         try {
@@ -352,10 +351,10 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
     /**
      * Connects this stream or datagram socket to the specified port number flag the specified host.
      *
-     * @param    address   the IP address of the remote host.
-     * @param    port     the port number.
-     * @exception IOException  if an I/O error occurs when attempting a
-     *			   connection.
+     * @param address the IP address of the remote host.
+     * @param port    the port number.
+     * @throws IOException if an I/O error occurs when attempting a
+     *                     connection.
      */
     protected void connect(InetAddress address, int port) throws IOException {
         try {
@@ -407,8 +406,8 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
      * Returns an input stream for this socket.
      *
      * @return a stream for reading from this socket.
-     * @exception IOException  if an I/O error occurs when creating the
-     *			   input stream.
+     * @throws IOException if an I/O error occurs when creating the
+     *                     input stream.
      */
     protected synchronized InputStream getInputStream() throws IOException {
         if (clientSocket != null)
@@ -421,8 +420,8 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
      * Returns an output stream for this socket.
      *
      * @return an output stream for writing to this socket.
-     * @exception IOException  if an I/O error occurs when creating the
-     *			   output stream.
+     * @throws IOException if an I/O error occurs when creating the
+     *                     output stream.
      */
     protected synchronized OutputStream getOutputStream() throws IOException {
         if (clientSocket != null)
@@ -436,9 +435,9 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
      * without blocking.
      *
      * @return the number of bytes that can be read from this socket
-     *			 without blocking.
-     * @exception IOException  if an I/O error occurs when determining the
-     *			   number of bytes available.
+     * without blocking.
+     * @throws IOException if an I/O error occurs when determining the
+     *                     number of bytes available.
      */
     protected synchronized int available() throws IOException {
         return getInputStream().available();
@@ -803,7 +802,7 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
     /**
      * Close the SocksSocket() connection to the SOCKS server.
      *
-     * @exception IOException  if an I/O error occurs when closing this socket.
+     * @throws IOException if an I/O error occurs when closing this socket.
      */
     protected void close() throws IOException {
         if (clientSocket != null) {
@@ -825,8 +824,8 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
      * connection indication arrives when the queue is full, the
      * connection is refused.
      *
-     * @param    backlog   the maximum length of the queue.
-     * @exception IOException  if an I/O error occurs when creating the queue.
+     * @param backlog the maximum length of the queue.
+     * @throws IOException if an I/O error occurs when creating the queue.
      */
     protected synchronized void listen(int backlog) throws IOException {
     }
@@ -834,9 +833,9 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
     /**
      * Accepts a connection.
      *
-     * @param    s   the accepted connection.
-     * @exception IOException  if an I/O error occurs when accepting the
-     *			   connection.
+     * @param s the accepted connection.
+     * @throws IOException if an I/O error occurs when accepting the
+     *                     connection.
      */
     protected synchronized void accept(SocketImpl s) throws IOException {
     }
@@ -876,51 +875,51 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
      * ...
      * Boolean noDelay = (Boolean)(s.getOption(TCP_NODELAY));
      * if (noDelay.booleanValue()) {
-     *	 // true if TCP_NODELAY is enabled...
+     * // true if TCP_NODELAY is enabled...
      * ...
      * }
      * </PRE>
-     * <P>
+     * <p>
      * For options that take a particular type as a parameter,
      * getOption(int) will return the paramter's value, else
      * it will return java.lang.Boolean(false):
      * <PRE>
      * Object o = s.getOption(SO_LINGER);
      * if (o instanceof Integer) {
-     *	 System.out.print("Linger time is " + ((Integer)o).intValue());
+     * System.out.print("Linger time is " + ((Integer)o).intValue());
      * } else {
-     *   // the true type of o is java.lang.Boolean(false);
+     * // the true type of o is java.lang.Boolean(false);
      * }
      * </PRE>
      *
      * @throws SocketException if the socket is closed
      * @throws SocketException if <I>optID</I> is unknown along the
-     *		 protocol stack (including the SocketImpl)
+     *                         protocol stack (including the SocketImpl)
      */
     public Object getOption(int opt) throws SocketException {
         switch (opt) {
             case SO_TIMEOUT:
                 if (clientSocket != null)
                     timeout = clientSocket.getSoTimeout();
-                return new Integer(timeout);
+                return timeout;
             case TCP_NODELAY:
                 if (clientSocket != null)
                     tcpNoDelay = clientSocket.getTcpNoDelay();
-                return new Boolean(tcpNoDelay);
+                return tcpNoDelay;
             case SO_LINGER:
                 if (clientSocket != null)
                     soLinger = clientSocket.getSoLinger();
-                return new Integer(soLinger);
+                return soLinger;
             case SO_BINDADDR:
                 return localAddress;
             case SO_SNDBUF:
                 if (clientSocket != null)
                     soSndBuf = clientSocket.getSendBufferSize();
-                return new Integer(soSndBuf);
+                return soSndBuf;
             case SO_RCVBUF:
                 if (clientSocket != null)
                     soRCVndBuf = clientSocket.getReceiveBufferSize();
-                return new Integer(soRCVndBuf);
+                return soRCVndBuf;
 
             case IP_MULTICAST_IF://For datagram socket
 
@@ -938,23 +937,23 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
      * SocketImpl s;
      * ...
      * s.setOption(SO_LINGER, new Integer(10));
-     *	// OK - set SO_LINGER w/ timeout of 10 sec.
+     * // OK - set SO_LINGER w/ timeout of 10 sec.
      * s.setOption(SO_LINGER, new Double(10));
-     *	// ERROR - expects java.lang.Integer
-     *</PRE>
+     * // ERROR - expects java.lang.Integer
+     * </PRE>
      * If the requested option is binary, it can be set using this method by
      * a java.lang.Boolean:
      * <BR><PRE>
      * s.setOption(TCP_NODELAY, new Boolean(true));
-     *	// OK - enables TCP_NODELAY, a binary option
+     * // OK - enables TCP_NODELAY, a binary option
      * </PRE>
      * <BR>
      * Any option can be disabled using this method with a Boolean(false):
      * <BR><PRE>
      * s.setOption(TCP_NODELAY, new Boolean(false));
-     *	// OK - disables TCP_NODELAY
+     * // OK - disables TCP_NODELAY
      * s.setOption(SO_LINGER, new Boolean(false));
-     *	// OK - disables SO_LINGER
+     * // OK - disables SO_LINGER
      * </PRE>
      * <BR>
      * For an option that requires a particular parameter,
@@ -964,10 +963,11 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
      * Throws SocketException if the option is unrecognized,
      * the socket is closed, or some low-level error occurred
      * <BR>
+     *
      * @param optID identifies the option
      * @param value the parameter of the socket option
      * @throws SocketException if the option is unrecognized,
-     * the socket is closed, or some low-level error occurred
+     *                         the socket is closed, or some low-level error occurred
      */
     public void setOption(int opt, Object val) throws SocketException {
         boolean flag = true;
@@ -1000,7 +1000,7 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
             case TCP_NODELAY:
                 if (val == null || !(val instanceof Boolean))
                     throw new SocketException("bad parameter for TCP_NODELAY");
-                flag = ((Boolean) val).booleanValue();
+                flag = (Boolean) val;
                 tcpNoDelay = flag;
                 if (clientSocket != null)
                     clientSocket.setTcpNoDelay(tcpNoDelay);
@@ -1008,12 +1008,12 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
             case SO_SNDBUF:
             case SO_RCVBUF:
                 if (val == null || !(val instanceof Integer) ||
-                        !(((Integer) val).intValue() > 0)) {
+                        !((Integer) val > 0)) {
                     throw new SocketException("bad parameter for SO_SNDBUF " +
                             "or SO_RCVBUF");
                 }
                 if (clientSocket != null) {
-                    int size = ((Integer) val).intValue();
+                    int size = (Integer) val;
                     if (opt == SO_SNDBUF) {
                         soSndBuf = size;
                         clientSocket.setSendBufferSize(size);
@@ -1061,9 +1061,8 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
      * data to be sent, its length, the IP address of the remote host,
      * and the port number on the remote host.
      *
-     * @param     p   the <code>DatagramPacket</code> to be sent.
-     *
-     * @exception IOException  if an I/O error occurs.
+     * @param p the <code>DatagramPacket</code> to be sent.
+     * @throws IOException if an I/O error occurs.
      */
     protected void send(DatagramPacket p) throws IOException {
         InetAddress packetAddress = p.getAddress();
@@ -1106,7 +1105,7 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
 
     /**
      * An extended method for DatagramSocket
-     *
+     * <p>
      * Disconnects the socket. This does nothing if the socket is not
      * connected.
      */
@@ -1123,6 +1122,7 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
 
     /**
      * Peek at the packet to see who it is from.
+     *
      * @param return the address which the packet came from.
      */
     protected int peek(InetAddress i) throws IOException {
@@ -1131,6 +1131,7 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
 
     /**
      * Receive the datagram packet.
+     *
      * @param Packet Received.
      */
     protected void receive(DatagramPacket p) throws IOException {
@@ -1184,8 +1185,8 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
 
     /**
      * Set the TTL (time-to-live) option.
-     * @param TTL to be set.
      *
+     * @param TTL to be set.
      * @deprecated use setTimeToLive instead.
      */
     protected void setTTL(byte ttl) throws IOException {
@@ -1201,6 +1202,7 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
 
     /**
      * Set the TTL (time-to-live) option.
+     *
      * @param TTL to be set.
      */
     protected void setTimeToLive(int ttl) throws IOException {
@@ -1209,6 +1211,7 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
 
     /**
      * Join the multicast group.
+     *
      * @param multicast address to join.
      */
     protected void join(InetAddress inetaddr) throws IOException {
@@ -1217,6 +1220,7 @@ class SocksSocketImpl extends SocketImpl implements SocksSocketConstants {
 
     /**
      * Leave the multicast group.
+     *
      * @param multicast address to leave.
      */
     protected void leave(InetAddress inetaddr) throws IOException {

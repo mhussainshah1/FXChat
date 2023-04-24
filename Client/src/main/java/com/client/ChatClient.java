@@ -6,28 +6,30 @@ import com.controller.ClientController;
 import javafx.application.Platform;
 
 import java.io.*;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import static com.common.CommonSettings.*;
 
 public class ChatClient {
     private final ClientController clientController;
-    private final BiConsumer<Serializable , Integer> onReceiveCallback;
-    private String userName;
+    private final BiConsumer<Serializable, Integer> onReceiveCallback;
+    private final String userName;
     private String userRoom;
-    private String serverName;
-    private String proxyHost;
+    private final String serverName;
+    private final String proxyHost;
     private String serverData;
     private String roomList;
-    private int serverPort, proxyPort;
-    private boolean isProxy;
+    private final int serverPort;
+    private final int proxyPort;
     private Socket socket;
     private BufferedReader bufferedIn;
     private OutputStream outputStream;
 
-    public ChatClient(ClientController frame, String userName, String userRoom, String serverName, int serverPort, String proxyHost, int proxyPort, BiConsumer<Serializable , Integer> onReceiveCallback) {
+    public ChatClient(ClientController frame, String userName, String userRoom, String serverName, int serverPort, String proxyHost, int proxyPort, BiConsumer<Serializable, Integer> onReceiveCallback) {
         this.clientController = frame;
         this.userName = userName;
         this.userRoom = userRoom;
@@ -38,13 +40,25 @@ public class ChatClient {
         this.onReceiveCallback = onReceiveCallback;
     }
 
-    public void startConnection() throws IOException {
+    public void startConnection(boolean isProxy) throws IOException {
         if (isProxy) {
             //Proxy
+/*
             SocksSocketImplFactory factory = new SocksSocketImplFactory(proxyHost, proxyPort);
             SocksSocket.setSocketImplFactory(factory);
             socket = new SocksSocket(serverName, serverPort);
+*/
+
+            System.setProperty("http.proxyHost", proxyHost);
+            System.setProperty("http.proxyPort", String.valueOf(proxyPort));
+            System.setProperty("java.net.useSystemProxies", "true");
+
+            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHost, proxyPort));
+            socket = new Socket(proxy);
+            socket.connect(new InetSocketAddress(serverName, serverPort));
             socket.setSoTimeout(0);
+            System.out.println("Connected to proxy server = " + proxyHost + " at port = " + proxyPort);
+
         } else {
             //Not Proxy
             socket = new Socket(serverName, serverPort);
@@ -145,7 +159,7 @@ public class ChatClient {
             //display(e.getMessage(), CommonSettings.MESSAGE_TYPE_ADMIN);
             /*quitConnection*/
             closeConnection(QUIT_TYPE_DEFAULT);
-            onReceiveCallback.accept(e , MESSAGE_TYPE_ADMIN);
+            onReceiveCallback.accept(e, MESSAGE_TYPE_ADMIN);
             e.printStackTrace();
         }
     }

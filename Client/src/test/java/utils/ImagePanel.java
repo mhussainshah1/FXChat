@@ -25,7 +25,7 @@ public class ImagePanel extends Application {
         //Child Nodes
         List<Button> buttonList = new ArrayList<>();
         for (int i = 0; i < 21; i++) {
-            var icon = new Button(Integer.toString(i),new ImageView(getClass().getResource(  "/icons/photo" + i + ".gif").toString()));
+            var icon = new Button(Integer.toString(i), new ImageView(getClass().getResource("/icons/photo" + i + ".gif").toString()));
             icon.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
             icon.setOnAction(event -> System.out.println(icon.getText()));
             icon.setOnMouseEntered(event -> icon.setStyle("-fx-border-color: black"));
@@ -37,7 +37,7 @@ public class ImagePanel extends Application {
         }
 
         //Parent Node
-        var rootNode = new FlowPane(10,10);
+        var rootNode = new FlowPane(10, 10);
 //        rootNode.setAlignment(Pos.CENTER);
         rootNode.getChildren().addAll(buttonList);
 

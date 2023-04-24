@@ -69,9 +69,7 @@ public class LoginController {
             }
             button.getScene().getWindow().hide();
             clientController.loginToChat();
-        }
-
-        else if (name.equals("Quit")) {
+        } else if (name.equals("Quit")) {
             connect = false;
             button.getScene().getWindow().hide();
         }
@@ -89,7 +87,7 @@ public class LoginController {
         return txtUserName.getText();
     }
 
-    public String getUserRoom(){
+    public String getUserRoom() {
         return choiceRoom.getValue();
     }
 

@@ -132,12 +132,12 @@ public class Data implements AutoCloseable {
         this.proxyHost = proxyHost;
     }
 
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
-    }
-
     public String getRoomName() {
         return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
     public String getServerName() {

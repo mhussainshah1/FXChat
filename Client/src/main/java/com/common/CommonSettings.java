@@ -1,4 +1,5 @@
 package com.common;
+
 public interface CommonSettings {
     int MESSAGE_TYPE_DEFAULT = 0;
     int MESSAGE_TYPE_JOIN = 1;

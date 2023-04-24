@@ -11,14 +11,15 @@ import java.util.Scanner;
 public class Client {
 
     // notification
-    private String notif = " *** ";
+    private final String notif = " *** ";
 
     // for I/O
     private ObjectInputStream sInput;        // to read from the socket
     private ObjectOutputStream sOutput;        // to write on the socket
     private Socket socket;                    // socket object
-    private String server, username;    // server and username
-    private int port;                    //port
+    private final String server;
+    private String username;    // server and username
+    private final int port;                    //port
 
     Client(String server, int port, String username) {
         this.server = server;

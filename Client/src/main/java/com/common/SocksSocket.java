@@ -71,9 +71,9 @@ public class SocksSocket extends Socket {
      * with the host address and <code>port</code>
      * as its arguments. This could result in a SecurityException.
      *
+     * @param host the host name.
+     * @param port the port number.
      * @throws IOException if an I/O error occurs when creating the socket.
-     * @param    host the host name.
-     * @param    port the port number.
      */
     public SocksSocket(String host, int port) throws IOException {
         this(host, port, null, 0);
@@ -92,9 +92,9 @@ public class SocksSocket extends Socket {
      * with the host address and <code>port</code>
      * as its arguments. This could result in a SecurityException.
      *
+     * @param address the IP address.
+     * @param port    the port number.
      * @throws IOException if an I/O error occurs when creating the socket.
-     * @param    address the IP address.
-     * @param    port     the port number.
      */
     public SocksSocket(InetAddress address, int port) throws IOException {
         this(address, port, null, 0);
@@ -169,9 +169,9 @@ public class SocksSocket extends Socket {
      * to ensure the operation is allowed.
      * This could result in a SecurityException.
      *
+     * @param fac the desired factory.
      * @throws IOException if an I/O error occurs when setting the
      *                     socket factory.
-     * @param    fac the desired factory.
      */
     public static synchronized void setSocketImplFactory(SocksSocketImplFactory fac) throws IOException {
         factory = fac;
@@ -189,9 +189,9 @@ public class SocksSocket extends Socket {
     /**
      * Returns an input stream for this socket.
      *
+     * @return an input stream for reading bytes from this socket.
      * @throws IOException if an I/O error occurs when creating the
      *                     input stream.
-     * @return an input stream for reading bytes from this socket.
      */
     public InputStream getInputStream() throws IOException {
         return impl.getInputStream();
@@ -200,9 +200,9 @@ public class SocksSocket extends Socket {
     /**
      * Returns an output stream for this socket.
      *
+     * @return an output stream for writing bytes to this socket.
      * @throws IOException if an I/O error occurs when creating the
      *                     output stream.
-     * @return an output stream for writing bytes to this socket.
      */
     public OutputStream getOutputStream() throws IOException {
         return impl.getOutputStream();
@@ -246,7 +246,7 @@ public class SocksSocket extends Socket {
     public synchronized int getSoTimeout() throws SocketException {
         Object o = impl.getOption(SocketOptions.SO_TIMEOUT);
         if (o instanceof Integer)
-            return ((Integer) o).intValue();
+            return (Integer) o;
         else
             return 0;
     }
@@ -263,7 +263,7 @@ public class SocksSocket extends Socket {
      * A timeout of zero is interpreted as an infinite timeout.
      */
     public synchronized void setSoTimeout(int timeout) throws SocketException {
-        impl.setOption(SocketOptions.SO_TIMEOUT, new Integer(timeout));
+        impl.setOption(SocketOptions.SO_TIMEOUT, timeout);
     }
 
     /**
@@ -272,14 +272,14 @@ public class SocksSocket extends Socket {
      * @since JDK1.1
      */
     public boolean getTcpNoDelay() throws SocketException {
-        return ((Boolean) impl.getOption(SocketOptions.TCP_NODELAY)).booleanValue();
+        return (Boolean) impl.getOption(SocketOptions.TCP_NODELAY);
     }
 
     /**
      * Enable/disable TCP_NODELAY (disable/enable Nagle's algorithm).
      */
     public void setTcpNoDelay(boolean on) throws SocketException {
-        impl.setOption(SocketOptions.TCP_NODELAY, new Boolean(on));
+        impl.setOption(SocketOptions.TCP_NODELAY, on);
     }
 
     /**
@@ -289,7 +289,7 @@ public class SocksSocket extends Socket {
     public int getSoLinger() throws SocketException {
         Object o = impl.getOption(SocketOptions.SO_LINGER);
         if (o instanceof Integer)
-            return ((Integer) o).intValue();
+            return (Integer) o;
         else
             return -1;
     }
@@ -303,7 +303,7 @@ public class SocksSocket extends Socket {
     public synchronized int getSendBufferSize() throws SocketException {
         Object o = impl.getOption(SocketOptions.SO_SNDBUF);
         if (o instanceof Integer)
-            return ((Integer) o).intValue();
+            return (Integer) o;
         else
             return 0;
     }
@@ -331,7 +331,7 @@ public class SocksSocket extends Socket {
     public synchronized void setSendBufferSize(int size) throws SocketException {
         if (!(size > 0))
             throw new IllegalArgumentException("negative send size");
-        impl.setOption(SocketOptions.SO_SNDBUF, new Integer(size));
+        impl.setOption(SocketOptions.SO_SNDBUF, Integer.valueOf(size));
     }
 
     /**
@@ -393,7 +393,7 @@ public class SocksSocket extends Socket {
     public synchronized void setReceiveBufferSize(int size) throws SocketException {
         if (size < 0)
             throw new IllegalArgumentException("invalid receive size");
-        impl.setOption(SocketOptions.SO_RCVBUF, new Integer(size));
+        impl.setOption(SocketOptions.SO_RCVBUF, Integer.valueOf(size));
     }
 
     /**
@@ -412,9 +412,9 @@ public class SocksSocket extends Socket {
             }
             if (linger > 65535)
                 linger = 65535;
-            impl.setOption(SocketOptions.SO_LINGER, new Integer(linger));
+            impl.setOption(SocketOptions.SO_LINGER, Integer.valueOf(linger));
         } else {
-            impl.setOption(SocketOptions.SO_LINGER, new Boolean(on));
+            impl.setOption(SocketOptions.SO_LINGER, Boolean.valueOf(on));
         }
     }
 

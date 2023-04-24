@@ -29,7 +29,7 @@ public class ClientList extends Application {
         response = new Label("Select Client");
         List<Label> labelList = new ArrayList<>();
         for (int i = 0; i < 21; i++) {
-            var icon = new Label(i + ".gif", new ImageView(getClass().getResource(   "/icons/photo" + i + ".gif").toString()));
+            var icon = new Label(i + ".gif", new ImageView(getClass().getResource("/icons/photo" + i + ".gif").toString()));
 //            icon.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
             icon.setCursor(Cursor.OPEN_HAND);
             labelList.add(icon);

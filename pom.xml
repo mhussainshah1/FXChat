@@ -8,7 +8,7 @@
     <artifactId>FXChat</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>FXChat</name>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

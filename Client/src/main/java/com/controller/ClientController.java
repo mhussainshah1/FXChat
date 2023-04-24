@@ -51,6 +51,8 @@ public class ClientController {
     @FXML
     private MenuItem loginMenuItem;
     @FXML
+    private MenuItem signupMenuItem;
+    @FXML
     private MenuItem logoutMenuItem;
     private ArrayList<PrivateChatController> privateWindows;
     private String userName;
@@ -82,9 +84,11 @@ public class ClientController {
         var alert = new Alert(Alert.AlertType.NONE);
         var name = ((MenuItem) e.getTarget()).getText();
 
-        if (name.equals("Login"))
+        if (name.equals("Login")) {
             openLoginWindow();
-        else if (name.equals("Logout")) {
+        } else if (name.equals("Signup")) {
+            openSignupWindow();
+        } else if (name.equals("Logout")) {
             quitConnection(QUIT_TYPE_DEFAULT);
         } else if (name.equals("Exit")) {
             shutdown();
@@ -186,6 +190,9 @@ public class ClientController {
         messageBoard.getChildren().clear();
         display("Connecting To Server... Please Wait...\n", MESSAGE_TYPE_ADMIN);
     }
+    private void openSignupWindow() {
+
+    }
 
     public void loginToChat() {
         if (loginController.isConnect()) {
@@ -205,13 +212,13 @@ public class ClientController {
             connectToServer();
         } catch (IOException e) {
             e.printStackTrace();
-            display(e.toString(),MESSAGE_TYPE_ADMIN);
+            display(e.toString(), MESSAGE_TYPE_ADMIN);
         }
     }
 
     private void connectToServer() throws IOException {
         chatClient = createClient();
-        chatClient.startConnection();
+        chatClient.startConnection(proxy);
         enableLogin();
     }
 
@@ -231,11 +238,10 @@ public class ClientController {
 
     //Function To Update the Information Label
     private void updateInformationLabel() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("User Name: ").append(userName).append("       ")
-                .append("Room Name: ").append(userRoom).append("       ")
-                .append("No. Of Users: ").append(totalUserCount).append("       ");
-        informationLabel.setText(builder.toString());
+        String builder = "User Name: " + userName + "       " +
+                "Room Name: " + userRoom + "       " +
+                "No. Of Users: " + totalUserCount + "       ";
+        informationLabel.setText(builder);
     }
 
     // LIST ali amir
@@ -557,7 +563,7 @@ public class ClientController {
     }
 
     private ChatClient createClient() {
-        return new ChatClient(this, userName, userRoom, serverName, serverPort, proxyHost, proxyPort, (data , type) ->
+        return new ChatClient(this, userName, userRoom, serverName, serverPort, proxyHost, proxyPort, (data, type) ->
                 Platform.runLater(() -> { //UI or background thread - manipulate UI object , It gives control back to UI thread
                     display(data.toString(), type);
                 }));
