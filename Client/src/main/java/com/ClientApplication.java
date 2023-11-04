@@ -44,6 +44,24 @@ public class ClientApplication extends Application {
         loginStage.show();
     }
 
+    public static void showSignupStage() throws IOException {
+        var loader = new FXMLLoader(ClientApplication.class.getResource("/com/controller/signup.fxml"));
+        Parent root = loader.load();
+
+/*        LoginController loginController = loader.getController();
+        loginController.setChatClientController(clientController);
+        clientController.setLoginController(loginController);*/
+
+        Stage signupStage = new Stage();
+        signupStage.getIcons().add(new Image(ClientApplication.class.getResource("/images/icon.gif").toString()));
+        signupStage.setTitle(CommonSettings.PRODUCT_NAME + " - Sign Up");
+        signupStage.setAlwaysOnTop(true);
+        signupStage.setResizable(false);
+        signupStage.initModality(Modality.APPLICATION_MODAL);
+        signupStage.setScene(new Scene(root, 250, 400));
+        signupStage.show();
+    }
+
     public static PrivateChatController showPrivateChatStage(String selectedUser) throws IOException {
         var loader = new FXMLLoader(ClientApplication.class.getResource("/com/controller/privatechat.fxml"));
         Parent root = loader.load();

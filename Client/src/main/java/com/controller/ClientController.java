@@ -84,21 +84,19 @@ public class ClientController {
         var alert = new Alert(Alert.AlertType.NONE);
         var name = ((MenuItem) e.getTarget()).getText();
 
-        if (name.equals("Login")) {
-            openLoginWindow();
-        } else if (name.equals("Signup")) {
-            openSignupWindow();
-        } else if (name.equals("Logout")) {
-            quitConnection(QUIT_TYPE_DEFAULT);
-        } else if (name.equals("Exit")) {
-            shutdown();
-        } else if (name.equals("About")) {
-            alert.setTitle("About Us");
-            alert.setHeaderText(PRODUCT_NAME);
-            alert.setContentText("\nDeveloped By...\n" + COMPANY_NAME);
-            alert.setGraphic(new ImageView(getClass().getResource("/icons/photo13.gif").toString()));
-            alert.setAlertType(Alert.AlertType.INFORMATION);
-            alert.show();
+        switch (name) {
+            case "Login" -> openLoginWindow();
+            case "Signup" -> openSignupWindow();
+            case "Logout" -> quitConnection(QUIT_TYPE_DEFAULT);
+            case "Exit" -> shutdown();
+            case "About" -> {
+                alert.setTitle("About Us");
+                alert.setHeaderText(PRODUCT_NAME);
+                alert.setContentText("\nDeveloped By...\n" + COMPANY_NAME);
+                alert.setGraphic(new ImageView(getClass().getResource("/icons/photo13.gif").toString()));
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.show();
+            }
         }
     }
 
@@ -190,8 +188,10 @@ public class ClientController {
         messageBoard.getChildren().clear();
         display("Connecting To Server... Please Wait...\n", MESSAGE_TYPE_ADMIN);
     }
-    private void openSignupWindow() {
-
+    private void openSignupWindow() throws IOException {
+        ClientApplication.showSignupStage();
+        messageBoard.getChildren().clear();
+        display("Connecting To Server... Please Wait...\n", MESSAGE_TYPE_ADMIN);
     }
 
     public void loginToChat() {
