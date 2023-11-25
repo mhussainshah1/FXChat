@@ -14,6 +14,7 @@ public class Data implements AutoCloseable {
     private int proxyPort;
     private String proxyHost;
     private String userName;
+    private String password;
     private String roomName;
     private int serverPort;
     private String serverName;
@@ -40,6 +41,10 @@ public class Data implements AutoCloseable {
         if (properties.getProperty("UserName") != null)
             userName = properties.getProperty("UserName");
         else userName = "Anonymous";
+
+        if (properties.getProperty("Password") != null)
+            password = properties.getProperty("Password");
+        else password = "Anonymous";
 
         if (properties.getProperty("RoomName") != null)
             roomName = properties.getProperty("RoomName");
@@ -156,6 +161,15 @@ public class Data implements AutoCloseable {
     public void setUserName(String userName) {
         properties.setProperty("UserName", userName);
         this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        properties.setProperty("Password", password);
+        this.password = password;
     }
 
     private void store() throws IOException {

@@ -42,9 +42,9 @@ public class Message implements Serializable {
             LEAVE_ROOM = 11,
             ROOM_COUNT = 12,
             PRIVATE_MESSAGE = 13;
-    private int messageType;
-    private Label label;
-    private DateTimeFormatter dateTimeFormatter;
+    private final int messageType;
+    private final Label label;
+    private final DateTimeFormatter dateTimeFormatter;
     private List<Node> list;
     private boolean ignored;
 

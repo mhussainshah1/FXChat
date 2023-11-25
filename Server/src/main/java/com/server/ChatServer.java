@@ -13,13 +13,13 @@ import java.util.function.BiConsumer;
 import static com.common.CommonSettings.MESSAGE_TYPE_ADMIN;
 
 public class ChatServer {
-    private BiConsumer<Serializable, Integer> onReceiveCallback;
+    private final BiConsumer<Serializable, Integer> onReceiveCallback;
     private Thread thread;
-    private ServerSocket serverSocket;
+    private final ServerSocket serverSocket;
     private Socket socket;
     private ClientHandler clientHandler;
-    private String roomList;
-    private ExecutorService pool;
+    private final String roomList;
+    private final ExecutorService pool;
 
     public ChatServer(String serverName, int port, int maximumGuestNumber, BiConsumer<Serializable, Integer> onReceiveCallback) throws IOException {
         try (Data data = new Data("server.properties")) {

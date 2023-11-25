@@ -40,9 +40,9 @@ public class ServerController {
     private TextField txtMessage;
     @FXML
     private Button btnSendMessage;
-    private String serverName = "localhost";
-    private int serverPort = 1436;
-    private int maximumGuestNumber = 50;
+    private final String serverName = "localhost";
+    private final int serverPort = 1436;
+    private final int maximumGuestNumber = 50;
     private Message message;
     private ChatServer server;
 

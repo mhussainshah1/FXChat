@@ -1,7 +1,5 @@
 package com.client;
 
-import com.common.SocksSocket;
-import com.common.SocksSocketImplFactory;
 import com.controller.ClientController;
 import javafx.application.Platform;
 
@@ -9,7 +7,6 @@ import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.Socket;
-import java.net.SocketAddress;
 import java.util.function.BiConsumer;
 
 import static com.common.CommonSettings.*;
@@ -18,20 +15,22 @@ public class ChatClient {
     private final ClientController clientController;
     private final BiConsumer<Serializable, Integer> onReceiveCallback;
     private final String userName;
-    private String userRoom;
     private final String serverName;
     private final String proxyHost;
-    private String serverData;
-    private String roomList;
     private final int serverPort;
     private final int proxyPort;
+    private String userRoom;
+    private String password;
+    private String serverData;
+    private String roomList;
     private Socket socket;
     private BufferedReader bufferedIn;
     private OutputStream outputStream;
 
-    public ChatClient(ClientController frame, String userName, String userRoom, String serverName, int serverPort, String proxyHost, int proxyPort, BiConsumer<Serializable, Integer> onReceiveCallback) {
+    public ChatClient(ClientController frame, String userName, String password, String userRoom, String serverName, int serverPort, String proxyHost, int proxyPort, BiConsumer<Serializable, Integer> onReceiveCallback) {
         this.clientController = frame;
         this.userName = userName;
+        this.password = password;
         this.userRoom = userRoom;
         this.serverName = serverName;
         this.serverPort = serverPort;
@@ -40,7 +39,7 @@ public class ChatClient {
         this.onReceiveCallback = onReceiveCallback;
     }
 
-    public void startConnection(boolean isProxy) throws IOException {
+    public void startConnection(boolean isProxy, String code) throws IOException {
         if (isProxy) {
             //Proxy
 /*
@@ -65,7 +64,8 @@ public class ChatClient {
         }
         socket.setTcpNoDelay(true);
         outputStream = socket.getOutputStream();
-        sendMessageToServer("HELO " + userName + " " + userRoom);
+        sendMessageToServer(code + " " + userName + " " + password + " " + userRoom);
+        //sendMessageToServer("HELO " + userName + " " + userRoom);
         bufferedIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
         //Send HELO To Server
@@ -85,6 +85,7 @@ public class ChatClient {
                 String[] tokens = serverData.split(" ");
                 String command = tokens[0];
 
+
                 Platform.runLater(() -> {
                     // RFC Coding
                     if (command.equalsIgnoreCase("LIST")) {
@@ -99,6 +100,10 @@ public class ChatClient {
                     // ADD RFC
                     else if (command.equalsIgnoreCase("ADD")) {
                         clientController.handleLogin(tokens);
+                    }
+                    else if(command.equalsIgnoreCase("EXCP")){
+                        String[] tokensMsg = serverData.split(" ", 2);
+                        clientController.handleException(tokensMsg);
                     }
 
                     // If Username Already Exists

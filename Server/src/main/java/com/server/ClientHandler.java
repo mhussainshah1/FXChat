@@ -2,8 +2,11 @@ package com.server;
 
 //Chat Server Client Communication Object
 
+import com.common.DBUtils;
+
 import java.io.*;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -13,14 +16,14 @@ import static com.common.CommonSettings.*;
 public class ClientHandler extends Thread implements CommonSettings {
     public static List<ClientHandler> clientHandlers = new ArrayList<>();
     private final BiConsumer<Serializable, Integer> onReceiveCallback;
+    private final ChatServer server;
+    private final ArrayList<String> messages;
     //Global Variable Declarations
     private Socket socket;
     private BufferedReader bufferedIn;
     private String RFC;
-    private ChatServer server;
     private OutputStream outputStream;
     private ClientHandler clientHandler;
-    private ArrayList<String> messages;
     private String userName;
     private String roomName;
 
@@ -53,10 +56,18 @@ public class ClientHandler extends Thread implements CommonSettings {
 //                Arrays.asList(tokens).forEach(System.out::println);
 
                 //RFC Checking
-                //HELO ali General
-                if (command.equalsIgnoreCase("HELO")) {
-                    addUser(socket, tokens);
+                //LOGN username password room
+                if (command.equalsIgnoreCase("LOGN")) {
+                    loginUser(socket, tokens);
                 }
+                //SGUP ali password General
+                else if (command.equalsIgnoreCase("SGUP")) {
+                    signupUser(socket, tokens);
+                }
+                //HELO ali General
+                /*else if (command.equalsIgnoreCase("HELO")) {
+                    addUser(socket, tokens);
+                }*/
                 //QUIT ali Party
                 else if (command.equalsIgnoreCase("QUIT")) {
                     removeUser(tokens, REMOVE_USER);
@@ -153,11 +164,39 @@ public class ClientHandler extends Thread implements CommonSettings {
         return getClientHandlerByUserName(userName) != null;
     }
 
+    protected void loginUser(Socket socket, String[] tokens) {
+        String tokenUserName = tokens[1];
+        String tokenPassword = tokens[2];
+        String tokenRoomName = tokens[3];
+
+        try {
+            DBUtils.logInUser(tokenUserName, tokenPassword);
+            addUser(socket, new String[]{tokenUserName, tokenRoomName});
+        } catch (SQLException e) {
+            e.printStackTrace();
+            sendMessageToClient(socket, "EXCP " + e.getMessage());
+        }
+    }
+
+    protected void signupUser(Socket socket, String[] tokens) {
+        String tokenUserName = tokens[1];
+        String tokenPassword = tokens[2];
+        String tokenRoomName = tokens[3];
+
+        try {
+            DBUtils.signUpUser(tokenUserName, tokenPassword, tokenRoomName);
+            addUser(socket, new String[]{tokenUserName, tokenRoomName});
+        } catch (SQLException e) {
+            e.printStackTrace();
+            sendMessageToClient(socket, "EXCP " + e.getMessage());
+        }
+    }
+
     //Function To Add a New Client in to the Server List
     protected void addUser(Socket socket, String[] tokens) {
 
-        String tokenUserName = tokens[1];
-        String tokenRoomName = tokens[2];
+        String tokenUserName = tokens[0];
+        String tokenRoomName = tokens[1];
 
         //If Username Exists return
         if (isUserExists(tokenUserName)) {
@@ -222,7 +261,7 @@ public class ClientHandler extends Thread implements CommonSettings {
 
     //Remove User When Exception Occurs
     protected void removeUserWhenException(Socket socket) {
-        for (ClientHandler removeClient: clientHandlers) {
+        for (ClientHandler removeClient : clientHandlers) {
             if (removeClient.getSocket().equals(socket)) {
                 String removeUserName = removeClient.getUserName();
                 String removeRoomName = removeClient.getRoomName();

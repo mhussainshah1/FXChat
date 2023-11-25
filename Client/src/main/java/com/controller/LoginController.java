@@ -1,13 +1,12 @@
 package com.controller;
 
+import com.common.CommonSettings;
+import com.common.DBUtils;
 import com.common.Data;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 
@@ -16,6 +15,8 @@ public class LoginController {
     private ChoiceBox<String> choiceRoom;
     @FXML
     private TextField txtUserName;
+    @FXML
+    private PasswordField txtPassword;
     @FXML
     private TextField txtServerName;
     @FXML
@@ -26,16 +27,16 @@ public class LoginController {
     private TextField txtProxyPort;
     @FXML
     private CheckBox proxyCheckBox;
-    private ClientController clientController;
     private boolean connect;
     private String roomName = "General";
+    private ClientController clientController;
 
     //Calls automatically
     @FXML
     private void initialize() throws IOException {
-
         try (Data data = new Data("data.properties")) {
             txtUserName.setText(data.getUserName());
+            txtPassword.setText(data.getPassword());
             choiceRoom.setItems(FXCollections.observableArrayList("General", "Teen", "Music", "Party"));
             choiceRoom.setOnAction(event -> {
                 roomName = choiceRoom.getValue();
@@ -60,6 +61,7 @@ public class LoginController {
             connect = true;
             try (var data = new Data("data.properties")) {
                 data.setUserName(txtUserName.getText());
+                data.setPassword(txtPassword.getText());
                 data.setRoomName(roomName);
                 data.setServerName(txtServerName.getText());
                 data.setServerPort(Integer.parseInt(txtServerPort.getText()));
@@ -72,6 +74,9 @@ public class LoginController {
         } else if (name.equals("Quit")) {
             connect = false;
             button.getScene().getWindow().hide();
+        } else if (name.equals("Signup")) {
+//            ClientApplication.showSignupStage();;
+            DBUtils.changeScene(e, "/com/controller/signup.fxml", CommonSettings.PRODUCT_NAME + " - Sign Up", null, null);
         }
     }
 
@@ -79,12 +84,16 @@ public class LoginController {
         return connect;
     }
 
-    public void setChatClientController(ClientController clientController) {
+    public void setClientController(ClientController clientController) {
         this.clientController = clientController;
     }
 
     public String getUserName() {
         return txtUserName.getText();
+    }
+
+    public String getPassword(){
+        return txtPassword.getText();
     }
 
     public String getUserRoom() {

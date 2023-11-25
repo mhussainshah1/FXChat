@@ -20,7 +20,7 @@ public class Main {
 
         SocketAddress proxyAddr = new InetSocketAddress(proxyHost, proxyPort);
         Proxy proxy = new Proxy(Proxy.Type.SOCKS, proxyAddr);
-        try (Socket socket = new Socket(proxy);) {
+        try (Socket socket = new Socket(proxy)) {
             socket.connect(new InetSocketAddress(serverName, serverPort));
 //            socket.setSoTimeout(0);
             System.out.println("Connected through proxy server = " + proxyHost + " at port = " + proxyPort);

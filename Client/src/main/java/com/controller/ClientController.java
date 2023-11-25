@@ -56,11 +56,11 @@ public class ClientController {
     private MenuItem logoutMenuItem;
     private ArrayList<PrivateChatController> privateWindows;
     private String userName;
+    private String password;
     private String userRoom;
     private ArrayList<Message> messages;
     private int totalUserCount;
     private ChatClient chatClient;
-    private LoginController loginController;
     private Message messageObject;
     private String serverName;
     private int serverPort;
@@ -68,6 +68,10 @@ public class ClientController {
     private String proxyHost;
     private int proxyPort;
     private String selectedUser, selectedRoom;
+    @FXML
+    private LoginController loginController;
+    @FXML
+    private SignUpController signUpController;
 
     @FXML
     private void initialize() {
@@ -76,6 +80,7 @@ public class ClientController {
         messageObject = new Message(new Label());
         privateWindows = new ArrayList<>();
         messageBoard.heightProperty().addListener((observable, oldValue, newValue) -> sp_main.setVvalue((Double) newValue));
+        //loginController.setClientController(this);
     }
 
     //Event Handlers
@@ -188,6 +193,7 @@ public class ClientController {
         messageBoard.getChildren().clear();
         display("Connecting To Server... Please Wait...\n", MESSAGE_TYPE_ADMIN);
     }
+
     private void openSignupWindow() throws IOException {
         ClientApplication.showSignupStage();
         messageBoard.getChildren().clear();
@@ -197,6 +203,7 @@ public class ClientController {
     public void loginToChat() {
         if (loginController.isConnect()) {
             userName = loginController.getUserName();
+            password = loginController.getPassword();
             userRoom = loginController.getUserRoom();
             serverName = loginController.getServerName();
             serverPort = loginController.getServerPort();
@@ -209,42 +216,65 @@ public class ClientController {
             }
         }
         try {
-            connectToServer();
+            connectToServer("LOGN");
         } catch (IOException e) {
             e.printStackTrace();
             display(e.toString(), MESSAGE_TYPE_ADMIN);
         }
     }
 
-    private void connectToServer() throws IOException {
-        chatClient = createClient();
-        chatClient.startConnection(proxy);
-        enableLogin();
+    public void signupToChat() {
+        if (signUpController.isConnect()) {
+            userName = signUpController.getUserName();
+            password = signUpController.getPassword();
+            userRoom = signUpController.getUserRoom();
+            serverName = signUpController.getServerName();
+            serverPort = signUpController.getServerPort();
+            if (signUpController.isProxyCheckBox()) {
+                proxy = true;
+                proxyHost = signUpController.getProxyHost();
+                proxyPort = signUpController.getProxyPort();
+            } else {
+                proxy = false;
+            }
+        }
+        try {
+            connectToServer("SGUP");
+        } catch (IOException e) {
+            e.printStackTrace();
+            display(e.toString(), MESSAGE_TYPE_ADMIN);
+        }
     }
 
+    private void connectToServer(String code) throws IOException {
+        chatClient = createClient();
+        chatClient.startConnection(proxy, code);
+        enableLogin();
+    }
     // Function To Send MESS Rfc to Server
+
     private void sendMessage() throws IOException {
         chatClient.sendMessageToServer("MESS " + userRoom + " " + userName + " " + txtMessage.getText());
         display(userName + ": " + txtMessage.getText(), MESSAGE_TYPE_DEFAULT);
         txtMessage.clear();
         txtMessage.requestFocus();
     }
-
     // To send a message to the text flow
+
     private void display(String message, Integer type) {
         List<Node> nodes = messageObject.parseMessage(message, type);
         messageBoard.getChildren().addAll(nodes);
     }
-
     //Function To Update the Information Label
+
     private void updateInformationLabel() {
         String builder = "User Name: " + userName + "       " +
                 "Room Name: " + userRoom + "       " +
                 "No. Of Users: " + totalUserCount + "       ";
         informationLabel.setText(builder);
     }
-
     // LIST ali amir
+
     public void handleList(String[] tokens) {
         totalUserCount = tokens.length - 1;
         //Update the Information Label
@@ -258,8 +288,8 @@ public class ClientController {
         messageBoard.getChildren().clear();
         display("Welcome To The " + userRoom + " Room!", MESSAGE_TYPE_JOIN);
     }
-
     // ROOM General Teen Music Party
+
     public void handleRoom(String[] tokens) {
         //userRoom = tokens[1];
         updateInformationLabel();
@@ -271,8 +301,8 @@ public class ClientController {
             addListItem(roomView, label);
         }
     }
-
     // ADD amir
+
     public void handleLogin(String[] tokens) {
         //Update the Information Label
         totalUserCount++;
@@ -286,7 +316,11 @@ public class ClientController {
         display(tokenUserName + " joins chat...", MESSAGE_TYPE_JOIN);
     }
 
+    public void handleUserException(String[] tokensMsg) {
+        quitConnection(QUIT_TYPE_NULL);
+    }
     // EXIS
+
     public void handleUserExist() {
         display("User name already exists... try again with another name!", MESSAGE_TYPE_ADMIN);
         quitConnection(QUIT_TYPE_NULL);
@@ -304,8 +338,19 @@ public class ClientController {
         totalUserCount--;
         updateInformationLabel();
     }
+    // EXCP user not found in the database!
 
-    // MESS amir Hi all
+    public void handleException(String[] tokens) {
+        String message = tokens[1];
+        display("Server: " + message, MESSAGE_TYPE_ADMIN);
+
+        var alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText(message);
+        alert.show();
+        quitConnection(QUIT_TYPE_NULL);
+    }
+    // MESS amir <Hi all>
+
     public void handleMessage(String[] tokens) {
         String userName = tokens[1];
         String message = tokens[2];
@@ -316,14 +361,14 @@ public class ClientController {
         } else if (!(isIgnoredUser(userName)))
             display(userName + ": " + message, MESSAGE_TYPE_DEFAULT);
     }
-
     // KICK
+
     public void handleKickUser() {
         display("You are Kicked Out From Chat for flooding the message!", MESSAGE_TYPE_ADMIN);
         quitConnection(QUIT_TYPE_KICK);
     }
-
     // INKI ali
+
     public void handleKickUserInfo(String[] tokens) {
         String tokenUserName = tokens[1];
         removeListItem(userView, tokenUserName);
@@ -334,13 +379,13 @@ public class ClientController {
         totalUserCount--;
         updateInformationLabel();
     }
-
     // CHRO Teen
+
     public void handleChangeRoom(String userRoom) {
         this.userRoom = userRoom;
     }
-
     // JORO ali
+
     public void handleJoinRoom(String[] tokens) {
         String tokenUserName = tokens[1];
         Label label = new Label(tokenUserName, new ImageView(getClass().getResource("/icons/photo11.gif").toString()));
@@ -351,8 +396,8 @@ public class ClientController {
 
         display(tokenUserName + " joins chat...", MESSAGE_TYPE_JOIN);
     }
-
     // LERO amir Teen
+
     public void handleLeaveRoom(String[] tokens) {
         String tokenUserName = tokens[1];
         String tokenRoomName = tokens[2];
@@ -363,14 +408,14 @@ public class ClientController {
         totalUserCount--;
         updateInformationLabel();
     }
-
     // ROCO General 2
+
     public void handleRoomCount(String[] tokens) {
         String tokenRoomName = tokens[1];
         txtUserCount.setText("Total Users in " + tokenRoomName + " : " + tokens[2]);
     }
-
     // PRIV ali hi
+
     public void handlePrivateChat(String[] tokens) {
         String userName = tokens[1];
         String message = tokens[2];
@@ -413,7 +458,6 @@ public class ClientController {
     }
 
     // Function To Remove the Given Item From the List Array
-
     private void removeListItem(ListView<Label> items, String text) {
         for (Label label : items.getItems()) {
             if (label.getText().equalsIgnoreCase(text)) {
@@ -423,8 +467,8 @@ public class ClientController {
             }
         }
     }
-    //List ViewCanvas Methods in Jeeva Project
 
+    //List ViewCanvas Methods in Jeeva Project
     protected void ignoreUser(boolean isIgnore) {
         if (selectedUser.equals("")) {
             display("Invalid User Selection!", MESSAGE_TYPE_ADMIN);
@@ -436,8 +480,8 @@ public class ClientController {
         }
         ignoreUser(isIgnore, selectedUser);
     }
-    //Set or Remove Ignore List from Array
 
+    //Set or Remove Ignore List from Array
     protected void ignoreUser(boolean isIgnore, String ignoreUserName) {
         PrivateChatController privateWindow = getPrivateWindowByUserName(ignoreUserName);
         if (privateWindow != null) {
@@ -456,6 +500,7 @@ public class ClientController {
             }
         }
     }
+
     //Function To Get the Index of Give Message from List Array
 
     public Message getMessageByText(String text) {
@@ -491,8 +536,8 @@ public class ClientController {
             privateWindow.enableAll();
         }
     }
-
     //Disable the Private Chat when the End User logged out
+
     private void removeUserFromPrivateChat(String toUserName) {
         PrivateChatController privateWindow = getPrivateWindowByUserName(toUserName);
         if (privateWindow != null) {
@@ -500,13 +545,13 @@ public class ClientController {
             privateWindow.disableAll();
         }
     }
-
     //Function To Send Private Message To Server
+
     public void sentPrivateMessageToServer(String message, String toUserName) throws IOException {
         chatClient.sendMessageToServer("PRIV " + toUserName + " " + userName + " " + message);
     }
-
     // Function To Remove Private Window
+
     protected void removePrivateWindow(String toUserName) {
         PrivateChatController privateWindow = getPrivateWindowByUserName(toUserName);
         if (privateWindow != null) {
@@ -514,8 +559,8 @@ public class ClientController {
             privateWindows.trimToSize();
         }
     }
-
     // Function to Change Room
+
     protected void changeRoom() throws IOException {
         if (selectedRoom.equals("")) {
             display("Invalid Room Selection!", MESSAGE_TYPE_ADMIN);
@@ -528,8 +573,8 @@ public class ClientController {
         }
         chatClient.sendMessageToServer("CHRO " + userName + " " + selectedRoom);
     }
-
     // Function to Send an RFC for Get a Room User Count
+
     protected void getRoomUserCount(String RoomName) throws IOException {
         chatClient.sendMessageToServer("ROCO " + RoomName);
     }
@@ -539,6 +584,7 @@ public class ClientController {
             chatClient.closeConnection(quitType);
 
         disableLogout();
+        informationLabel.setText("Information Label");
         display("ADMIN: CONNECTION TO THE SERVER IS CLOSED.", MESSAGE_TYPE_ADMIN);
     }
 
@@ -558,20 +604,25 @@ public class ClientController {
         txtMessage.setEditable(status);
         btnSend.setDisable(!status);
         rightPane.setDisable(!status);
-        logoutMenuItem.setDisable(!status);
         loginMenuItem.setDisable(status);
+        signupMenuItem.setDisable(status);
+        logoutMenuItem.setDisable(!status);
     }
 
     private ChatClient createClient() {
-        return new ChatClient(this, userName, userRoom, serverName, serverPort, proxyHost, proxyPort, (data, type) ->
+        return new ChatClient(this, userName, password, userRoom, serverName, serverPort, proxyHost, proxyPort, (data, type) ->
                 Platform.runLater(() -> { //UI or background thread - manipulate UI object , It gives control back to UI thread
                     display(data.toString(), type);
                 }));
     }
-
     //Bean Methods
+
     public void setLoginController(LoginController loginController) {
         this.loginController = loginController;
+    }
+
+    public void setSignUpController(SignUpController signUpController) {
+        this.signUpController = signUpController;
     }
 
     public String getUserName() {
@@ -593,5 +644,4 @@ public class ClientController {
     private void addPrivateWindow(PrivateChatController privateWindow) {
         privateWindows.add(privateWindow);
     }
-
 }

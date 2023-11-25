@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class ServerApplication extends Application {
 
-    ServerController serverController;
+    private ServerController serverController;
     public static void main(String[] args) {
         launch(args);
     }

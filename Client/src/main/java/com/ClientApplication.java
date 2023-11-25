@@ -4,6 +4,7 @@ import com.common.CommonSettings;
 import com.controller.ClientController;
 import com.controller.LoginController;
 import com.controller.PrivateChatController;
+import com.controller.SignUpController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,7 +24,7 @@ public class ClientApplication extends Application {
     private static ClientController clientController;
 
     public static void main(String[] args) {
-        launch(args);
+        launch(ClientApplication.class, args);
     }
 
     public static void showLoginStage() throws IOException {
@@ -31,7 +32,7 @@ public class ClientApplication extends Application {
         Parent root = loader.load();
 
         LoginController loginController = loader.getController();
-        loginController.setChatClientController(clientController);
+        loginController.setClientController(clientController);
         clientController.setLoginController(loginController);
 
         Stage loginStage = new Stage();
@@ -48,9 +49,9 @@ public class ClientApplication extends Application {
         var loader = new FXMLLoader(ClientApplication.class.getResource("/com/controller/signup.fxml"));
         Parent root = loader.load();
 
-/*        LoginController loginController = loader.getController();
-        loginController.setChatClientController(clientController);
-        clientController.setLoginController(loginController);*/
+        SignUpController signUpController = loader.getController();
+        signUpController.setClientController(clientController);
+        clientController.setSignUpController(signUpController);
 
         Stage signupStage = new Stage();
         signupStage.getIcons().add(new Image(ClientApplication.class.getResource("/images/icon.gif").toString()));
@@ -72,14 +73,20 @@ public class ClientApplication extends Application {
 
         Stage privateChatStage = new Stage();
         privateChatStage.getIcons().add(new Image(ClientApplication.class.getResource("/images/icon.gif").toString()));
-        privateChatStage.setScene(new Scene(root));
+        privateChatStage.setTitle("Private Chat with - " + selectedUser);
         privateChatStage.setHeight(PRIVATE_WINDOW_HEIGHT);
         privateChatStage.setWidth(PRIVATE_WINDOW_WIDTH);
-        privateChatStage.setTitle("Private Chat with - " + selectedUser);
+        privateChatStage.setScene(new Scene(root));
         privateChatStage.setResizable(false);
 //        privateChatStage.setOnHidden(e->privateChatController.exitPrivateWindow());
         return privateChatController;
     }
+
+/*    @Override
+    public void init() throws Exception {
+        springContext = SpringApplication.run(ClientApplication.class);
+        springContext.getAutowireCapableBeanFactory().autowireBeanProperties(this, AutowireCapableBeanFactory.AUTOWIRE_BY_TYPE, true);
+    }*/
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -89,8 +96,8 @@ public class ClientApplication extends Application {
         clientController = loader.getController();
 
         primaryStage.getIcons().add(new Image(getClass().getResource("/images/icon.gif").toString()));
-        primaryStage.setScene(new Scene(root, 778, 575));
         primaryStage.setTitle(CommonSettings.PRODUCT_NAME);
+        primaryStage.setScene(new Scene(root, 778, 575));
         primaryStage.setResizable(false);
         primaryStage.show();
 

@@ -6,10 +6,10 @@ import java.net.Socket;
 import java.util.List;
 
 public class ClientHandler implements Runnable {
-    private Socket client;
+    private final Socket client;
     private final List<ClientHandler> clients;
-    private BufferedReader in;
-    private PrintWriter out;
+    private final BufferedReader in;
+    private final PrintWriter out;
 
     public ClientHandler(Socket client, List<ClientHandler> clients) throws IOException {
         this.client = client;
