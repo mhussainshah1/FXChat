@@ -73,7 +73,7 @@ public class SignUpController {
             connect = false;
             button.getScene().getWindow().hide();
         } else if (name.equals("Log In!")) {
-            DBUtils.changeScene(e, "/com/controller/login.fxml", CommonSettings.PRODUCT_NAME + " - Login", null, null);
+            DBUtils.changeScene(e, "/com/controller/login.fxml", CommonSettings.PRODUCT_NAME + " - Login", null, null, clientController);
         }
     }
 

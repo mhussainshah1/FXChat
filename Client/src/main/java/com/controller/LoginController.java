@@ -76,7 +76,7 @@ public class LoginController {
             button.getScene().getWindow().hide();
         } else if (name.equals("Signup")) {
 //            ClientApplication.showSignupStage();;
-            DBUtils.changeScene(e, "/com/controller/signup.fxml", CommonSettings.PRODUCT_NAME + " - Sign Up", null, null);
+            DBUtils.changeScene(e, "/com/controller/signup.fxml", CommonSettings.PRODUCT_NAME + " - Sign Up", null, null,clientController);
         }
     }
 
