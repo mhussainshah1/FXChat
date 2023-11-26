@@ -82,7 +82,8 @@ public class ClientApplication extends Application {
         return privateChatController;
     }
 
-/*    @Override
+/*
+    @Override
     public void init() throws Exception {
         springContext = SpringApplication.run(ClientApplication.class);
         springContext.getAutowireCapableBeanFactory().autowireBeanProperties(this, AutowireCapableBeanFactory.AUTOWIRE_BY_TYPE, true);

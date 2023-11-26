@@ -16,8 +16,8 @@ public class DBUtils {
 
     public static void changeScene(ActionEvent event, String fxmlFile, String title, String username, String room, ClientController clientController) {
         Parent root = null;
-        var loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
         try {
+            var loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
             root = loader.load();
             if(fxmlFile.equals("/com/controller/signup.fxml")){
                 SignUpController signUpController = loader.getController();

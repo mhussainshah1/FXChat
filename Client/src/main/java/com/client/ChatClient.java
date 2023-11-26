@@ -15,12 +15,12 @@ public class ChatClient {
     private final ClientController clientController;
     private final BiConsumer<Serializable, Integer> onReceiveCallback;
     private final String userName;
-    private final String serverName;
-    private final String proxyHost;
-    private final int serverPort;
-    private final int proxyPort;
+    private final String password;
     private String userRoom;
-    private String password;
+    private final String serverName;
+    private final int serverPort;
+    private final String proxyHost;
+    private final int proxyPort;
     private String serverData;
     private String roomList;
     private Socket socket;

@@ -11,7 +11,6 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.text.TextFlow;
 
@@ -20,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.common.CommonSettings.*;
-
 
 public class ClientController {
     public ScrollPane sp_main;
@@ -32,8 +30,6 @@ public class ClientController {
     private TextField txtUserCount;
     @FXML
     private Label informationLabel;
-    @FXML
-    private GridPane login;
     @FXML
     private ListView<Label> userView;
     @FXML
@@ -81,6 +77,7 @@ public class ClientController {
         privateWindows = new ArrayList<>();
         messageBoard.heightProperty().addListener((observable, oldValue, newValue) -> sp_main.setVvalue((Double) newValue));
         //loginController.setClientController(this);
+        //signUpController.setClientController(this);
     }
 
     //Event Handlers

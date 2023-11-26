@@ -58,7 +58,6 @@ public class LoginController {
         var name = button.getText();
 
         if (name.equals("Connect")) {
-            connect = true;
             try (var data = new Data("data.properties")) {
                 data.setUserName(txtUserName.getText());
                 data.setPassword(txtPassword.getText());
@@ -70,12 +69,12 @@ public class LoginController {
                 data.setProxyPort(Integer.parseInt(txtProxyPort.getText()));
             }
             button.getScene().getWindow().hide();
+            connect = true;
             clientController.loginToChat();
         } else if (name.equals("Quit")) {
             connect = false;
             button.getScene().getWindow().hide();
         } else if (name.equals("Signup")) {
-//            ClientApplication.showSignupStage();;
             DBUtils.changeScene(e, "/com/controller/signup.fxml", CommonSettings.PRODUCT_NAME + " - Sign Up", null, null,clientController);
         }
     }
