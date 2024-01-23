@@ -12,25 +12,23 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;
 
 import static com.common.CommonSettings.PRIVATE_WINDOW_HEIGHT;
 import static com.common.CommonSettings.PRIVATE_WINDOW_WIDTH;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
-
 @SpringBootApplication
 public class ClientApplication extends Application {
 
     private static String userName;
     private static ClientController clientController;
-    private ConfigurableApplicationContext springContext;
     Parent root;
-
     FXMLLoader loader;
+    private ConfigurableApplicationContext springContext;
 
     public static void main(String[] args) {
         launch(ClientApplication.class, args);
