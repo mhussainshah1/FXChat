@@ -12,12 +12,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.List;
 
 import static com.common.CommonSettings.*;
 
+@Component
 public class PrivateChatController {
     public ScrollPane scrollPane;
     public Label lblTitle;

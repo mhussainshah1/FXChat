@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.text.TextFlow;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.List;
 
 import static com.common.CommonSettings.*;
 
+@Component
 public class ClientController {
     public ScrollPane sp_main;
     @FXML
@@ -64,10 +66,8 @@ public class ClientController {
     private String proxyHost;
     private int proxyPort;
     private String selectedUser, selectedRoom;
-    @FXML
-    private LoginController loginController;
-    @FXML
-    private SignUpController signUpController;
+//    @FXML  private LoginController loginController;
+//    @FXML  private SignUpController signUpController;
 
     @FXML
     private void initialize() {
@@ -197,53 +197,7 @@ public class ClientController {
         display("Connecting To Server... Please Wait...\n", MESSAGE_TYPE_ADMIN);
     }
 
-    public void loginToChat() {
-        if (loginController.isConnect()) {
-            userName = loginController.getUserName();
-            password = loginController.getPassword();
-            userRoom = loginController.getUserRoom();
-            serverName = loginController.getServerName();
-            serverPort = loginController.getServerPort();
-            if (loginController.isProxyCheckBox()) {
-                proxy = true;
-                proxyHost = loginController.getProxyHost();
-                proxyPort = loginController.getProxyPort();
-            } else {
-                proxy = false;
-            }
-        }
-        try {
-            connectToServer("LOGN");
-        } catch (IOException e) {
-            e.printStackTrace();
-            display(e.toString(), MESSAGE_TYPE_ADMIN);
-        }
-    }
-
-    public void signupToChat() {
-        if (signUpController.isConnect()) {
-            userName = signUpController.getUserName();
-            password = signUpController.getPassword();
-            userRoom = signUpController.getUserRoom();
-            serverName = signUpController.getServerName();
-            serverPort = signUpController.getServerPort();
-            if (signUpController.isProxyCheckBox()) {
-                proxy = true;
-                proxyHost = signUpController.getProxyHost();
-                proxyPort = signUpController.getProxyPort();
-            } else {
-                proxy = false;
-            }
-        }
-        try {
-            connectToServer("SGUP");
-        } catch (IOException e) {
-            e.printStackTrace();
-            display(e.toString(), MESSAGE_TYPE_ADMIN);
-        }
-    }
-
-    private void connectToServer(String code) throws IOException {
+    public void connectToServer(String code) throws IOException {
         chatClient = createClient();
         chatClient.startConnection(proxy, code);
         enableLogin();
@@ -258,7 +212,7 @@ public class ClientController {
     }
     // To send a message to the text flow
 
-    private void display(String message, Integer type) {
+    public void display(String message, Integer type) {
         List<Node> nodes = messageObject.parseMessage(message, type);
         messageBoard.getChildren().addAll(nodes);
     }
@@ -335,8 +289,7 @@ public class ClientController {
         totalUserCount--;
         updateInformationLabel();
     }
-    // EXCP user not found in the database!
-
+    // EXCP user isn't found in the database!
     public void handleException(String[] tokens) {
         String message = tokens[1];
         display("Server: " + message, MESSAGE_TYPE_ADMIN);
@@ -614,16 +567,77 @@ public class ClientController {
     }
     //Bean Methods
 
+    /*
     public void setLoginController(LoginController loginController) {
-        this.loginController = loginController;
+          this.loginController = loginController;
     }
 
     public void setSignUpController(SignUpController signUpController) {
         this.signUpController = signUpController;
     }
-
+    */
     public String getUserName() {
         return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUserRoom() {
+        return userRoom;
+    }
+
+    public void setUserRoom(String userRoom) {
+        this.userRoom = userRoom;
+    }
+
+    public String getServerName() {
+        return serverName;
+    }
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
+    }
+
+    public int getServerPort() {
+        return serverPort;
+    }
+
+    public void setServerPort(int serverPort) {
+        this.serverPort = serverPort;
+    }
+
+    public boolean isProxy() {
+        return proxy;
+    }
+
+    public void setProxy(boolean proxy) {
+        this.proxy = proxy;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public int getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(int proxyPort) {
+        this.proxyPort = proxyPort;
     }
 
     protected void sendDirectMessage() {

@@ -22,11 +22,11 @@ public class DBUtils {
             if(fxmlFile.equals("/com/controller/signup.fxml")){
                 SignUpController signUpController = loader.getController();
                 signUpController.setClientController(clientController);
-                clientController.setSignUpController(signUpController);
+//                clientController.setSignUpController(signUpController);
             } else {
                 LoginController loginController = loader.getController();
                 loginController.setClientController(clientController);
-                clientController.setLoginController(loginController);
+                //clientController.setLoginController(loginController);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

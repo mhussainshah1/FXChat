@@ -7,13 +7,17 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+import static com.common.CommonSettings.MESSAGE_TYPE_ADMIN;
+
+@Component
 public class SignUpController {
+    public PasswordField txtPassword;
     @FXML
     private TextField txtUserName;
-    public PasswordField txtPassword;
     @FXML
     private ChoiceBox<String> choiceRoom;
     @FXML
@@ -68,7 +72,7 @@ public class SignUpController {
                 data.setProxyPort(Integer.parseInt(txtProxyPort.getText()));
             }
             button.getScene().getWindow().hide();
-            clientController.signupToChat();
+            signupToChat();
         } else if (name.equals("Quit")) {
             connect = false;
             button.getScene().getWindow().hide();
@@ -77,9 +81,33 @@ public class SignUpController {
         }
     }
 
+    public void signupToChat() {
+        if (isConnect()) {
+            clientController.setUserRoom(getUserName());
+            clientController.setPassword(getPassword());
+            clientController.setUserRoom(getUserRoom());
+            clientController.setServerName(getServerName());
+            clientController.setServerPort(getServerPort());
+            if (isProxyCheckBox()) {
+                clientController.setProxy(true);
+                clientController.setProxyHost(getProxyHost());
+                clientController.setProxyPort(getProxyPort());
+            } else {
+                clientController.setProxy(false);
+            }
+        }
+        try {
+            clientController.connectToServer("SGUP");
+        } catch (IOException e) {
+            e.printStackTrace();
+            clientController.display(e.toString(), MESSAGE_TYPE_ADMIN);
+        }
+    }
+
     public void setClientController(ClientController clientController) {
         this.clientController = clientController;
     }
+
     public String getUserName() {
         return txtUserName.getText();
     }
@@ -87,7 +115,8 @@ public class SignUpController {
     public boolean isConnect() {
         return connect;
     }
-    public String getPassword(){
+
+    public String getPassword() {
         return txtPassword.getText();
     }
 

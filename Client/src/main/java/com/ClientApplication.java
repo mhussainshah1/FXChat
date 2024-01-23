@@ -18,10 +18,19 @@ import java.io.IOException;
 import static com.common.CommonSettings.PRIVATE_WINDOW_HEIGHT;
 import static com.common.CommonSettings.PRIVATE_WINDOW_WIDTH;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
+@SpringBootApplication
 public class ClientApplication extends Application {
 
     private static String userName;
     private static ClientController clientController;
+    private ConfigurableApplicationContext springContext;
+    Parent root;
+
+    FXMLLoader loader;
 
     public static void main(String[] args) {
         launch(ClientApplication.class, args);
@@ -33,7 +42,7 @@ public class ClientApplication extends Application {
 
         LoginController loginController = loader.getController();
         loginController.setClientController(clientController);
-        clientController.setLoginController(loginController);
+        //clientController.setLoginController(loginController);
 
         Stage loginStage = new Stage();
         loginStage.getIcons().add(new Image(ClientApplication.class.getResource("/images/icon.gif").toString()));
@@ -51,7 +60,7 @@ public class ClientApplication extends Application {
 
         SignUpController signUpController = loader.getController();
         signUpController.setClientController(clientController);
-        clientController.setSignUpController(signUpController);
+//        clientController.setSignUpController(signUpController);
 
         Stage signupStage = new Stage();
         signupStage.getIcons().add(new Image(ClientApplication.class.getResource("/images/icon.gif").toString()));
@@ -82,20 +91,17 @@ public class ClientApplication extends Application {
         return privateChatController;
     }
 
-/*
     @Override
     public void init() throws Exception {
         springContext = SpringApplication.run(ClientApplication.class);
-        springContext.getAutowireCapableBeanFactory().autowireBeanProperties(this, AutowireCapableBeanFactory.AUTOWIRE_BY_TYPE, true);
-    }*/
+        loader = new FXMLLoader(getClass().getResource("/com/controller/chatclient.fxml"));
+        loader.setControllerFactory(springContext::getBean);
+        root = loader.load();
+        clientController = loader.getController();
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        var loader = new FXMLLoader(getClass().getResource("/com/controller/chatclient.fxml"));
-        Parent root = loader.load();
-
-        clientController = loader.getController();
-
         primaryStage.getIcons().add(new Image(getClass().getResource("/images/icon.gif").toString()));
         primaryStage.setTitle(CommonSettings.PRODUCT_NAME);
         primaryStage.setScene(new Scene(root, 778, 575));
@@ -107,6 +113,7 @@ public class ClientApplication extends Application {
 
     @Override
     public void stop() {
+        springContext.close();
         clientController.shutdown();
     }
 }

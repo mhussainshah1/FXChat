@@ -7,9 +7,13 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+import static com.common.CommonSettings.MESSAGE_TYPE_ADMIN;
+
+@Component
 public class LoginController {
     @FXML
     private ChoiceBox<String> choiceRoom;
@@ -70,12 +74,35 @@ public class LoginController {
             }
             button.getScene().getWindow().hide();
             connect = true;
-            clientController.loginToChat();
+            loginToChat();
         } else if (name.equals("Quit")) {
             connect = false;
             button.getScene().getWindow().hide();
         } else if (name.equals("Signup")) {
             DBUtils.changeScene(e, "/com/controller/signup.fxml", CommonSettings.PRODUCT_NAME + " - Sign Up", null, null,clientController);
+        }
+    }
+
+    public void loginToChat() {
+        if (isConnect()) {
+            clientController.setUserName (getUserName());
+            clientController.setPassword(getPassword());
+            clientController.setUserRoom(getUserRoom());
+            clientController.setServerName(getServerName());
+            clientController.setServerPort(getServerPort());
+            if (isProxyCheckBox()) {
+                clientController.setProxy(true);
+                clientController.setProxyHost(getProxyHost());
+                clientController.setProxyPort(getProxyPort());
+            } else {
+                clientController.setProxy(false);
+            }
+        }
+        try {
+            clientController.connectToServer("LOGN");
+        } catch (IOException e) {
+            e.printStackTrace();
+            clientController.display(e.toString(), MESSAGE_TYPE_ADMIN);
         }
     }
 
