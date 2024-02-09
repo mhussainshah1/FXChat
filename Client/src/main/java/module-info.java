@@ -19,4 +19,8 @@ open module client {
 //    opens com.controller to javafx.fxml;
     exports com.controller;
 
+    exports com.service;
+
+    exports com.config;
+    exports com.entity;
 }

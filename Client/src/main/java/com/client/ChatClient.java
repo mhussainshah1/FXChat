@@ -16,15 +16,15 @@ public class ChatClient {
     private final BiConsumer<Serializable, Integer> onReceiveCallback;
     private final String userName;
     private final String password;
-    private String userRoom;
     private final String serverName;
     private final int serverPort;
     private final String proxyHost;
     private final int proxyPort;
+    private String userRoom;
     private String serverData;
     private String roomList;
     private Socket socket;
-    private BufferedReader bufferedIn;
+    private BufferedReader bufferedReader;
     private OutputStream outputStream;
 
     public ChatClient(ClientController frame, String userName, String password, String userRoom, String serverName, int serverPort, String proxyHost, int proxyPort, BiConsumer<Serializable, Integer> onReceiveCallback) {
@@ -66,7 +66,7 @@ public class ChatClient {
         outputStream = socket.getOutputStream();
         sendMessageToServer(code + " " + userName + " " + password + " " + userRoom);
         //sendMessageToServer("HELO " + userName + " " + userRoom);
-        bufferedIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
         //Send HELO To Server
         startMessageReader();
@@ -79,7 +79,7 @@ public class ChatClient {
 
     private void readMessageLoop() {
         try {
-            while ((serverData = bufferedIn.readLine()) != null) {
+            while ((serverData = bufferedReader.readLine()) != null) {
                 System.out.println(serverData);
 
                 String[] tokens = serverData.split(" ");
@@ -101,7 +101,8 @@ public class ChatClient {
                     else if (command.equalsIgnoreCase("ADD")) {
                         clientController.handleLogin(tokens);
                     }
-                    else if(command.equalsIgnoreCase("EXCP")){
+
+                    else if (command.equalsIgnoreCase("EXCP")) {
                         String[] tokensMsg = serverData.split(" ", 2);
                         clientController.handleException(tokensMsg);
                     }

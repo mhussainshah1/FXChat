@@ -2,110 +2,44 @@ package com;
 
 import com.common.CommonSettings;
 import com.controller.ClientController;
-import com.controller.LoginController;
-import com.controller.PrivateChatController;
-import com.controller.SignUpController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import java.io.IOException;
-
-import static com.common.CommonSettings.PRIVATE_WINDOW_HEIGHT;
-import static com.common.CommonSettings.PRIVATE_WINDOW_WIDTH;
-
 @SpringBootApplication
 public class ClientApplication extends Application {
 
     private static String userName;
-    private static ClientController clientController;
-    Parent root;
-    FXMLLoader loader;
+    private ClientController clientController;
     private ConfigurableApplicationContext springContext;
 
     public static void main(String[] args) {
-        launch(ClientApplication.class, args);
-    }
-
-    public static void showLoginStage() throws IOException {
-        var loader = new FXMLLoader(ClientApplication.class.getResource("/com/controller/login.fxml"));
-        Parent root = loader.load();
-
-        LoginController loginController = loader.getController();
-        loginController.setClientController(clientController);
-        //clientController.setLoginController(loginController);
-
-        Stage loginStage = new Stage();
-        loginStage.getIcons().add(new Image(ClientApplication.class.getResource("/images/icon.gif").toString()));
-        loginStage.setTitle(CommonSettings.PRODUCT_NAME + " - Login");
-        loginStage.setAlwaysOnTop(true);
-        loginStage.setResizable(false);
-        loginStage.initModality(Modality.APPLICATION_MODAL);
-        loginStage.setScene(new Scene(root, 250, 400));
-        loginStage.show();
-    }
-
-    public static void showSignupStage() throws IOException {
-        var loader = new FXMLLoader(ClientApplication.class.getResource("/com/controller/signup.fxml"));
-        Parent root = loader.load();
-
-        SignUpController signUpController = loader.getController();
-        signUpController.setClientController(clientController);
-//        clientController.setSignUpController(signUpController);
-
-        Stage signupStage = new Stage();
-        signupStage.getIcons().add(new Image(ClientApplication.class.getResource("/images/icon.gif").toString()));
-        signupStage.setTitle(CommonSettings.PRODUCT_NAME + " - Sign Up");
-        signupStage.setAlwaysOnTop(true);
-        signupStage.setResizable(false);
-        signupStage.initModality(Modality.APPLICATION_MODAL);
-        signupStage.setScene(new Scene(root, 250, 400));
-        signupStage.show();
-    }
-
-    public static PrivateChatController showPrivateChatStage(String selectedUser) throws IOException {
-        var loader = new FXMLLoader(ClientApplication.class.getResource("/com/controller/privatechat.fxml"));
-        Parent root = loader.load();
-
-        PrivateChatController privateChatController = loader.getController();
-        privateChatController.setClientController(clientController);
-        privateChatController.setUserName(selectedUser);
-
-        Stage privateChatStage = new Stage();
-        privateChatStage.getIcons().add(new Image(ClientApplication.class.getResource("/images/icon.gif").toString()));
-        privateChatStage.setTitle("Private Chat with - " + selectedUser);
-        privateChatStage.setHeight(PRIVATE_WINDOW_HEIGHT);
-        privateChatStage.setWidth(PRIVATE_WINDOW_WIDTH);
-        privateChatStage.setScene(new Scene(root));
-        privateChatStage.setResizable(false);
-//        privateChatStage.setOnHidden(e->privateChatController.exitPrivateWindow());
-        return privateChatController;
+        Application.launch(ClientApplication.class, args);
     }
 
     @Override
-    public void init() throws Exception {
+    public void init() {
         springContext = SpringApplication.run(ClientApplication.class);
-        loader = new FXMLLoader(getClass().getResource("/com/controller/chatclient.fxml"));
-        loader.setControllerFactory(springContext::getBean);
-        root = loader.load();
-        clientController = loader.getController();
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/controller/chatclient.fxml"));
+        fxmlLoader.setControllerFactory(springContext::getBean);
+        Parent root = fxmlLoader.load();
+        clientController = fxmlLoader.getController();
+
         primaryStage.getIcons().add(new Image(getClass().getResource("/images/icon.gif").toString()));
         primaryStage.setTitle(CommonSettings.PRODUCT_NAME);
         primaryStage.setScene(new Scene(root, 778, 575));
         primaryStage.setResizable(false);
         primaryStage.show();
-
         clientController.openLoginWindow();
     }
 

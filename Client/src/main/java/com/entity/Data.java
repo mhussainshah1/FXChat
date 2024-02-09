@@ -1,4 +1,4 @@
-package com.common;
+package com.entity;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

@@ -17,7 +17,7 @@ public class ServerConnection implements Runnable {
         try {
             while (true) {
                 String serverResponse = in.readLine();
-                if(serverResponse == null) break;
+                if (serverResponse == null) break;
                 System.out.println("Server says: " + serverResponse);
             }
         } catch (IOException e) {

@@ -1,0 +1,96 @@
+package com.entity;
+public class User {
+    private String userName;
+    private String password;
+    private String roomName;
+    private int serverPort;
+    private String serverName;
+    private int maximumGuestNumber;
+    private String roomList;
+    private boolean proxyState;
+    private int proxyPort;
+    private String proxyHost;
+
+    public User() {
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    public int getServerPort() {
+        return serverPort;
+    }
+
+    public void setServerPort(int serverPort) {
+        this.serverPort = serverPort;
+    }
+
+    public String getServerName() {
+        return serverName;
+    }
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
+    }
+
+    public int getMaximumGuestNumber() {
+        return maximumGuestNumber;
+    }
+
+    public void setMaximumGuestNumber(int maximumGuestNumber) {
+        this.maximumGuestNumber = maximumGuestNumber;
+    }
+
+    public String getRoomList() {
+        return roomList;
+    }
+
+    public void setRoomList(String roomList) {
+        this.roomList = roomList;
+    }
+
+    public boolean isProxyState() {
+        return proxyState;
+    }
+
+    public void setProxyState(boolean proxyState) {
+        this.proxyState = proxyState;
+    }
+
+    public int getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(int proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+}

@@ -1,4 +1,4 @@
-package com.common;
+package com.client;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -27,7 +27,7 @@ import static com.common.CommonSettings.*;
  */
 
 public class Message implements Serializable {
-    // The different types of message sent by the Client
+    // The different types of messages sent by the Client
     public static final int LIST = 0,// LIST to receive the list of the users connected
             MESSAGE = 1, // MESSAGE an ordinary text message
             LOGOUT = 2,// LOGOUT to disconnect from the Server
@@ -49,6 +49,7 @@ public class Message implements Serializable {
     private boolean ignored;
 
     // constructor
+//    @Autowired
     public Message(Label label) {
         this(label, MESSAGE_TYPE_DEFAULT);
     }
@@ -57,7 +58,7 @@ public class Message implements Serializable {
         this.label = label;
         this.messageType = messageType;
         this.dateTimeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss'> ' ");
-        list = new ArrayList<>();
+        this.list = new ArrayList<>();
     }
 
     public Text formatMessage(Text text, int messageType) {

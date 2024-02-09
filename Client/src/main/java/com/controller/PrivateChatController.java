@@ -1,6 +1,6 @@
 package com.controller;
 
-import com.common.Message;
+import com.client.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -20,7 +21,10 @@ import java.util.List;
 import static com.common.CommonSettings.*;
 
 @Component
+//@Scope("prototype")
 public class PrivateChatController {
+    private Message message;
+    private final ClientController clientController;
     public ScrollPane scrollPane;
     public Label lblTitle;
     public ScrollPane sp_main;
@@ -42,9 +46,12 @@ public class PrivateChatController {
     @FXML
     private TextFlow textFlow;
     private boolean visible = false;
-    private Message message;
-    private ClientController clientController;
     private Stage stage;
+
+    @Autowired
+    public PrivateChatController(ClientController clientController) {
+        this.clientController = clientController;
+    }
 
     public void initialize() {
         message = new Message(new Label());
@@ -141,10 +148,6 @@ public class PrivateChatController {
     public void exitPrivateWindow() {
         clientController.removePrivateWindow(userName);
         stage.close();
-    }
-
-    public void setClientController(ClientController clientController) {
-        this.clientController = clientController;
     }
 
     public Stage getStage() {

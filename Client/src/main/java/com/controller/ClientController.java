@@ -2,17 +2,25 @@ package com.controller;
 
 import com.ClientApplication;
 import com.client.ChatClient;
-import com.common.Message;
+import com.client.Message;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -22,8 +30,11 @@ import java.util.List;
 import static com.common.CommonSettings.*;
 
 @Component
+//@Scope("prototype")
 public class ClientController {
+    private final ConfigurableApplicationContext springContext;
     public ScrollPane sp_main;
+    private Message message;
     @FXML
     private Button btnChangeRoom;
     @FXML
@@ -59,25 +70,25 @@ public class ClientController {
     private ArrayList<Message> messages;
     private int totalUserCount;
     private ChatClient chatClient;
-    private Message messageObject;
     private String serverName;
     private int serverPort;
     private boolean proxy;
     private String proxyHost;
     private int proxyPort;
     private String selectedUser, selectedRoom;
-//    @FXML  private LoginController loginController;
-//    @FXML  private SignUpController signUpController;
+
+    @Autowired
+    public ClientController(ConfigurableApplicationContext springContext) {
+        this.springContext = springContext;
+    }
 
     @FXML
     private void initialize() {
         messages = new ArrayList<>();
         selectedUser = "";
-        messageObject = new Message(new Label());
+        message = new Message(new Label());
         privateWindows = new ArrayList<>();
         messageBoard.heightProperty().addListener((observable, oldValue, newValue) -> sp_main.setVvalue((Double) newValue));
-        //loginController.setClientController(this);
-        //signUpController.setClientController(this);
     }
 
     //Event Handlers
@@ -186,15 +197,47 @@ public class ClientController {
 
     //Instance Method
     public void openLoginWindow() throws IOException {
-        ClientApplication.showLoginStage();
+        showLoginStage();
         messageBoard.getChildren().clear();
         display("Connecting To Server... Please Wait...\n", MESSAGE_TYPE_ADMIN);
     }
 
+    @FXML
+    public void showLoginStage() throws IOException {
+        var loader = new FXMLLoader(ClientApplication.class.getResource("/com/controller/login.fxml"));
+        loader.setControllerFactory(springContext::getBean);
+        Parent root = loader.load();
+
+        Stage loginStage = new Stage();
+        loginStage.getIcons().add(new Image(ClientApplication.class.getResource("/images/icon.gif").toString()));
+        loginStage.setTitle(PRODUCT_NAME + " - Login");
+        loginStage.setAlwaysOnTop(true);
+        loginStage.setResizable(false);
+        loginStage.initModality(Modality.APPLICATION_MODAL);
+        loginStage.setScene(new Scene(root, 250, 400));
+        loginStage.show();
+    }
+
     private void openSignupWindow() throws IOException {
-        ClientApplication.showSignupStage();
+        showSignupStage();
         messageBoard.getChildren().clear();
         display("Connecting To Server... Please Wait...\n", MESSAGE_TYPE_ADMIN);
+    }
+
+    @FXML
+    public void showSignupStage() throws IOException {
+        var loader = new FXMLLoader(ClientApplication.class.getResource("/com/controller/signup.fxml"));
+        loader.setControllerFactory(springContext::getBean);
+        Parent root = loader.load();
+
+        Stage signupStage = new Stage();
+        signupStage.getIcons().add(new Image(ClientApplication.class.getResource("/images/icon.gif").toString()));
+        signupStage.setTitle(PRODUCT_NAME + " - Sign Up");
+        signupStage.setAlwaysOnTop(true);
+        signupStage.setResizable(false);
+        signupStage.initModality(Modality.APPLICATION_MODAL);
+        signupStage.setScene(new Scene(root, 250, 400));
+        signupStage.show();
     }
 
     public void connectToServer(String code) throws IOException {
@@ -213,16 +256,16 @@ public class ClientController {
     // To send a message to the text flow
 
     public void display(String message, Integer type) {
-        List<Node> nodes = messageObject.parseMessage(message, type);
+        List<Node> nodes = this.message.parseMessage(message, type);
         messageBoard.getChildren().addAll(nodes);
     }
     //Function To Update the Information Label
 
     private void updateInformationLabel() {
-        String builder = "User Name: " + userName + "       " +
+        String information = "User Name: " + userName + "       " +
                 "Room Name: " + userRoom + "       " +
                 "No. Of Users: " + totalUserCount + "       ";
-        informationLabel.setText(builder);
+        informationLabel.setText(information);
     }
     // LIST ali amir
 
@@ -270,8 +313,8 @@ public class ClientController {
     public void handleUserException(String[] tokensMsg) {
         quitConnection(QUIT_TYPE_NULL);
     }
-    // EXIS
 
+    // EXIS
     public void handleUserExist() {
         display("User name already exists... try again with another name!", MESSAGE_TYPE_ADMIN);
         quitConnection(QUIT_TYPE_NULL);
@@ -289,6 +332,7 @@ public class ClientController {
         totalUserCount--;
         updateInformationLabel();
     }
+
     // EXCP user isn't found in the database!
     public void handleException(String[] tokens) {
         String message = tokens[1];
@@ -299,8 +343,8 @@ public class ClientController {
         alert.show();
         quitConnection(QUIT_TYPE_NULL);
     }
-    // MESS amir <Hi all>
 
+    // MESS amir <Hi all>
     public void handleMessage(String[] tokens) {
         String userName = tokens[1];
         String message = tokens[2];
@@ -311,14 +355,14 @@ public class ClientController {
         } else if (!(isIgnoredUser(userName)))
             display(userName + ": " + message, MESSAGE_TYPE_DEFAULT);
     }
-    // KICK
 
+    // KICK
     public void handleKickUser() {
         display("You are Kicked Out From Chat for flooding the message!", MESSAGE_TYPE_ADMIN);
         quitConnection(QUIT_TYPE_KICK);
     }
-    // INKI ali
 
+    // INKI ali
     public void handleKickUserInfo(String[] tokens) {
         String tokenUserName = tokens[1];
         removeListItem(userView, tokenUserName);
@@ -329,13 +373,13 @@ public class ClientController {
         totalUserCount--;
         updateInformationLabel();
     }
-    // CHRO Teen
 
+    // CHRO Teen
     public void handleChangeRoom(String userRoom) {
         this.userRoom = userRoom;
     }
-    // JORO ali
 
+    // JORO ali
     public void handleJoinRoom(String[] tokens) {
         String tokenUserName = tokens[1];
         Label label = new Label(tokenUserName, new ImageView(getClass().getResource("/icons/photo11.gif").toString()));
@@ -346,8 +390,8 @@ public class ClientController {
 
         display(tokenUserName + " joins chat...", MESSAGE_TYPE_JOIN);
     }
-    // LERO amir Teen
 
+    // LERO amir Teen
     public void handleLeaveRoom(String[] tokens) {
         String tokenUserName = tokens[1];
         String tokenRoomName = tokens[2];
@@ -358,14 +402,14 @@ public class ClientController {
         totalUserCount--;
         updateInformationLabel();
     }
-    // ROCO General 2
 
+    // ROCO General 2
     public void handleRoomCount(String[] tokens) {
         String tokenRoomName = tokens[1];
         txtUserCount.setText("Total Users in " + tokenRoomName + " : " + tokens[2]);
     }
-    // PRIV ali hi
 
+    // PRIV ali hi
     public void handlePrivateChat(String[] tokens) {
         String userName = tokens[1];
         String message = tokens[2];
@@ -388,7 +432,7 @@ public class ClientController {
                     display("You are exceeding private window limit! So you may lose some message from your friends!", MESSAGE_TYPE_ADMIN);
                 } else {
                     try {
-                        privateWindow = ClientApplication.showPrivateChatStage(userName);
+                        privateWindow = showPrivateChatStage(userName);
                         if (message != null)
                             privateWindow.display(userName + ": " + message, MESSAGE_TYPE_DEFAULT);
                         privateWindow.getStage().show();
@@ -400,6 +444,27 @@ public class ClientController {
                 }
             }
         }
+    }
+
+    @FXML
+    public PrivateChatController showPrivateChatStage(String selectedUser) throws IOException {
+        var loader = new FXMLLoader(ClientApplication.class.getResource("/com/controller/privatechat.fxml"));
+        loader.setControllerFactory(springContext::getBean);
+        Parent root = loader.load();
+
+        Stage privateChatStage = new Stage();
+        privateChatStage.getIcons().add(new Image(ClientApplication.class.getResource("/images/icon.gif").toString()));
+        privateChatStage.setTitle("Private Chat with - " + selectedUser);
+        privateChatStage.setHeight(PRIVATE_WINDOW_HEIGHT);
+        privateChatStage.setWidth(PRIVATE_WINDOW_WIDTH);
+        privateChatStage.setScene(new Scene(root));
+        privateChatStage.setResizable(false);
+//        privateChatStage.setOnHidden(e->privateChatController.exitPrivateWindow());
+
+        PrivateChatController privateChatController = loader.getController();
+//        privateChatController.setClientController(this);
+        privateChatController.setUserName(selectedUser);
+        return privateChatController;
     }
 
     public void addListItem(ListView<Label> listView, Label label) {
@@ -420,7 +485,7 @@ public class ClientController {
 
     //List ViewCanvas Methods in Jeeva Project
     protected void ignoreUser(boolean isIgnore) {
-        if (selectedUser.equals("")) {
+        if (selectedUser.isEmpty()) {
             display("Invalid User Selection!", MESSAGE_TYPE_ADMIN);
             return;
         }
@@ -452,15 +517,22 @@ public class ClientController {
     }
 
     //Function To Get the Index of Give Message from List Array
-
     public Message getMessageByText(String text) {
-        for (Message message : messages) {
-            Label label = message.getLabel();
+        System.out.println("ClientController - messageServices " + messages);
+
+        return messages
+                .stream()
+                .filter(l -> l.getLabel().getText().equalsIgnoreCase(text))
+                .findFirst()
+                .orElse(null);
+/*
+        for (MessageService messageService : messageServices) {
+            Label label = messageService.getLabel();
             if (label.getText().equalsIgnoreCase(text)) {
-                return message;
+                return messageService;
             }
         }
-        return null;
+        return null;*/
     }
 
     public boolean isIgnoredUser(String userName) {
@@ -469,7 +541,6 @@ public class ClientController {
     }
 
     //Enable the Private Chat when the End User logged out
-
     public PrivateChatController getPrivateWindowByUserName(String userName) {
         for (PrivateChatController privateWindow : privateWindows) {
             if (privateWindow.getUserName().equalsIgnoreCase(userName)) {
@@ -500,8 +571,8 @@ public class ClientController {
     public void sentPrivateMessageToServer(String message, String toUserName) throws IOException {
         chatClient.sendMessageToServer("PRIV " + toUserName + " " + userName + " " + message);
     }
-    // Function To Remove Private Window
 
+    // Function To Remove Private Window
     protected void removePrivateWindow(String toUserName) {
         PrivateChatController privateWindow = getPrivateWindowByUserName(toUserName);
         if (privateWindow != null) {
@@ -509,8 +580,8 @@ public class ClientController {
             privateWindows.trimToSize();
         }
     }
-    // Function to Change Room
 
+    // Function to Change Room
     protected void changeRoom() throws IOException {
         if (selectedRoom.equals("")) {
             display("Invalid Room Selection!", MESSAGE_TYPE_ADMIN);
@@ -523,8 +594,8 @@ public class ClientController {
         }
         chatClient.sendMessageToServer("CHRO " + userName + " " + selectedRoom);
     }
-    // Function to Send an RFC for Get a Room User Count
 
+    // Function to Send an RFC for Get a Room User Count
     protected void getRoomUserCount(String RoomName) throws IOException {
         chatClient.sendMessageToServer("ROCO " + RoomName);
     }
@@ -561,21 +632,12 @@ public class ClientController {
 
     private ChatClient createClient() {
         return new ChatClient(this, userName, password, userRoom, serverName, serverPort, proxyHost, proxyPort, (data, type) ->
-                Platform.runLater(() -> { //UI or background thread - manipulate UI object , It gives control back to UI thread
+                Platform.runLater(() -> { //UI or background thread - manipulate a UI object, It gives control back to UI thread
                     display(data.toString(), type);
                 }));
     }
+
     //Bean Methods
-
-    /*
-    public void setLoginController(LoginController loginController) {
-          this.loginController = loginController;
-    }
-
-    public void setSignUpController(SignUpController signUpController) {
-        this.signUpController = signUpController;
-    }
-    */
     public String getUserName() {
         return userName;
     }
@@ -641,7 +703,7 @@ public class ClientController {
     }
 
     protected void sendDirectMessage() {
-        if (selectedUser.equals("")) {
+        if (selectedUser.isEmpty()) {
             display("Invalid User Selection!", MESSAGE_TYPE_ADMIN);
             return;
         }

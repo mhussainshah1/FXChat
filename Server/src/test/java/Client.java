@@ -17,10 +17,10 @@ public class Client {
 
         new Thread(serverConnection).start();
 
-        while(true){
+        while (true) {
             System.out.println("> ");
             String command = keyboard.readLine();
-            if(command.equals("quit"))break;
+            if (command.equals("quit")) break;
             out.println(command);
         }
     }

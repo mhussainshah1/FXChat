@@ -49,7 +49,7 @@ public class Message implements Serializable {
     private boolean ignored;
 
     // constructor
-    public Message(Label label){
+    public Message(Label label) {
         this(label, MESSAGE_TYPE_DEFAULT);
     }
 
@@ -78,6 +78,7 @@ public class Message implements Serializable {
         }
         return text;
     }
+
     public List<Node> parseMessage(String message, int messageType) {
         list = new ArrayList<>();
         String time = dateTimeFormatter.format(LocalDateTime.now());

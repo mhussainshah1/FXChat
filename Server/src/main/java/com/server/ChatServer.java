@@ -14,12 +14,12 @@ import static com.common.CommonSettings.MESSAGE_TYPE_ADMIN;
 
 public class ChatServer {
     private final BiConsumer<Serializable, Integer> onReceiveCallback;
-    private Thread thread;
     private final ServerSocket serverSocket;
-    private Socket socket;
-    private ClientHandler clientHandler;
     private final String roomList;
     private final ExecutorService pool;
+    private Thread thread;
+    private Socket socket;
+    private ClientHandler clientHandler;
 
     public ChatServer(String serverName, int port, int maximumGuestNumber, BiConsumer<Serializable, Integer> onReceiveCallback) throws IOException {
         try (Data data = new Data("server.properties")) {

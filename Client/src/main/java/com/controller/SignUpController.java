@@ -1,12 +1,14 @@
 package com.controller;
 
 import com.common.CommonSettings;
-import com.common.DBUtils;
-import com.common.Data;
+import com.entity.Data;
+import com.service.StageService;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -14,6 +16,7 @@ import java.io.IOException;
 import static com.common.CommonSettings.MESSAGE_TYPE_ADMIN;
 
 @Component
+@Scope("prototype")
 public class SignUpController {
     public PasswordField txtPassword;
     @FXML
@@ -32,7 +35,10 @@ public class SignUpController {
     private TextField txtProxyPort;
     private String roomName = "General";
     private boolean connect;
+    @Autowired
     private ClientController clientController;
+    @Autowired
+    private StageService stageService;
 
     //Calls automatically
     @FXML
@@ -64,7 +70,7 @@ public class SignUpController {
             try (var data = new Data("data.properties")) {
                 data.setUserName(txtUserName.getText());
                 data.setPassword(txtPassword.getText());
-                data.setRoomName(roomName);
+                data.setRoomName(choiceRoom.getValue());
                 data.setServerName(txtServerName.getText());
                 data.setServerPort(Integer.parseInt(txtServerPort.getText()));
                 data.setProxyState(proxyCheckBox.isSelected());
@@ -77,21 +83,21 @@ public class SignUpController {
             connect = false;
             button.getScene().getWindow().hide();
         } else if (name.equals("Log In!")) {
-            DBUtils.changeScene(e, "/com/controller/login.fxml", CommonSettings.PRODUCT_NAME + " - Login", null, null, clientController);
+            stageService.changeScene(e, "/com/controller/login.fxml", CommonSettings.PRODUCT_NAME + " - Login", null, null);
         }
     }
 
     public void signupToChat() {
-        if (isConnect()) {
-            clientController.setUserRoom(getUserName());
-            clientController.setPassword(getPassword());
-            clientController.setUserRoom(getUserRoom());
-            clientController.setServerName(getServerName());
-            clientController.setServerPort(getServerPort());
-            if (isProxyCheckBox()) {
+        if (connect) {
+            clientController.setUserName(txtUserName.getText());
+            clientController.setPassword(txtPassword.getText());
+            clientController.setUserRoom(choiceRoom.getValue());
+            clientController.setServerName(txtServerName.getText());
+            clientController.setServerPort(Integer.parseInt(txtServerPort.getText()));
+            if (proxyCheckBox.isSelected()) {
                 clientController.setProxy(true);
-                clientController.setProxyHost(getProxyHost());
-                clientController.setProxyPort(getProxyPort());
+                clientController.setProxyHost(txtProxyHost.getText());
+                clientController.setProxyPort(Integer.parseInt(txtProxyPort.getText()));
             } else {
                 clientController.setProxy(false);
             }
@@ -102,45 +108,5 @@ public class SignUpController {
             e.printStackTrace();
             clientController.display(e.toString(), MESSAGE_TYPE_ADMIN);
         }
-    }
-
-    public void setClientController(ClientController clientController) {
-        this.clientController = clientController;
-    }
-
-    public String getUserName() {
-        return txtUserName.getText();
-    }
-
-    public boolean isConnect() {
-        return connect;
-    }
-
-    public String getPassword() {
-        return txtPassword.getText();
-    }
-
-    public String getUserRoom() {
-        return choiceRoom.getValue();
-    }
-
-    public String getServerName() {
-        return txtServerName.getText();
-    }
-
-    public int getServerPort() {
-        return Integer.parseInt(txtServerPort.getText());
-    }
-
-    public String getProxyHost() {
-        return txtProxyHost.getText();
-    }
-
-    public int getProxyPort() {
-        return Integer.parseInt(txtProxyPort.getText());
-    }
-
-    public boolean isProxyCheckBox() {
-        return proxyCheckBox.isSelected();
     }
 }
