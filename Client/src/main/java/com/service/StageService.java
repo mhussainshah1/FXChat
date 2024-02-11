@@ -1,9 +1,10 @@
-package com.common;
+package com.service;
 
 import com.controller.ClientController;
 import com.controller.LoginController;
 import com.controller.SignUpController;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -12,21 +13,22 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class DBUtils {
+public class StageService {
 
-    public static void changeScene(ActionEvent event, String fxmlFile, String title, String username, String room, ClientController clientController) {
+    private ClientController clientController;
+
+    @FXML
+    public void changeScene(ActionEvent event, String fxmlFile, String title, String username, String room) {
         Parent root = null;
         try {
-            var loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
+            var loader = new FXMLLoader(StageService.class.getResource(fxmlFile));
             root = loader.load();
             if(fxmlFile.equals("/com/controller/signup.fxml")){
                 SignUpController signUpController = loader.getController();
                 signUpController.setClientController(clientController);
-                clientController.setSignUpController(signUpController);
             } else {
                 LoginController loginController = loader.getController();
                 loginController.setClientController(clientController);
-                clientController.setLoginController(loginController);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -36,5 +38,13 @@ public class DBUtils {
         stage.setTitle(title);
         stage.setScene(new Scene(root, 250, 400));
         stage.show();
+    }
+
+    public ClientController getClientController() {
+        return clientController;
+    }
+
+    public void setClientController(ClientController clientController) {
+        this.clientController = clientController;
     }
 }

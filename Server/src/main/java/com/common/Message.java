@@ -109,14 +109,6 @@ public class Message implements Serializable {
         return list;
     }
 
-    public boolean isIgnored() {
-        return ignored;
-    }
-
-    public void setIgnored(boolean ignored) {
-        this.ignored = ignored;
-    }
-
     public Label getLabel() {
         return label;
     }
