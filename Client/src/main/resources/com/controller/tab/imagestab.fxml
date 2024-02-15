@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.TilePane?>
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.controller.tab.ImagesTabController"
+            style="-fx-font-weight: bold;">
+    <center>
+        <ScrollPane hbarPolicy="ALWAYS" prefHeight="418.0" prefWidth="190.0"
+                    style="-fx-background-color: white;" vbarPolicy="ALWAYS"
+                    BorderPane.alignment="CENTER">
+            <TilePane fx:id="tilePane" hgap="10.0" prefColumns="4" prefHeight="398.0"
+                      prefWidth="188.0" style="-fx-background-color: white;" vgap="10.0">
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
+                <opaqueInsets>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                </opaqueInsets>
+                <Label alignment="CENTER" contentDisplay="GRAPHIC_ONLY"
+                       onMouseClicked="#iconHandler" onMouseEntered="#iconHandler"
+                       onMouseExited="#iconHandler" prefWidth="30.0" text="0">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo0.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler"
+                       prefWidth="35.0" text="1">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo1.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler"
+                       prefWidth="35.0" text="2">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo2.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler"
+                       prefWidth="34.0" text="3">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo3.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler"
+                       prefWidth="34.0" text="4">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo4.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler"
+                       prefWidth="34.0" text="5">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo5.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler"
+                       prefWidth="30.0" text="6">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo6.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler"
+                       prefHeight="30.0" prefWidth="34.0" text="7">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo7.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler"
+                       prefWidth="30.0" text="8">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo8.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler"
+                       prefWidth="34.0" text="9">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo9.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler"
+                       prefWidth="34.0" text="10">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo10.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler"
+                       prefWidth="34.0" text="11">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo11.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler"
+                       prefWidth="34.0" text="12">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo12.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler"
+                       prefWidth="34.0" text="13">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo13.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler"
+                       prefWidth="34.0" text="14">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo14.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler" text="15">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo15.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler" text="16">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo16.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler" text="17">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo17.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler" text="18">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo18.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler" text="19">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo19.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+                <Label contentDisplay="GRAPHIC_ONLY" onMouseClicked="#iconHandler"
+                       onMouseEntered="#iconHandler" onMouseExited="#iconHandler" text="20">
+                    <graphic>
+                        <ImageView pickOnBounds="true">
+                            <Image url="@../../../icons/photo20.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+            </TilePane>
+        </ScrollPane>
+    </center>
+</BorderPane>

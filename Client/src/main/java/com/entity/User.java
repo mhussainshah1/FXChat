@@ -1,4 +1,10 @@
 package com.entity;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class User {
     private String userName;
     private String password;
@@ -6,12 +12,38 @@ public class User {
     private int serverPort;
     private String serverName;
     private int maximumGuestNumber;
-    private String roomList;
+    private Set<String> roomList;
     private boolean proxyState;
     private int proxyPort;
     private String proxyHost;
+    private Set<Client> clients;
 
     public User() {
+        userName = "Anonymous";
+        password = "Anonymous";
+        roomName = "General";
+        serverPort = 1436;
+        serverName = "localhost";
+        maximumGuestNumber = 50;
+        roomList = new HashSet<>(/*List.of("General", "Teen", "Music", "Party")*/);
+        proxyState = false;
+        proxyHost = "";
+        proxyPort = 0;
+        clients = new HashSet<>();
+    }
+
+    public User(String userName, String password, String roomName, String serverName, int serverPort, int maximumGuestNumber, Set<String> roomList, boolean proxyState, String proxyHost, int proxyPort) {
+        this();
+        this.userName = userName;
+        this.password = password;
+        this.roomName = roomName;
+        this.serverPort = serverPort;
+        this.serverName = serverName;
+        this.maximumGuestNumber = maximumGuestNumber;
+        this.roomList = roomList;
+        this.proxyState = proxyState;
+        this.proxyHost = proxyHost;
+        this.proxyPort = proxyPort;
     }
 
     public String getUserName() {
@@ -62,11 +94,11 @@ public class User {
         this.maximumGuestNumber = maximumGuestNumber;
     }
 
-    public String getRoomList() {
+    public Set<String> getRoomList() {
         return roomList;
     }
 
-    public void setRoomList(String roomList) {
+    public void setRoomList(Set<String> roomList) {
         this.roomList = roomList;
     }
 
@@ -92,5 +124,13 @@ public class User {
 
     public void setProxyHost(String proxyHost) {
         this.proxyHost = proxyHost;
+    }
+
+    public Set<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(Set<Client> clients) {
+        this.clients = clients;
     }
 }

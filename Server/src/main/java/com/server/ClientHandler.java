@@ -194,13 +194,12 @@ public class ClientHandler extends Thread implements CommonSettings {
 
     //Function To Add a New Client in to the Server List
     protected void addUser(Socket socket, String[] tokens) {
-
         String tokenUserName = tokens[0];
         String tokenRoomName = tokens[1];
 
         //If Username Exists return
         if (isUserExists(tokenUserName)) {
-            sendMessageToClient(socket, "EXIS");
+            sendMessageToClient(socket, "EXCP User name already exists... try again with another name!");
             return;
         }
 

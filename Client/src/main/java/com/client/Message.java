@@ -46,7 +46,6 @@ public class Message implements Serializable {
     private final Label label;
     private final DateTimeFormatter dateTimeFormatter;
     private List<Node> list;
-    private boolean ignored;
 
     // constructor
 //    @Autowired
@@ -61,6 +60,7 @@ public class Message implements Serializable {
         this.list = new ArrayList<>();
     }
 
+    //Instance Methods
     public Text formatMessage(Text text, int messageType) {
         text.setFont(Font.font("Arial", 14));
         switch (messageType) {
@@ -111,14 +111,7 @@ public class Message implements Serializable {
         return list;
     }
 
-    public boolean isIgnored() {
-        return ignored;
-    }
-
-    public void setIgnored(boolean ignored) {
-        this.ignored = ignored;
-    }
-
+    //Beans Method
     public Label getLabel() {
         return label;
     }

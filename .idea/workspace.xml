@@ -5,77 +5,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ae00108-7c51-48a7-a71f-40959247da48" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Client/src/To-Do" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/config/ProjectConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/FXChat.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/aws.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/ImagesTabController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/RoomsTabController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/TabPaneManagerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/UsersTabController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/entity/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/tab/imagestab.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/tab/roomstab.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/tab/tabpanemanager.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/tab/userstab.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/.idea/libraries/FX.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/ClientApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/ClientApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/client/ChatClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/client/ChatClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/common/DBUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/service/StageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/common/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/entity/Data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/common/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/client/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/client/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/client/Message.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/ClientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/PrivateChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/PrivateChatController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/SignUpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/SignUpController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/entity/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/controller/chatclient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/chatclient.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/controller/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/test/java/utils/help/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/test/java/utils/help/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/test/java/utils/help/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/test/java/utils/help/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/controller/signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/signup.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/com/ClientApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/ClientApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/com/client/ChatClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/client/ChatClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/common/DBUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/common/Data.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/common/Message.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/client/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/client/Message.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/ClientController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/ClientController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/LoginController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/PrivateChatController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/PrivateChatController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/SignUpController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/SignUpController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/chatclient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/chatclient.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/signup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/entity/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/module-info.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/.idea/description.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/.idea/libraries/FX.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/.idea/project-template.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/ServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/ServerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/common/DBUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/common/DBUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/common/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/common/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/controller/ServerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/server/ChatServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/server/ChatServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/test/java/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/test/java/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/test/java/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/test/java/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/test/java/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/test/java/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/test/java/ServerConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/test/java/ServerConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/ServerApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/ServerApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/common/DBUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/common/DBUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/common/Data.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/common/Data.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/common/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/common/Message.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/ServerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/controller/ServerController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/server/ChatServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/server/ChatServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/server/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/server/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/server/ClientHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.properties" beforeDir="false" afterPath="$PROJECT_DIR$/data.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,41 +54,74 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="FxmlFile" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2c8ZdNWZvQq4Ygtq0pzrngoBHNN" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ServerApplication.executor": "Run",
-    "Maven.FXChat [clean].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.ClientApplication.executor": "Run",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/m_hus/OneDrive/Documents/Java/IdeaProjects/Chat-TODO/FXChat/Client/src/main/java/com/entity/Data.java",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "two.files.diff.last.used.file": "C:/Users/m_hus/OneDrive/Documents/Java/IdeaProjects/Chat-TODO/FXChat/Client/src/main/java/com/entity/Data.java",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.FXChat [clean].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ClientApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/m_hus/OneDrive/Documents/Java/IdeaProjects/Chat-TODO/FXChat/Client/src/main/java/com/controller&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/java/demo&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;two.files.diff.last.used.file&quot;: &quot;C:/Users/m_hus/OneDrive/Documents/Java/IdeaProjects/Chat-TODO/FXChat/Client/src/main/java/com/entity/Data.java&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\m_hus\OneDrive\Documents\Java\IdeaProjects\Chat-TODO\FXChat\Client\src\main\java\com\controller" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.controller.tab" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.entity" />
+    </key>
+  </component>
   <component name="RunManager" selected="Spring Boot.ClientApplication">
     <configuration name="ServerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ServerApplication" />
@@ -132,7 +136,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ClientApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+    <configuration name="ClientApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false" nameIsGenerated="true">
       <module name="Client" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.ClientApplication" />
       <extension name="coverage">
@@ -145,9 +149,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.ServerApplication" />
+      <item itemvalue="Spring Boot.ClientApplication" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.ClientApplication" />
         <item itemvalue="Application.ServerApplication" />
       </list>
     </recent_temporary>
@@ -155,7 +162,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-17.0.9-corretto-17.0.9-3183f394aec4-8f899f12" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
       </set>
     </attachedChunks>
   </component>
@@ -168,6 +175,10 @@
       <option name="presentableId" value="Default" />
       <updated>1707495253697</updated>
       <workItem from="1707495257837" duration="3542000" />
+      <workItem from="1707574777706" duration="6355000" />
+      <workItem from="1707932391867" duration="10000" />
+      <workItem from="1707993347272" duration="20689000" />
+      <workItem from="1708014227576" duration="1742000" />
     </task>
     <servers />
   </component>

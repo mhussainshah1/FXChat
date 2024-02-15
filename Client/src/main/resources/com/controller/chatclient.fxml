@@ -6,12 +6,15 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.TextFlow?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0"
-            prefWidth="778.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+<BorderPane maxHeight="-Infinity"
+            maxWidth="-Infinity"
+            minHeight="-Infinity"
+            minWidth="-Infinity"
+            prefHeight="575.0"
+            prefWidth="778.0"
+            xmlns="http://javafx.com/javafx/18"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.controller.ClientController">
-    <!--   child controllers-->
-<!--    <fx:include fx:id="login" source="login.fxml"/>-->
-<!--    <fx:include fx:id="signup" source="signup.fxml"/>-->
     <bottom>
         <BorderPane BorderPane.alignment="CENTER">
             <left>
@@ -35,10 +38,12 @@
         </BorderPane>
     </bottom>
     <right>
-        <BorderPane BorderPane.alignment="CENTER">
+        <BorderPane fx:id="rightPane" BorderPane.alignment="CENTER" disable="true">
             <center>
-                <TabPane fx:id="rightPane" disable="true" prefHeight="456.0" prefWidth="200.0"
-                         style="-fx-border-color: orange; -fx-border-width: 5;" tabClosingPolicy="UNAVAILABLE">
+                <TabPane prefHeight="456.0"
+                         prefWidth="200.0"
+                         style="-fx-border-color: orange; -fx-border-width: 5;"
+                         tabClosingPolicy="UNAVAILABLE">
                     <Tab style="-fx-font-weight: bold; -fx-font-color: white;" text="Users">
                         <BorderPane>
                             <bottom>

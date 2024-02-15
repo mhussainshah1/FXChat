@@ -23,4 +23,5 @@ open module client {
 
     exports com.config;
     exports com.entity;
+    exports com.controller.tab;
 }

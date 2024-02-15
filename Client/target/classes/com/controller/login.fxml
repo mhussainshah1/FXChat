@@ -34,22 +34,22 @@
     <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Proxy Host  (Socks)" GridPane.rowIndex="6" />
     <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Proxy Port (Socks)" GridPane.rowIndex="7" />
 
-    <TextField fx:id="txtUserName" GridPane.columnIndex="1">
+    <TextField fx:id="txtUserName" text="moe" GridPane.columnIndex="1">
         <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
         </GridPane.margin>
     </TextField>
-    <PasswordField fx:id="txtPassword" GridPane.columnIndex="1" GridPane.rowIndex="1">
+    <PasswordField fx:id="txtPassword" text="password" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
         </GridPane.margin>
     </PasswordField>
-    <TextField fx:id="txtServerName" GridPane.columnIndex="1" GridPane.rowIndex="3">
+    <TextField fx:id="txtServerName" text="localhost" GridPane.columnIndex="1" GridPane.rowIndex="3">
         <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
         </GridPane.margin>
     </TextField>
-    <TextField fx:id="txtServerPort" GridPane.columnIndex="1" GridPane.rowIndex="4">
+    <TextField fx:id="txtServerPort" text="1436" GridPane.columnIndex="1" GridPane.rowIndex="4">
         <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
         </GridPane.margin>
@@ -59,12 +59,12 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
         </GridPane.margin>
     </CheckBox>
-    <TextField fx:id="txtProxyHost" GridPane.columnIndex="1" GridPane.rowIndex="6">
+    <TextField fx:id="txtProxyHost" text="51.38.28.127" GridPane.columnIndex="1" GridPane.rowIndex="6">
         <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
         </GridPane.margin>
     </TextField>
-    <TextField fx:id="txtProxyPort" GridPane.columnIndex="1" GridPane.rowIndex="7">
+    <TextField fx:id="txtProxyPort" text="80" GridPane.columnIndex="1" GridPane.rowIndex="7">
         <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
         </GridPane.margin>
@@ -84,7 +84,7 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
         </GridPane.margin>
     </Button>
-   <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Not a data?" GridPane.rowIndex="9">
+   <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Not a user?" GridPane.rowIndex="9">
       <font>
          <Font name="Arial Rounded MT Bold" size="12.0" />
       </font></Label>
