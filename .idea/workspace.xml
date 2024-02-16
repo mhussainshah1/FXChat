@@ -5,48 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ae00108-7c51-48a7-a71f-40959247da48" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/ImagesTabController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/RoomsTabController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/TabPaneManagerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/UsersTabController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/entity/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/tab/imagestab.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/tab/roomstab.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/tab/tabpanemanager.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/tab/userstab.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/764d91c4-1a90-4c34-8e61-8a59cafe52d4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/764d91c4-1a90-4c34-8e61-8a59cafe52d4.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/ClientApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/ClientApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/client/ChatClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/client/ChatClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/client/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/client/Message.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/ClientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/PrivateChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/PrivateChatController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/SignUpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/SignUpController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/controller/chatclient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/chatclient.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/controller/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/controller/signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/signup.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/ClientApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/ClientApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/client/ChatClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/client/ChatClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/client/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/client/Message.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/ClientController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/ClientController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/PrivateChatController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/PrivateChatController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/SignUpController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/SignUpController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/chatclient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/chatclient.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/signup.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/com/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/entity/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/module-info.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/server/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/server/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/server/ClientHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.properties" beforeDir="false" afterPath="$PROJECT_DIR$/data.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

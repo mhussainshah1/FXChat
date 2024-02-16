@@ -83,7 +83,7 @@ public class LoginController {
             user.setServerName(txtServerName.getText());
             user.setServerPort(Integer.parseInt(txtServerPort.getText()));
             user.setMaximumGuestNumber(50);
-            user.setRoomList(new HashSet<>(/*List.of("General", "Teen", "Music", "Party")*/));
+            user.setRoomList(new ArrayList<>(/*List.of("General", "Teen", "Music", "Party")*/));
             user.setProxyState(proxyCheckBox.isSelected());
 
             if (proxyCheckBox.isSelected()) {

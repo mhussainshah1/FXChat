@@ -12,11 +12,11 @@ public class User {
     private int serverPort;
     private String serverName;
     private int maximumGuestNumber;
-    private Set<String> roomList;
     private boolean proxyState;
     private int proxyPort;
     private String proxyHost;
-    private Set<Client> clients;
+    private List<Client> clients;
+    private List<String> roomList;
 
     public User() {
         userName = "Anonymous";
@@ -25,14 +25,14 @@ public class User {
         serverPort = 1436;
         serverName = "localhost";
         maximumGuestNumber = 50;
-        roomList = new HashSet<>(/*List.of("General", "Teen", "Music", "Party")*/);
         proxyState = false;
         proxyHost = "";
         proxyPort = 0;
-        clients = new HashSet<>();
+        roomList = new ArrayList<>(/*List.of("General", "Teen", "Music", "Party")*/);
+        clients = new ArrayList<>();
     }
 
-    public User(String userName, String password, String roomName, String serverName, int serverPort, int maximumGuestNumber, Set<String> roomList, boolean proxyState, String proxyHost, int proxyPort) {
+    public User(String userName, String password, String roomName, String serverName, int serverPort, int maximumGuestNumber, List<String> roomList, boolean proxyState, String proxyHost, int proxyPort) {
         this();
         this.userName = userName;
         this.password = password;
@@ -94,11 +94,11 @@ public class User {
         this.maximumGuestNumber = maximumGuestNumber;
     }
 
-    public Set<String> getRoomList() {
+    public List<String> getRoomList() {
         return roomList;
     }
 
-    public void setRoomList(Set<String> roomList) {
+    public void setRoomList(List<String> roomList) {
         this.roomList = roomList;
     }
 
@@ -126,11 +126,11 @@ public class User {
         this.proxyHost = proxyHost;
     }
 
-    public Set<Client> getClients() {
+    public List<Client> getClients() {
         return clients;
     }
 
-    public void setClients(Set<Client> clients) {
+    public void setClients(List<Client> clients) {
         this.clients = clients;
     }
 }
