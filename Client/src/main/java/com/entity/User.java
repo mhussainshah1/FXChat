@@ -23,7 +23,7 @@ public class User {
         serverPort = 1436;
         serverName = "localhost";
         maximumGuestNumber = 50;
-        roomList = new ArrayList<>(List.of("General", "Teen", "Music", "Party"));
+        roomList = new ArrayList<>();
         proxyState = false;
         proxyHost = "";
         proxyPort = 0;

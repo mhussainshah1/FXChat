@@ -21,7 +21,7 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
 
     <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Nick Name" />
@@ -38,7 +38,7 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
         </GridPane.margin>
     </TextField>
-    <PasswordField fx:id="txtPassword" GridPane.columnIndex="1" GridPane.rowIndex="1">
+    <PasswordField fx:id="txtPassword" text="password" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
         </GridPane.margin>
@@ -83,16 +83,17 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
         </GridPane.margin>
     </Button>
-   <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Already a member?" GridPane.rowIndex="9">
-      <font>
-         <Font name="Arial Rounded MT Bold" size="12.0" />
-      </font></Label>
-   <Button fx:id="button_log_in" mnemonicParsing="false" onAction="#actionHandler" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Log In!" textFill="#0b40d2" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="9">
-      <font>
-         <Font name="Arial Rounded MT Bold" size="12.0" />
-      </font>
-      <GridPane.margin>
-         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-      </GridPane.margin>
-   </Button>
+    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Already a member?" GridPane.rowIndex="9">
+        <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+        </font>
+    </Label>
+    <Button fx:id="button_log_in" mnemonicParsing="false" onAction="#actionHandler" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Log In!" textFill="#0b40d2" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="9">
+        <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+        </font>
+        <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </GridPane.margin>
+    </Button>
 </GridPane>

@@ -20,10 +20,10 @@ public class Server {
     private final SimpleDateFormat sdf;
     // the port number to listen for connection
     private final int port;
-    // to check if server is running
-    private boolean keepGoing;
     // notification
     private final String notif = " *** ";
+    // to check if server is running
+    private boolean keepGoing;
 
     //constructor that receive the port to listen to for connection as parameter
 

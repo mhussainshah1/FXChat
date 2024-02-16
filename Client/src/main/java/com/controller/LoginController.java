@@ -1,7 +1,6 @@
 package com.controller;
 
 import com.common.CommonSettings;
-import com.common.Data;
 import com.entity.User;
 import com.service.StageService;
 import javafx.collections.FXCollections;
@@ -96,7 +95,7 @@ public class LoginController {
             user.setServerName(txtServerName.getText());
             user.setServerPort(Integer.parseInt(txtServerPort.getText()));
             user.setMaximumGuestNumber(50);
-            user.setRoomList(new ArrayList<>(List.of("General", "Teen", "Music", "Party")));
+            user.setRoomList(new ArrayList<>());
             user.setProxyState(proxyCheckBox.isSelected());
 
             if (proxyCheckBox.isSelected()) {

@@ -86,14 +86,12 @@ public class ChatClient {
                     // ADD RFC
                     else if (command.equalsIgnoreCase("ADD")) {
                         clientController.handleLogin(tokens);
-                    } else if (command.equalsIgnoreCase("EXCP")) {
-                        String[] tokensMsg = serverData.split(" ", 2);
-                        clientController.handleException(tokensMsg);
                     }
 
-                    // If Username Already Exists
-                    else if (command.equalsIgnoreCase("EXIS")) {
-                        clientController.handleUserExist();
+                    // ECXP <<message>>
+                    else if (command.equalsIgnoreCase("EXCP")) {
+                        String[] tokensMsg = serverData.split(" ", 2);
+                        clientController.handleException(tokensMsg);
                     }
 
                     // REMOVE User RFC Coding

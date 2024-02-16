@@ -2,21 +2,12 @@ package com;
 
 import com.common.CommonSettings;
 import com.controller.ClientController;
-import com.controller.LoginController;
-import com.controller.PrivateChatController;
-import com.controller.SignUpController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-
-import static com.common.CommonSettings.PRIVATE_WINDOW_HEIGHT;
-import static com.common.CommonSettings.PRIVATE_WINDOW_WIDTH;
 
 public class ClientApplication extends Application {
 

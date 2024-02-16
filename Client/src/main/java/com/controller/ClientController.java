@@ -61,7 +61,6 @@ public class ClientController {
     private MenuItem logoutMenuItem;
     private ArrayList<PrivateChatController> privateWindows;
     private User user;
-    private int totalClientCount;
     private ChatClient chatClient;
     private Message messageObject;
     private String selectedUser, selectedRoom;
@@ -117,11 +116,6 @@ public class ClientController {
         }
     }
 
-    public void shutdown() {
-        quitConnection(QUIT_TYPE_DEFAULT);
-        Platform.exit();
-    }
-
     @FXML
     private void txtHandler(ActionEvent e) {
         btnSend.fire();
@@ -146,7 +140,6 @@ public class ClientController {
     private void listViewHandler(MouseEvent mouseEvent) {
 
         if (mouseEvent.getEventType() == MouseEvent.MOUSE_CLICKED) {
-            txtUserCount.setText("");
             btnIgnoreUser.setText("Ignore User");
             if (mouseEvent.getSource().equals(userView)) {
                 var userSelModel = userView.getSelectionModel();
@@ -154,16 +147,17 @@ public class ClientController {
                 Label label = selectedItems.get(0);
                 selectedUser = label.getText();
 
-                if (isIgnoredUser(selectedUser))
+                if (isIgnoredUser(selectedUser)) {
                     btnIgnoreUser.setText("Allow User");
-                else
+                } else {
                     btnIgnoreUser.setText("Ignore User");
-
+                }
                 if ((mouseEvent.getClickCount() == 2) /*&& (!(selectedUser.equals("")))*/ && (!(selectedUser.equals(user.getUserName())))) {
                     handlePrivateChat(new String[]{null, selectedUser, null});
                 }
             }
 
+            txtUserCount.setText("");
             if (mouseEvent.getSource().equals(roomView)) {
                 MultipleSelectionModel<Label> selectionModel = roomView.getSelectionModel();
                 ObservableList<Label> selectedItems = selectionModel.getSelectedItems();
@@ -179,6 +173,7 @@ public class ClientController {
     }
 
     //Instance Method
+
     public void openLoginWindow() throws IOException {
         showLoginStage();
         messageBoard.getChildren().clear();
@@ -244,6 +239,11 @@ public class ClientController {
         return privateChatController;
     }
 
+    public void shutdown() {
+        quitConnection(QUIT_TYPE_DEFAULT);
+        Platform.exit();
+    }
+
     void connectToServer(String code) throws IOException {
         chatClient = createClient();
         chatClient.startConnection(user.isProxyState(), code);
@@ -263,64 +263,72 @@ public class ClientController {
         List<Node> nodes = messageObject.parseMessage(message, type);
         messageBoard.getChildren().addAll(nodes);
     }
+
     //Function To Update the Information Label
-
     private void updateInformationLabel() {
-        String builder = "User Name: " + user.getUserName() + "       " +
-                "Room Name: " + user.getRoomName() + "       " +
-                "No. Of Users: " + totalClientCount + "       ";
+        String builder = "User Name: " + user.getUserName() + "\t\t" +
+                "Room Name: " + user.getRoomName() + "\t\t" +
+                "No. Of Users: " + user.getClients().size() + "\t\t";
         informationLabel.setText(builder);
-    }
-    // LIST ali amir
 
+        try {
+            getRoomUserCount(user.getRoomName());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.print("ChatClientController - users [");
+        for (Client client : user.getClients()) {
+            System.out.print(client.getClientName() + " ");
+        }
+        System.out.println("]");
+    }
+
+    // LIST ali amir
     public void handleList(String[] tokens) {
-        totalClientCount = tokens.length - 1;
-        //Update the Information Label
-        updateInformationLabel();
         //Add Label into ListView for Users
         userView.getItems().clear();
+        user.getClients().clear();
         for (int j = 1; j < tokens.length; j++) {
             Label label = new Label(tokens[j], new ImageView(getClass().getResource("/icons/photo11.gif").toString()));
             addClient(userView, label);
         }
+        selectedRoom = user.getRoomName();
+
+        //Update the Information Label
+        updateInformationLabel();
+
         messageBoard.getChildren().clear();
         display("Welcome To The " + user.getRoomName() + " Room!", MESSAGE_TYPE_JOIN);
     }
-    // ROOM General Teen Music Party
 
+    // ROOM General Teen Music Party
     public void handleRoom(String[] tokens) {
-        //userRoom = tokens[1];
-        updateInformationLabel();
         //Add User Item into User Canvas
         roomView.getItems().clear();
+//        user.getRoomList().clear();
         // Loading Room List in to Room Canvas
         for (int j = 1; j < tokens.length; j++) {
             Label label = new Label(tokens[j], new ImageView(getClass().getResource("/icons/photo13.gif").toString()));
             addRoom(roomView, label);
         }
     }
+
     // ADD amir
-
     public void handleLogin(String[] tokens) {
-        //Update the Information Label
-        totalClientCount++;
-        updateInformationLabel();
-
         //Add User Item into User Canvas
         String tokenUserName = tokens[1];
         enablePrivateWindow(tokenUserName);
         Label label = new Label(tokenUserName, new ImageView(getClass().getResource("/icons/photo11.gif").toString()));
         addClient(userView, label);
+
+        //Update the Information Label
+        updateInformationLabel();
+
         display(tokenUserName + " joins chat...", MESSAGE_TYPE_JOIN);
     }
 
     public void handleUserException(String[] tokensMsg) {
-        quitConnection(QUIT_TYPE_NULL);
-    }
-    // EXIS
-
-    public void handleUserExist() {
-        display("User name already exists... try again with another name!", MESSAGE_TYPE_ADMIN);
         quitConnection(QUIT_TYPE_NULL);
     }
 
@@ -330,14 +338,14 @@ public class ClientController {
 
         removeClient(userView, tokenUserName);
         removeUserFromPrivateChat(tokenUserName);
-        display(tokenUserName + " has been logged out from chat!", MESSAGE_TYPE_LEAVE);
 
         //Update the Information Label
-        totalClientCount--;
         updateInformationLabel();
-    }
-    // EXCP user not found in the database!
 
+        display(tokenUserName + " has been logged out from chat!", MESSAGE_TYPE_LEAVE);
+    }
+
+    // EXCP user not found in the database!
     public void handleException(String[] tokens) {
         String message = tokens[1];
         display("Server: " + message, MESSAGE_TYPE_ADMIN);
@@ -347,8 +355,8 @@ public class ClientController {
         alert.show();
         quitConnection(QUIT_TYPE_NULL);
     }
-    // MESS amir <Hi all>
 
+    // MESS amir <Hi all>
     public void handleMessage(String[] tokens) {
         String userName = tokens[1];
         String message = tokens[2];
@@ -359,61 +367,61 @@ public class ClientController {
         } else if (!(isIgnoredUser(userName)))
             display(userName + ": " + message, MESSAGE_TYPE_DEFAULT);
     }
-    // KICK
 
+    // KICK
     public void handleKickUser() {
         display("You are Kicked Out From Chat for flooding the message!", MESSAGE_TYPE_ADMIN);
         quitConnection(QUIT_TYPE_KICK);
     }
-    // INKI ali
 
+    // INKI ali
     public void handleKickUserInfo(String[] tokens) {
         String tokenUserName = tokens[1];
         removeClient(userView, tokenUserName);
         removeUserFromPrivateChat(tokenUserName);
-        display(tokenUserName + " has been kicked Out from Chat by the Administrator!", MESSAGE_TYPE_ADMIN);
 
         //Update the Information Label
-        totalClientCount--;
         updateInformationLabel();
-    }
-    // CHRO Teen
 
+        display(tokenUserName + " has been kicked Out from Chat by the Administrator!", MESSAGE_TYPE_ADMIN);
+    }
+
+    // CHRO Teen
     public void handleChangeRoom(String userRoom) {
         user.setRoomName(userRoom);
     }
-    // JORO ali
 
+    // JORO ali
     public void handleJoinRoom(String[] tokens) {
         String tokenUserName = tokens[1];
         Label label = new Label(tokenUserName, new ImageView(getClass().getResource("/icons/photo11.gif").toString()));
         addClient(userView, label);
+
         //Update the Information Label
-        totalClientCount++;
         updateInformationLabel();
 
         display(tokenUserName + " joins chat...", MESSAGE_TYPE_JOIN);
     }
-    // LERO amir Teen
 
+    // LERO amir Teen
     public void handleLeaveRoom(String[] tokens) {
         String tokenUserName = tokens[1];
         String tokenRoomName = tokens[2];
         removeClient(userView, tokenUserName);
-        display(tokenUserName + " has left " + user.getRoomName() + " Room and joined into " + tokenRoomName + " Room", MESSAGE_TYPE_ADMIN);
 
         //Update the Information Label
-        totalClientCount--;
         updateInformationLabel();
-    }
-    // ROCO General 2
 
+        display(tokenUserName + " has left " + user.getRoomName() + " Room and joined into " + tokenRoomName + " Room", MESSAGE_TYPE_ADMIN);
+    }
+
+    // ROCO General 2
     public void handleRoomCount(String[] tokens) {
         String tokenRoomName = tokens[1];
         txtUserCount.setText("Total Users in " + tokenRoomName + " : " + tokens[2]);
     }
-    // PRIV ali hi
 
+    // PRIV ali hi
     public void handlePrivateChat(String[] tokens) {
         String userName = tokens[1];
         String message = tokens[2];
@@ -452,7 +460,16 @@ public class ClientController {
 
     // Function To add the Given Item From the List Array
     public void addClient(ListView<Label> listView, Label label) {
-        user.getClients().add(new Client(label.getText()));
+        boolean found = false;
+        for (Client client : user.getClients()) {
+            if (client.getClientName().equalsIgnoreCase(label.getText())) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            user.getClients().add(new Client(label.getText()));
+        }
         listView.getItems().add(label);
     }
 
@@ -506,14 +523,7 @@ public class ClientController {
     }
 
     //Function To Get the Index of Give Message from List Array
-
     public Client getClientByClientName(String clientName) {
-        System.out.print("ChatClientController - users [");
-        for (Client client : user.getClients()) {
-            System.out.print(client.getClientName() + ",");
-        }
-        System.out.println("]");
-
         for (Client client : user.getClients()) {
             //Label client = message.getLabel();
             if (client.getClientName().equalsIgnoreCase(clientName)) {
@@ -529,7 +539,6 @@ public class ClientController {
     }
 
     //Enable the Private Chat when the End User logged out
-
     public PrivateChatController getPrivateWindowByUserName(String userName) {
         for (PrivateChatController privateWindow : privateWindows) {
             if (privateWindow.getUserName().equalsIgnoreCase(userName)) {
@@ -546,8 +555,8 @@ public class ClientController {
             privateWindow.enableAll();
         }
     }
-    //Disable the Private Chat when the End User logged out
 
+    //Disable the Private Chat when the End User logged out
     private void removeUserFromPrivateChat(String toUserName) {
         PrivateChatController privateWindow = getPrivateWindowByUserName(toUserName);
         if (privateWindow != null) {
@@ -555,11 +564,12 @@ public class ClientController {
             privateWindow.disableAll();
         }
     }
-    //Function To Send Private Message To Server
 
+    //Function To Send Private Message To Server
     public void sentPrivateMessageToServer(String message, String toUserName) throws IOException {
         chatClient.sendMessageToServer("PRIV " + toUserName + " " + user.getUserName() + " " + message);
     }
+
     private void addPrivateWindow(PrivateChatController privateWindow) {
         privateWindows.add(privateWindow);
     }
@@ -585,10 +595,10 @@ public class ClientController {
             return;
         }
         chatClient.sendMessageToServer("CHRO " + user.getUserName() + " " + selectedRoom);
+        getRoomUserCount(selectedRoom);
     }
 
     // Function to Send an RFC for Get a Room User Count
-
     protected void getRoomUserCount(String RoomName) throws IOException {
         chatClient.sendMessageToServer("ROCO " + RoomName);
     }
@@ -610,7 +620,7 @@ public class ClientController {
         control(false);
         user.setUserName("");
         user.setRoomName("");
-        totalClientCount = 0;
+        user.getClients().clear();
         userView.getItems().clear();
     }
 

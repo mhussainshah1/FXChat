@@ -10,19 +10,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 import static com.common.CommonSettings.MESSAGE_TYPE_ADMIN;
 
 
 public class ServerController {
+    private final String serverName = "localhost";
+    private final int serverPort = 1436;
+    private final int maximumGuestNumber = 50;
     public ScrollPane sp_main;
     @FXML
     private Button btnStop;
@@ -40,9 +39,6 @@ public class ServerController {
     private TextField txtMessage;
     @FXML
     private Button btnSendMessage;
-    private final String serverName = "localhost";
-    private final int serverPort = 1436;
-    private final int maximumGuestNumber = 50;
     private Message message;
     private ChatServer server;
 

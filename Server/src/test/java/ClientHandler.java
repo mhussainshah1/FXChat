@@ -47,8 +47,9 @@ public class ClientHandler implements Runnable {
             }
         }
     }
+
     private void outToAll(String msg) {
-        for (ClientHandler clientHandler : clients){
+        for (ClientHandler clientHandler : clients) {
             clientHandler.out.println(msg);
         }
     }

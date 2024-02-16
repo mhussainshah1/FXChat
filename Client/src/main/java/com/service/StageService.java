@@ -23,7 +23,7 @@ public class StageService {
         try {
             var loader = new FXMLLoader(StageService.class.getResource(fxmlFile));
             root = loader.load();
-            if(fxmlFile.equals("/com/controller/signup.fxml")){
+            if (fxmlFile.equals("/com/controller/signup.fxml")) {
                 SignUpController signUpController = loader.getController();
                 signUpController.setClientController(clientController);
             } else {

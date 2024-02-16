@@ -12,10 +12,11 @@ public class Server {
     private static final int PORT = 9090;
     private static final List<ClientHandler> clients = new ArrayList<>();
     private static final ExecutorService pool = Executors.newFixedThreadPool(4);
+
     public static void main(String[] args) throws IOException {
         ServerSocket listner = new ServerSocket(PORT);
 
-        while(true){
+        while (true) {
             System.out.println("(SERVER) waiting for client connection...");
             Socket socket = listner.accept();
             System.out.println("(SERVER) connected to client!");

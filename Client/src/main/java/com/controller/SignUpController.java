@@ -3,7 +3,6 @@ package com.controller;
 import com.common.CommonSettings;
 import com.entity.User;
 import com.service.StageService;
-import com.common.Data;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -93,7 +92,7 @@ public class SignUpController {
             user.setServerName(txtServerName.getText());
             user.setServerPort(Integer.parseInt(txtServerPort.getText()));
             user.setMaximumGuestNumber(50);
-            user.setRoomList(new ArrayList<>(List.of("General", "Teen", "Music", "Party")));
+            user.setRoomList(new ArrayList<>());
             user.setProxyState(proxyCheckBox.isSelected());
 
             if (proxyCheckBox.isSelected()) {

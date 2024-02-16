@@ -15,9 +15,9 @@
         <junit.version>5.8.2</junit.version>
     </properties>
 
-   <modules>
-       <module>Server</module>
-       <module>Client</module>
-   </modules>
+    <modules>
+        <module>Server</module>
+        <module>Client</module>
+    </modules>
 
 </project>

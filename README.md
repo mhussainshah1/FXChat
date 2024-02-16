@@ -1,25 +1,32 @@
 ### Chat
 
 ### ADVANCED JAVA CHAT APPLICATION
+
 ## Developed By
+
 ## Muhammad Shah
 
-This Java Chat Application developed by my own interest, and now i am interested to share my source code with other peoples to get learn from it. I request everyone, if suppose you are using this for any college project, just dont submit as it is. Try to understand the coding and use this application for a reference and develop with your own knowledge. In Anytime, If you need any help contact me through mail.
+This Java Chat Application developed by my own interest, and now i am interested to share my source code with other
+peoples to get learn from it. I request everyone, if suppose you are using this for any college project, just dont
+submit as it is. Try to understand the coding and use this application for a reference and develop with your own
+knowledge. In Anytime, If you need any help contact me through mail.
 
 ### Requirements
+
 	* Java Run Time Environment 8 or Higer
 
 ### RFC Used In Chat
-|RFC |			Description				|
-|----|:--------------------------------------------------------:|
-|HELO| - Initialize Connection To Server 			|
-|QUIT| - Remove Users From Chat					|
-|KICK| - Kickoff From Chat					|
-|CHRO| - Change Room						|
-|MESS| - Send General Message 					|
-|PRIV| - Send Private Message					|
-|ROCO| - Get Users Count in Specfied Room			|
-|CALL| - Request for Voice Chat (Not Included with this one)	|
+
+| RFC  |                   			Description				                   |
+|------|:------------------------------------------------------:|
+| HELO |         - Initialize Connection To Server 			          |
+| QUIT |             - Remove Users From Chat					              |
+| KICK |                - Kickoff From Chat					                |
+| CHRO |                  - Change Room						                   |
+| MESS |              - Send General Message 					              |
+| PRIV |              - Send Private Message					               |
+| ROCO |         - Get Users Count in Specfied Room			          |
+| CALL | - Request for Voice Chat (Not Included with this one)	 |
 
 ### How To Run Application
 
@@ -28,20 +35,24 @@ This Java Chat Application developed by my own interest, and now i am interested
 * server.properties - used to store to port no, and room lists.
 * run ServerApplication and click start server button.
 * Server<br>
-<img src="server.png">
+  <img src="server.png">
 
 ### Client
 
-* data.properties - used to store the client information like username, server name and proxy name if you are behind firewall.
-* run ClientApplication , and enter the username and give the machine name of chatserver (if the server runs on same machine just give localhost as a servername) and click Connect Button.
+* data.properties - used to store the client information like username, server name and proxy name if you are behind
+  firewall.
+* run ClientApplication , and enter the username and give the machine name of chatserver (if the server runs on same
+  machine just give localhost as a servername) and click Connect Button.
 
 * Login Dialog <br>
-<img src="login.png">
+  <img src="login.png">
 
 * Client with private window chat dialog<br>
-<img src="client.png">
+  <img src="client.png">
 
 ### Conclusion
-I hope this will satisfy your requirements in some way. please email to give your feedback at at mhussainshah79@gmail.com. 
+
+I hope this will satisfy your requirements in some way. please email to give your feedback at at
+mhussainshah79@gmail.com. 
 	
 

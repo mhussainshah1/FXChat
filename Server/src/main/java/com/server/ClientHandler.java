@@ -200,7 +200,7 @@ public class ClientHandler extends Thread implements CommonSettings {
 
         //If Username Exists return
         if (isUserExists(tokenUserName)) {
-            sendMessageToClient(socket, "EXIS");
+            sendMessageToClient(socket, "EXCP User name already exists... try again with another name!");
             return;
         }
 
