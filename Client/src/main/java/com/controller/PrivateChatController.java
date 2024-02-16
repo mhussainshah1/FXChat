@@ -122,7 +122,7 @@ public class PrivateChatController {
 
     //Instance Methods
     private void sendMessage() throws IOException {
-        display(clientController.getUserName() + ": " + txtMessage.getText(), MESSAGE_TYPE_DEFAULT);
+        display(clientController.getUser().getUserName() + ": " + txtMessage.getText(), MESSAGE_TYPE_DEFAULT);
         clientController.sentPrivateMessageToServer(txtMessage.getText(), userName);
         txtMessage.clear();
         txtMessage.requestFocus();

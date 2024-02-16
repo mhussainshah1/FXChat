@@ -15,7 +15,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class ClientApplication extends Application {
 
-    private static String userName;
     private ClientController clientController;
     private ConfigurableApplicationContext springContext;
 

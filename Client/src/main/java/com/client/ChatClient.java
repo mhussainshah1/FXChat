@@ -1,6 +1,7 @@
 package com.client;
 
 import com.controller.ClientController;
+import com.entity.User;
 import javafx.application.Platform;
 
 import java.io.*;
@@ -14,28 +15,15 @@ import static com.common.CommonSettings.*;
 public class ChatClient {
     private final ClientController clientController;
     private final BiConsumer<Serializable, Integer> onReceiveCallback;
-    private final String userName;
-    private final String password;
-    private final String serverName;
-    private final int serverPort;
-    private final String proxyHost;
-    private final int proxyPort;
-    private String userRoom;
+    private final User user;
     private String serverData;
-    private String roomList;
     private Socket socket;
     private BufferedReader bufferedReader;
     private OutputStream outputStream;
 
-    public ChatClient(ClientController frame, String userName, String password, String userRoom, String serverName, int serverPort, String proxyHost, int proxyPort, BiConsumer<Serializable, Integer> onReceiveCallback) {
-        this.clientController = frame;
-        this.userName = userName;
-        this.password = password;
-        this.userRoom = userRoom;
-        this.serverName = serverName;
-        this.serverPort = serverPort;
-        this.proxyHost = proxyHost;
-        this.proxyPort = proxyPort;
+    public ChatClient(ClientController clientController, User user, BiConsumer<Serializable, Integer> onReceiveCallback) {
+        this.clientController = clientController;
+        this.user = user;
         this.onReceiveCallback = onReceiveCallback;
     }
 
@@ -47,24 +35,23 @@ public class ChatClient {
             SocksSocket.setSocketImplFactory(factory);
             socket = new SocksSocket(serverName, serverPort);
 */
-
-            System.setProperty("http.proxyHost", proxyHost);
-            System.setProperty("http.proxyPort", String.valueOf(proxyPort));
+            System.setProperty("http.proxyHost", user.getProxyHost());
+            System.setProperty("http.proxyPort", String.valueOf(user.getProxyPort()));
             System.setProperty("java.net.useSystemProxies", "true");
 
-            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHost, proxyPort));
+            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(user.getProxyHost(), user.getProxyPort()));
             socket = new Socket(proxy);
-            socket.connect(new InetSocketAddress(serverName, serverPort));
+            socket.connect(new InetSocketAddress(user.getServerName(), user.getServerPort()));
             socket.setSoTimeout(0);
-            System.out.println("Connected to proxy server = " + proxyHost + " at port = " + proxyPort);
+            System.out.println("Connected to proxy server = " + user.getProxyHost() + " at port = " + user.getProxyPort());
 
         } else {
             //Not Proxy
-            socket = new Socket(serverName, serverPort);
+            socket = new Socket(user.getServerName(), user.getServerPort());
         }
         socket.setTcpNoDelay(true);
         outputStream = socket.getOutputStream();
-        sendMessageToServer(code + " " + userName + " " + password + " " + userRoom);
+        sendMessageToServer(code + " " + user.getUserName() + " " + user.getPassword() + " " + user.getRoomName());
         //sendMessageToServer("HELO " + userName + " " + userRoom);
         bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
@@ -85,7 +72,6 @@ public class ChatClient {
                 String[] tokens = serverData.split(" ");
                 String command = tokens[0];
 
-
                 Platform.runLater(() -> {
                     // RFC Coding
                     if (command.equalsIgnoreCase("LIST")) {
@@ -102,14 +88,10 @@ public class ChatClient {
                         clientController.handleLogin(tokens);
                     }
 
+                    // ECXP <<message>>
                     else if (command.equalsIgnoreCase("EXCP")) {
                         String[] tokensMsg = serverData.split(" ", 2);
                         clientController.handleException(tokensMsg);
-                    }
-
-                    // If Username Already Exists
-                    else if (command.equalsIgnoreCase("EXIS")) {
-                        clientController.handleUserExist();
                     }
 
                     // REMOVE User RFC Coding
@@ -135,8 +117,8 @@ public class ChatClient {
 
                     // Change Room RFC
                     else if (command.equalsIgnoreCase("CHRO")) {
-                        userRoom = tokens[1];
-                        clientController.handleChangeRoom(userRoom);
+                        user.setRoomName(tokens[1]);
+                        clientController.handleChangeRoom(user.getRoomName());
                     }
 
                     // Join Room RFC
@@ -178,9 +160,9 @@ public class ChatClient {
         if (socket != null) {
             try {
                 if (quitType == QUIT_TYPE_DEFAULT)
-                    sendMessageToServer("QUIT " + userName + " " + userRoom);
+                    sendMessageToServer("QUIT " + user.getUserName() + " " + user.getRoomName());
                 else if (quitType == QUIT_TYPE_KICK)
-                    sendMessageToServer("KICK " + userName + " " + userRoom);
+                    sendMessageToServer("KICK " + user.getUserName() + " " + user.getRoomName());
                 socket.close();
                 socket = null;
             } catch (IOException e) {
@@ -190,7 +172,7 @@ public class ChatClient {
     }
 
     public String getUserName() {
-        return userName;
+        return user.getUserName();
     }
 }
 
