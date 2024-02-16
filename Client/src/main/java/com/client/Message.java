@@ -46,7 +46,6 @@ public class Message implements Serializable {
     private final Label label;
     private final DateTimeFormatter dateTimeFormatter;
     private List<Node> list;
-    private boolean ignored;
 
     // constructor
 //    @Autowired
@@ -109,14 +108,6 @@ public class Message implements Serializable {
         }
         list.add(new Text(System.lineSeparator())); //new line separator
         return list;
-    }
-
-    public boolean isIgnored() {
-        return ignored;
-    }
-
-    public void setIgnored(boolean ignored) {
-        this.ignored = ignored;
     }
 
     public Label getLabel() {
