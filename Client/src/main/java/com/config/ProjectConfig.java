@@ -5,8 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-import java.io.*;
-import java.net.Socket;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 @Configuration
 public class ProjectConfig {

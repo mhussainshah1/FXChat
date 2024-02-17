@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.client.Message;
+import com.controller.tab.TabPaneManagerController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -23,11 +24,15 @@ import static com.common.CommonSettings.*;
 @Component
 //@Scope("prototype")
 public class PrivateChatController {
-    private Message message;
     private final ClientController clientController;
-    public ScrollPane scrollPane;
-    public Label lblTitle;
-    public ScrollPane sp_main;
+    private final TabPaneManagerController tabPaneManagerController;
+    @FXML
+    private ScrollPane scrollPane;
+    @FXML
+    private Label lblTitle;
+    @FXML
+    private ScrollPane sp_main;
+    private Message message;
     private String userName;
     @FXML
     private AnchorPane root;
@@ -49,8 +54,9 @@ public class PrivateChatController {
     private Stage stage;
 
     @Autowired
-    public PrivateChatController(ClientController clientController) {
+    public PrivateChatController(ClientController clientController, TabPaneManagerController tabPaneManagerController) {
         this.clientController = clientController;
+        this.tabPaneManagerController = tabPaneManagerController;
     }
 
     public void initialize() {
@@ -73,7 +79,7 @@ public class PrivateChatController {
             textFlow.getChildren().clear();
 
         } else if (actionEvent.getSource().equals(btnIgnoreUser)) {
-            clientController.ignoreUser(name.equals("Ignore User"), userName);
+            tabPaneManagerController.getUsersTabController().ignoreUser(name.equals("Ignore User"), userName);
 
         } else if (name.equals("Close")) {
             exitPrivateWindow();
@@ -128,13 +134,12 @@ public class PrivateChatController {
         txtMessage.requestFocus();
     }
 
-    void display(String messageText, int messageType) {
+    public void display(String messageText, int messageType) {
         List<Node> nodes = message.parseMessage(messageText, messageType);
         textFlow.getChildren().addAll(nodes);
     }
 
-    //Bean Methods
-    protected void disableAll() {
+    public void disableAll() {
         txtMessage.setDisable(true);
         btnSend.setDisable(true);
     }
@@ -146,10 +151,11 @@ public class PrivateChatController {
 
     // Exit from Private Chat
     public void exitPrivateWindow() {
-        clientController.removePrivateWindow(userName);
+        tabPaneManagerController.getUsersTabController().removePrivateWindow(userName);
         stage.close();
     }
 
+    //Bean Methods
     public Stage getStage() {
         return (Stage) btnSend.getScene().getWindow();
     }

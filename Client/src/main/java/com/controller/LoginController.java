@@ -1,7 +1,6 @@
 package com.controller;
 
 import com.common.CommonSettings;
-import com.entity.Data;
 import com.entity.User;
 import com.service.StageService;
 import javafx.collections.FXCollections;
@@ -14,20 +13,21 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
 import static com.common.CommonSettings.MESSAGE_TYPE_ADMIN;
 
 @Component
 @Scope("prototype")
 public class LoginController {
-    @FXML
-    private ChoiceBox<String> choiceRoom;
+    private final ClientController clientController;
+    private final StageService stageService;
+    private final User user;
     @FXML
     private TextField txtUserName;
     @FXML
     private PasswordField txtPassword;
+    @FXML
+    private ChoiceBox<String> choiceRoom;
     @FXML
     private TextField txtServerName;
     @FXML
@@ -39,13 +39,15 @@ public class LoginController {
     @FXML
     private CheckBox proxyCheckBox;
     private boolean connect;
-    private User user;
     private String roomName = "General";
 
+    //Constructor
     @Autowired
-    private ClientController clientController;
-    @Autowired
-    private StageService stageService;
+    public LoginController(ClientController clientController, StageService stageService, User user) {
+        this.clientController = clientController;
+        this.stageService = stageService;
+        this.user = user;
+    }
 
     //Calls automatically
     @FXML
@@ -57,7 +59,7 @@ public class LoginController {
         });
     }
 
-    //Handler
+    //Event Handler
     @FXML
     private void actionHandler(ActionEvent e) throws IOException {
         Button button = (Button) e.getTarget();
@@ -74,9 +76,9 @@ public class LoginController {
         }
     }
 
+    //Instance Method
     public void loginToChat() {
         if (connect) {
-            user = new User();
             user.setUserName(txtUserName.getText());
             user.setPassword(txtPassword.getText());
             user.setRoomName(choiceRoom.getValue());
@@ -93,7 +95,6 @@ public class LoginController {
                 user.setProxyHost("");
                 user.setProxyPort(0);
             }
-            clientController.setUser(user);
         }
         try {
             clientController.connectToServer("LOGN");

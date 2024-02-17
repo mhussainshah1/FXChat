@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.controller.TopController"
+            prefHeight="107.0"
+            prefWidth="778.0"
+            BorderPane.alignment="CENTER">
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <Menu mnemonicParsing="false" text="File">
+                <MenuItem fx:id="loginMenuItem" mnemonicParsing="false" onAction="#menuHandler" text="Login"/>
+                <MenuItem fx:id="signupMenuItem" mnemonicParsing="false" onAction="#menuHandler" text="Signup"/>
+                <MenuItem fx:id="logoutMenuItem" disable="true" mnemonicParsing="false" onAction="#menuHandler"
+                          text="Logout"/>
+                <MenuItem mnemonicParsing="false" onAction="#menuHandler" text="Exit"/>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+                <MenuItem mnemonicParsing="false" onAction="#menuHandler" text="About"/>
+            </Menu>
+        </MenuBar>
+    </top>
+    <bottom>
+        <Label fx:id="informationLabel" alignment="CENTER" maxWidth="1.7976931348623157E308"
+               text="Information Label" BorderPane.alignment="CENTER"/>
+    </bottom>
+    <center>
+        <BorderPane style="-fx-background-color: yellow;" BorderPane.alignment="CENTER">
+            <left>
+                <Label contentDisplay="GRAPHIC_ONLY" prefHeight="57.0" prefWidth="391.0" text="Default Banner"
+                       BorderPane.alignment="CENTER">
+                    <graphic>
+                        <ImageView fitHeight="49.0" fitWidth="346.0" pickOnBounds="true">
+                            <Image url="@../../images/defaultbanner.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+            </left>
+            <right>
+                <Label contentDisplay="GRAPHIC_ONLY" text="logo" BorderPane.alignment="CENTER">
+                    <graphic>
+                        <ImageView fitHeight="56.0" fitWidth="127.0" pickOnBounds="true">
+                            <Image url="@../../images/logo.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Label>
+            </right>
+        </BorderPane>
+    </center>
+</BorderPane>

@@ -1,6 +1,7 @@
 package com.client;
 
 import com.controller.ClientController;
+import com.controller.tab.TabPaneManagerController;
 import com.entity.User;
 import javafx.application.Platform;
 
@@ -14,6 +15,7 @@ import static com.common.CommonSettings.*;
 
 public class ChatClient {
     private final ClientController clientController;
+    private final TabPaneManagerController tabPaneManagerController;
     private final User user;
     private final BiConsumer<Serializable, Integer> onReceiveCallback;
     private String serverData;
@@ -21,8 +23,9 @@ public class ChatClient {
     private BufferedReader bufferedReader;
     private OutputStream outputStream;
 
-    public ChatClient(ClientController clientController, User user, BiConsumer<Serializable, Integer> onReceiveCallback) {
+    public ChatClient(ClientController clientController, TabPaneManagerController tabPaneManagerController, User user, BiConsumer<Serializable, Integer> onReceiveCallback) {
         this.clientController = clientController;
+        this.tabPaneManagerController = tabPaneManagerController;
         this.user = user;
         this.onReceiveCallback = onReceiveCallback;
     }
@@ -76,17 +79,17 @@ public class ChatClient {
                 Platform.runLater(() -> {
                     // LIST RFC
                     if (command.equalsIgnoreCase("LIST")) {
-                        clientController.handleList(tokens);
+                        tabPaneManagerController.getUsersTabController().handleList(tokens);
                     }
 
                     // ROOM RFC
                     else if (command.equalsIgnoreCase("ROOM")) {
-                        clientController.handleRoom(tokens);
+                        tabPaneManagerController.getRoomsTabController().handleRoom(tokens);
                     }
 
                     // ADD user RFC
                     else if (command.equalsIgnoreCase("ADD")) {
-                        clientController.handleLogin(tokens);
+                        tabPaneManagerController.getUsersTabController().handleLogin(tokens);
                     }
 
                     //EXCP <<Username Already Exists>>
@@ -97,13 +100,13 @@ public class ChatClient {
 
                     // REMOVE User RFC
                     else if (command.equalsIgnoreCase("REMO")) {
-                        clientController.handleLoggOff(tokens);
+                        tabPaneManagerController.getUsersTabController().handleLoggOff(tokens);
                     }
 
                     // MESS RFC
                     else if (command.equalsIgnoreCase("MESS")) {
                         String[] tokensMsg = serverData.split(" ", 3);
-                        clientController.handleMessage(tokensMsg);
+                        tabPaneManagerController.getUsersTabController().handleMessage(tokensMsg);
                     }
 
                     // KICK RFC
@@ -113,34 +116,34 @@ public class ChatClient {
 
                     // INKI RFC (Information about kicked off User
                     else if (command.equalsIgnoreCase("INKI")) {
-                        clientController.handleKickUserInfo(tokens);
+                        tabPaneManagerController.getUsersTabController().handleKickUserInfo(tokens);
                     }
 
                     // Change Room RFC
                     else if (command.equalsIgnoreCase("CHRO")) {
                         user.setRoomName(tokens[1]);
-                        clientController.handleChangeRoom(user.getRoomName());
+                        tabPaneManagerController.getRoomsTabController().handleChangeRoom(user.getRoomName());
                     }
 
                     // Join Room RFC
                     else if (command.equalsIgnoreCase("JORO")) {
-                        clientController.handleJoinRoom(tokens);
+                        tabPaneManagerController.getUsersTabController().handleJoinRoom(tokens);
                     }
 
                     // Leave Room RFC
                     else if (command.equalsIgnoreCase("LERO")) {
-                        clientController.handleLeaveRoom(tokens);
+                        tabPaneManagerController.getUsersTabController().handleLeaveRoom(tokens);
                     }
 
                     // Room Count RFC
                     else if (command.equalsIgnoreCase("ROCO")) {
-                        clientController.handleRoomCount(tokens);
+                        tabPaneManagerController.getRoomsTabController().handleRoomCount(tokens);
                     }
 
                     // Private Message RFC
                     else if (command.equalsIgnoreCase("PRIV")) {
                         String[] tokensMsg = serverData.split(" ", 3);
-                        clientController.handlePrivateChat(tokensMsg);
+                        tabPaneManagerController.getUsersTabController().handlePrivateChat(tokensMsg);
                     }
                 });
             }

@@ -1,7 +1,6 @@
 package com.controller;
 
 import com.common.CommonSettings;
-import com.entity.Data;
 import com.entity.User;
 import com.service.StageService;
 import javafx.collections.FXCollections;
@@ -14,17 +13,19 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
 import static com.common.CommonSettings.MESSAGE_TYPE_ADMIN;
 
 @Component
 @Scope("prototype")
 public class SignUpController {
-    public PasswordField txtPassword;
+    private final ClientController clientController;
+    private final StageService stageService;
+    private final User user;
     @FXML
     private TextField txtUserName;
+    @FXML
+    private PasswordField txtPassword;
     @FXML
     private ChoiceBox<String> choiceRoom;
     @FXML
@@ -39,11 +40,13 @@ public class SignUpController {
     private TextField txtProxyPort;
     private String roomName = "General";
     private boolean connect;
+
     @Autowired
-    private ClientController clientController;
-    @Autowired
-    private StageService stageService;
-    private User user;
+    public SignUpController(ClientController clientController, StageService stageService, User user) {
+        this.clientController = clientController;
+        this.stageService = stageService;
+        this.user = user;
+    }
 
     //Calls automatically
     @FXML
@@ -74,7 +77,6 @@ public class SignUpController {
 
     public void signupToChat() {
         if (connect) {
-            user = new User();
             user.setUserName(txtUserName.getText());
             user.setPassword(txtPassword.getText());
             user.setRoomName(choiceRoom.getValue());
@@ -91,7 +93,6 @@ public class SignUpController {
                 user.setProxyHost("");
                 user.setProxyPort(0);
             }
-            clientController.setUser(user);
         }
         try {
             clientController.connectToServer("SGUP");
