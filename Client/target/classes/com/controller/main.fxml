@@ -9,7 +9,7 @@
             minWidth="-Infinity"
             prefHeight="575.0"
             prefWidth="778.0"
-            fx:controller="com.controller.ClientController">
+            fx:controller="com.controller.MainController">
     <top>
         <fx:include fx:id="topPane" source="top.fxml"/>
     </top>

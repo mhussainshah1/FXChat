@@ -2,17 +2,14 @@ package com.controller;
 
 import com.ClientApplication;
 import com.client.ChatClient;
-import com.client.Message;
 import com.controller.tab.TabPaneManagerController;
 import com.entity.User;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
@@ -23,13 +20,12 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.List;
 
 import static com.common.CommonSettings.*;
 
 @Component
 //@Scope("prototype")
-public class ClientController {
+public class MainController {
     private final ConfigurableApplicationContext springContext;
     private final User user;
     @Autowired
@@ -48,18 +44,17 @@ public class ClientController {
     private ScrollPane centerPane;
     @FXML
     private BorderPane bottomPane;
-    private Message message;
     private ChatClient chatClient;
 
     @Autowired
-    public ClientController(ConfigurableApplicationContext springContext, User user) {
+    public MainController(ConfigurableApplicationContext springContext, User user) {
         this.springContext = springContext;
         this.user = user;
     }
 
     @FXML
     private void initialize() {
-        message = new Message(new Label());
+
     }
 
     //Instance Method
@@ -110,15 +105,15 @@ public class ClientController {
     // Function To Send MESS Rfc to Server
 
     public void connectToServer(String code) throws IOException {
-        chatClient = createClient();
+//        chatClient = createClient();
+        chatClient = new ChatClient(this,tabPaneManagerController,user);
         chatClient.startConnection(user.isProxyState(), code);
         enableLogin();
     }
 
     //Function To Update the Information Label
     public void display(String message, Integer type) {
-        List<Node> nodes = this.message.parseMessage(message, type);
-        centerController.getMessageBoard().getChildren().addAll(nodes);
+        centerController.display(message,type);
     }
 
     //Function To Send Private Message To Server
@@ -166,7 +161,6 @@ public class ClientController {
             chatClient.closeConnection(quitType);
 
         disableLogout();
-        topController.informationLabel.setText("Information Label");
         display("ADMIN: CONNECTION TO THE SERVER IS CLOSED.", MESSAGE_TYPE_ADMIN);
     }
 
@@ -179,19 +173,15 @@ public class ClientController {
         user.setUserName("");
         user.setRoomName("");
         user.getClients().clear();
-        tabPaneManagerController.getUsersTabController().getUserView().getItems().clear();
     }
 
-    private void control(boolean status) {
-        bottomController.getTxtMessage().setEditable(status);
-        bottomController.btnSend.setDisable(!status);
+    void control(boolean status) {
+        topController.control(status);
         rightPane.setDisable(!status);
-        topController.loginMenuItem.setDisable(status);
-        topController.signupMenuItem.setDisable(status);
-        topController.logoutMenuItem.setDisable(!status);
+        bottomController.control(status);
     }
 
-    private ChatClient createClient() {
+   /* private ChatClient createClient() {
         return new ChatClient(
                 this,
                 tabPaneManagerController,
@@ -200,14 +190,12 @@ public class ClientController {
                         Platform.runLater(() -> { //UI or background thread - manipulate a UI object, It gives control back to UI thread
                             display(data.toString(), type);
                         }));
-    }
-
+    }*/
 
     //Bean Methods
     public User getUser() {
         return user;
     }
-
 
     public void sendMessage(String text) throws IOException {
         chatClient.sendMessageToServer("MESS " + user.getRoomName() + " " + user.getUserName() + " " + text);

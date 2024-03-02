@@ -9,16 +9,15 @@ import java.net.Socket;
  */
 public class ProxyMultiThread {
     public static void main(String[] args) {
-        try {
+        String host = "38.154.227.167"; //args[0];
+        int remoteport = 5868; //Integer.parseInt(args[1]);
+        int localport = 1436; //Integer.parseInt(args[2]);
+        try (ServerSocket server = new ServerSocket(localport);){
            /* if (args.length != 3)
                 throw new IllegalArgumentException("insufficient arguments");*/
             // and the local port that we listen for connections on
-            String host = "127.0.0.1"; //args[0];
-            int remoteport = 1436; //Integer.parseInt(args[1]);
-            int localport = 1080; //Integer.parseInt(args[2]);
             // Print a start-up message
             System.out.println("Starting proxy for " + host + ":" + remoteport + " on port " + localport);
-            ServerSocket server = new ServerSocket(localport);
             while (true) {
                 new ThreadProxy(server.accept(), host, remoteport);
             }

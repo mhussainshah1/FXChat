@@ -2,16 +2,17 @@ package com.controller.tab;
 
 import com.controller.BottomController;
 import com.controller.CenterController;
-import com.controller.ClientController;
+import com.controller.MainController;
 import com.controller.TopController;
+import com.entity.User;
 import javafx.scene.control.TextField;
 import javafx.scene.text.TextFlow;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+
+import static com.common.CommonSettings.MESSAGE_TYPE_JOIN;
 
 @Component
 public class TabPaneManagerController {
@@ -20,22 +21,38 @@ public class TabPaneManagerController {
     @Autowired
     private RoomsTabController roomsTabController;
     @Autowired
+    TopController topController;
+    @Autowired
     private CenterController centerController;
     @Autowired
     private BottomController bottomController;
     @Autowired
-    private ClientController clientController;
+    private MainController mainController;
+    @Autowired
+    User user;
 
     public void display(String message, int type) {
-        clientController.display(message, type);
+        mainController.display(message, type);
     }
 
     public void getRoomUserCount(String roomName) throws IOException {
-        clientController.getRoomUserCount(roomName);
+        mainController.getRoomUserCount(roomName);
     }
 
     public void changeRoom(String userName, String selectedRoom) throws IOException {
-        clientController.changeRoom(userName, selectedRoom);
+        mainController.changeRoom(userName, selectedRoom);
+    }
+
+    public TextField getTxtMessage() {
+        return bottomController.getTxtMessage();
+    }
+
+    public TextFlow getMessageBoard() {
+        return centerController.getMessageBoard();
+    }
+
+    public void updateInformationLabel(User user) {
+        topController.updateInformationLabel(user);
     }
 
     //Beans Method
@@ -43,15 +60,7 @@ public class TabPaneManagerController {
         return roomsTabController;
     }
 
-    public TextField getTxtMessage() {
-        return bottomController.getTxtMessage();
-    }
-
     public UsersTabController getUsersTabController() {
         return usersTabController;
-    }
-
-    public TextFlow getMessageBoard() {
-        return centerController.getMessageBoard();
     }
 }

@@ -1,26 +1,22 @@
 package com.controller;
 
-import com.entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-import static com.common.CommonSettings.MESSAGE_TYPE_DEFAULT;
-
 @Component
 public class BottomController {
+    @Autowired
+    MainController mainController;
     @FXML
-    Button btnSend;
+    private Button btnSend;
     @FXML
     private TextField txtMessage;
-    @Autowired
-    ClientController clientController;
 
     //Event Handlers
     @FXML
@@ -33,7 +29,7 @@ public class BottomController {
                 sendMessage();
             }
         } else if (name.equals("Exit Chat")) {
-            clientController.shutdown();
+            mainController.shutdown();
         }
     }
 
@@ -44,9 +40,14 @@ public class BottomController {
 
     // To send a message to the text flow
     void sendMessage() throws IOException {
-        clientController.sendMessage(txtMessage.getText());
+        mainController.sendMessage(txtMessage.getText());
         txtMessage.clear();
         txtMessage.requestFocus();
+    }
+
+    void control(boolean status) {
+        txtMessage.setEditable(status);
+        btnSend.setDisable(!status);
     }
 
     public TextField getTxtMessage() {

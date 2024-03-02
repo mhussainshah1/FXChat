@@ -1,53 +1,58 @@
 package com.client;
 
-import com.controller.ClientController;
+import com.controller.MainController;
 import com.controller.tab.TabPaneManagerController;
 import com.entity.User;
 import javafx.application.Platform;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.util.function.BiConsumer;
 
 import static com.common.CommonSettings.*;
 
+@Component
 public class ChatClient {
-    private final ClientController clientController;
+    private final MainController mainController;
     private final TabPaneManagerController tabPaneManagerController;
     private final User user;
-    private final BiConsumer<Serializable, Integer> onReceiveCallback;
     private String serverData;
     private Socket socket;
     private BufferedReader bufferedReader;
     private OutputStream outputStream;
 
-    public ChatClient(ClientController clientController, TabPaneManagerController tabPaneManagerController, User user, BiConsumer<Serializable, Integer> onReceiveCallback) {
-        this.clientController = clientController;
+    @Autowired
+    public ChatClient(MainController mainController, TabPaneManagerController tabPaneManagerController, User user) {
+        this.mainController = mainController;
         this.tabPaneManagerController = tabPaneManagerController;
         this.user = user;
-        this.onReceiveCallback = onReceiveCallback;
     }
 
     public void startConnection(boolean isProxy, String code) throws IOException {
         if (isProxy) {
             //Proxy
 /*
-            SocksSocketImplFactory factory = new SocksSocketImplFactory(proxyHost, proxyPort);
+            SocksSocketImplFactory factory = new SocksSocketImplFactory( user.getProxyHost(), user.getProxyPort());
             SocksSocket.setSocketImplFactory(factory);
             socket = new SocksSocket(serverName, serverPort);
 */
-            System.setProperty("http.proxyHost", user.getProxyHost());
-            System.setProperty("http.proxyPort", String.valueOf(user.getProxyPort()));
+            System.setProperty("socksProxyHost", user.getProxyHost());
+            System.setProperty("socksProxyPort", String.valueOf(user.getProxyPort()));
             System.setProperty("java.net.useSystemProxies", "true");
+            System.setProperty("jdk.http.auth.tunneling.disabledSchemes", "");
 
-            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(user.getProxyHost(), user.getProxyPort()));
+            SocketAddress proxyAddr = new InetSocketAddress(user.getProxyHost(), user.getProxyPort());
+            Proxy proxy = new Proxy(Proxy.Type.SOCKS, proxyAddr);
             socket = new Socket(proxy);
-            socket.connect(new InetSocketAddress(user.getServerName(), user.getServerPort()));
+            InetSocketAddress address = InetSocketAddress.createUnresolved(user.getProxyHost(), user.getProxyPort()); // create a socket without resolving the target host to IP
+            socket.connect(address);
             socket.setSoTimeout(0);
             System.out.println("Connected to proxy server = " + user.getProxyHost() + " at port = " + user.getProxyPort());
-
         } else {
             //Not Proxy
             socket = new Socket(user.getServerName(), user.getServerPort());
@@ -95,7 +100,7 @@ public class ChatClient {
                     //EXCP <<Username Already Exists>>
                     else if (command.equalsIgnoreCase("EXCP")) {
                         String[] tokensMsg = serverData.split(" ", 2);
-                        clientController.handleException(tokensMsg);
+                        mainController.handleException(tokensMsg);
                     }
 
                     // REMOVE User RFC
@@ -111,7 +116,7 @@ public class ChatClient {
 
                     // KICK RFC
                     else if (command.equalsIgnoreCase("KICK")) {
-                        clientController.handleKickUser();
+                        mainController.handleKickUser();
                     }
 
                     // INKI RFC (Information about kicked off User
@@ -151,7 +156,7 @@ public class ChatClient {
             //display(e.getMessage(), CommonSettings.MESSAGE_TYPE_ADMIN);
             /*quitConnection*/
             closeConnection(QUIT_TYPE_DEFAULT);
-            onReceiveCallback.accept(e, MESSAGE_TYPE_ADMIN);
+            mainController.display(e.getMessage(), MESSAGE_TYPE_ADMIN);
             e.printStackTrace();
         }
     }

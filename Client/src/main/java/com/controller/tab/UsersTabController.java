@@ -31,7 +31,6 @@ import static com.common.CommonSettings.*;
 public class UsersTabController {
     private final ConfigurableApplicationContext springContext;
     private final TabPaneManagerController tabPaneManagerController;
-    private final TopController topController;
     private final User user;
     @FXML
     private Button btnIgnoreUser;
@@ -41,10 +40,9 @@ public class UsersTabController {
     private ArrayList<PrivateChatController> privateWindows;
 
     @Autowired
-    public UsersTabController(ConfigurableApplicationContext springContext, TabPaneManagerController tabPaneManagerController, TopController topController, User user) {
+    public UsersTabController(ConfigurableApplicationContext springContext, TabPaneManagerController tabPaneManagerController, User user) {
         this.springContext = springContext;
         this.tabPaneManagerController = tabPaneManagerController;
-        this.topController = topController;
         this.user = user;
     }
 
@@ -58,6 +56,7 @@ public class UsersTabController {
     private void listViewHandler(MouseEvent mouseEvent) {
         if (mouseEvent.getEventType() == MouseEvent.MOUSE_CLICKED) {
             btnIgnoreUser.setText("Ignore User");
+
             if (mouseEvent.getSource().equals(userView)) {
                 var userSelModel = userView.getSelectionModel();
                 ObservableList<Label> selectedItems = userSelModel.getSelectedItems();
@@ -99,7 +98,7 @@ public class UsersTabController {
         }
 
         //Update the Information Label
-        topController.updateInformationLabel();
+        tabPaneManagerController.updateInformationLabel(user);
 
         tabPaneManagerController.getMessageBoard().getChildren().clear();
         tabPaneManagerController.display("Welcome To The " + user.getRoomName() + " Room!", MESSAGE_TYPE_JOIN);
@@ -114,7 +113,7 @@ public class UsersTabController {
         addClient(userView, label);
 
         //Update the Information Label
-        topController.updateInformationLabel();
+        tabPaneManagerController.updateInformationLabel(user);
 
         tabPaneManagerController.display(tokenUserName + " joins chat...", MESSAGE_TYPE_JOIN);
     }
@@ -127,7 +126,7 @@ public class UsersTabController {
         removeUserFromPrivateChat(tokenUserName);
 
         //Update the Information Label
-        topController.updateInformationLabel();
+        tabPaneManagerController.updateInformationLabel(user);
 
         tabPaneManagerController.display(tokenUserName + " has been logged out from chat!", MESSAGE_TYPE_LEAVE);
     }
@@ -152,7 +151,7 @@ public class UsersTabController {
         removeUserFromPrivateChat(tokenUserName);
 
         //Update the Information Label
-        topController.updateInformationLabel();
+        tabPaneManagerController.updateInformationLabel(user);
 
         tabPaneManagerController.display(tokenUserName + " has been kicked Out from Chat by the Administrator!", MESSAGE_TYPE_ADMIN);
     }
@@ -164,7 +163,7 @@ public class UsersTabController {
         addClient(userView, label);
 
         //Update the Information Label
-        topController.updateInformationLabel();
+        tabPaneManagerController.updateInformationLabel(user);
 
         tabPaneManagerController.display(tokenUserName + " joins chat...", MESSAGE_TYPE_JOIN);
     }
@@ -176,7 +175,7 @@ public class UsersTabController {
         removeClient(userView, tokenUserName);
 
         //Update the Information Label
-        topController.updateInformationLabel();
+        tabPaneManagerController.updateInformationLabel(user);
 
         tabPaneManagerController.display(tokenUserName + " has left " + user.getRoomName() + " Room and joined into " + tokenRoomName + " Room", MESSAGE_TYPE_ADMIN);
     }

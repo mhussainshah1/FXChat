@@ -19,7 +19,7 @@ import static com.common.CommonSettings.MESSAGE_TYPE_ADMIN;
 @Component
 @Scope("prototype")
 public class SignUpController {
-    private final ClientController clientController;
+    private final MainController mainController;
     private final StageService stageService;
     private final User user;
     @FXML
@@ -42,8 +42,8 @@ public class SignUpController {
     private boolean connect;
 
     @Autowired
-    public SignUpController(ClientController clientController, StageService stageService, User user) {
-        this.clientController = clientController;
+    public SignUpController(MainController mainController, StageService stageService, User user) {
+        this.mainController = mainController;
         this.stageService = stageService;
         this.user = user;
     }
@@ -95,10 +95,10 @@ public class SignUpController {
             }
         }
         try {
-            clientController.connectToServer("SGUP");
+            mainController.connectToServer("SGUP");
         } catch (IOException e) {
             e.printStackTrace();
-            clientController.display(e.toString(), MESSAGE_TYPE_ADMIN);
+            mainController.display(e.toString(), MESSAGE_TYPE_ADMIN);
         }
     }
 }

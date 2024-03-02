@@ -1,7 +1,7 @@
 package com;
 
 import com.common.CommonSettings;
-import com.controller.ClientController;
+import com.controller.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +15,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class ClientApplication extends Application {
 
-    private ClientController clientController;
+    private MainController mainController;
     private ConfigurableApplicationContext springContext;
 
     public static void main(String[] args) {
@@ -29,22 +29,22 @@ public class ClientApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/controller/chatclient.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/controller/main.fxml"));
         fxmlLoader.setControllerFactory(springContext::getBean);
         Parent root = fxmlLoader.load();
-        clientController = fxmlLoader.getController();
+        mainController = fxmlLoader.getController();
 
         primaryStage.getIcons().add(new Image(getClass().getResource("/images/icon.gif").toString()));
         primaryStage.setTitle(CommonSettings.PRODUCT_NAME);
         primaryStage.setScene(new Scene(root, 778, 575));
         primaryStage.setResizable(false);
         primaryStage.show();
-        clientController.openLoginWindow();
+        mainController.openLoginWindow();
     }
 
     @Override
     public void stop() {
         springContext.close();
-        clientController.shutdown();
+        mainController.shutdown();
     }
 }

@@ -24,7 +24,7 @@ import static com.common.CommonSettings.*;
 @Component
 //@Scope("prototype")
 public class PrivateChatController {
-    private final ClientController clientController;
+    private final MainController mainController;
     private final TabPaneManagerController tabPaneManagerController;
     @FXML
     private ScrollPane scrollPane;
@@ -54,8 +54,8 @@ public class PrivateChatController {
     private Stage stage;
 
     @Autowired
-    public PrivateChatController(ClientController clientController, TabPaneManagerController tabPaneManagerController) {
-        this.clientController = clientController;
+    public PrivateChatController(MainController mainController, TabPaneManagerController tabPaneManagerController) {
+        this.mainController = mainController;
         this.tabPaneManagerController = tabPaneManagerController;
     }
 
@@ -128,8 +128,8 @@ public class PrivateChatController {
 
     //Instance Methods
     private void sendMessage() throws IOException {
-        display(clientController.getUser().getUserName() + ": " + txtMessage.getText(), MESSAGE_TYPE_DEFAULT);
-        clientController.sentPrivateMessageToServer(txtMessage.getText(), userName);
+        display(mainController.getUser().getUserName() + ": " + txtMessage.getText(), MESSAGE_TYPE_DEFAULT);
+        mainController.sentPrivateMessageToServer(txtMessage.getText(), userName);
         txtMessage.clear();
         txtMessage.requestFocus();
     }

@@ -7,24 +7,28 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import java.io.IOException;
+
 import static com.common.CommonSettings.*;
 
 @Component
 public class TopController {
 
-    public MenuItem loginMenuItem;
-    public MenuItem signupMenuItem;
-    public MenuItem logoutMenuItem;
-    public Label informationLabel;
     @Autowired
-    ClientController clientController;
-    @Autowired
-    private User user;
+    MainController mainController;
+    @FXML
+    private Label informationLabel;
+    @FXML
+    private MenuItem loginMenuItem;
+    @FXML
+    private MenuItem signupMenuItem;
+    @FXML
+    private MenuItem logoutMenuItem;
+
     @FXML
     public void initialize() {
 
@@ -36,10 +40,10 @@ public class TopController {
         var name = ((MenuItem) e.getTarget()).getText();
 
         switch (name) {
-            case "Login" -> clientController.openLoginWindow();
-            case "Signup" -> clientController.openSignupWindow();
-            case "Logout" -> clientController.quitConnection(QUIT_TYPE_DEFAULT);
-            case "Exit" -> clientController.shutdown();
+            case "Login" -> mainController.openLoginWindow();
+            case "Signup" -> mainController.openSignupWindow();
+            case "Logout" -> quitConnection(QUIT_TYPE_DEFAULT);
+            case "Exit" -> mainController.shutdown();
             case "About" -> {
                 alert.setTitle("About Us");
                 alert.setHeaderText(PRODUCT_NAME);
@@ -51,15 +55,21 @@ public class TopController {
         }
     }
 
+    private void quitConnection(int quitTypeDefault) {
+        mainController.quitConnection(quitTypeDefault);
+        getInformationLabel().setText("Information Label");
+    }
+
     //Function To Update the Information Label
-    public void updateInformationLabel() {
-        String builder = "User Name: " + user.getUserName() + "\t\t" +
-                "Room Name: " + user.getRoomName() + "\t\t" +
-                "No. Of Users: " + user.getClients().size() + "\t\t";
+    public void updateInformationLabel(User user) {
+        String builder =
+                "User Name: " + user.getUserName() + "\t\t"
+                + "Room Name: " + user.getRoomName() + "\t\t"
+                + "No. Of Users: " + user.getClients().size() + "\t\t";
         informationLabel.setText(builder);
 
         try {
-            clientController.getRoomUserCount(user.getRoomName());
+            mainController.getRoomUserCount(user.getRoomName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -69,5 +79,15 @@ public class TopController {
             System.out.print(client.getClientName() + " ");
         }
         System.out.println("]");
+    }
+
+    void control(boolean status) {
+        loginMenuItem.setDisable(status);
+        signupMenuItem.setDisable(status);
+        logoutMenuItem.setDisable(!status);
+    }
+
+    public Label getInformationLabel() {
+        return informationLabel;
     }
 }

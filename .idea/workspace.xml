@@ -5,58 +5,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ae00108-7c51-48a7-a71f-40959247da48" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/BottomController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/CenterController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/TopController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/bottom.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/center.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/top.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/MainController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/test/java/proxy/TestProxy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/test-classes/Client.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/test-classes/ClientHandler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/test-classes/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/test-classes/Server.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/test-classes/ServerConnection.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/test-classes/proxy/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/test-classes/proxy/MyProxySelector$InnerProxy.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/test-classes/proxy/MyProxySelector.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/test-classes/proxy/ProxyMultiThread.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/target/test-classes/proxy/ThreadProxy.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/ClientApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/ClientApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/client/ChatClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/client/ChatClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/config/ProjectConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/config/ProjectConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/BottomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/BottomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/CenterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/CenterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/PrivateChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/PrivateChatController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/SignUpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/SignUpController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/ImagesTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/ImagesTabController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/RoomsTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/RoomsTabController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/TopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/TopController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/TabPaneManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/TabPaneManagerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/UsersTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/UsersTabController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/entity/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/entity/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/controller/chatclient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/chatclient.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/controller/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/controller/signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/signup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/controller/chatclient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/main.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/controller/tab/imagestab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/tab/imagestab.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/controller/tab/roomstab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/tab/roomstab.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/controller/tab/tabpanemanager.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/tab/tabpanemanager.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/controller/tab/userstab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/tab/userstab.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/test/java/proxy/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/test/java/proxy/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/test/java/proxy/MyProxySelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/test/java/proxy/MyProxySelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/test/java/proxy/ProxyMultiThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/test/java/proxy/ProxyMultiThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/ClientApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/ClientApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/com/client/ChatClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/client/ChatClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/ClientController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/ClientController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/BottomController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/BottomController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/CenterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/CenterController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/ClientController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/PrivateChatController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/PrivateChatController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/PrivateChatController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/SignUpController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/SignUpController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/chatclient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/chatclient.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/signup.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/ImagesTabController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/ImagesTabController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/RoomsTabController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/RoomsTabController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/TopController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/TopController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/chatclient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/main.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/TabPaneManagerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/TabPaneManagerController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/UsersTabController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/UsersTabController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/imagestab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/imagestab.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/roomstab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/roomstab.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/tabpanemanager.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/tabpanemanager.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/userstab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/userstab.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/entity/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/entity/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/Client/target/classes/com/entity/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/com/controller/server.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/com/controller/server.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/mysql.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/mysql.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/server.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/controller/server.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/mysql.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/mysql.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,12 +65,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "mhussainshah1"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;mhussainshah1&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -101,40 +91,48 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ServerApplication.executor": "Run",
-    "Maven.FXChat [clean].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.ClientApplication.executor": "Run",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_directory_selection": "C:/Users/m_hus/OneDrive/Documents/Java/IdeaProjects/Chat-TODO/FXChat/Client/src/main/java/com/controller",
-    "last_opened_file_path": "C:/Users/m_hus/OneDrive/Documents/Java/IdeaProjects/sortout/MVP_Java",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "two.files.diff.last.used.file": "C:/Users/m_hus/OneDrive/Documents/Java/IdeaProjects/Chat-TODO/FXChat/Client/src/main/java/com/entity/Data.java",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main (1).executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MyProxySelector.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ProxyMultiThread (1).executor&quot;: &quot;Run&quot;,
+    &quot;Application.ProxyMultiThread.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.SimpleProxyServer (1).executor&quot;: &quot;Run&quot;,
+    &quot;Application.SimpleProxyServer.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestProxy.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.FXChat [clean].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ClientApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/m_hus/OneDrive/Documents/Java/IdeaProjects/Chat-TODO/FXChat/Client/src/main/java/com/controller&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/m_hus/OneDrive/Documents/Java/IdeaProjects/sortout/MVP_Java&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;two.files.diff.last.used.file&quot;: &quot;C:/Users/m_hus/OneDrive/Documents/Java/IdeaProjects/Chat-TODO/FXChat/Client/src/main/java/com/entity/Data.java&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\m_hus\OneDrive\Documents\Java\IdeaProjects\Chat-TODO\FXChat\Client\src\main\java\com\controller" />
@@ -203,7 +201,9 @@
       <workItem from="1707932391867" duration="10000" />
       <workItem from="1707993347272" duration="20689000" />
       <workItem from="1708014227576" duration="1742000" />
-      <workItem from="1708165610084" duration="21826000" />
+      <workItem from="1708165610084" duration="47917000" />
+      <workItem from="1708442652418" duration="11389000" />
+      <workItem from="1709343673867" duration="412000" />
     </task>
     <servers />
   </component>
