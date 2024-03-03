@@ -46,7 +46,6 @@ public class Message implements Serializable {
     private final Label label;
     private final DateTimeFormatter dateTimeFormatter;
     private List<Node> list;
-    private boolean ignored;
 
     // constructor
     public Message(Label label) {

@@ -6,23 +6,24 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.TextFlow;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.List;
 
 import static com.common.CommonSettings.MESSAGE_TYPE_ADMIN;
 
-
+@Component
 public class ServerController {
     private final String serverName = "localhost";
     private final int serverPort = 1436;
     private final int maximumGuestNumber = 50;
-    public ScrollPane sp_main;
+    public Tab imagesTab;
+    @FXML
+    private ScrollPane sp_main;
     @FXML
     private Button btnStop;
     @FXML
@@ -43,15 +44,17 @@ public class ServerController {
     private ChatServer server;
 
     //Methods
-    public void initialize() throws IOException {
+    @FXML
+    public void initialize() {
         this.message = new Message(new Label());
-        txtServerName.setText(String.valueOf(serverName));
+        txtServerName.setText(serverName);
         txtServerPort.setText(String.valueOf(serverPort));
         txtMaximumGuest.setText(String.valueOf(maximumGuestNumber));
         messageBoard.heightProperty().addListener((observable, oldValue, newValue) -> sp_main.setVvalue((Double) newValue));
     }
 
     //Handlers
+    @FXML
     public void btnHandler(ActionEvent e) throws IOException {
         Button button = (Button) e.getTarget();
         var name = button.getText();
@@ -69,14 +72,15 @@ public class ServerController {
         }
     }
 
+    @FXML
+    public void txtHandler(ActionEvent e) {
+        btnSendMessage.fire();
+    }
+
     public void shutdown() {
         if (server != null)
             server.closeConnection();
         disableLogout();
-    }
-
-    public void txtHandler(ActionEvent e) {
-        btnSendMessage.fire();
     }
 
     private void sendMessage(String message) {
@@ -102,6 +106,7 @@ public class ServerController {
         btnStop.setDisable(!status);
         txtMessage.setDisable(!status);
         btnSendMessage.setDisable(!status);
+        imagesTab.setDisable(!status);
     }
 
     private ChatServer createServer() throws IOException {
@@ -120,5 +125,9 @@ public class ServerController {
     public void display(String text, int type) {
         List<Node> nodes = message.parseMessage(text, type);
         messageBoard.getChildren().addAll(nodes);
+    }
+
+    public TextField getTxtMessage() {
+        return txtMessage;
     }
 }
