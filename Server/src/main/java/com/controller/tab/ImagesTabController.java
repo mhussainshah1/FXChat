@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class ImagesTabController {
 
-    private final ServerController serverController;
+    private final MainController serverController;
 
     private final BottomController bottomController;
     @Autowired
-    public ImagesTabController(ServerController serverController, BottomController bottomController) {
+    public ImagesTabController(MainController serverController, BottomController bottomController) {
         this.serverController = serverController;
         this.bottomController = bottomController;
     }

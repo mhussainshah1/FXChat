@@ -1,6 +1,7 @@
 package com.controller.tab;
 
-import com.controller.ServerController;
+import com.controller.CenterController;
+import com.controller.MainController;
 import com.server.ChatServer;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -30,9 +31,10 @@ public class ConnectionTabController {
     @FXML
     private TextField txtMaximumGuest;
     private ChatServer server;
-
     @Autowired
-    ServerController serverController;
+    MainController serverController;
+    @Autowired
+    CenterController centerController;
 
     @FXML
     public void initialize() {
@@ -49,7 +51,7 @@ public class ConnectionTabController {
             server = createServer();
             server.startConnection();
             serverController.enableLogin();
-            serverController.display("About to accept client connection...", MESSAGE_TYPE_ADMIN);
+            centerController.display("About to accept client connection...", MESSAGE_TYPE_ADMIN);
         } if (name.equals("Stop Server")) {
             shutdown();
         }
@@ -70,7 +72,7 @@ public class ConnectionTabController {
                 Integer.parseInt(txtMaximumGuest.getText()),
                 (data, messageType) -> {
                     Platform.runLater(() -> { //UI or background thread - manipulate UI object , It gives control back to UI thread
-                        serverController.display(data.toString(), messageType);
+                        centerController.display(data.toString(), messageType);
                     });
                 });
     }

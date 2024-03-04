@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.TextFlow?>
+<ScrollPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.controller.CenterController"
+            fx:id="sp_main" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;"
+            BorderPane.alignment="CENTER">
+
+    <TextFlow fx:id="messageBoard" prefHeight="337.0" prefWidth="399.0" style="-fx-background-color: white;"/>
+
+</ScrollPane>
