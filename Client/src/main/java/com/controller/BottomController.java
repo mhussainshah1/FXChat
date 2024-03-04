@@ -11,12 +11,17 @@ import java.io.IOException;
 
 @Component
 public class BottomController {
-    @Autowired
-    MainController mainController;
+    private final MainController mainController;
+    public Button btnSendMessage;
     @FXML
     private Button btnSend;
     @FXML
     private TextField txtMessage;
+
+    @Autowired
+    public BottomController(MainController mainController) {
+        this.mainController = mainController;
+    }
 
     //Event Handlers
     @FXML

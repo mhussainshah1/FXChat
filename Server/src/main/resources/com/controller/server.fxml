@@ -64,22 +64,12 @@
                 </GridPane>
             </Tab>
             <Tab fx:id="imagesTab" disable="true" text="Images">
-                <fx:include source="imagestab.fxml" />
+                <fx:include source="tab/imagestab.fxml" />
             </Tab>
         </TabPane>
     </right>
     <bottom>
-        <BorderPane BorderPane.alignment="CENTER">
-            <left>
-                <Label styleClass="chat-label" stylesheets="@../../stylesheets/chatserver.css" text="General Message" BorderPane.alignment="CENTER" />
-            </left>
-            <right>
-                <Button fx:id="btnSendMessage" disable="true" mnemonicParsing="false" onAction="#btnHandler" styleClass="chat-button" stylesheets="@../../stylesheets/chatserver.css" text="Send Message!" BorderPane.alignment="CENTER" />
-            </right>
-            <center>
-                <TextField fx:id="txtMessage" disable="true" onAction="#txtHandler" BorderPane.alignment="CENTER" />
-            </center>
-        </BorderPane>
+        <fx:include source="bottom.fxml" />
     </bottom>
     <center>
         <ScrollPane fx:id="sp_main" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">

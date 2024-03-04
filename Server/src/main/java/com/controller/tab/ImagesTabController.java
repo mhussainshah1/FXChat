@@ -10,9 +10,12 @@ import org.springframework.stereotype.Component;
 public class ImagesTabController {
 
     private final ServerController serverController;
+
+    private final BottomController bottomController;
     @Autowired
-    public ImagesTabController(ServerController serverController) {
+    public ImagesTabController(ServerController serverController, BottomController bottomController) {
         this.serverController = serverController;
+        this.bottomController = bottomController;
     }
     @FXML
     private void iconHandler(MouseEvent mouseEvent) {
@@ -22,7 +25,7 @@ public class ImagesTabController {
             icon.setStyle("-fx-border-color: black");
 
         } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_CLICKED) {
-            serverController.getTxtMessage().appendText("~~" + icon.getText() + " ");
+            bottomController.getTxtMessage().appendText("~~" + icon.getText() + " ");
 
         } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_EXITED) {
             icon.setStyle("-fx-border-color: white");

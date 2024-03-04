@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.TextFlow;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -36,12 +37,12 @@ public class ServerController {
     private TextField txtMaximumGuest;
     @FXML
     private TextFlow messageBoard;
-    @FXML
-    private TextField txtMessage;
-    @FXML
-    private Button btnSendMessage;
+
     private Message message;
     private ChatServer server;
+
+    @Autowired
+    private BottomController bottomController;
 
     //Methods
     @FXML
@@ -64,17 +65,9 @@ public class ServerController {
             server.startConnection();
             enableLogin();
             display("About to accept client connection...", MESSAGE_TYPE_ADMIN);
-        } else if (name.equals("Send Message!")) {
-            if (!txtMessage.getText().isEmpty())
-                sendMessage(txtMessage.getText());
-        } else if (name.equals("Stop Server")) {
+        } if (name.equals("Stop Server")) {
             shutdown();
         }
-    }
-
-    @FXML
-    public void txtHandler(ActionEvent e) {
-        btnSendMessage.fire();
     }
 
     public void shutdown() {
@@ -83,10 +76,8 @@ public class ServerController {
         disableLogout();
     }
 
-    private void sendMessage(String message) {
+    void sendMessage(String message) {
         server.broadcast(message);
-        txtMessage.clear();
-        txtMessage.requestFocus();
     }
 
     private void enableLogin() {
@@ -104,8 +95,9 @@ public class ServerController {
         txtMaximumGuest.setDisable(status);
         btnStart.setDisable(status);
         btnStop.setDisable(!status);
-        txtMessage.setDisable(!status);
-        btnSendMessage.setDisable(!status);
+
+        bottomController.control(status);
+
         imagesTab.setDisable(!status);
     }
 
@@ -125,9 +117,5 @@ public class ServerController {
     public void display(String text, int type) {
         List<Node> nodes = message.parseMessage(text, type);
         messageBoard.getChildren().addAll(nodes);
-    }
-
-    public TextField getTxtMessage() {
-        return txtMessage;
     }
 }

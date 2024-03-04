@@ -25,7 +25,7 @@
                        onMouseEntered="#iconHandler" onMouseExited="#iconHandler" prefWidth="30.0" text="0">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo0.gif"/>
+                            <Image url="@../../../icons/photo0.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -33,7 +33,7 @@
                        onMouseExited="#iconHandler" prefWidth="35.0" text="1">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo1.gif"/>
+                            <Image url="@../../../icons/photo1.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -41,7 +41,7 @@
                        onMouseExited="#iconHandler" text="2">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo2.gif"/>
+                            <Image url="@../../../icons/photo2.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -49,7 +49,7 @@
                        onMouseExited="#iconHandler" text="3">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo3.gif"/>
+                            <Image url="@../../../icons/photo3.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -57,7 +57,7 @@
                        onMouseExited="#iconHandler" text="4">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo4.gif"/>
+                            <Image url="@../../../icons/photo4.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -65,7 +65,7 @@
                        onMouseExited="#iconHandler" text="5">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo5.gif"/>
+                            <Image url="@../../../icons/photo5.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -73,7 +73,7 @@
                        onMouseExited="#iconHandler" text="6">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo6.gif"/>
+                            <Image url="@../../../icons/photo6.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -81,7 +81,7 @@
                        onMouseExited="#iconHandler" text="7">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo7.gif"/>
+                            <Image url="@../../../icons/photo7.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -89,7 +89,7 @@
                        onMouseExited="#iconHandler" text="8">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo8.gif"/>
+                            <Image url="@../../../icons/photo8.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -97,7 +97,7 @@
                        onMouseExited="#iconHandler" text="9">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo9.gif"/>
+                            <Image url="@../../../icons/photo9.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -105,7 +105,7 @@
                        onMouseExited="#iconHandler" text="10">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo10.gif"/>
+                            <Image url="@../../../icons/photo10.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -113,7 +113,7 @@
                        onMouseExited="#iconHandler" text="11">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo11.gif"/>
+                            <Image url="@../../../icons/photo11.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -121,7 +121,7 @@
                        onMouseExited="#iconHandler" text="12">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo12.gif"/>
+                            <Image url="@../../../icons/photo12.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -129,7 +129,7 @@
                        onMouseExited="#iconHandler" text="13">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo13.gif"/>
+                            <Image url="@../../../icons/photo13.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -137,7 +137,7 @@
                        onMouseExited="#iconHandler" text="14">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo14.gif"/>
+                            <Image url="@../../../icons/photo14.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -145,7 +145,7 @@
                        onMouseExited="#iconHandler" text="15">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo15.gif"/>
+                            <Image url="@../../../icons/photo15.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -153,7 +153,7 @@
                        onMouseExited="#iconHandler" text="16">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo16.gif"/>
+                            <Image url="@../../../icons/photo16.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -161,7 +161,7 @@
                        onMouseExited="#iconHandler" text="17">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo17.gif"/>
+                            <Image url="@../../../icons/photo17.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -169,7 +169,7 @@
                        onMouseExited="#iconHandler" text="18">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo18.gif"/>
+                            <Image url="@../../../icons/photo18.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -177,7 +177,7 @@
                        onMouseExited="#iconHandler" text="19">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo19.gif"/>
+                            <Image url="@../../../icons/photo19.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
@@ -185,7 +185,7 @@
                        onMouseExited="#iconHandler" text="20">
                     <graphic>
                         <ImageView pickOnBounds="true">
-                            <Image url="@../../icons/photo20.gif"/>
+                            <Image url="@../../../icons/photo20.gif"/>
                         </ImageView>
                     </graphic>
                 </Label>
