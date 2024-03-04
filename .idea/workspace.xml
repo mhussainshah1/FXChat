@@ -5,21 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ae00108-7c51-48a7-a71f-40959247da48" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/controller/BottomController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/controller/tab/ConnectionTabController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/src/main/resources/com/controller/bottom.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/src/main/resources/com/controller/tab/connectiontab.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/BottomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/BottomController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/controller/ImagesTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/controller/tab/ImagesTabController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/ClientApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/ClientApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/ServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/ServerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/controller/BottomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/controller/BottomController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/controller/ServerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/com/controller/imagestab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/com/controller/tab/imagestab.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/controller/tab/ConnectionTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/controller/tab/ConnectionTabController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/resources/com/controller/server.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/com/controller/server.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/ImagesTabController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/controller/ImagesTabController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/com/controller/tab/connectiontab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/com/controller/tab/connectiontab.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/ServerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/controller/ServerController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/server.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/controller/server.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/tab/ConnectionTabController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/controller/tab/ConnectionTabController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/tab/connectiontab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/controller/tab/connectiontab.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -160,7 +157,7 @@
       <workItem from="1708165610084" duration="749000" />
       <workItem from="1709351861026" duration="302000" />
       <workItem from="1709432956949" duration="7128000" />
-      <workItem from="1709510919932" duration="1144000" />
+      <workItem from="1709510919932" duration="2609000" />
     </task>
     <servers />
   </component>

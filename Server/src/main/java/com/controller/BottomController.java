@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.controller.tab.ConnectionTabController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,13 +18,11 @@ public class BottomController {
     private TextField txtMessage;
     @FXML
     private Button btnSendMessage;
-
     @Autowired
-    ServerController serverController;
-
+    private ConnectionTabController connectionTabController;
 
     @FXML
-    public void btnHandler(ActionEvent e) throws IOException {
+    public void btnHandler(ActionEvent e) {
         Button button = (Button) e.getTarget();
         var name = button.getText();
 
@@ -33,14 +32,13 @@ public class BottomController {
         }
     }
 
-
     @FXML
     public void txtHandler(ActionEvent e) {
         btnSendMessage.fire();
     }
 
     private void sendMessage(String message) {
-        serverController.sendMessage(message);
+        connectionTabController.sendMessage(message);
         txtMessage.clear();
         txtMessage.requestFocus();
     }

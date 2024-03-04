@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.common.Message;
+import com.controller.tab.ConnectionTabController;
 import com.server.ChatServer;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -19,98 +20,42 @@ import static com.common.CommonSettings.MESSAGE_TYPE_ADMIN;
 
 @Component
 public class ServerController {
-    private final String serverName = "localhost";
-    private final int serverPort = 1436;
-    private final int maximumGuestNumber = 50;
-    public Tab imagesTab;
+    @FXML
+    private Tab imagesTab;
     @FXML
     private ScrollPane sp_main;
     @FXML
-    private Button btnStop;
-    @FXML
-    private Button btnStart;
-    @FXML
-    private TextField txtServerName;
-    @FXML
-    private TextField txtServerPort;
-    @FXML
-    private TextField txtMaximumGuest;
-    @FXML
     private TextFlow messageBoard;
-
     private Message message;
-    private ChatServer server;
-
     @Autowired
     private BottomController bottomController;
+    @Autowired
+    private ConnectionTabController connectionTabController;
 
     //Methods
     @FXML
     public void initialize() {
         this.message = new Message(new Label());
-        txtServerName.setText(serverName);
-        txtServerPort.setText(String.valueOf(serverPort));
-        txtMaximumGuest.setText(String.valueOf(maximumGuestNumber));
         messageBoard.heightProperty().addListener((observable, oldValue, newValue) -> sp_main.setVvalue((Double) newValue));
     }
 
     //Handlers
-    @FXML
-    public void btnHandler(ActionEvent e) throws IOException {
-        Button button = (Button) e.getTarget();
-        var name = button.getText();
 
-        if (name.equals("Start Server")) {
-            server = createServer();
-            server.startConnection();
-            enableLogin();
-            display("About to accept client connection...", MESSAGE_TYPE_ADMIN);
-        } if (name.equals("Stop Server")) {
-            shutdown();
-        }
-    }
-
-    public void shutdown() {
-        if (server != null)
-            server.closeConnection();
-        disableLogout();
-    }
-
-    void sendMessage(String message) {
-        server.broadcast(message);
-    }
-
-    private void enableLogin() {
+    public void enableLogin() {
         control(true);
     }
 
-    private void disableLogout() {
+    public void disableLogout() {
         control(false);
     }
 
     void control(boolean status) {
         messageBoard.getChildren().clear();
-        txtServerName.setDisable(status);
-        txtServerPort.setDisable(status);
-        txtMaximumGuest.setDisable(status);
-        btnStart.setDisable(status);
-        btnStop.setDisable(!status);
+
+        connectionTabController.control(status);
+        imagesTab.setDisable(!status);
 
         bottomController.control(status);
-
-        imagesTab.setDisable(!status);
-    }
-
-    private ChatServer createServer() throws IOException {
-        return new ChatServer(
-                txtServerPort.getText(),
-                Integer.parseInt(txtServerPort.getText()),
-                Integer.parseInt(txtMaximumGuest.getText()),
-                (data, messageType) -> {
-                    Platform.runLater(() -> { //UI or background thread - manipulate UI object , It gives control back to UI thread
-                        display(data.toString(), messageType);
-                    });
-                });
     }
 
     // Display an event to the console

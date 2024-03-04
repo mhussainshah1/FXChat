@@ -1,6 +1,6 @@
 package com;
 
-import com.controller.ServerController;
+import com.controller.tab.ConnectionTabController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -8,15 +8,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-
 public class ServerApplication extends Application {
 
-    private ServerController serverController;
+    @Autowired
+    private ConnectionTabController connectionTabController;
 
     private ConfigurableApplicationContext springContext;
 
@@ -31,10 +32,9 @@ public class ServerApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        var loader = new FXMLLoader(getClass().getResource("/com/controller/server.fxml"));
+        var loader = new FXMLLoader(getClass().getResource("/com/controller/main.fxml"));
         loader.setControllerFactory(springContext::getBean);
         Parent root = loader.load();
-        serverController = loader.getController();
 
         primaryStage.getIcons().add(new Image(getClass().getResource("/images/icon.gif").toString()));
         primaryStage.setScene(new Scene(root));
@@ -45,7 +45,7 @@ public class ServerApplication extends Application {
     @Override
     public void stop() {
         springContext.close();
-        serverController.shutdown();
+        connectionTabController.shutdown();
         Platform.exit();
     }
 }
