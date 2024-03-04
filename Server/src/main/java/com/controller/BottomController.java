@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.controller.tab.ConnectionTabController;
+import com.controller.tab.TabPaneManagerController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,8 +19,14 @@ public class BottomController {
     private TextField txtMessage;
     @FXML
     private Button btnSendMessage;
+
+    private final TabPaneManagerController tabPaneManagerController;
+
     @Autowired
-    private ConnectionTabController connectionTabController;
+    public BottomController(TabPaneManagerController tabPaneManagerController) {
+        this.tabPaneManagerController = tabPaneManagerController;
+    }
+
 
     @FXML
     public void btnHandler(ActionEvent e) {
@@ -38,7 +45,7 @@ public class BottomController {
     }
 
     private void sendMessage(String message) {
-        connectionTabController.sendMessage(message);
+        tabPaneManagerController.sendMessage(message);
         txtMessage.clear();
         txtMessage.requestFocus();
     }

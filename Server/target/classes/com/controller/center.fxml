@@ -9,6 +9,6 @@
             fx:id="sp_main" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;"
             BorderPane.alignment="CENTER">
 
-    <TextFlow fx:id="messageBoard" prefHeight="337.0" prefWidth="399.0" style="-fx-background-color: white;"/>
+    <TextFlow fx:id="messageBoard" prefHeight="337.0" prefWidth="400" style="-fx-background-color: white;"/>
 
 </ScrollPane>

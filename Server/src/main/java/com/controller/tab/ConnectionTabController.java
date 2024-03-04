@@ -1,7 +1,5 @@
 package com.controller.tab;
 
-import com.controller.CenterController;
-import com.controller.MainController;
 import com.server.ChatServer;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -31,10 +29,13 @@ public class ConnectionTabController {
     @FXML
     private TextField txtMaximumGuest;
     private ChatServer server;
+
+    private final TabPaneManagerController tabPaneManagerController;
+
     @Autowired
-    MainController serverController;
-    @Autowired
-    CenterController centerController;
+    public ConnectionTabController(TabPaneManagerController tabPaneManagerController) {
+        this.tabPaneManagerController = tabPaneManagerController;
+    }
 
     @FXML
     public void initialize() {
@@ -50,8 +51,8 @@ public class ConnectionTabController {
         if (name.equals("Start Server")) {
             server = createServer();
             server.startConnection();
-            serverController.enableLogin();
-            centerController.display("About to accept client connection...", MESSAGE_TYPE_ADMIN);
+            tabPaneManagerController.enableLogin();
+            tabPaneManagerController.display("About to accept client connection...", MESSAGE_TYPE_ADMIN);
         } if (name.equals("Stop Server")) {
             shutdown();
         }
@@ -72,7 +73,7 @@ public class ConnectionTabController {
                 Integer.parseInt(txtMaximumGuest.getText()),
                 (data, messageType) -> {
                     Platform.runLater(() -> { //UI or background thread - manipulate UI object , It gives control back to UI thread
-                        centerController.display(data.toString(), messageType);
+                        tabPaneManagerController.display(data.toString(), messageType);
                     });
                 });
     }
@@ -80,7 +81,7 @@ public class ConnectionTabController {
     public void shutdown() {
         if (server != null)
             server.closeConnection();
-        serverController.disableLogout();
+        tabPaneManagerController.disableLogout();
     }
 
     public void sendMessage(String message) {

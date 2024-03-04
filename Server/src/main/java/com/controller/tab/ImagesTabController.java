@@ -1,20 +1,19 @@
-package com.controller;
+package com.controller.tab;
 
+import com.controller.BottomController;
+import com.controller.MainController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ImagesTabController {
-
-    private final MainController serverController;
-
     private final BottomController bottomController;
     @Autowired
-    public ImagesTabController(MainController serverController, BottomController bottomController) {
-        this.serverController = serverController;
+    public ImagesTabController(BottomController bottomController) {
         this.bottomController = bottomController;
     }
     @FXML

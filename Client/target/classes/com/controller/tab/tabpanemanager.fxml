@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/17.0.2-ea"
+            fx:controller="com.controller.tab.TabPaneManagerController"
+            disable="true"
+            BorderPane.alignment="CENTER">
+    <center>
+        <TabPane prefHeight="456.0"
+                 prefWidth="200.0"
+                 style="-fx-border-color: orange; -fx-border-width: 5;" tabClosingPolicy="UNAVAILABLE">
+            <Tab text="Users">
+                <fx:include fx:id="userstab" source="userstab.fxml"/>
+            </Tab>
+            <Tab text="Rooms">
+                <fx:include fx:id="roomstab" source="roomstab.fxml"/>
+            </Tab>
+            <Tab text="Images">
+                <fx:include fx:id="imagestab" source="imagestab.fxml"/>
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>

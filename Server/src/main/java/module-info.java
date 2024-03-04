@@ -2,6 +2,7 @@ open module server {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+
     requires spring.beans;
     requires spring.boot;
     requires spring.boot.autoconfigure;
@@ -13,4 +14,6 @@ open module server {
 
 //    opens com.controller to javafx.fxml;
     exports com.controller;
+
+    exports com.controller.tab;
 }

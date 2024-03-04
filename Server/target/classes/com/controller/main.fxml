@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 <BorderPane prefHeight="400.0"
@@ -20,14 +18,7 @@
         </Label>
     </top>
     <right>
-        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
-            <Tab text="Connection">
-                <fx:include source="tab/connectiontab.fxml"/>
-            </Tab>
-            <Tab fx:id="imagesTab" disable="true" text="Images">
-                <fx:include source="tab/imagestab.fxml"/>
-            </Tab>
-        </TabPane>
+        <fx:include source="tab/tabpanemanager.fxml" />
     </right>
     <center>
         <fx:include source="center.fxml"/>

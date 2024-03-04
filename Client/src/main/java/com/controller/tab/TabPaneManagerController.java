@@ -5,6 +5,7 @@ import com.controller.CenterController;
 import com.controller.MainController;
 import com.controller.TopController;
 import com.entity.User;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.text.TextFlow;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import static com.common.CommonSettings.MESSAGE_TYPE_JOIN;
 
 @Component
 public class TabPaneManagerController {
+
+
     @Autowired
     private UsersTabController usersTabController;
     @Autowired

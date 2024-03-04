@@ -1,8 +1,6 @@
 package com.controller;
 
-import com.controller.tab.ConnectionTabController;
-import javafx.fxml.FXML;
-import javafx.scene.control.Tab;
+import com.controller.tab.TabPaneManagerController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,16 +8,12 @@ import org.springframework.stereotype.Component;
 public class MainController {
     @Autowired
     CenterController centerController;
-    @FXML
-    private Tab imagesTab;
     @Autowired
     private BottomController bottomController;
     @Autowired
-    private ConnectionTabController connectionTabController;
+    TabPaneManagerController tabPaneManagerController;
 
     //Methods
-
-    //Handlers
     public void enableLogin() {
         control(true);
     }
@@ -30,10 +24,7 @@ public class MainController {
 
     void control(boolean status) {
         centerController.control(status);
-
-        connectionTabController.control(status);
-        imagesTab.setDisable(!status);
-
+        tabPaneManagerController.control(status);
         bottomController.control(status);
     }
 }

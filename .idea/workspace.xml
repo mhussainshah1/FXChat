@@ -5,121 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ae00108-7c51-48a7-a71f-40959247da48" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/controller/CenterController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/controller/MainController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/src/main/resources/com/controller/center.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/controller/tab/TabPaneManagerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/resources/com/controller/tab/tabpanemanager.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/ClientApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/client/ChatClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/client/Message.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/common/CommonSettings.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/common/SocksSocket.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/common/SocksSocketConstants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/common/SocksSocketImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/common/SocksSocketImplFactory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/config/ProjectConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/BottomController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/CenterController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/LoginController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/MainController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/PrivateChatController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/SignUpController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/TopController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/bottom.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/center.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/login.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/main.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/privatechat.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/signup.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/ImagesTabController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/RoomsTabController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/TabPaneManagerController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/UsersTabController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/imagestab.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/roomstab.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/tabpanemanager.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/userstab.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/top.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/entity/Client.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/entity/Data.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/entity/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/service/StageService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/data.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo0.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo1.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo10.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo11.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo12.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo13.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo14.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo15.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo16.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo17.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo18.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo19.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo2.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo20.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo3.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo4.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo5.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo6.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo7.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo8.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo9.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/images/defaultbanner.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/images/icon.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/images/logo.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/module-info.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/target/classes/stylesheets/chatclient.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/controller/ServerController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/ImagesTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/ImagesTabController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/TabPaneManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/tab/TabPaneManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/com/controller/tab/imagestab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/com/controller/tab/imagestab.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/controller/BottomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/controller/BottomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/controller/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/controller/tab/ConnectionTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/controller/tab/ConnectionTabController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/controller/tab/ImagesTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/controller/tab/ImagesTabController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/com/controller/center.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/com/controller/center.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/resources/com/controller/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/com/controller/main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/ServerApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/common/CommonSettings.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/common/DBUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/common/Data.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/common/Message.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/BottomController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/com/controller/tab/imagestab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/com/controller/tab/imagestab.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/BottomController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/controller/BottomController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/ImagesTabController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/ServerController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/bottom.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/imagestab.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/main.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/tab/ConnectionTabController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/tab/connectiontab.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/tab/imagestab.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/server/ChatServer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/server/ClientHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/server/CommonSettings.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo0.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo1.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo10.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo11.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo12.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo13.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo14.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo15.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo16.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo17.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo18.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo19.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo2.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo20.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo3.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo4.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo5.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo6.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo7.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo8.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo9.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/images/icon.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/module-info.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/mysql.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/server.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/target/classes/stylesheets/chatserver.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/controller/MainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/center.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/controller/center.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/controller/main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/tab/ConnectionTabController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/controller/tab/ConnectionTabController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/tab/imagestab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/com/controller/tab/imagestab.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/Server/target/classes/module-info.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -166,7 +73,7 @@
     "git-widget-placeholder": "springboot__user__class",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_directory_selection": "C:/Users/m_hus/OneDrive/Documents/Java/IdeaProjects/Chat-TODO/FXChat/Server/src/main/java/com/controller",
+    "last_directory_selection": "C:/Users/m_hus/OneDrive/Documents/Java/IdeaProjects/Chat-TODO/FXChat/Server/src/main/java/com/controller/tab",
     "last_opened_file_path": "C:/Users/m_hus/OneDrive/Documents/Java/IdeaProjects/Chat-TODO/FXChat/Server/src/main/resources/com/controller",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -200,7 +107,7 @@
       <recent name="com.entity" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ServerApplication">
+  <component name="RunManager" selected="Spring Boot.ClientApplication">
     <configuration name="ServerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ServerApplication" />
       <module name="Server" />
@@ -260,7 +167,7 @@
       <workItem from="1708165610084" duration="749000" />
       <workItem from="1709351861026" duration="302000" />
       <workItem from="1709432956949" duration="7128000" />
-      <workItem from="1709510919932" duration="3394000" />
+      <workItem from="1709510919932" duration="9865000" />
     </task>
     <servers />
   </component>

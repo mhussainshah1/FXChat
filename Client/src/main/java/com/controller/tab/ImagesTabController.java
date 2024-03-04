@@ -3,6 +3,7 @@ package com.controller.tab;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ImagesTabController {
     private final TabPaneManagerController tabPaneManagerController;
+    @FXML
+    private BorderPane imagesTab;
 
     @Autowired
     public ImagesTabController(TabPaneManagerController tabPaneManagerController) {
@@ -29,5 +32,9 @@ public class ImagesTabController {
         } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_EXITED) {
             icon.setStyle("-fx-border-color: white");
         }
+    }
+
+    public void control(boolean status){
+        imagesTab.setDisable(!status);
     }
 }

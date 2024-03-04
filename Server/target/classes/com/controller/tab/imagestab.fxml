@@ -9,7 +9,7 @@
 <BorderPane style="-fx-font-weight: bold;"
             xmlns="http://javafx.com/javafx/17.0.2-ea"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.controller.ImagesTabController">
+            fx:controller="com.controller.tab.ImagesTabController">
     <center>
         <ScrollPane hbarPolicy="ALWAYS" style="-fx-background-color: white;"
                     vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">

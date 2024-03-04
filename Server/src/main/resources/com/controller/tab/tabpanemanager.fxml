@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.controller.tab.TabPaneManagerController"
+            prefHeight="200.0" prefWidth="200.0">
+<center>
+    <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <Tab text="Connection">
+            <fx:include source="connectiontab.fxml"/>
+        </Tab>
+        <Tab fx:id="imagesTab" text="Images" disable="true">
+            <fx:include source="imagestab.fxml" />
+        </Tab>
+    </TabPane>
+</center>
+</BorderPane>
