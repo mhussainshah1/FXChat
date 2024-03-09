@@ -9,8 +9,11 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.controller.MainController">
     <top>
-        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-               style="-fx-background-color: black; -fx-text-fill: white;" text="CHAT SERVER V1.0"
+        <Label alignment="CENTER"
+               maxHeight="1.7976931348623157E308"
+               maxWidth="1.7976931348623157E308"
+               style="-fx-background-color: black; -fx-text-fill: white;"
+               text="CHAT SERVER V1.0"
                BorderPane.alignment="CENTER">
             <font>
                 <Font name="System Bold" size="20.0"/>

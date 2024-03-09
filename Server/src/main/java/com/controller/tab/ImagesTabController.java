@@ -1,9 +1,9 @@
 package com.controller.tab;
 
 import com.controller.BottomController;
-import com.controller.MainController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +11,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ImagesTabController {
-    private final BottomController bottomController;
+    private final TabPaneManagerController tabPaneManagerController;
+
     @Autowired
-    public ImagesTabController(BottomController bottomController) {
-        this.bottomController = bottomController;
+    public ImagesTabController(TabPaneManagerController tabPaneManagerController) {
+        this.tabPaneManagerController = tabPaneManagerController;
     }
     @FXML
     private void iconHandler(MouseEvent mouseEvent) {
@@ -24,7 +25,7 @@ public class ImagesTabController {
             icon.setStyle("-fx-border-color: black");
 
         } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_CLICKED) {
-            bottomController.getTxtMessage().appendText("~~" + icon.getText() + " ");
+            tabPaneManagerController.getTxtMessage().appendText("~~" + icon.getText() + " ");
 
         } else if (mouseEvent.getEventType() == MouseEvent.MOUSE_EXITED) {
             icon.setStyle("-fx-border-color: white");

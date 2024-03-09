@@ -60,7 +60,7 @@ public class UsersTabController {
             if (mouseEvent.getSource().equals(userView)) {
                 var userSelModel = userView.getSelectionModel();
                 ObservableList<Label> selectedItems = userSelModel.getSelectedItems();
-                Label label = selectedItems.getFirst();
+                Label label = selectedItems.get(0);
                 selectedUser = label.getText();
 
                 if (isIgnoredUser(selectedUser)) {

@@ -1,9 +1,11 @@
 package com.controller.tab;
 
+import com.controller.BottomController;
 import com.controller.CenterController;
 import com.controller.MainController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +16,8 @@ public class TabPaneManagerController {
     private ConnectionTabController connectionTabController;
     @Autowired
     private CenterController centerController;
+    @Autowired
+    private BottomController bottomController;
     @Autowired
     private MainController mainController;
     @FXML
@@ -37,6 +41,10 @@ public class TabPaneManagerController {
     }
 
     public void display(String string, Integer messageType) {
-        centerController.display(string,messageType);
+        centerController.display(string, messageType);
+    }
+
+    public TextField getTxtMessage() {
+        return bottomController.getTxtMessage();
     }
 }

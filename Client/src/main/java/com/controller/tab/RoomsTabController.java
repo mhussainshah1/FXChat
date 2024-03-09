@@ -44,7 +44,7 @@ public class RoomsTabController {
             if (mouseEvent.getSource().equals(roomView)) {
                 MultipleSelectionModel<Label> selectionModel = roomView.getSelectionModel();
                 ObservableList<Label> selectedItems = selectionModel.getSelectedItems();
-                Label label = selectedItems.getFirst();
+                Label label = selectedItems.get(0);
                 selectedRoom = label.getText();
                 tabPaneManagerController.getRoomUserCount(selectedRoom);
             }

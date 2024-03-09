@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.controller.TopController"
@@ -24,10 +24,6 @@
             </Menu>
         </MenuBar>
     </top>
-    <bottom>
-        <Label fx:id="informationLabel" alignment="CENTER" maxWidth="1.7976931348623157E308"
-               text="Information Label" BorderPane.alignment="CENTER"/>
-    </bottom>
     <center>
         <BorderPane style="-fx-background-color: yellow;" BorderPane.alignment="CENTER">
             <left>
@@ -51,4 +47,8 @@
             </right>
         </BorderPane>
     </center>
+    <bottom>
+        <Label fx:id="informationLabel" alignment="CENTER" maxWidth="1.7976931348623157E308"
+               text="Information Label" BorderPane.alignment="CENTER"/>
+    </bottom>
 </BorderPane>

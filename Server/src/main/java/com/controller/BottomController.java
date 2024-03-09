@@ -27,7 +27,6 @@ public class BottomController {
         this.tabPaneManagerController = tabPaneManagerController;
     }
 
-
     @FXML
     public void btnHandler(ActionEvent e) {
         Button button = (Button) e.getTarget();

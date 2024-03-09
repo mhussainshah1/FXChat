@@ -16,4 +16,5 @@ open module server {
     exports com.controller;
 
     exports com.controller.tab;
+    exports com.service;
 }

@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.common.Message;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -17,6 +18,7 @@ public class CenterController {
     @FXML
     private TextFlow messageBoard;
     private Message message;
+
     @FXML
     public void initialize() {
         this.message = new Message(new Label());

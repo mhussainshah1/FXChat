@@ -48,7 +48,6 @@ public class Message implements Serializable {
     private List<Node> list;
 
     // constructor
-//    @Autowired
     public Message(Label label) {
         this(label, MESSAGE_TYPE_DEFAULT);
     }

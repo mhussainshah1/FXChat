@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class MainController {
     @Autowired
-    CenterController centerController;
+    private CenterController centerController;
     @Autowired
     private BottomController bottomController;
     @Autowired
-    TabPaneManagerController tabPaneManagerController;
+    private TabPaneManagerController tabPaneManagerController;
 
     //Methods
     public void enableLogin() {

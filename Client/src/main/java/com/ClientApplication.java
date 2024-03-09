@@ -16,7 +16,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class ClientApplication extends Application {
 
-//    @Autowired
     private MainController mainController;
     private ConfigurableApplicationContext springContext;
 

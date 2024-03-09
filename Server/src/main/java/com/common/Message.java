@@ -52,6 +52,7 @@ public class Message implements Serializable {
         this(label, MESSAGE_TYPE_DEFAULT);
     }
 
+    //Instance Methods
     public Message(Label label, int messageType) {
         this.label = label;
         this.messageType = messageType;
