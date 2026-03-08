@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8ae00108-7c51-48a7-a71f-40959247da48" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/764d91c4-1a90-4c34-8e61-8a59cafe52d4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/764d91c4-1a90-4c34-8e61-8a59cafe52d4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/common/CommonSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/common/CommonSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/controller/PrivateChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/controller/PrivateChatController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/test/java/utils/PrivateChat.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/test/java/utils/PrivateChat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/ClientApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/client/ChatClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/client/Message.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/common/CommonSettings.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/common/SocksSocket.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/common/SocksSocketConstants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/common/SocksSocketImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/common/SocksSocketImplFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/config/ProjectConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/BottomController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/CenterController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/LoginController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/MainController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/PrivateChatController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/SignUpController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/TopController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/bottom.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/center.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/login.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/main.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/privatechat.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/signup.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/ImagesTabController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/RoomsTabController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/TabPaneManagerController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/UsersTabController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/imagestab.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/roomstab.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/tabpanemanager.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/tab/userstab.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/controller/top.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/entity/Client.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/entity/Data.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/entity/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/com/service/StageService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/data.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo0.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo1.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo10.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo11.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo12.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo13.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo14.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo15.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo16.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo17.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo18.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo19.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo2.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo20.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo3.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo4.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo5.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo6.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo7.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo8.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/icons/photo9.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/images/defaultbanner.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/images/icon.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/images/logo.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/module-info.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/target/classes/stylesheets/chatclient.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/common/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/common/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/server/ChatServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/server/ChatServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/server/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/server/CommonSettings.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/mysql.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/mysql.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/ServerApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/common/CommonSettings.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/common/Data.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/common/Message.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/BottomController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/CenterController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/MainController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/bottom.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/center.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/main.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/tab/ConnectionTabController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/tab/ImagesTabController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/tab/TabPaneManagerController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/tab/connectiontab.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/tab/imagestab.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/controller/tab/tabpanemanager.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/server/ChatServer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/server/ClientHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/server/CommonSettings.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/service/DatabaseService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/com/service/StageService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo0.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo1.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo10.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo11.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo12.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo13.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo14.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo15.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo16.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo17.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo18.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo19.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo2.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo20.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo3.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo4.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo5.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo6.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo7.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo8.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/icons/photo9.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/images/icon.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/module-info.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/mysql.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/server.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/target/classes/stylesheets/chatserver.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "mhussainshah1"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/mhussainshah1/FXChat",
+    "accountId": "4be8f173-9c5f-461b-b641-2d28968cfc48"
+  }
+}]]></component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2c8ZdNWZvQq4Ygtq0pzrngoBHNN" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ProxyMultiThread.executor": "Run",
+    "Application.ServerApplication.executor": "Run",
+    "Maven.FXChat [clean].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.ClientApplication.executor": "Run",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "springboot",
+    "ignore.virus.scanning.warn.message": "true",
+    "javascript.preferred.runtime.type.id": "node",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "C:/Users/m_hus/OneDrive/Documents/Java/IdeaProjects/Chat-TODO/FXChat/Server/src/main/java/com/controller/tab",
+    "last_opened_file_path": "C:/Users/m_hus/OneDrive/Documents/Java/IdeaProjects/Chat-TODO/FXChat",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "to.speed.mode.migration.done": "true",
+    "two.files.diff.last.used.file": "C:/Users/m_hus/OneDrive/Documents/Java/IdeaProjects/Chat-TODO/FXChat/Client/src/main/java/com/entity/Data.java",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\m_hus\OneDrive\Documents\Java\IdeaProjects\Chat-TODO\FXChat\Server\src\main\resources\com\controller" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\m_hus\OneDrive\Documents\Java\IdeaProjects\Chat-TODO\FXChat" />
+      <recent name="C:\Users\m_hus\OneDrive\Documents\Java\IdeaProjects\Chat-TODO\FXChat\Server\src\test" />
+      <recent name="C:\Users\m_hus\OneDrive\Documents\Java\IdeaProjects\Chat-TODO\FXChat\Client\src\test\resources\docs" />
+      <recent name="C:\Users\m_hus\OneDrive\Documents\Java\IdeaProjects\Chat-TODO\FXChat\Client\src\main\java\com\controller" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.controller.tab" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.controller" />
+      <recent name="com.entity" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.ClientApplication">
+    <configuration name="ProxyMultiThread" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="proxy.ProxyMultiThread" />
+      <module name="Server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="proxy.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ServerApplication" />
+      <module name="Server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClientApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false" nameIsGenerated="true">
+      <module name="Client" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ClientApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.ProxyMultiThread" />
+      <item itemvalue="Application.ServerApplication" />
+      <item itemvalue="Spring Boot.ClientApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ServerApplication" />
+        <item itemvalue="Application.ProxyMultiThread" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.31033.145" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8ae00108-7c51-48a7-a71f-40959247da48" name="Changes" comment="" />
+      <created>1707495253697</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1707495253697</updated>
+      <workItem from="1707495257837" duration="3542000" />
+      <workItem from="1707574777706" duration="6355000" />
+      <workItem from="1707932391867" duration="10000" />
+      <workItem from="1707993347272" duration="20689000" />
+      <workItem from="1708014227576" duration="1742000" />
+      <workItem from="1708165610084" duration="749000" />
+      <workItem from="1709351861026" duration="302000" />
+      <workItem from="1709432956949" duration="7128000" />
+      <workItem from="1709510919932" duration="22046000" />
+      <workItem from="1709796423102" duration="6349000" />
+      <workItem from="1710011371581" duration="2467000" />
+      <workItem from="1710474425664" duration="25784000" />
+      <workItem from="1713752416609" duration="279000" />
+      <workItem from="1714518791122" duration="264000" />
+      <workItem from="1715645213363" duration="19000" />
+      <workItem from="1716590574290" duration="7900000" />
+      <workItem from="1717119297623" duration="1178000" />
+      <workItem from="1719280492359" duration="803000" />
+      <workItem from="1719914198625" duration="1129000" />
+      <workItem from="1724892094438" duration="1568000" />
+      <workItem from="1727882271567" duration="980000" />
+      <workItem from="1728221679610" duration="4331000" />
+      <workItem from="1732653271962" duration="1836000" />
+      <workItem from="1735181067834" duration="696000" />
+      <workItem from="1735185842512" duration="767000" />
+      <workItem from="1736442614257" duration="813000" />
+      <workItem from="1743624750044" duration="317000" />
+      <workItem from="1744298914038" duration="500000" />
+      <workItem from="1744299604654" duration="4085000" />
+      <workItem from="1751906058505" duration="1637000" />
+      <workItem from="1751916059589" duration="718000" />
+      <workItem from="1754759770410" duration="87000" />
+      <workItem from="1757108400370" duration="999000" />
+      <workItem from="1760000779568" duration="788000" />
+      <workItem from="1762674353364" duration="1331000" />
+      <workItem from="1763734071968" duration="685000" />
+      <workItem from="1763743574816" duration="15000" />
+      <workItem from="1772935667236" duration="50000" />
+      <workItem from="1772935725595" duration="45000" />
+      <workItem from="1772935779087" duration="436000" />
+      <workItem from="1772936562324" duration="180000" />
+      <workItem from="1772937595116" duration="38000" />
+      <workItem from="1772938478848" duration="4852000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/master" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Server/src/main/java/com/server/ClientHandler.java</url>
+          <line>190</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

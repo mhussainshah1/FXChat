@@ -1,36 +1,47 @@
 package com.server;
 
-import com.common.Data;
+import com.service.DatabaseService;
+import com.controller.tab.TabPaneManagerController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.function.BiConsumer;
 
 import static com.common.CommonSettings.MESSAGE_TYPE_ADMIN;
 
+@Component
 public class ChatServer {
-    private final BiConsumer<Serializable, Integer> onReceiveCallback;
-    private final ServerSocket serverSocket;
-    private final String roomList;
-    private final ExecutorService pool;
+    private String serverName;
+    private int serverPort;
+    private int maximumGuestNumber;
+//    private BiConsumer<Serializable, Integer> tabPaneManagerController;
+    private ServerSocket serverSocket;
+    private String roomList;
+    private ExecutorService pool;
     private Thread thread;
     private Socket socket;
     private ClientHandler clientHandler;
+    private DatabaseService databaseService;
+    private TabPaneManagerController tabPaneManagerController;
 
-    public ChatServer(String serverName, int port, int maximumGuestNumber, BiConsumer<Serializable, Integer> onReceiveCallback) throws IOException {
-        try (Data data = new Data("server.properties")) {
-            data.setServerName(serverName);
-            data.setServerPort(port);
-            data.setMaximumGuestNumber(maximumGuestNumber);
-            roomList = data.getRoomList();
-            pool = Executors.newFixedThreadPool(maximumGuestNumber);
-        }
-        this.serverSocket = new ServerSocket(port);
-        this.onReceiveCallback = onReceiveCallback;
+    public ChatServer() throws IOException {
+        serverName = "localhost";
+        serverPort = 1436;
+        maximumGuestNumber = 50;
+        roomList = "General Teen Music Party";
+        pool = Executors.newFixedThreadPool(maximumGuestNumber);
+        this.serverSocket = new ServerSocket(serverPort);
+    }
+
+    @Autowired
+    public ChatServer(DatabaseService databaseService, TabPaneManagerController tabPaneManagerController) throws IOException {
+        this();
+        this.databaseService = databaseService;
+        this.tabPaneManagerController = tabPaneManagerController;
     }
 
     public void startConnection() {
@@ -46,7 +57,7 @@ public class ChatServer {
                 socket = serverSocket.accept();
                 socket.setTcpNoDelay(true);
                 // Create a Separate Thread for that each client
-                clientHandler = new ClientHandler(this, socket, onReceiveCallback);
+                clientHandler = new ClientHandler(this, socket, tabPaneManagerController, databaseService);
                 pool.execute(clientHandler);
 //                clientHandler.start();
             } catch (IOException e) {
@@ -72,8 +83,32 @@ public class ChatServer {
     }
 
     public void broadcast(String message) {
-        onReceiveCallback.accept("Server: " + message, MESSAGE_TYPE_ADMIN);
+        tabPaneManagerController.display("Server: " + message, MESSAGE_TYPE_ADMIN);
         if (clientHandler != null)
             clientHandler.broadcastMessage(message);
+    }
+
+    public String getServerName() {
+        return serverName;
+    }
+
+    public int getServerPort() {
+        return serverPort;
+    }
+
+    public int getMaximumGuestNumber() {
+        return maximumGuestNumber;
+    }
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
+    }
+
+    public void setServerPort(int serverPort) {
+        this.serverPort = serverPort;
+    }
+
+    public void setMaximumGuestNumber(int maximumGuestNumber) {
+        this.maximumGuestNumber = maximumGuestNumber;
     }
 }

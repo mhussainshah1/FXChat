@@ -1,50 +1,58 @@
 package com.client;
 
-import com.controller.ClientController;
+import com.controller.MainController;
+import com.controller.tab.TabPaneManagerController;
 import com.entity.User;
 import javafx.application.Platform;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.util.function.BiConsumer;
 
 import static com.common.CommonSettings.*;
 
+@Component
 public class ChatClient {
-    private final ClientController clientController;
-    private final BiConsumer<Serializable, Integer> onReceiveCallback;
+    private final MainController mainController;
+    private final TabPaneManagerController tabPaneManagerController;
     private final User user;
     private String serverData;
     private Socket socket;
-    private BufferedReader bufferedIn;
+    private BufferedReader bufferedReader;
     private OutputStream outputStream;
 
-    public ChatClient(ClientController clientController, User user, BiConsumer<Serializable, Integer> onReceiveCallback) {
-        this.clientController = clientController;
+    @Autowired
+    public ChatClient(MainController mainController, TabPaneManagerController tabPaneManagerController, User user) {
+        this.mainController = mainController;
+        this.tabPaneManagerController = tabPaneManagerController;
         this.user = user;
-        this.onReceiveCallback = onReceiveCallback;
     }
 
     public void startConnection(boolean isProxy, String code) throws IOException {
         if (isProxy) {
             //Proxy
 /*
-            SocksSocketImplFactory factory = new SocksSocketImplFactory(proxyHost, proxyPort);
+            SocksSocketImplFactory factory = new SocksSocketImplFactory( user.getProxyHost(), user.getProxyPort());
             SocksSocket.setSocketImplFactory(factory);
             socket = new SocksSocket(serverName, serverPort);
 */
-            System.setProperty("http.proxyHost", user.getProxyHost());
-            System.setProperty("http.proxyPort", String.valueOf(user.getProxyPort()));
+            System.setProperty("socksProxyHost", user.getProxyHost());
+            System.setProperty("socksProxyPort", String.valueOf(user.getProxyPort()));
             System.setProperty("java.net.useSystemProxies", "true");
+            System.setProperty("jdk.http.auth.tunneling.disabledSchemes", "");
 
-            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(user.getProxyHost(), user.getProxyPort()));
+            SocketAddress proxyAddr = new InetSocketAddress(user.getProxyHost(), user.getProxyPort());
+            Proxy proxy = new Proxy(Proxy.Type.SOCKS, proxyAddr);
             socket = new Socket(proxy);
-            socket.connect(new InetSocketAddress(user.getServerName(), user.getServerPort()));
+            InetSocketAddress address = InetSocketAddress.createUnresolved(user.getProxyHost(), user.getProxyPort()); // create a socket without resolving the target host to IP
+            socket.connect(address);
             socket.setSoTimeout(0);
             System.out.println("Connected to proxy server = " + user.getProxyHost() + " at port = " + user.getProxyPort());
-
         } else {
             //Not Proxy
             socket = new Socket(user.getServerName(), user.getServerPort());
@@ -53,7 +61,7 @@ public class ChatClient {
         outputStream = socket.getOutputStream();
         sendMessageToServer(code + " " + user.getUserName() + " " + user.getPassword() + " " + user.getRoomName());
         //sendMessageToServer("HELO " + userName + " " + userRoom);
-        bufferedIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
         //Send HELO To Server
         startMessageReader();
@@ -66,80 +74,81 @@ public class ChatClient {
 
     private void readMessageLoop() {
         try {
-            while ((serverData = bufferedIn.readLine()) != null) {
+            while ((serverData = bufferedReader.readLine()) != null) {
                 System.out.println(serverData);
 
                 String[] tokens = serverData.split(" ");
                 String command = tokens[0];
 
+
                 Platform.runLater(() -> {
-                    // RFC Coding
+                    // LIST RFC
                     if (command.equalsIgnoreCase("LIST")) {
-                        clientController.handleList(tokens);
+                        tabPaneManagerController.getUsersTabController().handleList(tokens);
                     }
 
-                    // Room RFC
+                    // ROOM RFC
                     else if (command.equalsIgnoreCase("ROOM")) {
-                        clientController.handleRoom(tokens);
+                        tabPaneManagerController.getRoomsTabController().handleRoom(tokens);
                     }
 
-                    // ADD RFC
+                    // ADD user RFC
                     else if (command.equalsIgnoreCase("ADD")) {
-                        clientController.handleLogin(tokens);
+                        tabPaneManagerController.getUsersTabController().handleLogin(tokens);
                     }
 
-                    // ECXP <<message>>
+                    //EXCP <<Username Already Exists>>
                     else if (command.equalsIgnoreCase("EXCP")) {
                         String[] tokensMsg = serverData.split(" ", 2);
-                        clientController.handleException(tokensMsg);
+                        mainController.handleException(tokensMsg);
                     }
 
-                    // REMOVE User RFC Coding
+                    // REMOVE User RFC
                     else if (command.equalsIgnoreCase("REMO")) {
-                        clientController.handleLoggOff(tokens);
+                        tabPaneManagerController.getUsersTabController().handleLoggOff(tokens);
                     }
 
-                    // MESS RFC Coding Starts
+                    // MESS RFC
                     else if (command.equalsIgnoreCase("MESS")) {
                         String[] tokensMsg = serverData.split(" ", 3);
-                        clientController.handleMessage(tokensMsg);
+                        tabPaneManagerController.getUsersTabController().handleMessage(tokensMsg);
                     }
 
-                    // KICK RFC Starts
+                    // KICK RFC
                     else if (command.equalsIgnoreCase("KICK")) {
-                        clientController.handleKickUser();
+                        mainController.handleKickUser();
                     }
 
                     // INKI RFC (Information about kicked off User
                     else if (command.equalsIgnoreCase("INKI")) {
-                        clientController.handleKickUserInfo(tokens);
+                        tabPaneManagerController.getUsersTabController().handleKickUserInfo(tokens);
                     }
 
                     // Change Room RFC
                     else if (command.equalsIgnoreCase("CHRO")) {
                         user.setRoomName(tokens[1]);
-                        clientController.handleChangeRoom(user.getRoomName());
+                        tabPaneManagerController.getRoomsTabController().handleChangeRoom(user.getRoomName());
                     }
 
                     // Join Room RFC
                     else if (command.equalsIgnoreCase("JORO")) {
-                        clientController.handleJoinRoom(tokens);
+                        tabPaneManagerController.getUsersTabController().handleJoinRoom(tokens);
                     }
 
                     // Leave Room RFC
                     else if (command.equalsIgnoreCase("LERO")) {
-                        clientController.handleLeaveRoom(tokens);
+                        tabPaneManagerController.getUsersTabController().handleLeaveRoom(tokens);
                     }
 
                     // Room Count RFC
                     else if (command.equalsIgnoreCase("ROCO")) {
-                        clientController.handleRoomCount(tokens);
+                        tabPaneManagerController.getRoomsTabController().handleRoomCount(tokens);
                     }
 
                     // Private Message RFC
                     else if (command.equalsIgnoreCase("PRIV")) {
                         String[] tokensMsg = serverData.split(" ", 3);
-                        clientController.handlePrivateChat(tokensMsg);
+                        tabPaneManagerController.getUsersTabController().handlePrivateChat(tokensMsg);
                     }
                 });
             }
@@ -147,7 +156,7 @@ public class ChatClient {
             //display(e.getMessage(), CommonSettings.MESSAGE_TYPE_ADMIN);
             /*quitConnection*/
             closeConnection(QUIT_TYPE_DEFAULT);
-            onReceiveCallback.accept(e, MESSAGE_TYPE_ADMIN);
+            mainController.display(e.getMessage(), MESSAGE_TYPE_ADMIN);
             e.printStackTrace();
         }
     }
@@ -169,10 +178,6 @@ public class ChatClient {
                 e.printStackTrace();
             }
         }
-    }
-
-    public String getUserName() {
-        return user.getUserName();
     }
 }
 

@@ -1,11 +1,20 @@
-module server {
+open module server {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
 
-    opens com to javafx.fxml;
+    requires spring.beans;
+    requires spring.boot;
+    requires spring.boot.autoconfigure;
+    requires spring.context;
+    requires spring.core;
+
+//    opens com to javafx.fxml;
     exports com;
 
-    opens com.controller to javafx.fxml;
+//    opens com.controller to javafx.fxml;
     exports com.controller;
+
+    exports com.controller.tab;
+    exports com.service;
 }

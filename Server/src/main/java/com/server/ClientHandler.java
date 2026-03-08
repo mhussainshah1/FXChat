@@ -2,36 +2,42 @@ package com.server;
 
 //Chat Server Client Communication Object
 
-import com.common.DBUtils;
+import com.service.DatabaseService;
+import com.controller.tab.TabPaneManagerController;
+import javafx.application.Platform;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiConsumer;
 
 import static com.common.CommonSettings.*;
 
-public class ClientHandler extends Thread implements CommonSettings {
+public class ClientHandler extends Thread {
+    //Global Variable Declarations
     public static List<ClientHandler> clientHandlers = new ArrayList<>();
-    private final BiConsumer<Serializable, Integer> onReceiveCallback;
     private final ChatServer server;
     private final ArrayList<String> messages;
-    //Global Variable Declarations
+    private final TabPaneManagerController tabPaneManagerController;
+    private final DatabaseService databaseService;
     private Socket socket;
     private BufferedReader bufferedIn;
-    private String RFC;
     private OutputStream outputStream;
+    private String RFC;
     private ClientHandler clientHandler;
     private String userName;
     private String roomName;
 
     //Initialize the Socket to the Client
-    ClientHandler(ChatServer server, Socket socket, BiConsumer<Serializable, Integer> onReceiveCallback) {
+    ClientHandler(ChatServer server, Socket socket , TabPaneManagerController tabPaneManagerController, DatabaseService databaseService) {
         this.server = server;
         this.socket = socket;
-        this.onReceiveCallback = onReceiveCallback;
+        this.tabPaneManagerController= tabPaneManagerController;
+        this.databaseService = databaseService;
         messages = new ArrayList<>();
     }
 
@@ -51,80 +57,83 @@ public class ClientHandler extends Thread implements CommonSettings {
         while ((RFC = bufferedIn.readLine()) != null) {
             System.out.println(RFC);
             String[] tokens = RFC.split(" ");
-            if (tokens != null && tokens.length > 0) {
-                String command = tokens[0];
-//                Arrays.asList(tokens).forEach(System.out::println);
 
-                //RFC Checking
-                //LOGN username password room
-                if (command.equalsIgnoreCase("LOGN")) {
-                    loginUser(socket, tokens);
+            Platform.runLater(() -> {
+                if (tokens != null && tokens.length > 0) {
+                    String command = tokens[0];
+//                  Arrays.asList(tokens).forEach(System.out::println);
+
+                    //RFC Checking
+                    //LOGN username password room
+                    if (command.equalsIgnoreCase("LOGN")) {
+                        loginUser(socket, tokens);
+                    }
+                    //SGUP ali password General
+                    else if (command.equalsIgnoreCase("SGUP")) {
+                        signupUser(socket, tokens);
+                    }
+                    //HELO ali General
+                    /*else if (command.equalsIgnoreCase("HELO")) {
+                        addUser(socket, tokens);
+                    }*/
+                    //QUIT ali Party
+                    else if (command.equalsIgnoreCase("QUIT")) {
+                        removeUser(tokens, REMOVE_USER);
+                        quitConnection();
+                    }
+                    //KICK amir Party
+                    else if (command.equalsIgnoreCase("KICK")) {
+                        removeUser(tokens, KICK_USER);
+                        quitConnection();
+                    }
+                    //CHRO amir Party
+                    else if (command.equalsIgnoreCase("CHRO")) {
+                        changeRoom(socket, tokens);
+                    }
+                    //MESS General ali <hi how are you>
+                    else if (command.equalsIgnoreCase("MESS")) {
+                        String[] tokensMsg = RFC.split(" ", 4);
+                        sendGeneralMessage(socket, tokensMsg);
+                    }
+                    //PRIV ali amir <This is private message>
+                    else if (command.equalsIgnoreCase("PRIV")) {
+                        String[] tokensMsg = RFC.split(" ", 4);
+                        sendPrivateMessage(tokensMsg);
+                    }
+                    //ROCO General
+                    else if (command.equalsIgnoreCase("ROCO")) {
+                        getUserCount(socket, tokens);
+                    }
+                    //CALL amir~ali
+                    else if (command.equalsIgnoreCase("CALL")) {
+                        requestForVoiceChat(socket, tokens);
+                    }
+                    //ACCE amir~ali
+                    else if (command.equalsIgnoreCase("ACCE")) {
+                        sendUserIP(socket, tokens);
+                    }
+                    //CANC amir~ali
+                    else if (command.equalsIgnoreCase("CANC")) {
+                        rejectCall(tokens);
+                    }
+                    //QVCT amir~ali
+                    else if (command.equalsIgnoreCase("QVCT")) {
+                        quitVoiceChat(tokens);
+                    }
+                    //REIP amir~ali
+                    else if (command.equalsIgnoreCase("REIP")) {
+                        getRemoteUserAddress(socket, tokens);
+                    }
+                    //AEIP amir~ali
+                    else if (command.equalsIgnoreCase("AEIP")) {
+                        sendRemoteUserAddress(socket, tokens);
+                    }
+                    //QUVC amir~ali
+                    else if (command.equalsIgnoreCase("QUVC")) {
+                        quitVideoChat(tokens);
+                    }
                 }
-                //SGUP ali password General
-                else if (command.equalsIgnoreCase("SGUP")) {
-                    signupUser(socket, tokens);
-                }
-                //HELO ali General
-                /*else if (command.equalsIgnoreCase("HELO")) {
-                    addUser(socket, tokens);
-                }*/
-                //QUIT ali Party
-                else if (command.equalsIgnoreCase("QUIT")) {
-                    removeUser(tokens, REMOVE_USER);
-                    quitConnection();
-                }
-                //KICK amir Party
-                else if (command.equalsIgnoreCase("KICK")) {
-                    removeUser(tokens, KICK_USER);
-                    quitConnection();
-                }
-                //CHRO amir Party
-                else if (command.equalsIgnoreCase("CHRO")) {
-                    changeRoom(socket, tokens);
-                }
-                //MESS General ali <hi how are you>
-                else if (command.equalsIgnoreCase("MESS")) {
-                    String[] tokensMsg = RFC.split(" ", 4);
-                    sendGeneralMessage(socket, tokensMsg);
-                }
-                //PRIV ali amir <This is private message>
-                else if (command.equalsIgnoreCase("PRIV")) {
-                    String[] tokensMsg = RFC.split(" ", 4);
-                    sendPrivateMessage(tokensMsg);
-                }
-                //ROCO General
-                else if (command.equalsIgnoreCase("ROCO")) {
-                    getUserCount(socket, tokens);
-                }
-                //CALL amir~ali
-                else if (command.equalsIgnoreCase("CALL")) {
-                    requestForVoiceChat(socket, tokens);
-                }
-                //ACCE amir~ali
-                else if (command.equalsIgnoreCase("ACCE")) {
-                    sendUserIP(socket, tokens);
-                }
-                //CANC amir~ali
-                else if (command.equalsIgnoreCase("CANC")) {
-                    rejectCall(tokens);
-                }
-                //QVCT amir~ali
-                else if (command.equalsIgnoreCase("QVCT")) {
-                    quitVoiceChat(tokens);
-                }
-                //REIP amir~ali
-                else if (command.equalsIgnoreCase("REIP")) {
-                    getRemoteUserAddress(socket, tokens);
-                }
-                //AEIP amir~ali
-                else if (command.equalsIgnoreCase("AEIP")) {
-                    sendRemoteUserAddress(socket, tokens);
-                }
-                //QUVC amir~ali
-                else if (command.equalsIgnoreCase("QUVC")) {
-                    quitVideoChat(tokens);
-                }
-            }
+            });
         }
     }
 
@@ -170,7 +179,7 @@ public class ClientHandler extends Thread implements CommonSettings {
         String tokenRoomName = tokens[3];
 
         try {
-            DBUtils.logInUser(tokenUserName, tokenPassword);
+            databaseService.logInUser(tokenUserName, tokenPassword);
             addUser(socket, new String[]{tokenUserName, tokenRoomName});
         } catch (SQLException e) {
             e.printStackTrace();
@@ -184,7 +193,7 @@ public class ClientHandler extends Thread implements CommonSettings {
         String tokenRoomName = tokens[3];
 
         try {
-            DBUtils.signUpUser(tokenUserName, tokenPassword, tokenRoomName);
+            databaseService.signUpUser(tokenUserName, tokenPassword, tokenRoomName);
             addUser(socket, new String[]{tokenUserName, tokenRoomName});
         } catch (SQLException e) {
             e.printStackTrace();
@@ -194,7 +203,6 @@ public class ClientHandler extends Thread implements CommonSettings {
 
     //Function To Add a New Client in to the Server List
     protected void addUser(Socket socket, String[] tokens) {
-
         String tokenUserName = tokens[0];
         String tokenRoomName = tokens[1];
 
@@ -231,7 +239,7 @@ public class ClientHandler extends Thread implements CommonSettings {
                 .append(" ");
         sendMessageToClient(socket, builder.toString());
 
-        onReceiveCallback.accept(tokenUserName + " joins chat...", MESSAGE_TYPE_JOIN);
+        tabPaneManagerController.display(tokenUserName + " joins chat...", MESSAGE_TYPE_JOIN);
     }
 
     //Function to Remove User From Server
@@ -255,7 +263,7 @@ public class ClientHandler extends Thread implements CommonSettings {
                 if (client.getRoomName().equals(tokenRoomName))
                     sendMessageToClient(client.getSocket(), removeRFC);
             }
-            onReceiveCallback.accept(tokenUserName + " has been logged out from chat!", MESSAGE_TYPE_LEAVE);
+            tabPaneManagerController.display(tokenUserName + " has been logged out from chat!", MESSAGE_TYPE_LEAVE);
         }
     }
 
@@ -277,7 +285,7 @@ public class ClientHandler extends Thread implements CommonSettings {
                 return;
             }
         }
-//        onReceiveCallback.accept(userName + " has been logged out from chat!", MESSAGE_TYPE_LEAVE);
+        tabPaneManagerController.display(userName + " has been logged out from chat!", MESSAGE_TYPE_LEAVE);
     }
 
     //Function To Change the Room
@@ -314,7 +322,7 @@ public class ClientHandler extends Thread implements CommonSettings {
                     sendMessageToClient(client.getSocket(), newRoomRFC);
             }
 
-            onReceiveCallback.accept(tokenUserName + " has left " + oldRoomName + " Room and joined into " + newRoomName + " Room", MESSAGE_TYPE_ADMIN);
+            tabPaneManagerController.display(tokenUserName + " has left " + oldRoomName + " Room and joined into " + newRoomName + " Room", MESSAGE_TYPE_ADMIN);
         }
     }
 
@@ -327,11 +335,11 @@ public class ClientHandler extends Thread implements CommonSettings {
         boolean floodFlag = false;
         messages.add(tokenUserName);
         if (messages.size() > MAX_MESSAGE) {
-            messages.remove(0);
+            messages.removeFirst();
             messages.trimToSize();
 
             //Chk Whether the User is flooding the message
-            String firstMessage = messages.get(0);
+            String firstMessage = messages.getFirst();
             for (int i = 1; i < messages.size(); i++) {
                 if (messages.get(i).equals(firstMessage)) {
                     floodFlag = true;
@@ -356,7 +364,7 @@ public class ClientHandler extends Thread implements CommonSettings {
             messages.clear();
         }
 
-        onReceiveCallback.accept(tokenUserName + ": " + message, MESSAGE_TYPE_DEFAULT);
+        tabPaneManagerController.display(tokenUserName + ": " + message, MESSAGE_TYPE_DEFAULT);
     }
 
     //Function To Send Private Message

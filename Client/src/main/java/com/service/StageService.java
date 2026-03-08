@@ -1,8 +1,5 @@
 package com.service;
 
-import com.controller.ClientController;
-import com.controller.LoginController;
-import com.controller.SignUpController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,26 +7,25 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+@Service
 public class StageService {
 
-    private ClientController clientController;
+    @Autowired
+    private ConfigurableApplicationContext springContext;
 
     @FXML
     public void changeScene(ActionEvent event, String fxmlFile, String title, String username, String room) {
-        Parent root = null;
+        Parent root;
         try {
-            var loader = new FXMLLoader(StageService.class.getResource(fxmlFile));
+            var loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            loader.setControllerFactory(springContext::getBean);
             root = loader.load();
-            if (fxmlFile.equals("/com/controller/signup.fxml")) {
-                SignUpController signUpController = loader.getController();
-                signUpController.setClientController(clientController);
-            } else {
-                LoginController loginController = loader.getController();
-                loginController.setClientController(clientController);
-            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -38,13 +34,5 @@ public class StageService {
         stage.setTitle(title);
         stage.setScene(new Scene(root, 250, 400));
         stage.show();
-    }
-
-    public ClientController getClientController() {
-        return clientController;
-    }
-
-    public void setClientController(ClientController clientController) {
-        this.clientController = clientController;
     }
 }

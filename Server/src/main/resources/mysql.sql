@@ -11,3 +11,5 @@ create table users
     room     VARCHAR(45),
     PRIMARY KEY (user_id)
 );
+
+select * FROM users;

@@ -13,7 +13,7 @@ public interface CommonSettings {
     int PRIVATE_WINDOW_WIDTH = 415;
     int PRIVATE_WINDOW_HEIGHT = 360;
 
-    int EMOTION_CANVAS_HEIGHT = 270;
+    int EMOTION_PANE_HEIGHT = 270;
 
     int MAX_PRIVATE_WINDOW = 40;
     String PRODUCT_NAME = "Amir Chat v1.0";

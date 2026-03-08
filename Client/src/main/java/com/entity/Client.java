@@ -1,8 +1,16 @@
 package com.entity;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Client {
-    private String clientName;
+    private final String clientName;
     private boolean ignored;
+
+    public Client() {
+        this.clientName = "";
+        ignored = false;
+    }
 
     public Client(String clientName) {
         this.clientName = clientName;
@@ -12,9 +20,6 @@ public class Client {
         return clientName;
     }
 
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
 
     public boolean isIgnored() {
         return ignored;

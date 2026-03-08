@@ -1,8 +1,11 @@
 package com.entity;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class User {
     private String userName;
     private String password;
@@ -10,11 +13,11 @@ public class User {
     private int serverPort;
     private String serverName;
     private int maximumGuestNumber;
-    private List<String> roomList;
     private boolean proxyState;
     private int proxyPort;
     private String proxyHost;
     private List<Client> clients;
+    private List<String> roomList;
 
     public User() {
         userName = "Anonymous";
@@ -23,10 +26,10 @@ public class User {
         serverPort = 1436;
         serverName = "localhost";
         maximumGuestNumber = 50;
-        roomList = new ArrayList<>();
         proxyState = false;
         proxyHost = "";
         proxyPort = 0;
+        roomList = new ArrayList<>(/*List.of("General", "Teen", "Music", "Party")*/);
         clients = new ArrayList<>();
     }
 

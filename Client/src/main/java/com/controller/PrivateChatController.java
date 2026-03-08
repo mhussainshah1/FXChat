@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.client.Message;
+import com.controller.tab.TabPaneManagerController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -12,16 +13,26 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.List;
 
 import static com.common.CommonSettings.*;
 
+@Component
+//@Scope("prototype")
 public class PrivateChatController {
-    public ScrollPane scrollPane;
-    public Label lblTitle;
-    public ScrollPane sp_main;
+    private final MainController mainController;
+    private final TabPaneManagerController tabPaneManagerController;
+    @FXML
+    private ScrollPane scrollPane;
+    @FXML
+    private Label lblTitle;
+    @FXML
+    private ScrollPane sp_main;
+    private Message message;
     private String userName;
     @FXML
     private AnchorPane root;
@@ -40,9 +51,13 @@ public class PrivateChatController {
     @FXML
     private TextFlow textFlow;
     private boolean visible = false;
-    private Message message;
-    private ClientController clientController;
     private Stage stage;
+
+    @Autowired
+    public PrivateChatController(MainController mainController, TabPaneManagerController tabPaneManagerController) {
+        this.mainController = mainController;
+        this.tabPaneManagerController = tabPaneManagerController;
+    }
 
     public void initialize() {
         message = new Message(new Label());
@@ -64,7 +79,7 @@ public class PrivateChatController {
             textFlow.getChildren().clear();
 
         } else if (actionEvent.getSource().equals(btnIgnoreUser)) {
-            clientController.ignoreUser(name.equals("Ignore User"), userName);
+            tabPaneManagerController.getUsersTabController().ignoreUser(name.equals("Ignore User"), userName);
 
         } else if (name.equals("Close")) {
             exitPrivateWindow();
@@ -75,7 +90,7 @@ public class PrivateChatController {
                 stage.setHeight(PRIVATE_WINDOW_HEIGHT);
             } else {
                 visible = true;
-                stage.setHeight(PRIVATE_WINDOW_HEIGHT + EMOTION_CANVAS_HEIGHT);
+                stage.setHeight(PRIVATE_WINDOW_HEIGHT + EMOTION_PANE_HEIGHT);
             }
             scrollPane.setVisible(visible);
         }
@@ -113,19 +128,18 @@ public class PrivateChatController {
 
     //Instance Methods
     private void sendMessage() throws IOException {
-        display(clientController.getUser().getUserName() + ": " + txtMessage.getText(), MESSAGE_TYPE_DEFAULT);
-        clientController.sentPrivateMessageToServer(txtMessage.getText(), userName);
+        display(mainController.getUser().getUserName() + ": " + txtMessage.getText(), MESSAGE_TYPE_DEFAULT);
+        mainController.sentPrivateMessageToServer(txtMessage.getText(), userName);
         txtMessage.clear();
         txtMessage.requestFocus();
     }
 
-    void display(String messageText, int messageType) {
+    public void display(String messageText, int messageType) {
         List<Node> nodes = message.parseMessage(messageText, messageType);
         textFlow.getChildren().addAll(nodes);
     }
 
-    //Bean Methods
-    protected void disableAll() {
+    public void disableAll() {
         txtMessage.setDisable(true);
         btnSend.setDisable(true);
     }
@@ -137,14 +151,11 @@ public class PrivateChatController {
 
     // Exit from Private Chat
     public void exitPrivateWindow() {
-        clientController.removePrivateWindow(userName);
+        tabPaneManagerController.getUsersTabController().removePrivateWindow(userName);
         stage.close();
     }
 
-    public void setClientController(ClientController clientController) {
-        this.clientController = clientController;
-    }
-
+    //Bean Methods
     public Stage getStage() {
         return (Stage) btnSend.getScene().getWindow();
     }
