@@ -1,0 +1,11 @@
+.chat-button {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-color: #e0ecfe;
+    -fx-border-color: rgba(128, 128, 128, 0.56);
+}
+
+.chat-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
