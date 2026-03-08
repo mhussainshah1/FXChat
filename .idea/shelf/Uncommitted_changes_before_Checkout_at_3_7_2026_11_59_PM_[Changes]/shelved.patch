@@ -1,0 +1,32 @@
+Index: Server/target/classes/server.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>ServerName=localhost\r\nPortNumber=1436\r\nroomList=General Teen Music Party\r\nMaximumGuest=50\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/Server/target/classes/server.properties b/Server/target/classes/server.properties
+--- a/Server/target/classes/server.properties	(revision 06002c71cedb197d457610b2d6d710990037d36c)
++++ b/Server/target/classes/server.properties	(date 1772945773097)
+@@ -1,4 +1,4 @@
+ ServerName=localhost
+ PortNumber=1436
+-roomList=General Teen Music Party
++roomList=General Teen Music Party Dance
+ MaximumGuest=50
+Index: Server/src/main/resources/server.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>ServerName=localhost\r\nPortNumber=1436\r\nroomList=General Teen Music Party\r\nMaximumGuest=50\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/Server/src/main/resources/server.properties b/Server/src/main/resources/server.properties
+--- a/Server/src/main/resources/server.properties	(revision 06002c71cedb197d457610b2d6d710990037d36c)
++++ b/Server/src/main/resources/server.properties	(date 1772945773090)
+@@ -1,4 +1,4 @@
+ ServerName=localhost
+ PortNumber=1436
+-roomList=General Teen Music Party
++roomList=General Teen Music Party Dance
+ MaximumGuest=50
