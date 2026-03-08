@@ -18,13 +18,12 @@ import java.util.List;
 import static com.common.CommonSettings.*;
 
 public class ClientHandler extends Thread {
+    //Global Variable Declarations
     public static List<ClientHandler> clientHandlers = new ArrayList<>();
     private final ChatServer server;
     private final ArrayList<String> messages;
     private final TabPaneManagerController tabPaneManagerController;
     private final DatabaseService databaseService;
-
-    //Global Variable Declarations
     private Socket socket;
     private BufferedReader bufferedIn;
     private OutputStream outputStream;
@@ -33,14 +32,12 @@ public class ClientHandler extends Thread {
     private String userName;
     private String roomName;
 
-
     //Initialize the Socket to the Client
     ClientHandler(ChatServer server, Socket socket , TabPaneManagerController tabPaneManagerController, DatabaseService databaseService) {
         this.server = server;
         this.socket = socket;
         this.tabPaneManagerController= tabPaneManagerController;
         this.databaseService = databaseService;
-
         messages = new ArrayList<>();
     }
 
@@ -288,7 +285,7 @@ public class ClientHandler extends Thread {
                 return;
             }
         }
-//        onReceiveCallback.accept(userName + " has been logged out from chat!", MESSAGE_TYPE_LEAVE);
+        tabPaneManagerController.display(userName + " has been logged out from chat!", MESSAGE_TYPE_LEAVE);
     }
 
     //Function To Change the Room
@@ -338,11 +335,11 @@ public class ClientHandler extends Thread {
         boolean floodFlag = false;
         messages.add(tokenUserName);
         if (messages.size() > MAX_MESSAGE) {
-            messages.remove(0);
+            messages.removeFirst();
             messages.trimToSize();
 
             //Chk Whether the User is flooding the message
-            String firstMessage = messages.get(0);
+            String firstMessage = messages.getFirst();
             for (int i = 1; i < messages.size(); i++) {
                 if (messages.get(i).equals(firstMessage)) {
                     floodFlag = true;

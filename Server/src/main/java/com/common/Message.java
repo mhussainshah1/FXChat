@@ -27,7 +27,7 @@ import static com.common.CommonSettings.*;
  */
 
 public class Message implements Serializable {
-    // The different types of message sent by the Client
+    // The different types of messages sent by the Client
     public static final int LIST = 0,// LIST to receive the list of the users connected
             MESSAGE = 1, // MESSAGE an ordinary text message
             LOGOUT = 2,// LOGOUT to disconnect from the Server

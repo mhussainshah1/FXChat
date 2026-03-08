@@ -90,7 +90,7 @@ public class PrivateChatController {
                 stage.setHeight(PRIVATE_WINDOW_HEIGHT);
             } else {
                 visible = true;
-                stage.setHeight(PRIVATE_WINDOW_HEIGHT + EMOTION_CANVAS_HEIGHT);
+                stage.setHeight(PRIVATE_WINDOW_HEIGHT + EMOTION_PANE_HEIGHT);
             }
             scrollPane.setVisible(visible);
         }

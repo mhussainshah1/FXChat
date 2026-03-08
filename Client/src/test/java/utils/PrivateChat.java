@@ -31,7 +31,7 @@ public class PrivateChat extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         var rootNode = new VBox();
 
         var lblTile = new Label("Conversation with " + name);
@@ -52,7 +52,7 @@ public class PrivateChat extends Application {
         btnSend.setPrefWidth(70);
         btnSend.setOnAction(event -> {
                     Text text;
-                    if (textFlow.getChildren().size() == 0) {
+                    if (textFlow.getChildren().isEmpty()) {
                         text = new Text(name + ": " + textField.getText());
                     } else { // Add new line if not the first child
                         text = new Text("\n" + name + ": " + textField.getText());

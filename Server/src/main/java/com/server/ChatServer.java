@@ -27,16 +27,21 @@ public class ChatServer {
     private ClientHandler clientHandler;
     private DatabaseService databaseService;
     private TabPaneManagerController tabPaneManagerController;
-    @Autowired
-    public ChatServer(DatabaseService databaseService, TabPaneManagerController tabPaneManagerController) throws IOException {
+
+    public ChatServer() throws IOException {
         serverName = "localhost";
         serverPort = 1436;
         maximumGuestNumber = 50;
         roomList = "General Teen Music Party";
-        this.tabPaneManagerController = tabPaneManagerController;
-        this.databaseService = databaseService;
         pool = Executors.newFixedThreadPool(maximumGuestNumber);
         this.serverSocket = new ServerSocket(serverPort);
+    }
+
+    @Autowired
+    public ChatServer(DatabaseService databaseService, TabPaneManagerController tabPaneManagerController) throws IOException {
+        this();
+        this.databaseService = databaseService;
+        this.tabPaneManagerController = tabPaneManagerController;
     }
 
     public void startConnection() {
